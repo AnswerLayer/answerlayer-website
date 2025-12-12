@@ -41,9 +41,9 @@
   --text-2xl: 24px;
   --text-3xl: 32px;
 
-  /* Layout - narrower, more readable */
-  --max-width: 740px;
-  --max-width-wide: 900px;
+  /* Layout */
+  --max-width: 960px;
+  --max-width-wide: 1100px;
   --header-height: 50px;
 }
 
@@ -264,7 +264,6 @@ pre code {
   right: 0;
   height: var(--header-height);
   background: var(--bg-alt);
-  border-bottom: 1px solid var(--border);
   z-index: 100;
 }
 
@@ -499,8 +498,6 @@ pre code {
   text-transform: uppercase;
   letter-spacing: 0.1em;
   color: var(--fg-muted);
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border);
   margin-bottom: 20px;
 }
 
@@ -568,8 +565,6 @@ pre code {
 
 .trust-section h2 {
   font-size: var(--text-xl);
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border);
   margin-bottom: 15px;
 }
 
@@ -683,11 +678,6 @@ pre code {
 /* Personas/Use cases */
 .persona {
   padding: 25px 0;
-  border-bottom: 1px solid var(--border);
-}
-
-.persona:last-child {
-  border-bottom: none;
 }
 
 .persona-title {
@@ -787,7 +777,6 @@ pre code {
 .hero {
   text-align: center;
   padding: 60px 0 40px;
-  border-bottom: 1px solid var(--border);
 }
 
 .hero-logo {
@@ -890,8 +879,6 @@ pre code {
   font-size: var(--text-xl);
   margin-top: 35px;
   margin-bottom: 15px;
-  padding-bottom: 8px;
-  border-bottom: 1px solid var(--border);
 }
 
 .legal-content h3 {
