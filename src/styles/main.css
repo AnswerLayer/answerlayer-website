@@ -377,7 +377,6 @@ pre code {
 
 /* Footer */
 .footer {
-  border-top: 1px solid var(--border);
   background: var(--bg-alt);
   padding: 20px 0;
   margin-top: auto;
@@ -850,8 +849,6 @@ pre code {
   gap: 40px;
   padding: 25px 0;
   background: var(--bg-alt);
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
   flex-wrap: wrap;
 }
 

@@ -1,0 +1,72 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="AI Product Companies - AnswerLayer"
+  description="How AI product companies use AnswerLayer to ship analytics features faster."
+>
+  <section class="section">
+    <div class="container container-narrow">
+      <p class="breadcrumb"><a href="/customers">Customers</a> / AI Product Companies</p>
+      <h1 class="mb-lg">AI Product Companies</h1>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="container container-narrow">
+      <div class="persona">
+        <div class="persona-section">
+          <div class="persona-label">Challenge</div>
+          <p>
+            Building analytics into a SaaS product. Don't want to build and maintain
+            a data infrastructure layer. Need to support multiple customer databases
+            without exposing raw SQL to the LLM.
+          </p>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-label">Solution</div>
+          <p>
+            Embed AnswerLayer as the analytics backend. Each customer gets their own
+            isolated semantic layer. The API returns structured data that feeds into
+            your product's AI features. Multi-tenant isolation is built in.
+          </p>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-label">Outcome</div>
+          <p>
+            Ship AI-powered analytics in weeks instead of months. No database
+            infrastructure to maintain. Scales with your customer base.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section text-center">
+    <div class="container container-narrow">
+      <h2 class="mb-md">Ready to ship analytics faster?</h2>
+      <p class="text-muted mb-lg">
+        See how AnswerLayer can power your product's AI features.
+      </p>
+      <div class="flex gap-md" style="justify-content: center;">
+        <a href="https://app.getanswerlayer.com/sign-up" class="btn btn-primary">Get Started</a>
+        <a href="mailto:hello@getanswerlayer.com" class="btn btn-link">Talk to Us</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .breadcrumb {
+    font-size: 13px;
+    color: var(--fg-muted);
+    margin-bottom: 16px;
+  }
+
+  .breadcrumb a {
+    color: var(--accent);
+  }
+</style>

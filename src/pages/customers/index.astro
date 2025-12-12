@@ -1,0 +1,109 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const customers = [
+  {
+    title: 'Data & Analytics Teams',
+    slug: 'data-analytics-teams',
+    summary: 'Reduce analyst ticket volume. Let business users self-serve with consistent definitions.',
+  },
+  {
+    title: 'AI Product Companies',
+    slug: 'ai-product-companies',
+    summary: 'Add natural language analytics to your product in days, not months.',
+  },
+  {
+    title: 'Security-Conscious Organizations',
+    slug: 'security-conscious-organizations',
+    summary: 'Analytics without data leaving your cloud. Full audit trails.',
+  },
+  {
+    title: 'Data Platform Teams',
+    slug: 'data-platform-teams',
+    summary: 'Safe, accurate, controlled AI-to-database access with guardrails built in.',
+  },
+];
+---
+
+<Layout
+  title="Customers - AnswerLayer"
+  description="How different teams use AnswerLayer to unlock insights from their data."
+>
+  <section class="section">
+    <div class="container container-narrow">
+      <h1 class="mb-lg">Customers</h1>
+      <p class="text-lg" style="max-width: 600px;">
+        Different teams use AnswerLayer in different ways.
+        Here's how our customers are building with the platform.
+      </p>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="container container-narrow">
+      <div class="customer-list">
+        {customers.map((customer) => (
+          <a href={`/customers/${customer.slug}`} class="customer-card">
+            <h3>{customer.title}</h3>
+            <p>{customer.summary}</p>
+            <span class="customer-link">Learn more →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="section text-center">
+    <div class="container container-narrow">
+      <h2 class="mb-md">Which describes you?</h2>
+      <p class="text-muted mb-lg">
+        Tell us about your use case and we'll help you get started.
+      </p>
+      <div class="flex gap-md" style="justify-content: center;">
+        <a href="https://app.getanswerlayer.com/sign-up" class="btn btn-primary">Get Started</a>
+        <a href="mailto:hello@getanswerlayer.com" class="btn btn-link">Talk to Us</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .customer-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .customer-card {
+    display: block;
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 20px;
+    text-decoration: none;
+    color: inherit;
+    transition: border-color 0.1s;
+  }
+
+  .customer-card:hover {
+    border-color: var(--accent);
+  }
+
+  .customer-card h3 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+    color: var(--fg);
+  }
+
+  .customer-card p {
+    margin: 0 0 12px 0;
+    font-size: 14px;
+    color: var(--fg-muted);
+    line-height: 1.5;
+  }
+
+  .customer-link {
+    font-size: 13px;
+    color: var(--accent);
+  }
+</style>

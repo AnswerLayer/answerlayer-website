@@ -1,0 +1,72 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Data Platform Teams - AnswerLayer"
+  description="How data platform teams use AnswerLayer for safe AI-to-database access."
+>
+  <section class="section">
+    <div class="container container-narrow">
+      <p class="breadcrumb"><a href="/customers">Customers</a> / Data Platform Teams</p>
+      <h1 class="mb-lg">Data Platform Teams</h1>
+    </div>
+  </section>
+
+  <section class="section-sm">
+    <div class="container container-narrow">
+      <div class="persona">
+        <div class="persona-section">
+          <div class="persona-label">Challenge</div>
+          <p>
+            AI agents need database access, but you can't trust raw SQL generation.
+            LLMs hallucinate column names, miss JOINs, and ignore business logic.
+            Building guardrails from scratch takes months.
+          </p>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-label">Solution</div>
+          <p>
+            Use the semantic layer as the abstraction between AI and data.
+            AnswerLayer validates queries against the schema, blocks dangerous operations,
+            and enforces row limits. You define the rules; AI follows them.
+          </p>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-label">Outcome</div>
+          <p>
+            Safe, accurate, controlled AI-to-database access. Guardrails built in,
+            not bolted on. Your agents query data without risking the production database.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section text-center">
+    <div class="container container-narrow">
+      <h2 class="mb-md">Ready for safe AI-to-database access?</h2>
+      <p class="text-muted mb-lg">
+        See how AnswerLayer can be your agents' data layer.
+      </p>
+      <div class="flex gap-md" style="justify-content: center;">
+        <a href="https://app.getanswerlayer.com/sign-up" class="btn btn-primary">Get Started</a>
+        <a href="mailto:hello@getanswerlayer.com" class="btn btn-link">Talk to Us</a>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .breadcrumb {
+    font-size: 13px;
+    color: var(--fg-muted);
+    margin-bottom: 16px;
+  }
+
+  .breadcrumb a {
+    color: var(--accent);
+  }
+</style>
