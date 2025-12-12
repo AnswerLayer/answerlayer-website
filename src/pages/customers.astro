@@ -1,0 +1,138 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Customers - AnswerLayer"
+  description="How different teams use AnswerLayer to unlock insights from their data."
+>
+  <section class="section">
+    <div class="container container-narrow">
+      <h1 class="mb-lg">Use Cases</h1>
+      <p class="text-muted text-lg mb-2xl">
+        Different teams use AnswerLayer in different ways.
+        Here's how our customers are building with the platform.
+      </p>
+    </div>
+  </section>
+
+  <!-- Persona 1: Enterprise Data Team -->
+  <section class="section-sm" style="border-top: 1px solid var(--border);">
+    <div class="container container-narrow">
+      <div class="persona">
+        <h2 class="persona-title">Enterprise Data Team</h2>
+
+        <div class="persona-section">
+          <div class="persona-label">Challenge</div>
+          <p>
+            Data analysts drowning in ad-hoc requests. Business users can't get answers
+            without filing a ticket and waiting days. Dashboards are static and don't
+            answer the follow-up questions.
+          </p>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-label">Solution</div>
+          <p>
+            Deploy AnswerLayer as a self-serve analytics layer. Business users ask questions
+            in plain English. The semantic layer ensures consistent definitions across the org.
+            PII filtering protects sensitive customer data.
+          </p>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-label">Outcome</div>
+          <p class="text-muted">
+            80% reduction in analyst ticket volume. Time-to-insight drops from days to seconds.
+            Data team focuses on high-value projects instead of ad-hoc requests.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Persona 2: AI Product Company -->
+  <section class="section-sm" style="border-top: 1px solid var(--border);">
+    <div class="container container-narrow">
+      <div class="persona">
+        <h2 class="persona-title">AI Product Company</h2>
+
+        <div class="persona-section">
+          <div class="persona-label">Challenge</div>
+          <p>
+            Building analytics into their SaaS product. Don't want to build and maintain
+            a data infrastructure layer. Need to support multiple customer databases
+            without exposing raw SQL to the LLM.
+          </p>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-label">Solution</div>
+          <p>
+            Embed AnswerLayer as the analytics backend. Each customer gets their own
+            isolated semantic layer. The API returns structured data that feeds into
+            the product's AI features.
+          </p>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-label">Outcome</div>
+          <p class="text-muted">
+            Shipped AI-powered analytics in 2 weeks instead of 6 months. No database
+            infrastructure to maintain. Multi-tenant by default.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Persona 3: Regulated Industry -->
+  <section class="section-sm" style="border-top: 1px solid var(--border);">
+    <div class="container container-narrow">
+      <div class="persona">
+        <h2 class="persona-title">Regulated Industry</h2>
+        <p class="text-muted text-sm mb-lg">Healthcare, Finance, Government</p>
+
+        <div class="persona-section">
+          <div class="persona-label">Challenge</div>
+          <p>
+            Need AI-powered analytics but can't send data to external services.
+            Strict compliance requirements around data residency and access controls.
+            Must demonstrate audit trails for all data access.
+          </p>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-label">Solution</div>
+          <p>
+            VPC deployment—AnswerLayer runs entirely in their cloud. Data never leaves
+            their environment. PII filtering catches sensitive information before it
+            reaches the AI. Full audit logging for compliance.
+          </p>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-label">Outcome</div>
+          <p class="text-muted">
+            AI analytics without compliance risk. Passed security review in 2 weeks.
+            Full audit trail satisfies regulatory requirements.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section text-center">
+    <div class="container container-narrow">
+      <h2 class="mb-md">Which describes you?</h2>
+      <p class="text-muted mb-xl">
+        Tell us about your use case and we'll help you get started.
+      </p>
+      <div class="flex gap-md" style="justify-content: center;">
+        <a href="https://app.getanswerlayer.com/sign-up" class="btn btn-primary">Get Started</a>
+        <a href="mailto:josh@getanswerlayer.com" class="btn btn-secondary">Talk to Us</a>
+      </div>
+    </div>
+  </section>
+</Layout>

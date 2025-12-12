@@ -1,16 +1,14 @@
 ---
-import MarketingLayout from '../layouts/MarketingLayout.astro';
+import Layout from '../layouts/Layout.astro';
 ---
 
-<MarketingLayout
+<Layout
   title="Terms of Service - AnswerLayer"
   description="AnswerLayer Terms of Service - Understand our terms of use for the AI-powered data analytics platform."
-  showBreadcrumbs={true}
 >
-  <div class="min-h-screen bg-white">
-    <div class="container max-w-4xl mx-auto px-6 py-12">
-      <div class="prose max-w-none">
-        <h1 class="text-4xl font-serif font-light mb-8 text-gray-900">Terms of Service</h1>
+  <section class="section">
+    <div class="container legal-content">
+        <h1>Terms of Service</h1>
 
         <p class="text-sm text-gray-600 mb-8">Last updated: June 4, 2025</p>
 
@@ -210,7 +208,6 @@ import MarketingLayout from '../layouts/MarketingLayout.astro';
             These Terms, together with our Privacy Policy and any additional terms for specific features, constitute the entire agreement between you and AnswerLayer regarding the Service.
           </p>
         </section>
-      </div>
     </div>
-  </div>
-</MarketingLayout>
+  </section>
+</Layout>

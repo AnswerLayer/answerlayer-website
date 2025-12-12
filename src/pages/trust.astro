@@ -1,0 +1,219 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Trust Center - AnswerLayer"
+  description="Security practices, data handling, and compliance information for AnswerLayer."
+>
+  <section class="section">
+    <div class="container container-narrow">
+      <h1 class="mb-lg">Trust Center</h1>
+      <p class="text-muted text-lg mb-2xl">
+        Security and data protection are foundational to AnswerLayer.
+        Here's how we handle your data and protect your infrastructure.
+      </p>
+    </div>
+  </section>
+
+  <!-- Data Handling -->
+  <section class="section-sm" style="border-top: 1px solid var(--border);">
+    <div class="container container-narrow">
+      <div class="trust-section">
+        <h2>Data Handling</h2>
+
+        <div class="trust-item">
+          <span class="trust-icon">✓</span>
+          <div>
+            <strong>Your data stays in your cloud</strong>
+            <p class="text-muted text-sm mt-xs">
+              In VPC deployments, AnswerLayer runs inside your infrastructure.
+              Query results never leave your environment.
+            </p>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <span class="trust-icon">✓</span>
+          <div>
+            <strong>No data retention</strong>
+            <p class="text-muted text-sm mt-xs">
+              We don't store query results. Schema metadata is cached for performance
+              but can be purged on demand.
+            </p>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <span class="trust-icon">✓</span>
+          <div>
+            <strong>PII detection and filtering</strong>
+            <p class="text-muted text-sm mt-xs">
+              Automatic detection of emails, phone numbers, SSNs, and other PII.
+              Configure policies to redact, hash, or block sensitive data.
+            </p>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <span class="trust-icon">✓</span>
+          <div>
+            <strong>Credential encryption</strong>
+            <p class="text-muted text-sm mt-xs">
+              Database credentials are encrypted at rest using AES-256.
+              Keys are managed through your cloud provider's KMS.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Infrastructure Security -->
+  <section class="section-sm" style="border-top: 1px solid var(--border);">
+    <div class="container container-narrow">
+      <div class="trust-section">
+        <h2>Infrastructure Security</h2>
+
+        <div class="trust-item">
+          <span class="trust-icon">✓</span>
+          <div>
+            <strong>Encryption in transit</strong>
+            <p class="text-muted text-sm mt-xs">
+              All connections use TLS 1.3. Database connections support SSL/TLS
+              with certificate verification.
+            </p>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <span class="trust-icon">✓</span>
+          <div>
+            <strong>Network isolation</strong>
+            <p class="text-muted text-sm mt-xs">
+              VPC deployments run in isolated networks. Cloud deployments use
+              dedicated infrastructure per customer.
+            </p>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <span class="trust-icon">✓</span>
+          <div>
+            <strong>Access controls</strong>
+            <p class="text-muted text-sm mt-xs">
+              Role-based access control with organization-level isolation.
+              SSO integration with SAML 2.0 and OpenID Connect.
+            </p>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <span class="trust-icon">✓</span>
+          <div>
+            <strong>Audit logging</strong>
+            <p class="text-muted text-sm mt-xs">
+              All API calls and queries are logged. Export logs to your SIEM
+              or security monitoring tools.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Operational Security -->
+  <section class="section-sm" style="border-top: 1px solid var(--border);">
+    <div class="container container-narrow">
+      <div class="trust-section">
+        <h2>Operational Security</h2>
+
+        <div class="trust-item">
+          <span class="trust-icon">✓</span>
+          <div>
+            <strong>Incident response</strong>
+            <p class="text-muted text-sm mt-xs">
+              Documented incident response procedures with defined SLAs.
+              Security incidents are communicated within 24 hours.
+            </p>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <span class="trust-icon">✓</span>
+          <div>
+            <strong>Vulnerability management</strong>
+            <p class="text-muted text-sm mt-xs">
+              Regular security scans and dependency audits.
+              Critical vulnerabilities are patched within 48 hours.
+            </p>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <span class="trust-icon">✓</span>
+          <div>
+            <strong>Employee security</strong>
+            <p class="text-muted text-sm mt-xs">
+              Background checks for all employees. Security awareness training
+              and least-privilege access policies.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Compliance -->
+  <section class="section-sm" style="border-top: 1px solid var(--border);">
+    <div class="container container-narrow">
+      <div class="trust-section">
+        <h2>Compliance</h2>
+
+        <div class="trust-item">
+          <span class="trust-icon">✓</span>
+          <div>
+            <strong>SOC 2 Type II</strong>
+            <p class="text-muted text-sm mt-xs">
+              Currently in progress. Expected completion Q1 2025.
+            </p>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <span class="trust-icon">✓</span>
+          <div>
+            <strong>GDPR ready</strong>
+            <p class="text-muted text-sm mt-xs">
+              Data processing agreements available. EU data residency options
+              for VPC deployments.
+            </p>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <span class="trust-icon">✓</span>
+          <div>
+            <strong>HIPAA considerations</strong>
+            <p class="text-muted text-sm mt-xs">
+              VPC deployments can be configured for HIPAA compliance.
+              BAA available for enterprise customers.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="section text-center">
+    <div class="container container-narrow">
+      <h2 class="mb-md">Security Questions?</h2>
+      <p class="text-muted mb-lg">
+        Contact our security team for detailed documentation, penetration test reports,
+        or to schedule a security review.
+      </p>
+      <a href="mailto:security@getanswerlayer.com" class="btn btn-secondary">security@getanswerlayer.com</a>
+    </div>
+  </section>
+</Layout>

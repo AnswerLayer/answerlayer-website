@@ -1,0 +1,122 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="How It Works - AnswerLayer"
+  description="Technical deep-dive into AnswerLayer's generative semantic layer architecture."
+>
+  <section class="section">
+    <div class="container container-narrow">
+      <h1 class="mb-lg">How It Works</h1>
+      <p class="text-muted text-lg mb-2xl">
+        AnswerLayer is a generative semantic layer that sits between your database and AI agents.
+        It understands your schema, generates accurate SQL, and returns structured results.
+      </p>
+    </div>
+  </section>
+
+  <!-- The Problem -->
+  <section class="section-sm" style="border-top: 1px solid var(--border);">
+    <div class="container container-narrow">
+      <h2 class="mb-lg">The Problem</h2>
+      <p class="mb-md">
+        AI agents need data, but databases don't speak natural language. The typical approach—having an LLM generate SQL directly—fails in production:
+      </p>
+      <ul class="feature-list">
+        <li>LLMs hallucinate column names and table relationships</li>
+        <li>No understanding of business logic ("revenue" vs "gross_revenue" vs "net_revenue")</li>
+        <li>Inconsistent query patterns lead to inconsistent results</li>
+        <li>No PII awareness—sensitive data leaks into responses</li>
+        <li>Slow iteration: every query requires a full LLM roundtrip</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Our Approach -->
+  <section class="section-sm" style="border-top: 1px solid var(--border);">
+    <div class="container container-narrow">
+      <h2 class="mb-lg">Our Approach</h2>
+      <p class="mb-xl">
+        AnswerLayer introduces a semantic layer that understands your data before any query is generated:
+      </p>
+
+      <div class="card mb-lg">
+        <h3 class="card-title">1. Schema Discovery</h3>
+        <p class="card-text">
+          When you connect a database, we analyze its schema: tables, columns, relationships, data types.
+          This metadata is cached and indexed for fast lookup.
+        </p>
+      </div>
+
+      <div class="card mb-lg">
+        <h3 class="card-title">2. Semantic Mapping</h3>
+        <p class="card-text">
+          You define business concepts in plain language. "Revenue" maps to <code>SUM(orders.total_amount)</code>.
+          "Active users" means <code>users WHERE last_login > NOW() - INTERVAL 30 days</code>.
+          These definitions are reused across all queries.
+        </p>
+      </div>
+
+      <div class="card mb-lg">
+        <h3 class="card-title">3. Query Generation</h3>
+        <p class="card-text">
+          When a question arrives, we match it against known concepts, validate against the schema,
+          and generate SQL that's guaranteed to execute. No hallucinated columns. No missing JOINs.
+        </p>
+      </div>
+
+      <div class="card mb-lg">
+        <h3 class="card-title">4. PII Filtering</h3>
+        <p class="card-text">
+          Before results are returned, we scan for personally identifiable information.
+          Email addresses, phone numbers, SSNs—automatically detected and filtered based on your policies.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technical Details -->
+  <section class="section-sm" style="border-top: 1px solid var(--border);">
+    <div class="container container-narrow">
+      <h2 class="mb-lg">Technical Details</h2>
+
+      <h3 class="mb-sm">Supported Databases</h3>
+      <p class="text-muted mb-lg">
+        PostgreSQL, BigQuery, Snowflake, MySQL, AWS Athena, ClickHouse, DuckDB.
+        Any database with a SQL interface.
+      </p>
+
+      <h3 class="mb-sm">Deployment Options</h3>
+      <p class="text-muted mb-lg">
+        Cloud (managed), VPC (your infrastructure), or on-premises.
+        Data never leaves your environment in VPC/on-prem deployments.
+      </p>
+
+      <h3 class="mb-sm">API</h3>
+      <p class="text-muted mb-lg">
+        RESTful API with OpenAPI spec. SDK libraries for Python, TypeScript, and Go.
+        Webhook support for async queries.
+      </p>
+
+      <h3 class="mb-sm">Authentication</h3>
+      <p class="text-muted">
+        API keys, OAuth 2.0, or SAML SSO. Role-based access control with organization-level isolation.
+      </p>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section text-center">
+    <div class="container container-narrow">
+      <h2 class="mb-md">Ready to try it?</h2>
+      <p class="text-muted mb-xl">
+        Connect a database and ask your first question in under 5 minutes.
+      </p>
+      <div class="flex gap-md" style="justify-content: center;">
+        <a href="https://app.getanswerlayer.com/sign-up" class="btn btn-primary">Get Started</a>
+        <a href="https://docs.getanswerlayer.com" class="btn btn-secondary">Read the Docs</a>
+      </div>
+    </div>
+  </section>
+</Layout>

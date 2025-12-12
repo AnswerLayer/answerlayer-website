@@ -1,142 +1,68 @@
 ---
-import MarketingLayout from '../layouts/MarketingLayout.astro';
-
-const appUrl = 'https://app.getanswerlayer.com';
-
-const plans = [
-  {
-    name: 'Basic',
-    description: 'Perfect for getting started with natural language analytics',
-    features: [
-      'Natural language queries',
-      'Any database type',
-      'PII filtering',
-      'Basic visualizations',
-      '100 Free Credits per Month'
-    ],
-    cta: 'Get Started Free',
-    ctaLink: `${appUrl}/sign-up`,
-    highlight: false
-  },
-  {
-    name: 'Pro',
-    description: 'For teams that need advanced analytics capabilities',
-    features: [
-      'Everything in Basic',
-      'Embedded conversational analytics',
-      'Semantic layer for reliability',
-      'Role-based access control',
-      'Multi-tenancy'
-    ],
-    cta: 'Contact Sales',
-    ctaLink: 'mailto:josh@getanswerlayer.com?subject=Pro Plan Inquiry',
-    highlight: true
-  }
-];
+import Layout from '../layouts/Layout.astro';
 ---
 
-<MarketingLayout
+<Layout
   title="Pricing - AnswerLayer"
-  description="Start free with AnswerLayer. Get started with natural language analytics today. Upgrade to Pro when you need advanced features."
-  showBreadcrumbs={true}
+  description="Simple pricing for AnswerLayer. Start free, upgrade when you need more."
 >
-  <!-- Hero Section -->
-  <section class="pt-20 pb-4 bg-gradient-to-b from-navy-50 to-gray-50">
-    <div class="container-custom text-center">
-      <h1 class="text-4xl md:text-5xl font-serif font-light mb-6 text-navy-900">
-        Start Free, Scale When Ready
-      </h1>
-      <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto font-light">
-        Get started with natural language analytics today. Upgrade to Pro when you need advanced features.
-      </p>
-    </div>
-  </section>
+  <section class="section">
+    <div class="container container-narrow">
+      <h1 class="mb-md">Pricing</h1>
+      <p class="text-muted mb-2xl">Start free. Upgrade when you need more.</p>
 
-  <!-- Pricing Options -->
-  <section class="py-16">
-    <div class="container-custom">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-        {plans.map((plan) => (
-          <div
-            class={`relative bg-white rounded-2xl shadow-lg border-2 transition-all duration-300 hover:shadow-xl ${
-              plan.highlight
-                ? 'border-navy-500 scale-105'
-                : 'border-gray-200 hover:border-navy-300'
-            }`}
-          >
-            {plan.highlight && (
-              <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <span class="bg-navy-500 text-white px-6 py-2 rounded-full text-sm font-medium">
-                  Most Popular
-                </span>
-              </div>
-            )}
+      <div class="pricing-grid">
+        <!-- Free -->
+        <div class="pricing-card">
+          <div class="pricing-name">Free</div>
+          <div class="pricing-price">$0<span>/month</span></div>
+          <ul class="pricing-features">
+            <li>100 queries/month</li>
+            <li>1 database connection</li>
+            <li>Natural language queries</li>
+            <li>Basic visualizations</li>
+            <li>Community support</li>
+          </ul>
+          <a href="https://app.getanswerlayer.com/sign-up" class="btn btn-secondary" style="width: 100%;">Get Started</a>
+        </div>
 
-            <div class="p-6">
-              <div class="text-center mb-4">
-                <h3 class="text-2xl font-serif font-medium text-navy-900 mb-2">
-                  {plan.name}
-                </h3>
-                <p class="text-gray-600 font-light">
-                  {plan.description}
-                </p>
-              </div>
+        <!-- Pro -->
+        <div class="pricing-card featured">
+          <div class="pricing-name">Pro</div>
+          <div class="pricing-price">$99<span>/month</span></div>
+          <ul class="pricing-features">
+            <li>Unlimited queries</li>
+            <li>Unlimited connections</li>
+            <li>Semantic layer</li>
+            <li>PII detection &amp; filtering</li>
+            <li>Priority support</li>
+          </ul>
+          <a href="https://app.getanswerlayer.com/sign-up" class="btn btn-primary" style="width: 100%;">Start Free Trial</a>
+        </div>
 
-              <div class="mb-6">
-                <ul class="space-y-3">
-                  {plan.features.map((feature) => (
-                    <li class="flex items-start gap-3">
-                      <svg class="h-5 w-5 text-navy-600 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                      </svg>
-                      <span class="text-gray-700">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              <a
-                href={plan.ctaLink}
-                class={`btn w-full justify-center ${
-                  plan.highlight
-                    ? 'btn-primary'
-                    : 'btn-outline'
-                }`}
-              >
-                {plan.cta}
-                <svg class="ml-2 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-              </a>
-            </div>
-          </div>
-        ))}
+        <!-- Enterprise -->
+        <div class="pricing-card">
+          <div class="pricing-name">Enterprise</div>
+          <div class="pricing-price">Custom</div>
+          <ul class="pricing-features">
+            <li>Everything in Pro</li>
+            <li>VPC deployment</li>
+            <li>SSO / SAML</li>
+            <li>Audit logging</li>
+            <li>Dedicated support</li>
+          </ul>
+          <a href="mailto:josh@getanswerlayer.com?subject=Enterprise Inquiry" class="btn btn-secondary" style="width: 100%;">Contact Sales</a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA Section -->
-  <section class="py-16 bg-navy-900 text-white">
-    <div class="container-custom text-center">
-      <h2 class="text-3xl font-serif font-light mb-4">
-        Ready to Get Started?
-      </h2>
-      <p class="text-navy-200 mb-8 max-w-2xl mx-auto">
-        Join teams already using AnswerLayer to unlock insights from their data.
+  <section class="section-sm" style="border-top: 1px solid var(--border);">
+    <div class="container container-narrow text-center">
+      <h2 class="mb-md">Questions?</h2>
+      <p class="text-muted">
+        Email <a href="mailto:josh@getanswerlayer.com">josh@getanswerlayer.com</a> for custom pricing or technical questions.
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a
-          href={`${appUrl}/sign-up`}
-          class="btn bg-white text-navy-900 hover:bg-gray-100 btn-lg"
-        >
-          Start with Basic
-          <svg class="ml-2 h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <line x1="5" y1="12" x2="19" y2="12"></line>
-            <polyline points="12 5 19 12 12 19"></polyline>
-          </svg>
-        </a>
-      </div>
     </div>
   </section>
-</MarketingLayout>
+</Layout>
