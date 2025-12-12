@@ -1,0 +1,24 @@
+# AnswerLayer - AI-First Data Analytics Platform
+User-agent: *
+Allow: /
+
+# Allow all search engines full access
+User-agent: Googlebot
+Allow: /
+User-agent: Bingbot
+Allow: /
+User-agent: DuckDuckBot
+Allow: /
+
+# Block certain paths that might contain sensitive or duplicate content
+Disallow: /api/
+Disallow: /admin/
+Disallow: */private/
+Disallow: */temp/
+
+# Specify sitemap location
+Sitemap: https://www.getanswerlayer.com/sitemap.xml
+
+# Crawl delay for slower bots
+User-agent: *
+Crawl-delay: 1

@@ -1,0 +1,88 @@
+---
+import MarketingLayout from '../layouts/MarketingLayout.astro';
+---
+
+<MarketingLayout
+  title="Security - AnswerLayer"
+  description="Enterprise-grade security for your data. Encryption, access controls, and compliance."
+  showBreadcrumbs={true}
+>
+  <!-- Hero Section -->
+  <section class="pt-20 pb-16 bg-gradient-to-b from-navy-50 to-gray-50">
+    <div class="container-custom text-center">
+      <h1 class="text-4xl md:text-5xl font-serif font-light mb-6 text-navy-900">
+        Enterprise-Grade <span class="italic">Security</span>
+      </h1>
+      <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto font-light">
+        Your data security is our top priority. Industry-leading protection at every layer.
+      </p>
+    </div>
+  </section>
+
+  <!-- Security Features -->
+  <section class="py-20 bg-white">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div class="feature-card">
+          <h3 class="text-xl font-serif mb-3 text-navy-900">Encryption at Rest</h3>
+          <p class="text-gray-600">AES-256 encryption for all stored data. Your credentials and connection details are always encrypted.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="text-xl font-serif mb-3 text-navy-900">Encryption in Transit</h3>
+          <p class="text-gray-600">TLS 1.3 for all data transmission. Your queries and results are protected end-to-end.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="text-xl font-serif mb-3 text-navy-900">SOC 2 Compliant</h3>
+          <p class="text-gray-600">Our infrastructure and processes meet SOC 2 Type II requirements for security and availability.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="text-xl font-serif mb-3 text-navy-900">OAuth Integration</h3>
+          <p class="text-gray-600">Secure authentication through OAuth providers. We never store your database passwords directly.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="text-xl font-serif mb-3 text-navy-900">Role-Based Access</h3>
+          <p class="text-gray-600">Fine-grained permissions control. Define who can access what data at the organization level.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="text-xl font-serif mb-3 text-navy-900">Audit Logging</h3>
+          <p class="text-gray-600">Complete audit trail of all queries and actions. Know who accessed what and when.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="text-xl font-serif mb-3 text-navy-900">Static Outbound IPs</h3>
+          <p class="text-gray-600">Whitelist our static IPs in your firewall. All connections come from known addresses.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="text-xl font-serif mb-3 text-navy-900">Data Isolation</h3>
+          <p class="text-gray-600">Your data is logically isolated from other customers. No cross-tenant data access.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="text-xl font-serif mb-3 text-navy-900">Regular Assessments</h3>
+          <p class="text-gray-600">Third-party security assessments and penetration testing to ensure ongoing security.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact -->
+  <section class="py-20 bg-gray-50">
+    <div class="container-custom text-center">
+      <h2 class="text-3xl font-serif font-light mb-4 text-navy-900">
+        Have Security Questions?
+      </h2>
+      <p class="text-gray-600 mb-8 max-w-2xl mx-auto">
+        Our security team is happy to discuss your requirements and answer any questions.
+      </p>
+      <a href="mailto:security@getanswerlayer.com" class="btn btn-primary btn-lg">
+        Contact Security Team
+      </a>
+    </div>
+  </section>
+</MarketingLayout>

@@ -1,0 +1,99 @@
+---
+// Footer component for marketing site
+const docsUrl = 'https://docs.getanswerlayer.com';
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="bg-navy-900 text-navy-300 py-16">
+  <div class="container-custom">
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+      <!-- Logo and tagline -->
+      <div class="md:col-span-1">
+        <a href="/" class="inline-block" aria-label="AnswerLayer Home">
+          <div class="flex items-center gap-2 mb-4">
+            <div class="h-11 w-10 rounded-md bg-navy-600 flex flex-col items-center justify-center py-1">
+              <span class="text-white font-serif font-bold text-xs mb-0.5">A</span>
+              <svg xmlns="http://www.w3.org/2000/svg" class="text-white h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <ellipse cx="12" cy="5" rx="9" ry="3"></ellipse>
+                <path d="M3 5V19A9 3 0 0 0 21 19V5"></path>
+                <path d="M3 12A9 3 0 0 0 21 12"></path>
+              </svg>
+            </div>
+            <span class="font-serif font-bold text-xl text-white">AnswerLayer</span>
+          </div>
+        </a>
+        <p class="mb-6 font-light">
+          Transform your data into actionable insights with the power of AI.
+        </p>
+      </div>
+
+      <!-- Links -->
+      <div class="md:col-span-1 grid grid-cols-2 gap-8">
+        <div>
+          <h3 class="text-white font-serif font-medium text-lg mb-4">Product</h3>
+          <ul class="space-y-2">
+            <li>
+              <a href="/ai-analytics" class="hover:text-white transition-colors focus:outline-none focus:underline">
+                AI-Powered Analytics
+              </a>
+            </li>
+            <li>
+              <a href="/semantic-layer" class="hover:text-white transition-colors focus:outline-none focus:underline">
+                Semantic Layer
+              </a>
+            </li>
+            <li>
+              <a href="/privacy-protection" class="hover:text-white transition-colors focus:outline-none focus:underline">
+                Privacy Protection
+              </a>
+            </li>
+            <li>
+              <a href="/product" class="hover:text-white transition-colors focus:outline-none focus:underline">
+                Features
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="text-white font-serif font-medium text-lg mb-4">Resources</h3>
+          <ul class="space-y-2">
+            <li>
+              <a href="/faq" class="hover:text-white transition-colors focus:outline-none focus:underline">
+                FAQ
+              </a>
+            </li>
+            <li>
+              <a href={docsUrl} target="_blank" rel="noopener noreferrer" class="hover:text-white transition-colors focus:outline-none focus:underline">
+                Documentation
+              </a>
+            </li>
+            <li>
+              <a href="/security" class="hover:text-white transition-colors focus:outline-none focus:underline">
+                Security
+              </a>
+            </li>
+            <li>
+              <a href="/open-source" class="hover:text-white transition-colors focus:outline-none focus:underline">
+                Open Source
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="border-t border-navy-800 mt-12 pt-8 text-sm flex flex-col md:flex-row justify-between items-center gap-4">
+      <p>&copy; {currentYear} AnswerLayer. All rights reserved.</p>
+      <div class="flex space-x-4">
+        <a href="/privacy" class="hover:text-white transition-colors focus:outline-none focus:underline">
+          Privacy Policy
+        </a>
+        <a href="/terms" class="hover:text-white transition-colors focus:outline-none focus:underline">
+          Terms of Service
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>

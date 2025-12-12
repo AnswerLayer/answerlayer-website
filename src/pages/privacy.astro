@@ -1,0 +1,180 @@
+---
+import MarketingLayout from '../layouts/MarketingLayout.astro';
+---
+
+<MarketingLayout
+  title="Privacy Policy - AnswerLayer"
+  description="AnswerLayer Privacy Policy - Learn how we collect, use, and protect your data."
+  showBreadcrumbs={true}
+>
+  <div class="min-h-screen bg-white">
+    <div class="container max-w-4xl mx-auto px-6 py-12">
+      <div class="prose max-w-none">
+        <h1 class="text-4xl font-serif font-light mb-8 text-gray-900">Privacy Policy</h1>
+
+        <p class="text-sm text-gray-600 mb-8">Last updated: June 4, 2025</p>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-serif font-light mb-4 text-gray-900">1. Introduction</h2>
+          <p class="mb-4">
+            AnswerLayer ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our AI-powered data analytics platform and services (the "Service").
+          </p>
+          <p class="mb-4">
+            AnswerLayer enables users to query databases using natural language, create visualizations, and manage data through our intelligent semantic layer. We provide secure connections to various data sources including Google BigQuery, PostgreSQL, AWS Athena, and other database systems.
+          </p>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-serif font-light mb-4 text-gray-900">2. Information We Collect</h2>
+
+          <h3 class="text-xl font-medium mb-3 text-gray-800">Account Information</h3>
+          <ul class="list-disc pl-6 mb-4 space-y-2">
+            <li>Name, email address, and organization details when you create an account</li>
+            <li>Authentication information through OAuth providers</li>
+            <li>Profile information and preferences</li>
+          </ul>
+
+          <h3 class="text-xl font-medium mb-3 text-gray-800">Data Source Connections</h3>
+          <ul class="list-disc pl-6 mb-4 space-y-2">
+            <li>Database connection parameters (host, database names, credentials)</li>
+            <li>OAuth tokens for accessing third-party services (Google BigQuery, etc.)</li>
+            <li>Database schema metadata for query generation</li>
+            <li>Connection status and performance metrics</li>
+          </ul>
+
+          <h3 class="text-xl font-medium mb-3 text-gray-800">Usage Data</h3>
+          <ul class="list-disc pl-6 mb-4 space-y-2">
+            <li>Natural language queries you submit</li>
+            <li>Generated SQL queries and results</li>
+            <li>Charts and visualizations created</li>
+            <li>Service usage patterns and analytics</li>
+          </ul>
+
+          <h3 class="text-xl font-medium mb-3 text-gray-800">Technical Information</h3>
+          <ul class="list-disc pl-6 mb-4 space-y-2">
+            <li>IP address, browser type, and device information</li>
+            <li>Log data and error reports</li>
+            <li>Performance and security monitoring data</li>
+          </ul>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-serif font-light mb-4 text-gray-900">3. How We Use Your Information</h2>
+          <ul class="list-disc pl-6 mb-4 space-y-2">
+            <li><strong>Service Provision:</strong> To provide, maintain, and improve our data analytics platform</li>
+            <li><strong>Natural Language Processing:</strong> To translate your queries into SQL and generate insights</li>
+            <li><strong>Data Connections:</strong> To securely connect to and query your authorized data sources</li>
+            <li><strong>Authentication:</strong> To verify your identity and manage access permissions</li>
+            <li><strong>Support:</strong> To provide customer support and troubleshoot issues</li>
+            <li><strong>Analytics:</strong> To understand usage patterns and improve our services</li>
+            <li><strong>Security:</strong> To detect, prevent, and respond to security threats</li>
+            <li><strong>Communications:</strong> To send important service updates and notifications</li>
+          </ul>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-serif font-light mb-4 text-gray-900">4. Google BigQuery Integration</h2>
+          <p class="mb-4">
+            When you connect Google BigQuery to AnswerLayer, we request specific permissions to provide our services:
+          </p>
+          <ul class="list-disc pl-6 mb-4 space-y-2">
+            <li><strong>BigQuery Access:</strong> To read your BigQuery datasets and execute queries on your behalf</li>
+            <li><strong>Profile Information:</strong> To identify your Google account and personalize your experience</li>
+            <li><strong>Email Access:</strong> For account management and authentication purposes</li>
+          </ul>
+          <p class="mb-4">
+            We only access data you explicitly authorize through our connection interface. We do not access other Google services or data beyond what's necessary for AnswerLayer functionality.
+          </p>
+          <p class="mb-4">
+            Google Workspace APIs are not used to develop, improve, or train generalized AI and/or ML models.
+          </p>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-serif font-light mb-4 text-gray-900">5. Data Security and Storage</h2>
+          <ul class="list-disc pl-6 mb-4 space-y-2">
+            <li><strong>Encryption:</strong> All data is encrypted in transit and at rest using industry-standard encryption</li>
+            <li><strong>Access Controls:</strong> Strict access controls and authentication mechanisms protect your data</li>
+            <li><strong>Infrastructure Security:</strong> We use secure cloud infrastructure with regular security assessments</li>
+            <li><strong>Database Credentials:</strong> All database passwords and tokens are encrypted before storage</li>
+            <li><strong>OAuth Tokens:</strong> Third-party authentication tokens are securely stored and managed</li>
+          </ul>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-serif font-light mb-4 text-gray-900">6. Information Sharing and Disclosure</h2>
+          <p class="mb-4">We do not sell, trade, or rent your personal information. We may share information in the following circumstances:</p>
+          <ul class="list-disc pl-6 mb-4 space-y-2">
+            <li><strong>Service Providers:</strong> With trusted third-party providers who assist in service delivery (hosting, analytics, support)</li>
+            <li><strong>Legal Requirements:</strong> When required by law, legal process, or government request</li>
+            <li><strong>Business Transfers:</strong> In connection with mergers, acquisitions, or asset sales</li>
+            <li><strong>Consent:</strong> With your explicit consent for specific purposes</li>
+            <li><strong>Protection:</strong> To protect the rights, property, or safety of AnswerLayer, users, or others</li>
+          </ul>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-serif font-light mb-4 text-gray-900">7. Data Retention</h2>
+          <ul class="list-disc pl-6 mb-4 space-y-2">
+            <li>Account data is retained for as long as your account is active</li>
+            <li>Query history and generated insights are retained to improve service quality</li>
+            <li>Connection metadata is retained for troubleshooting and analytics</li>
+            <li>You may request deletion of your data by contacting us</li>
+          </ul>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-serif font-light mb-4 text-gray-900">8. Your Rights and Choices</h2>
+          <ul class="list-disc pl-6 mb-4 space-y-2">
+            <li><strong>Access:</strong> Request access to your personal information</li>
+            <li><strong>Correction:</strong> Request correction of inaccurate or incomplete data</li>
+            <li><strong>Deletion:</strong> Request deletion of your personal information</li>
+            <li><strong>Portability:</strong> Request a copy of your data in a portable format</li>
+            <li><strong>Consent Withdrawal:</strong> Withdraw consent for data processing where applicable</li>
+            <li><strong>OAuth Management:</strong> Revoke third-party integrations through your account settings</li>
+          </ul>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-serif font-light mb-4 text-gray-900">9. Cookies and Tracking</h2>
+          <p class="mb-4">
+            We use cookies and similar technologies to enhance your experience, analyze usage, and provide personalized content. You can control cookie preferences through your browser settings.
+          </p>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-serif font-light mb-4 text-gray-900">10. International Data Transfers</h2>
+          <p class="mb-4">
+            Your information may be transferred to and processed in countries other than your residence. We ensure appropriate safeguards are in place to protect your information in accordance with applicable data protection laws.
+          </p>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-serif font-light mb-4 text-gray-900">11. Children's Privacy</h2>
+          <p class="mb-4">
+            Our Service is not intended for children under 13. We do not knowingly collect personal information from children under 13. If you believe a child has provided us with personal information, please contact us.
+          </p>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-serif font-light mb-4 text-gray-900">12. Changes to This Privacy Policy</h2>
+          <p class="mb-4">
+            We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new Privacy Policy on this page and updating the "Last updated" date. Material changes will be communicated via email or prominent notice in the Service.
+          </p>
+        </section>
+
+        <section class="mb-8">
+          <h2 class="text-2xl font-serif font-light mb-4 text-gray-900">13. Contact Us</h2>
+          <p class="mb-4">
+            If you have any questions about this Privacy Policy or our data practices, please contact us:
+          </p>
+          <ul class="list-disc pl-6 mb-4 space-y-2">
+            <li>Email: privacy@getanswerlayer.com</li>
+            <li>Support: josh@getanswerlayer.com</li>
+            <li>Website: https://www.getanswerlayer.com</li>
+          </ul>
+        </section>
+      </div>
+    </div>
+  </div>
+</MarketingLayout>

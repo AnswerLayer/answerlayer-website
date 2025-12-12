@@ -1,0 +1,120 @@
+---
+import MarketingLayout from '../layouts/MarketingLayout.astro';
+
+const appUrl = 'https://app.getanswerlayer.com';
+---
+
+<MarketingLayout
+  title="Semantic Layer - AnswerLayer"
+  description="Define business metrics once, use them everywhere. Ensure consistent definitions across your organization."
+  showBreadcrumbs={true}
+>
+  <!-- Hero Section -->
+  <section class="pt-20 pb-16 bg-gradient-to-b from-navy-50 to-gray-50">
+    <div class="container-custom text-center">
+      <h1 class="text-4xl md:text-5xl font-serif font-light mb-6 text-navy-900">
+        Semantic <span class="italic">Layer</span>
+      </h1>
+      <p class="text-xl text-gray-600 mb-8 max-w-3xl mx-auto font-light">
+        Define business metrics once, use them everywhere. Ensure "revenue" means the same thing across every query, every user, every conversation.
+      </p>
+      <a href={`${appUrl}/sign-up`} class="btn btn-primary btn-lg">
+        Get Started
+      </a>
+    </div>
+  </section>
+
+  <!-- What is a Semantic Layer -->
+  <section class="py-20 bg-white">
+    <div class="container-custom">
+      <div class="grid md:grid-cols-2 gap-16 items-center">
+        <div>
+          <h2 class="text-3xl font-serif font-light mb-6 text-navy-900">
+            What is a Semantic Layer?
+          </h2>
+          <p class="text-gray-600 mb-6 text-lg">
+            A semantic layer is a business abstraction that sits between your raw data and your users. It translates complex database schemas into business-friendly terms and ensures consistent metric definitions.
+          </p>
+          <p class="text-gray-600 mb-6">
+            Instead of everyone writing their own SQL and potentially calculating "revenue" differently, the semantic layer provides a single source of truth.
+          </p>
+        </div>
+
+        <div class="bg-gradient-to-br from-navy-50 to-blue-100 rounded-2xl p-8">
+          <div class="space-y-4">
+            <div class="bg-white rounded-lg p-4 shadow-sm">
+              <p class="text-sm font-medium text-gray-500 mb-1">Business Term</p>
+              <p class="text-navy-900 font-serif text-lg">Monthly Recurring Revenue (MRR)</p>
+            </div>
+            <div class="flex justify-center">
+              <svg class="h-6 w-6 text-navy-400" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="5" x2="12" y2="19"></line>
+                <polyline points="19 12 12 19 5 12"></polyline>
+              </svg>
+            </div>
+            <div class="bg-white rounded-lg p-4 shadow-sm">
+              <p class="text-sm font-medium text-gray-500 mb-1">Definition</p>
+              <code class="text-sm text-navy-700">SUM(subscription_value) WHERE status = 'active'</code>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Benefits -->
+  <section class="py-20 bg-gray-50">
+    <div class="container-custom">
+      <h2 class="text-3xl font-serif font-light mb-12 text-center text-navy-900">
+        Benefits of a Semantic Layer
+      </h2>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        <div class="feature-card">
+          <h3 class="text-xl font-serif mb-3 text-navy-900">Consistency</h3>
+          <p class="text-gray-600">Everyone uses the same definitions. No more "my numbers don't match yours" conversations.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="text-xl font-serif mb-3 text-navy-900">Governance</h3>
+          <p class="text-gray-600">Control who can access what data. Define permissions at the metric level.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="text-xl font-serif mb-3 text-navy-900">Self-Service</h3>
+          <p class="text-gray-600">Business users can explore data without SQL knowledge. AI understands your terminology.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="text-xl font-serif mb-3 text-navy-900">Maintainability</h3>
+          <p class="text-gray-600">Change a definition once, update everywhere. No hunting for hardcoded formulas.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="text-xl font-serif mb-3 text-navy-900">Performance</h3>
+          <p class="text-gray-600">Optimized queries based on your data model. Automatic caching and aggregation.</p>
+        </div>
+
+        <div class="feature-card">
+          <h3 class="text-xl font-serif mb-3 text-navy-900">AI-Ready</h3>
+          <p class="text-gray-600">Semantic layer makes AI more accurate by providing business context and constraints.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-20 bg-navy-900 text-white">
+    <div class="container-custom text-center">
+      <h2 class="text-3xl font-serif font-light mb-4">
+        Build Your Semantic Layer
+      </h2>
+      <p class="text-navy-200 mb-8 max-w-2xl mx-auto">
+        Start defining consistent metrics for your organization today.
+      </p>
+      <a href={`${appUrl}/sign-up`} class="btn bg-white text-navy-900 hover:bg-gray-100 btn-lg">
+        Get Started Free
+      </a>
+    </div>
+  </section>
+</MarketingLayout>
