@@ -3,32 +3,32 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout
-  title="Trust Center - AnswerLayer"
-  description="Security practices, data handling, and compliance information for AnswerLayer."
+  title="Trust - AnswerLayer"
+  description="How AnswerLayer keeps your data secure with VPC deployment, guardrails, and compliance-ready infrastructure."
 >
   <section class="section">
     <div class="container container-narrow">
-      <h1 class="mb-lg">Trust Center</h1>
-      <p class="text-muted text-lg mb-2xl">
-        Security and data protection are foundational to AnswerLayer.
-        Here's how we handle your data and protect your infrastructure.
+      <h1 class="mb-lg">Trust</h1>
+      <p class="text-lg" style="max-width: 600px;">
+        Security isn't an add-on. AnswerLayer is built for organizations that can't
+        compromise on data protection.
       </p>
     </div>
   </section>
 
-  <!-- Data Handling -->
+  <!-- Data Stays in Your Cloud -->
   <section class="section-sm" style="border-top: 1px solid var(--border);">
     <div class="container container-narrow">
       <div class="trust-section">
-        <h2>Data Handling</h2>
+        <h2>Data Stays in Your Cloud</h2>
 
         <div class="trust-item">
           <span class="trust-icon">✓</span>
           <div>
-            <strong>Your data stays in your cloud</strong>
+            <strong>VPC deployment is standard</strong>
             <p class="text-muted text-sm mt-xs">
-              In VPC deployments, AnswerLayer runs inside your infrastructure.
-              Query results never leave your environment.
+              Not a premium feature, not an afterthought. AnswerLayer is designed to run
+              in your infrastructure from day one.
             </p>
           </div>
         </div>
@@ -36,10 +36,10 @@ import Layout from '../layouts/Layout.astro';
         <div class="trust-item">
           <span class="trust-icon">✓</span>
           <div>
-            <strong>No data retention</strong>
+            <strong>Query execution in your environment</strong>
             <p class="text-muted text-sm mt-xs">
-              We don't store query results. Schema metadata is cached for performance
-              but can be purged on demand.
+              SQL runs against your database, in your cloud. Results never traverse
+              external networks.
             </p>
           </div>
         </div>
@@ -47,10 +47,10 @@ import Layout from '../layouts/Layout.astro';
         <div class="trust-item">
           <span class="trust-icon">✓</span>
           <div>
-            <strong>PII detection and filtering</strong>
+            <strong>Only metadata for generation</strong>
             <p class="text-muted text-sm mt-xs">
-              Automatic detection of emails, phone numbers, SSNs, and other PII.
-              Configure policies to redact, hash, or block sensitive data.
+              Schema structure and data samples power the semantic layer generation.
+              Your actual data rows stay where they are.
             </p>
           </div>
         </div>
@@ -58,10 +58,10 @@ import Layout from '../layouts/Layout.astro';
         <div class="trust-item">
           <span class="trust-icon">✓</span>
           <div>
-            <strong>Credential encryption</strong>
+            <strong>Static outbound IP</strong>
             <p class="text-muted text-sm mt-xs">
-              Database credentials are encrypted at rest using AES-256.
-              Keys are managed through your cloud provider's KMS.
+              Whitelist a single IP address in your firewall. No dynamic ranges,
+              no guesswork.
             </p>
           </div>
         </div>
@@ -69,19 +69,20 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <!-- Infrastructure Security -->
+  <!-- Guardrails at Every Level -->
   <section class="section-sm" style="border-top: 1px solid var(--border);">
     <div class="container container-narrow">
       <div class="trust-section">
-        <h2>Infrastructure Security</h2>
+        <h2>Guardrails at Every Level</h2>
 
         <div class="trust-item">
           <span class="trust-icon">✓</span>
           <div>
-            <strong>Encryption in transit</strong>
+            <strong>PII detection with confidence scoring</strong>
             <p class="text-muted text-sm mt-xs">
-              All connections use TLS 1.3. Database connections support SSL/TLS
-              with certificate verification.
+              AI-powered detection scans columns for emails, phone numbers, SSNs, and other
+              sensitive data. Each detection comes with a confidence score, and you can
+              override any decision.
             </p>
           </div>
         </div>
@@ -89,10 +90,10 @@ import Layout from '../layouts/Layout.astro';
         <div class="trust-item">
           <span class="trust-icon">✓</span>
           <div>
-            <strong>Network isolation</strong>
+            <strong>Query validation blocks dangerous operations</strong>
             <p class="text-muted text-sm mt-xs">
-              VPC deployments run in isolated networks. Cloud deployments use
-              dedicated infrastructure per customer.
+              DROP, DELETE, TRUNCATE, ALTER are blocked by default. Generated SQL is validated
+              against your schema before execution.
             </p>
           </div>
         </div>
@@ -100,10 +101,10 @@ import Layout from '../layouts/Layout.astro';
         <div class="trust-item">
           <span class="trust-icon">✓</span>
           <div>
-            <strong>Access controls</strong>
+            <strong>Row limits prevent runaway queries</strong>
             <p class="text-muted text-sm mt-xs">
-              Role-based access control with organization-level isolation.
-              SSO integration with SAML 2.0 and OpenID Connect.
+              Configurable caps on result set size. Default is 10,000 rows—enough for
+              analysis, not enough for exfiltration.
             </p>
           </div>
         </div>
@@ -111,10 +112,10 @@ import Layout from '../layouts/Layout.astro';
         <div class="trust-item">
           <span class="trust-icon">✓</span>
           <div>
-            <strong>Audit logging</strong>
+            <strong>Timeout protection</strong>
             <p class="text-muted text-sm mt-xs">
-              All API calls and queries are logged. Export logs to your SIEM
-              or security monitoring tools.
+              Queries time out after 2 minutes by default. Long-running operations
+              are stopped before they impact your database.
             </p>
           </div>
         </div>
@@ -122,19 +123,19 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <!-- Operational Security -->
+  <!-- Credential Security -->
   <section class="section-sm" style="border-top: 1px solid var(--border);">
     <div class="container container-narrow">
       <div class="trust-section">
-        <h2>Operational Security</h2>
+        <h2>Credential Security</h2>
 
         <div class="trust-item">
           <span class="trust-icon">✓</span>
           <div>
-            <strong>Incident response</strong>
+            <strong>PBKDF2 + Fernet encryption</strong>
             <p class="text-muted text-sm mt-xs">
-              Documented incident response procedures with defined SLAs.
-              Security incidents are communicated within 24 hours.
+              Database credentials are encrypted at rest using industry-standard
+              algorithms. Not stored in plaintext, ever.
             </p>
           </div>
         </div>
@@ -142,10 +143,10 @@ import Layout from '../layouts/Layout.astro';
         <div class="trust-item">
           <span class="trust-icon">✓</span>
           <div>
-            <strong>Vulnerability management</strong>
+            <strong>Cloud KMS key management</strong>
             <p class="text-muted text-sm mt-xs">
-              Regular security scans and dependency audits.
-              Critical vulnerabilities are patched within 48 hours.
+              Encryption keys are managed through your cloud provider's KMS—GCP,
+              AWS, or Azure. You control access.
             </p>
           </div>
         </div>
@@ -153,10 +154,52 @@ import Layout from '../layouts/Layout.astro';
         <div class="trust-item">
           <span class="trust-icon">✓</span>
           <div>
-            <strong>Employee security</strong>
+            <strong>Decrypted only at connection time</strong>
             <p class="text-muted text-sm mt-xs">
-              Background checks for all employees. Security awareness training
-              and least-privilege access policies.
+              Credentials are decrypted when connecting to your database and immediately
+              discarded after. No credential caching.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Access Controls -->
+  <section class="section-sm" style="border-top: 1px solid var(--border);">
+    <div class="container container-narrow">
+      <div class="trust-section">
+        <h2>Access Controls</h2>
+
+        <div class="trust-item">
+          <span class="trust-icon">✓</span>
+          <div>
+            <strong>Organization-level isolation</strong>
+            <p class="text-muted text-sm mt-xs">
+              Each organization's data is completely isolated. No cross-tenant access,
+              no shared resources.
+            </p>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <span class="trust-icon">✓</span>
+          <div>
+            <strong>Role-based access from your identity provider</strong>
+            <p class="text-muted text-sm mt-xs">
+              Sync roles from Okta, Azure AD, or your existing identity provider.
+              SSO via SAML 2.0 and OpenID Connect.
+            </p>
+          </div>
+        </div>
+
+        <div class="trust-item">
+          <span class="trust-icon">✓</span>
+          <div>
+            <strong>Full audit logging</strong>
+            <p class="text-muted text-sm mt-xs">
+              Every query, every API call, every configuration change is logged.
+              Export to your SIEM for compliance reporting.
             </p>
           </div>
         </div>
@@ -175,7 +218,7 @@ import Layout from '../layouts/Layout.astro';
           <div>
             <strong>SOC 2 Type II</strong>
             <p class="text-muted text-sm mt-xs">
-              Currently in progress. Expected completion Q1 2025.
+              In progress. Built on SOC 2-compliant infrastructure from day one.
             </p>
           </div>
         </div>
@@ -206,14 +249,14 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <!-- Contact -->
-  <section class="section text-center">
+  <section class="section text-center" style="border-top: 1px solid var(--border);">
     <div class="container container-narrow">
       <h2 class="mb-md">Security Questions?</h2>
       <p class="text-muted mb-lg">
         Contact our security team for detailed documentation, penetration test reports,
         or to schedule a security review.
       </p>
-      <a href="mailto:security@getanswerlayer.com" class="btn btn-secondary">security@getanswerlayer.com</a>
+      <a href="mailto:security@getanswerlayer.com" class="btn btn-link">security@getanswerlayer.com</a>
     </div>
   </section>
 </Layout>

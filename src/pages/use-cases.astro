@@ -3,29 +3,29 @@ import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout
-  title="Customers - AnswerLayer"
+  title="Use Cases - AnswerLayer"
   description="How different teams use AnswerLayer to unlock insights from their data."
 >
   <section class="section">
     <div class="container container-narrow">
       <h1 class="mb-lg">Use Cases</h1>
-      <p class="text-muted text-lg mb-2xl">
+      <p class="text-lg" style="max-width: 600px;">
         Different teams use AnswerLayer in different ways.
         Here's how our customers are building with the platform.
       </p>
     </div>
   </section>
 
-  <!-- Persona 1: Enterprise Data Team -->
+  <!-- Persona 1: Data & Analytics Teams -->
   <section class="section-sm" style="border-top: 1px solid var(--border);">
     <div class="container container-narrow">
       <div class="persona">
-        <h2 class="persona-title">Enterprise Data Team</h2>
+        <h2 class="persona-title">Data & Analytics Teams</h2>
 
         <div class="persona-section">
           <div class="persona-label">Challenge</div>
           <p>
-            Data analysts drowning in ad-hoc requests. Business users can't get answers
+            Drowning in ad-hoc requests. Business users can't get answers
             without filing a ticket and waiting days. Dashboards are static and don't
             answer the follow-up questions.
           </p>
@@ -36,7 +36,7 @@ import Layout from '../layouts/Layout.astro';
           <p>
             Deploy AnswerLayer as a self-serve analytics layer. Business users ask questions
             in plain English. The semantic layer ensures consistent definitions across the org.
-            PII filtering protects sensitive customer data.
+            PII filtering protects sensitive customer data automatically.
           </p>
         </div>
 
@@ -51,16 +51,16 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <!-- Persona 2: AI Product Company -->
+  <!-- Persona 2: AI Product Companies -->
   <section class="section-sm" style="border-top: 1px solid var(--border);">
     <div class="container container-narrow">
       <div class="persona">
-        <h2 class="persona-title">AI Product Company</h2>
+        <h2 class="persona-title">AI Product Companies</h2>
 
         <div class="persona-section">
           <div class="persona-label">Challenge</div>
           <p>
-            Building analytics into their SaaS product. Don't want to build and maintain
+            Building analytics into a SaaS product. Don't want to build and maintain
             a data infrastructure layer. Need to support multiple customer databases
             without exposing raw SQL to the LLM.
           </p>
@@ -71,32 +71,32 @@ import Layout from '../layouts/Layout.astro';
           <p>
             Embed AnswerLayer as the analytics backend. Each customer gets their own
             isolated semantic layer. The API returns structured data that feeds into
-            the product's AI features.
+            your product's AI features. Multi-tenant isolation is built in.
           </p>
         </div>
 
         <div class="persona-section">
           <div class="persona-label">Outcome</div>
           <p class="text-muted">
-            Shipped AI-powered analytics in 2 weeks instead of 6 months. No database
-            infrastructure to maintain. Multi-tenant by default.
+            Ship AI-powered analytics in weeks instead of months. No database
+            infrastructure to maintain. Scales with your customer base.
           </p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Persona 3: Regulated Industry -->
+  <!-- Persona 3: Security-Conscious Organizations -->
   <section class="section-sm" style="border-top: 1px solid var(--border);">
     <div class="container container-narrow">
       <div class="persona">
-        <h2 class="persona-title">Regulated Industry</h2>
+        <h2 class="persona-title">Security-Conscious Organizations</h2>
         <p class="text-muted text-sm mb-lg">Healthcare, Finance, Government</p>
 
         <div class="persona-section">
           <div class="persona-label">Challenge</div>
           <p>
-            Need AI-powered analytics but can't send data to external services.
+            Need analytics capabilities but can't send data to external services.
             Strict compliance requirements around data residency and access controls.
             Must demonstrate audit trails for all data access.
           </p>
@@ -105,17 +105,52 @@ import Layout from '../layouts/Layout.astro';
         <div class="persona-section">
           <div class="persona-label">Solution</div>
           <p>
-            VPC deployment—AnswerLayer runs entirely in their cloud. Data never leaves
-            their environment. PII filtering catches sensitive information before it
-            reaches the AI. Full audit logging for compliance.
+            VPC deployment—AnswerLayer runs entirely in your cloud. Data never leaves
+            your environment. PII filtering catches sensitive information before it's
+            exposed. Full audit logging for compliance.
           </p>
         </div>
 
         <div class="persona-section">
           <div class="persona-label">Outcome</div>
           <p class="text-muted">
-            AI analytics without compliance risk. Passed security review in 2 weeks.
-            Full audit trail satisfies regulatory requirements.
+            Analytics without compliance risk. Full audit trail satisfies regulatory
+            requirements. Security review measured in weeks, not months.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Persona 4: Data Platform Teams -->
+  <section class="section-sm" style="border-top: 1px solid var(--border);">
+    <div class="container container-narrow">
+      <div class="persona">
+        <h2 class="persona-title">Data Platform Teams</h2>
+
+        <div class="persona-section">
+          <div class="persona-label">Challenge</div>
+          <p>
+            AI agents need database access, but you can't trust raw SQL generation.
+            LLMs hallucinate column names, miss JOINs, and ignore business logic.
+            Building guardrails from scratch takes months.
+          </p>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-label">Solution</div>
+          <p>
+            Use the semantic layer as the abstraction between AI and data.
+            AnswerLayer validates queries against the schema, blocks dangerous operations,
+            and enforces row limits. You define the rules; AI follows them.
+          </p>
+        </div>
+
+        <div class="persona-section">
+          <div class="persona-label">Outcome</div>
+          <p class="text-muted">
+            Safe, accurate, controlled AI-to-database access. Guardrails built in,
+            not bolted on. Your agents query data without risking the production database.
           </p>
         </div>
       </div>
@@ -123,15 +158,15 @@ import Layout from '../layouts/Layout.astro';
   </section>
 
   <!-- CTA -->
-  <section class="section text-center">
+  <section class="section text-center" style="border-top: 1px solid var(--border);">
     <div class="container container-narrow">
       <h2 class="mb-md">Which describes you?</h2>
-      <p class="text-muted mb-xl">
+      <p class="text-muted mb-lg">
         Tell us about your use case and we'll help you get started.
       </p>
       <div class="flex gap-md" style="justify-content: center;">
         <a href="https://app.getanswerlayer.com/sign-up" class="btn btn-primary">Get Started</a>
-        <a href="mailto:josh@getanswerlayer.com" class="btn btn-secondary">Talk to Us</a>
+        <a href="mailto:hello@getanswerlayer.com" class="btn btn-link">Talk to Us</a>
       </div>
     </div>
   </section>

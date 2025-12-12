@@ -3,36 +3,39 @@ const currentPath = Astro.url.pathname;
 
 const navLinks = [
   { href: '/how-it-works', label: 'How It Works' },
-  { href: '/customers', label: 'Customers' },
+  { href: '/use-cases', label: 'Use Cases' },
   { href: '/trust', label: 'Trust' },
   { href: '/pricing', label: 'Pricing' },
 ];
 ---
 
 <header class="header">
-  <div class="container header-inner">
-    <a href="/" class="logo">AnswerLayer</a>
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <img src="/logo.svg" alt="" width="24" height="24" />
+      AnswerLayer
+    </a>
 
     <nav class="nav" id="nav">
-      {navLinks.map(link => (
-        <a
-          href={link.href}
-          class:list={[{ active: currentPath === link.href || currentPath.startsWith(link.href + '/') }]}
-        >
-          {link.label}
-        </a>
+      {navLinks.map((link, i) => (
+        <>
+          <a
+            href={link.href}
+            class:list={[{ active: currentPath === link.href || currentPath.startsWith(link.href + '/') }]}
+          >
+            {link.label}
+          </a>
+          {i < navLinks.length - 1 && <span class="nav-separator">|</span>}
+        </>
       ))}
+      <span class="nav-separator">|</span>
       <a href="https://docs.getanswerlayer.com" target="_blank" rel="noopener">Docs</a>
-      <a href="https://app.getanswerlayer.com/sign-in" class="btn btn-secondary">Sign In</a>
+      <span class="nav-separator">|</span>
       <a href="https://app.getanswerlayer.com/sign-up" class="btn btn-primary">Get Started</a>
     </nav>
 
     <button class="nav-mobile-toggle" id="nav-toggle" aria-label="Toggle navigation">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <line x1="3" y1="6" x2="21" y2="6"></line>
-        <line x1="3" y1="12" x2="21" y2="12"></line>
-        <line x1="3" y1="18" x2="21" y2="18"></line>
-      </svg>
+      Menu
     </button>
   </div>
 </header>
@@ -49,5 +52,6 @@ const navLinks = [
 <style>
   .nav a.active {
     color: var(--fg);
+    background: var(--border-subtle);
   }
 </style>

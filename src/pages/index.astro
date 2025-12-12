@@ -2,105 +2,130 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="AnswerLayer - Generative Semantic Layer for Analytics Agents">
+<Layout title="AnswerLayer - The Generative Semantic Layer">
   <!-- Hero -->
-  <section class="section">
+  <section class="hero">
     <div class="container">
-      <h1 class="mb-lg">Generative semantic layer for analytics agents</h1>
-      <p class="text-lg text-muted" style="max-width: 40rem;">
-        Connect your database. Ask questions in plain English. Get answers.
-        Your data never leaves your cloud.
+      <img src="/logo.svg" alt="AnswerLayer" class="hero-logo" />
+      <h1>[Headline placeholder — focus on outcomes]</h1>
+      <p class="subhead">
+        Your semantic layer generates itself. Experts curate and control it.
+        Deploys in your cloud.
       </p>
-
-      <div class="mt-xl flex gap-md">
+      <div class="hero-cta">
         <a href="https://app.getanswerlayer.com/sign-up" class="btn btn-primary">Get Started</a>
-        <a href="https://docs.getanswerlayer.com" class="btn btn-secondary">Read the Docs</a>
+        <a href="/how-it-works" class="btn btn-secondary">See How It Works</a>
       </div>
     </div>
   </section>
 
-  <!-- Architecture -->
-  <section class="section-sm">
+  <!-- Problem/Solution -->
+  <section class="section">
     <div class="container">
-      <h2 class="mb-lg">How it works</h2>
-
-      <div class="diagram">┌─────────────────┐     ┌─────────────────────────┐     ┌─────────────────┐
-│                 │     │                         │     │                 │
-│   Your Cloud    │     │      AnswerLayer        │     │    AI Agents    │
-│                 │     │                         │     │                 │
-│  ┌───────────┐  │     │  ┌─────────────────┐   │     │  ┌───────────┐  │
-│  │ BigQuery  │──┼─────┼──│ Semantic Layer  │───┼─────┼──│  Claude   │  │
-│  │ Postgres  │  │     │  │                 │   │     │  │  GPT-4    │  │
-│  │ Snowflake │  │     │  │ • Schema aware  │   │     │  │  Custom   │  │
-│  └───────────┘  │     │  │ • PII filtered  │   │     │  └───────────┘  │
-│                 │     │  │ • Query cached  │   │     │                 │
-│  Data stays     │     │  └─────────────────┘   │     │  Natural        │
-│  here           │     │                         │     │  language       │
-│                 │     │  Runs in your VPC       │     │  interface      │
-└─────────────────┘     └─────────────────────────┘     └─────────────────┘</div>
+      <p class="text-lg" style="max-width: 600px; margin: 0 auto; text-align: center;">
+        Traditional semantic layers require weeks of manual configuration.
+        AnswerLayer generates yours in minutes—then gives you full control to refine it.
+      </p>
     </div>
   </section>
 
-  <!-- Key Points -->
-  <section class="section">
+  <!-- Value Pillars -->
+  <section class="section" style="border-top: 1px solid var(--border);">
     <div class="container">
-      <div class="grid grid-3 gap-xl">
-        <div>
-          <h3 class="mb-sm">Data stays in your cloud</h3>
-          <p class="text-muted text-sm">
-            AnswerLayer runs in your VPC. Query results are processed locally.
-            We never see your data.
+      <div class="pillars">
+        <div class="pillar">
+          <h3>Generative, not manual</h3>
+          <p>
+            Analyzes your actual data—not just schema. Creates entities, metrics,
+            dimensions, and filters automatically. You curate and refine, not build from scratch.
           </p>
         </div>
 
-        <div>
-          <h3 class="mb-sm">Generative semantic layer</h3>
-          <p class="text-muted text-sm">
-            Not static mappings. The semantic layer understands your schema
-            and generates accurate SQL for each question.
+        <div class="pillar">
+          <h3>Runs in your cloud</h3>
+          <p>
+            VPC deployment is standard. Data never leaves your infrastructure.
+            Static outbound IP for firewall whitelisting.
           </p>
         </div>
 
-        <div>
-          <h3 class="mb-sm">Sub-second query generation</h3>
-          <p class="text-muted text-sm">
-            Schema caching and intelligent query planning.
-            From question to SQL in under 500ms.
+        <div class="pillar">
+          <h3>Guardrails included</h3>
+          <p>
+            PII detection catches sensitive data before it's exposed.
+            Query validation blocks dangerous operations. Row limits prevent runaway queries.
           </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- For Different Audiences -->
+  <section class="section" style="border-top: 1px solid var(--border);">
+    <div class="container">
+      <h2 class="section-header">Who it's for</h2>
+      <div class="audience-grid">
+        <div class="audience-card">
+          <h4>Data Teams</h4>
+          <p>Reduce analyst ticket volume. Let business users self-serve with consistent definitions.</p>
+        </div>
+        <div class="audience-card">
+          <h4>Engineering Teams</h4>
+          <p>Add natural language analytics to your product in days, not months.</p>
+        </div>
+        <div class="audience-card">
+          <h4>Product Teams</h4>
+          <p>Unlock new value from customer data without building infrastructure.</p>
+        </div>
+        <div class="audience-card">
+          <h4>Security-Conscious Orgs</h4>
+          <p>Analytics without data leaving your cloud. Full audit trails.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Metrics -->
-  <section class="section-sm" style="border-top: 1px solid var(--border);">
-    <div class="container">
-      <div class="metrics" style="justify-content: center;">
-        <div class="metric">
-          <div class="metric-value">&lt;500ms</div>
-          <div class="metric-label">Query generation</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">99.9%</div>
-          <div class="metric-label">Uptime</div>
-        </div>
-        <div class="metric">
-          <div class="metric-value">0</div>
-          <div class="metric-label">Data retained</div>
-        </div>
+  <div class="metrics">
+    <div class="metric">
+      <div class="metric-value">&lt;500ms</div>
+      <div class="metric-label">Query generation</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">99.9%</div>
+      <div class="metric-label">Uptime</div>
+    </div>
+    <div class="metric">
+      <div class="metric-value">0 bytes</div>
+      <div class="metric-label">Data retained</div>
+    </div>
+  </div>
+
+  <!-- Databases -->
+  <section class="section">
+    <div class="container text-center">
+      <h2 class="section-header">Connect your database</h2>
+      <div class="flex gap-xl" style="justify-content: center; flex-wrap: wrap; align-items: center;">
+        <img src="/dblogos/postgres_logo.png" alt="PostgreSQL" width="40" height="40" style="opacity: 0.7;" />
+        <img src="/dblogos/bigquery_logo.png" alt="BigQuery" width="40" height="40" style="opacity: 0.7;" />
+        <img src="/dblogos/snowflake_logo.png" alt="Snowflake" width="40" height="40" style="opacity: 0.7;" />
+        <img src="/dblogos/mysql_logo.png" alt="MySQL" width="40" height="40" style="opacity: 0.7;" />
       </div>
+      <p class="text-muted text-sm mt-lg">PostgreSQL, BigQuery, Snowflake, MySQL, Athena, and more.</p>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="section text-center">
-    <div class="container container-narrow">
-      <h2 class="mb-md">Start querying your data</h2>
-      <p class="text-muted mb-xl">
-        Connect a database and ask your first question in under 5 minutes.
-        No credit card required.
+  <section class="section text-center" style="border-top: 1px solid var(--border);">
+    <div class="container">
+      <h2>Ready to stop maintaining YAML?</h2>
+      <p class="text-muted mb-lg">
+        Connect a database and see your semantic layer generated in minutes.
       </p>
-      <a href="https://app.getanswerlayer.com/sign-up" class="btn btn-primary">Get Started</a>
+      <div class="flex gap-md" style="justify-content: center;">
+        <a href="https://app.getanswerlayer.com/sign-up" class="btn btn-primary">Get Started</a>
+        <a href="mailto:hello@getanswerlayer.com" class="btn btn-link">Talk to Us</a>
+      </div>
     </div>
   </section>
 </Layout>

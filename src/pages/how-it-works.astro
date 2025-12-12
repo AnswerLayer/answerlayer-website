@@ -4,14 +4,15 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout
   title="How It Works - AnswerLayer"
-  description="Technical deep-dive into AnswerLayer's generative semantic layer architecture."
+  description="See how AnswerLayer generates your semantic layer from actual data, then lets experts curate and refine it."
 >
+  <!-- Intro -->
   <section class="section">
     <div class="container container-narrow">
       <h1 class="mb-lg">How It Works</h1>
-      <p class="text-muted text-lg mb-2xl">
-        AnswerLayer is a generative semantic layer that sits between your database and AI agents.
-        It understands your schema, generates accurate SQL, and returns structured results.
+      <p class="text-lg" style="max-width: 600px;">
+        Traditional semantic layers require weeks of manual YAML configuration.
+        AnswerLayer generates yours in minutes—then gives you full control to refine it.
       </p>
     </div>
   </section>
@@ -19,59 +20,117 @@ import Layout from '../layouts/Layout.astro';
   <!-- The Problem -->
   <section class="section-sm" style="border-top: 1px solid var(--border);">
     <div class="container container-narrow">
-      <h2 class="mb-lg">The Problem</h2>
+      <h2 class="mb-lg">The Problem with Traditional Semantic Layers</h2>
       <p class="mb-md">
-        AI agents need data, but databases don't speak natural language. The typical approach—having an LLM generate SQL directly—fails in production:
+        Semantic layers are essential for consistent analytics. They define what "revenue" means,
+        how tables relate, and which metrics matter. But traditional tools require you to:
       </p>
       <ul class="feature-list">
-        <li>LLMs hallucinate column names and table relationships</li>
-        <li>No understanding of business logic ("revenue" vs "gross_revenue" vs "net_revenue")</li>
-        <li>Inconsistent query patterns lead to inconsistent results</li>
-        <li>No PII awareness—sensitive data leaks into responses</li>
-        <li>Slow iteration: every query requires a full LLM roundtrip</li>
+        <li>Write hundreds of lines of YAML or configuration code</li>
+        <li>Manually map every table, column, and relationship</li>
+        <li>Define metrics one by one with exact SQL expressions</li>
+        <li>Maintain it all as your schema evolves</li>
       </ul>
+      <p class="mt-lg text-muted">
+        This means weeks of upfront work and ongoing maintenance. Meanwhile, your team needs answers now.
+      </p>
     </div>
   </section>
 
-  <!-- Our Approach -->
+  <!-- The AnswerLayer Approach -->
   <section class="section-sm" style="border-top: 1px solid var(--border);">
     <div class="container container-narrow">
-      <h2 class="mb-lg">Our Approach</h2>
-      <p class="mb-xl">
-        AnswerLayer introduces a semantic layer that understands your data before any query is generated:
+      <h2 class="mb-xl">The AnswerLayer Approach</h2>
+
+      <div class="step">
+        <div class="step-number">1</div>
+        <div class="step-content">
+          <h3>Connect your database</h3>
+          <p>
+            PostgreSQL, BigQuery, Snowflake, MySQL, Athena—connect any SQL database.
+            Runs in your VPC, so credentials stay encrypted and data never leaves your infrastructure.
+          </p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">2</div>
+        <div class="step-content">
+          <h3>AI generates your semantic layer</h3>
+          <p>
+            Not just schema inspection—AnswerLayer analyzes actual data samples to understand
+            business context. It identifies entities (Customer, Order, Product), creates metrics
+            with meaningful names (Revenue, Churn Rate), and defines useful dimensions and filters.
+          </p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">3</div>
+        <div class="step-content">
+          <h3>Experts curate and refine</h3>
+          <p>
+            Review what AI generated. Override PII detection decisions. Add business context
+            the AI missed. Lock down definitions that matter. You're in control—the AI just
+            gave you a head start.
+          </p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="step-number">4</div>
+        <div class="step-content">
+          <h3>Query with natural language</h3>
+          <p>
+            AI agents and business users ask questions in plain English. AnswerLayer translates
+            them to accurate SQL using your curated semantic layer. PII is automatically filtered.
+            Row limits prevent runaway queries.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Four Core Objects -->
+  <section class="section-sm" style="border-top: 1px solid var(--border);">
+    <div class="container container-narrow">
+      <h2 class="mb-lg">The Semantic Layer Structure</h2>
+      <p class="mb-xl text-muted">
+        AnswerLayer organizes your data model into four core objects:
       </p>
 
-      <div class="card mb-lg">
-        <h3 class="card-title">1. Schema Discovery</h3>
-        <p class="card-text">
-          When you connect a database, we analyze its schema: tables, columns, relationships, data types.
-          This metadata is cached and indexed for fast lookup.
-        </p>
-      </div>
+      <div class="object-grid">
+        <div class="object-card">
+          <h4>Entities</h4>
+          <p>
+            The nouns in your data. Customers, Orders, Products, Employees.
+            Each entity maps to a table or view with a clear business meaning.
+          </p>
+        </div>
 
-      <div class="card mb-lg">
-        <h3 class="card-title">2. Semantic Mapping</h3>
-        <p class="card-text">
-          You define business concepts in plain language. "Revenue" maps to <code>SUM(orders.total_amount)</code>.
-          "Active users" means <code>users WHERE last_login > NOW() - INTERVAL 30 days</code>.
-          These definitions are reused across all queries.
-        </p>
-      </div>
+        <div class="object-card">
+          <h4>Metrics</h4>
+          <p>
+            The numbers you care about. Revenue, Churn Rate, Average Order Value.
+            Defined once, used consistently across every query.
+          </p>
+        </div>
 
-      <div class="card mb-lg">
-        <h3 class="card-title">3. Query Generation</h3>
-        <p class="card-text">
-          When a question arrives, we match it against known concepts, validate against the schema,
-          and generate SQL that's guaranteed to execute. No hallucinated columns. No missing JOINs.
-        </p>
-      </div>
+        <div class="object-card">
+          <h4>Dimensions</h4>
+          <p>
+            The ways you slice data. By region, by product category, by time period.
+            Dimensions let users explore without writing SQL.
+          </p>
+        </div>
 
-      <div class="card mb-lg">
-        <h3 class="card-title">4. PII Filtering</h3>
-        <p class="card-text">
-          Before results are returned, we scan for personally identifiable information.
-          Email addresses, phone numbers, SSNs—automatically detected and filtered based on your policies.
-        </p>
+        <div class="object-card">
+          <h4>Filters</h4>
+          <p>
+            Predefined constraints. "Active customers only" or "Last 90 days."
+            Reusable conditions that ensure consistent analysis.
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -79,44 +138,156 @@ import Layout from '../layouts/Layout.astro';
   <!-- Technical Details -->
   <section class="section-sm" style="border-top: 1px solid var(--border);">
     <div class="container container-narrow">
-      <h2 class="mb-lg">Technical Details</h2>
+      <h2 class="mb-lg">Under the Hood</h2>
 
-      <h3 class="mb-sm">Supported Databases</h3>
-      <p class="text-muted mb-lg">
-        PostgreSQL, BigQuery, Snowflake, MySQL, AWS Athena, ClickHouse, DuckDB.
-        Any database with a SQL interface.
-      </p>
+      <div class="detail-row">
+        <h4>Data Sampling Analysis</h4>
+        <p>
+          We don't just read your schema. We analyze actual data samples to understand
+          statistical distributions, detect data types, identify relationships, and
+          infer business meaning. This is how we know that <code>cust_id</code> refers to customers.
+        </p>
+      </div>
 
-      <h3 class="mb-sm">Deployment Options</h3>
-      <p class="text-muted mb-lg">
-        Cloud (managed), VPC (your infrastructure), or on-premises.
-        Data never leaves your environment in VPC/on-prem deployments.
-      </p>
+      <div class="detail-row">
+        <h4>Chain-of-Thought Reasoning</h4>
+        <p>
+          Built on DSPy, our semantic layer generation uses chain-of-thought prompting
+          to reason through complex schemas. Each decision comes with a confidence score
+          so you know what to review.
+        </p>
+      </div>
 
-      <h3 class="mb-sm">API</h3>
-      <p class="text-muted mb-lg">
-        RESTful API with OpenAPI spec. SDK libraries for Python, TypeScript, and Go.
-        Webhook support for async queries.
-      </p>
+      <div class="detail-row">
+        <h4>PII Detection</h4>
+        <p>
+          AI-powered detection scans columns for personally identifiable information.
+          Email addresses, phone numbers, SSNs—flagged with confidence scores and human
+          override available. Catch sensitive data before it's exposed.
+        </p>
+      </div>
 
-      <h3 class="mb-sm">Authentication</h3>
-      <p class="text-muted">
-        API keys, OAuth 2.0, or SAML SSO. Role-based access control with organization-level isolation.
-      </p>
+      <div class="detail-row">
+        <h4>Query Validation</h4>
+        <p>
+          Generated SQL is validated against your schema before execution. DROP, DELETE,
+          TRUNCATE, ALTER blocked by default. Row limits prevent runaway queries.
+          Timeout protection stops long-running operations.
+        </p>
+      </div>
     </div>
   </section>
 
   <!-- CTA -->
-  <section class="section text-center">
+  <section class="section text-center" style="border-top: 1px solid var(--border);">
     <div class="container container-narrow">
-      <h2 class="mb-md">Ready to try it?</h2>
-      <p class="text-muted mb-xl">
-        Connect a database and ask your first question in under 5 minutes.
+      <h2 class="mb-md">See it in action</h2>
+      <p class="text-muted mb-lg">
+        Connect a database and watch your semantic layer generate in minutes.
       </p>
       <div class="flex gap-md" style="justify-content: center;">
         <a href="https://app.getanswerlayer.com/sign-up" class="btn btn-primary">Get Started</a>
-        <a href="https://docs.getanswerlayer.com" class="btn btn-secondary">Read the Docs</a>
+        <a href="https://docs.getanswerlayer.com" class="btn btn-link">Read the Docs</a>
       </div>
     </div>
   </section>
 </Layout>
+
+<style>
+  .step {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+  }
+
+  .step-number {
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    background: var(--accent);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-heading);
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  .step-content h3 {
+    margin: 0 0 8px 0;
+    font-size: 16px;
+  }
+
+  .step-content p {
+    margin: 0;
+    color: var(--fg-muted);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .object-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+
+  @media (max-width: 600px) {
+    .object-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .object-card {
+    background: var(--bg-alt);
+    border: 1px solid var(--border);
+    padding: 20px;
+    border-radius: 4px;
+  }
+
+  .object-card h4 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    color: var(--accent);
+  }
+
+  .object-card p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--fg-muted);
+    line-height: 1.5;
+  }
+
+  .detail-row {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border-subtle);
+  }
+
+  .detail-row:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+  }
+
+  .detail-row h4 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+  }
+
+  .detail-row p {
+    margin: 0;
+    font-size: 14px;
+    color: var(--fg-muted);
+    line-height: 1.6;
+  }
+
+  .detail-row code {
+    background: var(--bg);
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    border: 1px solid var(--border-subtle);
+  }
+</style>
