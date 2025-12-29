@@ -1573,8 +1573,9 @@ pre {
 }
 
 .crt-heading {
-  text-shadow: -2px 0 #38439399, 2px 0 #8997d699, 0 0 6px #38439366, 0 0 12px #38439333;
-  filter: contrast(1.15) brightness(1.1);
+  /* Softened to match crt-text - per ANS-487 */
+  text-shadow: -1px 0 #38439380, 1px 0 #8997d680, 0 0 3px #3843934d;
+  filter: contrast(1.1) brightness(1.05);
   position: relative;
 }
 
