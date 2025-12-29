@@ -16,9 +16,9 @@ export function CTA({
   secondaryButton,
   variant = 'default'
 }: CTAProps) {
-  const containerClass = variant === 'bordered' 
-    ? 'border-4 border-black p-8 md:p-12 bg-white' 
-    : 'p-8 md:p-12 bg-black text-cream';
+  const containerClass = variant === 'bordered'
+    ? 'border-4 border-navy-900 p-8 md:p-12 bg-white'
+    : 'p-8 md:p-12 bg-navy-900 text-white';
 
   return (
     <div className={containerClass}>
@@ -33,7 +33,7 @@ export function CTA({
               variant={variant === 'default' ? 'primary' : 'primary'}
               size="lg"
               onClick={primaryButton.onClick}
-              className={variant === 'default' ? 'bg-cream text-black border-cream hover:bg-white' : ''}
+              className={variant === 'default' ? 'bg-white text-navy-900 border-white hover:bg-navy-100' : ''}
             >
               {primaryButton.label}
             </Button>
@@ -43,7 +43,7 @@ export function CTA({
               variant="outline"
               size="lg"
               onClick={secondaryButton.onClick}
-              className={variant === 'default' ? 'border-cream text-cream hover:bg-cream hover:text-black' : ''}
+              className={variant === 'default' ? 'border-white text-white hover:bg-white hover:text-navy-900' : ''}
             >
               {secondaryButton.label}
             </Button>

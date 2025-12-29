@@ -14,7 +14,7 @@ export function Input({ label, error, className = '', ...props }: InputProps) {
         </label>
       )}
       <input
-        className={`border-2 border-black px-4 py-3 bg-white text-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-cream disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
+        className={`border-2 border-black px-4 py-3 bg-white text-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-white disabled:opacity-50 disabled:cursor-not-allowed ${className}`}
         {...props}
       />
       {error && (
@@ -40,7 +40,7 @@ export function TextArea({ label, error, className = '', ...props }: TextAreaPro
         </label>
       )}
       <textarea
-        className={`border-2 border-black px-4 py-3 bg-white text-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-cream disabled:opacity-50 disabled:cursor-not-allowed min-h-[120px] ${className}`}
+        className={`border-2 border-black px-4 py-3 bg-white text-black placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-black focus:ring-offset-2 focus:ring-offset-white disabled:opacity-50 disabled:cursor-not-allowed min-h-[120px] ${className}`}
         {...props}
       />
       {error && (

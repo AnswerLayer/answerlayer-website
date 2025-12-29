@@ -36,7 +36,7 @@ export function Header({
             ))}
           </nav>
 
-          <button className="md:hidden border-2 border-black px-4 py-2 uppercase text-sm hover:bg-black hover:text-cream transition-colors">
+          <button className="md:hidden border-2 border-navy-900 px-4 py-2 uppercase text-sm hover:bg-navy-900 hover:text-white transition-colors">
             MENU
           </button>
         </div>

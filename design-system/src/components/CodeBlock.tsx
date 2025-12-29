@@ -24,7 +24,7 @@ export function CodeBlock({
           <Badge variant="outlined" size="sm">{language}</Badge>
         </div>
       )}
-      <div className="bg-black text-cream p-6 overflow-x-auto">
+      <div className="bg-navy-900 text-white p-6 overflow-x-auto">
         <pre className="border-0 p-0 m-0 bg-transparent">
           {showLineNumbers ? (
             <code className="bg-transparent border-0 p-0">

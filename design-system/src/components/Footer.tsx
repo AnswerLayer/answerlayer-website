@@ -45,7 +45,7 @@ export function Footer({
   copyright = '© 2025 Answer Layer. All rights reserved.'
 }: FooterProps) {
   return (
-    <footer className="bg-black text-cream border-t-2 border-black">
+    <footer className="bg-navy-900 text-white border-t-2 border-navy-900">
       <div className="container mx-auto px-6 py-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
           <div className="col-span-2 md:col-span-1">
