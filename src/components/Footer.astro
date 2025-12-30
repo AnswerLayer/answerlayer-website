@@ -40,7 +40,7 @@
           <a href="mailto:hello@getanswerlayer.com" class="crt-text hover:text-navy-900 transition-colors">
             Contact
           </a>
-          <span id="footer-clock" class="crt-text text-navy-500">© 00:00:00 AnswerLayer</span>
+          <span id="footer-clock" class="crt-text text-navy-500">©0000 00 00 00:00:00 AnswerLayer</span>
         </div>
       </div>
     </div>
@@ -50,15 +50,15 @@
 <script>
   function updateClock() {
     const now = new Date();
-    const time = now.toLocaleTimeString('en-US', {
-      hour12: false,
-      hour: '2-digit',
-      minute: '2-digit',
-      second: '2-digit'
-    });
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hour = String(now.getHours()).padStart(2, '0');
+    const minute = String(now.getMinutes()).padStart(2, '0');
+    const second = String(now.getSeconds()).padStart(2, '0');
     const el = document.getElementById('footer-clock');
     if (el) {
-      el.textContent = `© ${time} AnswerLayer`;
+      el.textContent = `©${year} ${month} ${day} ${hour}:${minute}:${second} AnswerLayer`;
     }
   }
   updateClock();
