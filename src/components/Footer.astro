@@ -1,18 +1,45 @@
 ---
+/**
+ * Footer Component
+ * Technical metadata bar style matching CRTHero bottom section
+ */
 const currentYear = new Date().getFullYear();
 ---
 
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-links">
-      <a href="/privacy">Privacy</a>
-      <span class="footer-separator">|</span>
-      <a href="/terms">Terms</a>
-      <span class="footer-separator">|</span>
-      <a href="https://github.com/AnswerLayer" target="_blank" rel="noopener">GitHub</a>
-      <span class="footer-separator">|</span>
-      <a href="mailto:hello@getanswerlayer.com">Contact</a>
+<footer class="crt-screen border-t border-navy-300">
+  <div class="container mx-auto px-6 py-6">
+    <div class="font-mono text-sm text-navy-600 uppercase tracking-wider">
+      <div class="flex flex-wrap gap-6 md:gap-8 items-center justify-between">
+        <!-- Left side: Links -->
+        <div class="flex flex-wrap gap-6 md:gap-8 items-center">
+          <a href="/how-it-works" class="crt-text hover:text-navy-900 transition-colors">
+            How It Works
+          </a>
+          <a href="/pricing" class="crt-text hover:text-navy-900 transition-colors">
+            Pricing
+          </a>
+          <a href="https://docs.getanswerlayer.com" target="_blank" rel="noopener" class="crt-text hover:text-navy-900 transition-colors">
+            Docs
+          </a>
+          <a href="/trust" class="crt-text hover:text-navy-900 transition-colors">
+            Trust
+          </a>
+          <a href="/customers" class="crt-text hover:text-navy-900 transition-colors">
+            Customers
+          </a>
+        </div>
+
+        <!-- Right side: Meta -->
+        <div class="flex flex-wrap gap-6 md:gap-8 items-center">
+          <a href="https://github.com/AnswerLayer" target="_blank" rel="noopener" class="crt-text hover:text-navy-900 transition-colors">
+            GitHub
+          </a>
+          <a href="mailto:hello@getanswerlayer.com" class="crt-text hover:text-navy-900 transition-colors">
+            Contact
+          </a>
+          <span class="crt-text text-navy-500">© {currentYear} AnswerLayer</span>
+        </div>
+      </div>
     </div>
-    <p class="footer-copy">© {currentYear} Dynemetis, Inc.</p>
   </div>
 </footer>

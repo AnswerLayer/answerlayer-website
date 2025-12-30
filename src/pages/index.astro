@@ -1,131 +1,98 @@
 ---
+/**
+ * Home Page
+ * Minimal approach with IBM Plex Sans body text, technical card, CRT effects
+ */
 import Layout from '../layouts/Layout.astro';
+import Button from '../components/Button.astro';
 ---
 
-<Layout title="AnswerLayer - The Generative Semantic Layer">
-  <!-- Hero -->
-  <section class="hero">
-    <div class="container">
-      <img src="/logo.svg" alt="AnswerLayer" class="hero-logo" />
-      <h1>Private context layer for analytics agents.</h1>
-      <p class="subhead">
-        Your semantic layer generates itself. Experts curate and control it.
-        Deploys in your cloud.
-      </p>
-      <div class="hero-cta">
-        <a href="https://app.getanswerlayer.com/sign-up" class="btn btn-primary">Get Started</a>
-        <a href="/how-it-works" class="btn btn-secondary">See How It Works</a>
+<Layout title="AnswerLayer">
+  <div class="crt-screen hero-section">
+    <div class="container mx-auto px-6" style="max-width: 48rem;">
+
+      <div class="technical-card crt-glow">
+        <div class="title-box">
+          <h1 class="home-title crt-text">
+            Generative Semantic Layer
+          </h1>
+        </div>
+
+        <p class="body-text crt-text" style="margin-bottom: 1.25rem;">
+          AnswerLayer generates a semantic layer from your database. Connect a data warehouse—PostgreSQL, BigQuery, Snowflake, MySQL—and get a complete semantic model in minutes. Entities, metrics, dimensions, filters, and relationships are created automatically by analyzing your actual data, not just the schema.
+        </p>
+
+        <p class="body-text crt-text" style="margin-bottom: 1.25rem;">
+          The generated layer is fully editable. Domain experts refine definitions, add business logic, and control what's exposed. No YAML to maintain. No manual configuration. The AI does the grunt work; you curate the result.
+        </p>
+
+        <p class="body-text crt-text">
+          Runs in your cloud. VPC deployment is standard—data never leaves your infrastructure. PII detection flags sensitive columns before exposure. Query guardrails prevent runaway operations. Full audit trails for compliance.
+        </p>
       </div>
-    </div>
-  </section>
 
-  <!-- Problem/Solution -->
-  <section class="section">
-    <div class="container">
-      <p class="text-lg" style="max-width: 600px; margin: 0 auto; text-align: center;">
-        Traditional semantic layers require weeks of manual configuration.
-        AnswerLayer generates yours in minutes—then gives you full control to refine it.
-      </p>
-    </div>
-  </section>
-
-  <!-- Value Pillars -->
-  <section class="section" >
-    <div class="container">
-      <div class="pillars">
-        <div class="pillar">
-          <h3>Generative, not manual</h3>
-          <p>
-            Analyzes your actual data—not just schema. Creates entities, metrics,
-            dimensions, and filters automatically. You curate and refine, not build from scratch.
-          </p>
-        </div>
-
-        <div class="pillar">
-          <h3>Runs in your cloud</h3>
-          <p>
-            VPC deployment is standard. Data never leaves your infrastructure.
-            Static outbound IP for firewall whitelisting.
-          </p>
-        </div>
-
-        <div class="pillar">
-          <h3>Guardrails included</h3>
-          <p>
-            PII detection catches sensitive data before it's exposed.
-            Query validation blocks dangerous operations. Row limits prevent runaway queries.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- For Different Audiences -->
-  <section class="section" >
-    <div class="container">
-      <h2 class="section-header">Who it's for</h2>
-      <div class="audience-grid">
-        <div class="audience-card">
-          <h4>Data Teams</h4>
-          <p>Reduce analyst ticket volume. Let business users self-serve with consistent definitions.</p>
-        </div>
-        <div class="audience-card">
-          <h4>Engineering Teams</h4>
-          <p>Add natural language analytics to your product in days, not months.</p>
-        </div>
-        <div class="audience-card">
-          <h4>Product Teams</h4>
-          <p>Unlock new value from customer data without building infrastructure.</p>
-        </div>
-        <div class="audience-card">
-          <h4>Security-Conscious Orgs</h4>
-          <p>Analytics without data leaving your cloud. Full audit trails.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Metrics -->
-  <div class="metrics">
-    <div class="metric">
-      <div class="metric-value">&lt;500ms</div>
-      <div class="metric-label">Query generation</div>
-    </div>
-    <div class="metric">
-      <div class="metric-value">99.9%</div>
-      <div class="metric-label">Uptime</div>
-    </div>
-    <div class="metric">
-      <div class="metric-value">0 bytes</div>
-      <div class="metric-label">Data retained</div>
     </div>
   </div>
 
-  <!-- Databases -->
-  <section class="section">
-    <div class="container text-center">
-      <h2 class="section-header">Connect your database</h2>
-      <div class="flex gap-xl" style="justify-content: center; flex-wrap: wrap; align-items: center;">
-        <img src="/dblogos/postgres_logo.png" alt="PostgreSQL" width="40" height="40" style="opacity: 0.7;" />
-        <img src="/dblogos/bigquery_logo.png" alt="BigQuery" width="40" height="40" style="opacity: 0.7;" />
-        <img src="/dblogos/snowflake_logo.png" alt="Snowflake" width="40" height="40" style="opacity: 0.7;" />
-        <img src="/dblogos/mysql_logo.png" alt="MySQL" width="40" height="40" style="opacity: 0.7;" />
-      </div>
-      <p class="text-muted text-sm mt-lg">PostgreSQL, BigQuery, Snowflake, MySQL, Athena, and more.</p>
-    </div>
-  </section>
-
-  <!-- CTA -->
-  <section class="section text-center" >
-    <div class="container">
-      <h2>Ready to stop maintaining YAML?</h2>
-      <p class="text-muted mb-lg">
-        Connect a database and see your semantic layer generated in minutes.
-      </p>
-      <div class="flex gap-md" style="justify-content: center;">
-        <a href="https://app.getanswerlayer.com/sign-up" class="btn btn-primary">Get Started</a>
-        <a href="mailto:hello@getanswerlayer.com" class="btn btn-link">Talk to Us</a>
-      </div>
-    </div>
-  </section>
+  <style>
+    .hero-section {
+      min-height: calc(100vh - 80px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .title-box {
+      border: none;
+      border-bottom: 2px solid var(--color-navy-900);
+      padding: 1rem 1.5rem;
+      margin: -2rem -2.5rem 1.5rem -2.5rem;
+      background: transparent;
+    }
+    .home-title {
+      font-family: var(--font-display);
+      font-size: 2rem;
+      font-weight: 500;
+      text-transform: none;
+      margin: 0;
+      color: #151c3f;
+    }
+    @media (min-width: 640px) {
+      .home-title {
+        white-space: nowrap;
+      }
+    }
+    .body-text {
+      font-family: 'IBM Plex Sans', system-ui, sans-serif;
+      font-size: 1.0625rem;
+      color: #374151;
+      line-height: 1.75;
+    }
+    .technical-card {
+      background: transparent;
+      border: 2px solid var(--color-navy-900);
+      padding: 2rem 2.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+    }
+    .technical-card::before {
+      content: "";
+      position: absolute;
+      inset: -6px;
+      border: 1px solid var(--color-navy-300);
+      pointer-events: none;
+    }
+    .crt-link {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      color: var(--color-navy-900);
+      text-decoration: none;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      transition: opacity 0.2s;
+    }
+    .crt-link:hover {
+      opacity: 0.7;
+      text-decoration: underline;
+    }
+  </style>
 </Layout>

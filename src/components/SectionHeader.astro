@@ -1,0 +1,59 @@
+---
+/**
+ * SectionHeader Component
+ * Used within Section to display title, subtitle, and description
+ * Using inline styles to avoid Tailwind v4 text-breaking issues
+ */
+interface Props {
+  title: string;
+  subtitle?: string;
+  description?: string;
+  align?: 'left' | 'center';
+  class?: string;
+}
+
+const {
+  title,
+  subtitle,
+  description,
+  align = 'left',
+  class: className = ''
+} = Astro.props;
+
+const containerStyle = `
+  margin-bottom: 3rem;
+  ${align === 'center' ? 'text-align: center; margin-left: auto; margin-right: auto; max-width: 56rem;' : 'max-width: 64rem;'}
+`;
+
+const subtitleStyle = `
+  font-size: 0.875rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #4b5563;
+  font-family: var(--font-mono);
+  margin-bottom: 1rem;
+  display: block;
+`;
+
+const descriptionStyle = `
+  font-size: 1.125rem;
+  color: #4b5563;
+  line-height: 1.75;
+`;
+---
+
+<div style={containerStyle} class={className}>
+  {subtitle && (
+    <div style="margin-bottom: 1rem;">
+      <span style={subtitleStyle}>
+        {subtitle}
+      </span>
+    </div>
+  )}
+  <h2 class="crt-text" style="margin-bottom: 1rem;">{title}</h2>
+  {description && (
+    <p style={descriptionStyle}>
+      {description}
+    </p>
+  )}
+</div>

@@ -1,0 +1,39 @@
+---
+/**
+ * Section Component
+ * Per ANS-486: Avoid background patterns on feature sections, use solid backgrounds
+ */
+interface Props {
+  background?: 'light' | 'white' | 'navy';
+  pattern?: boolean;
+  border?: boolean;
+  class?: string;
+  id?: string;
+}
+
+const {
+  background = 'light',
+  pattern = false,
+  border = false,
+  class: className = '',
+  id
+} = Astro.props;
+
+const backgrounds = {
+  light: 'bg-background text-foreground',
+  white: 'bg-white text-foreground',
+  navy: 'bg-navy-900 text-white'
+};
+
+const classes = `
+  ${backgrounds[background]}
+  ${pattern ? 'grid-pattern' : ''}
+  ${border ? 'border-b-2 border-gray-200' : ''}
+  py-16 md:py-24
+  ${className}
+`.trim().replace(/\s+/g, ' ');
+---
+
+<section class={classes} id={id}>
+  <slot />
+</section>

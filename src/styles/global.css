@@ -1,0 +1,394 @@
+/* Google Fonts - MUST come before @import "tailwindcss" */
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap");
+
+@import "tailwindcss";
+
+/* ============================================
+   ANSWER LAYER DESIGN SYSTEM
+   CRT Brutalist Aesthetic with Navy Palette
+   ============================================ */
+
+/* ----------------------------------------
+   Theme Extension (Tailwind v4)
+   ---------------------------------------- */
+@theme {
+  /* Navy Color Palette (Primary Brand Colors) */
+  --color-navy-50: #eef1fa;
+  --color-navy-100: #dbe1f3;
+  --color-navy-200: #aebce5;
+  --color-navy-300: #8997d6;
+  --color-navy-400: #6275c7;
+  --color-navy-500: #4a57b4;
+  --color-navy-600: #384393;
+  --color-navy-700: #2a3477;
+  --color-navy-800: #1f2858;
+  --color-navy-900: #151c3f;
+  --color-navy-950: #0c1129;
+
+  /* Semantic Colors */
+  --color-background: #f1f4f9;
+  --color-foreground: #0f172a;
+
+  /* Font Families */
+  --font-display: "Space Grotesk", "Inter", system-ui, -apple-system, sans-serif;
+  --font-mono: "Space Mono", "IBM Plex Mono", "Courier New", monospace;
+  --font-sans: "Inter", system-ui, -apple-system, sans-serif;
+
+  /* Spacing (design system tokens) */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 3rem;
+  --spacing-3xl: 4rem;
+  --spacing-4xl: 6rem;
+
+  /* Borders */
+  --border-thin: 1px;
+  --border-medium: 2px;
+  --border-thick: 3px;
+  --border-heavy: 4px;
+
+  /* Transitions */
+  --transition-fast: 0.15s ease;
+  --transition-medium: 0.3s ease;
+}
+
+/* ----------------------------------------
+   Base Styles
+   ---------------------------------------- */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-mono);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-foreground);
+  line-height: 1.5;
+}
+
+/* ----------------------------------------
+   Typography System
+   ---------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+h1 {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: var(--color-navy-900);
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+  color: var(--color-navy-900);
+}
+
+h3 {
+  font-family: var(--font-display);
+  font-size: 1.75rem;
+  font-weight: 600;
+  line-height: 1.3;
+  text-transform: uppercase;
+  color: var(--color-navy-900);
+}
+
+h4 {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 600;
+  line-height: 1.4;
+  text-transform: uppercase;
+  color: var(--color-navy-900);
+}
+
+h5 {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+h6 {
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-transform: uppercase;
+}
+
+p {
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.6;
+  white-space: normal;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+small {
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+code {
+  font-family: var(--font-mono);
+  background-color: var(--color-gray-100, #f1f3f5);
+  border: var(--border-thin) solid var(--color-gray-300, #dee2e6);
+  padding: 0.125rem 0.25rem;
+}
+
+pre {
+  font-family: var(--font-mono);
+  background-color: var(--color-navy-900);
+  color: var(--color-navy-50);
+  padding: var(--spacing-md);
+  border: var(--border-medium) solid var(--color-navy-800);
+  overflow-x: auto;
+}
+
+/* ----------------------------------------
+   Container
+   ---------------------------------------- */
+.container {
+  max-width: 1400px;
+  padding: 0 var(--spacing-lg);
+  margin: 0 auto;
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1600px;
+  }
+}
+
+/* ----------------------------------------
+   CRT Screen Effects
+   Vintage display aesthetic with chromatic aberration
+   ---------------------------------------- */
+
+/* Subtle chromatic aberration for body text and UI elements */
+.crt-text {
+  text-shadow:
+    -1px 0 rgba(56, 67, 147, 0.5),
+    1px 0 rgba(137, 151, 214, 0.5),
+    0 0 3px rgba(56, 67, 147, 0.3);
+  filter: contrast(1.1) brightness(1.05);
+  position: relative;
+}
+
+/* NOTE: Per ANS-486, .crt-heading is too aggressive - use .crt-text instead */
+.crt-heading {
+  /* Softened to match crt-text - per ANS-487 */
+  text-shadow:
+    -1px 0 rgba(56, 67, 147, 0.5),
+    1px 0 rgba(137, 151, 214, 0.5),
+    0 0 3px rgba(56, 67, 147, 0.3);
+  filter: contrast(1.1) brightness(1.05);
+  position: relative;
+}
+
+/* Scanline overlay container */
+.crt-container {
+  position: relative;
+}
+
+.crt-container::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.03) 0,
+    transparent 1px 2px
+  );
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Box chromatic shadow for cards */
+.crt-glow {
+  box-shadow:
+    -2px 0 rgba(56, 67, 147, 0.3),
+    2px 0 rgba(137, 151, 214, 0.3),
+    0 0 10px rgba(56, 67, 147, 0.2);
+  filter: contrast(1.05);
+}
+
+/* NOTE: Per ANS-486, .crt-pixelated is too harsh - use .crt-glow instead */
+.crt-pixelated {
+  image-rendering: crisp-edges;
+  position: relative;
+}
+
+.crt-pixelated::after {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background:
+    linear-gradient(90deg, rgba(56, 67, 147, 0.15) 0%, transparent 3% 97%, rgba(137, 151, 214, 0.15) 100%),
+    linear-gradient(0deg, rgba(56, 67, 147, 0.15) 0%, transparent 3% 97%, rgba(137, 151, 214, 0.15) 100%);
+  pointer-events: none;
+  mix-blend-mode: overlay;
+}
+
+/* Badge chromatic effect */
+.crt-badge {
+  text-shadow:
+    -1px 0 rgba(56, 67, 147, 0.4),
+    1px 0 rgba(137, 151, 214, 0.4);
+  box-shadow:
+    -1px 0 rgba(56, 67, 147, 0.3),
+    1px 0 rgba(137, 151, 214, 0.3);
+}
+
+/* Full CRT screen effect with scanlines */
+.crt-screen {
+  background: var(--color-background);
+  position: relative;
+}
+
+.crt-screen::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(21, 28, 63, 0.04) 0,
+      transparent 1px,
+      transparent 3px
+    );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.crt-screen > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Interactive hover effect */
+.crt-interactive {
+  transition: filter 0.2s, transform 0.2s;
+}
+
+.crt-interactive:hover {
+  filter: contrast(1.1) brightness(1.05);
+  transform: translateZ(0);
+}
+
+/* Animated glitch effect (use sparingly) */
+@keyframes crt-glitch {
+  0%, 100% {
+    text-shadow:
+      -1px 0 rgba(56, 67, 147, 0.5),
+      1px 0 rgba(137, 151, 214, 0.5);
+  }
+  50% {
+    text-shadow:
+      -2px 0 rgba(56, 67, 147, 0.7),
+      2px 0 rgba(137, 151, 214, 0.7);
+  }
+}
+
+.crt-glitch {
+  animation: crt-glitch 3s ease-in-out infinite;
+}
+
+/* ----------------------------------------
+   Utility Patterns
+   ---------------------------------------- */
+
+/* Technical double-border pattern */
+.technical-border {
+  border: var(--border-medium) solid var(--color-navy-900);
+  position: relative;
+}
+
+.technical-border::before {
+  content: "";
+  position: absolute;
+  inset: -4px;
+  border: var(--border-thin) solid var(--color-navy-300);
+  pointer-events: none;
+}
+
+/* Arrow pattern (decorative) */
+.arrow-pattern {
+  height: 2px;
+  background-image: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 8px,
+    var(--color-navy-600) 8px,
+    var(--color-navy-600) 10px
+  );
+  background-size: 20px 2px;
+}
+
+/* Grid pattern background */
+.grid-pattern {
+  background-image:
+    linear-gradient(var(--color-gray-300, #dee2e6) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-gray-300, #dee2e6) 1px, transparent 1px);
+  background-size: 20px 20px;
+}
+
+/* ----------------------------------------
+   Selection & Scrollbar
+   ---------------------------------------- */
+::selection {
+  background-color: var(--color-navy-600);
+  color: var(--color-white, #fff);
+}
+
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-background);
+  border-left: var(--border-thin) solid var(--color-gray-300, #dee2e6);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-navy-600);
+  border: 2px solid var(--color-background);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-navy-700);
+}

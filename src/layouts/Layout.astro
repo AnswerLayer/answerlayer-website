@@ -1,7 +1,7 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import '../styles/main.css';
+import '../styles/global.css';
 
 interface Props {
   title: string;
@@ -40,10 +40,10 @@ const {
     <script async defer src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
     <noscript><img src="https://queue.simpleanalyticscdn.com/noscript.gif" alt="" referrerpolicy="no-referrer-when-downgrade" /></noscript>
   </head>
-  <body>
+  <body style="display: flex; flex-direction: column; min-height: 100vh;">
     <Header />
     <div class="page-spacer"></div>
-    <main>
+    <main style="flex: 1;">
       <slot />
     </main>
     <Footer />

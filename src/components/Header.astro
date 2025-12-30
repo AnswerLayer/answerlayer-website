@@ -1,4 +1,9 @@
 ---
+/**
+ * Header Component
+ * Per ANS-486: "Header menu - Nearly perfect, minimal changes"
+ * Using ghost button variant for softer appearance
+ */
 const currentPath = Astro.url.pathname;
 
 const navLinks = [
@@ -9,49 +14,109 @@ const navLinks = [
 ];
 ---
 
-<header class="header">
-  <div class="header-inner">
-    <a href="/" class="logo">
-      <img src="/logo.svg" alt="" width="24" height="24" />
-      AnswerLayer
-    </a>
+<header class="border-b-2 border-navy-900 bg-white sticky top-0 z-50">
+  <div class="container mx-auto px-6">
+    <div class="flex items-center justify-between py-4">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-2 uppercase tracking-tight font-display font-bold text-navy-900 hover:no-underline">
+        <img src="/logo.svg" alt="" width="24" height="24" class="w-6 h-6" />
+        <span class="crt-text">AnswerLayer</span>
+      </a>
 
-    <nav class="nav" id="nav">
-      {navLinks.map((link, i) => (
-        <>
+      <!-- Desktop Navigation -->
+      <nav class="hidden md:flex items-center gap-6">
+        {navLinks.map((link) => (
           <a
             href={link.href}
-            class:list={[{ active: currentPath === link.href || currentPath.startsWith(link.href + '/') }]}
+            class:list={[
+              'uppercase text-sm tracking-wide font-mono hover:underline transition-colors',
+              currentPath === link.href || currentPath.startsWith(link.href + '/')
+                ? 'text-navy-900 font-bold'
+                : 'text-gray-600 hover:text-navy-900'
+            ]}
           >
             {link.label}
           </a>
-          {i < navLinks.length - 1 && <span class="nav-separator">|</span>}
-        </>
-      ))}
-      <span class="nav-separator">|</span>
-      <a href="https://docs.getanswerlayer.com" target="_blank" rel="noopener">Docs</a>
-      <span class="nav-separator">|</span>
-      <a href="https://app.getanswerlayer.com/sign-up" class="btn btn-primary">Get Started</a>
-    </nav>
+        ))}
+        <span class="text-gray-300">|</span>
+        <a
+          href="https://docs.getanswerlayer.com"
+          target="_blank"
+          rel="noopener"
+          class="uppercase text-sm tracking-wide font-mono text-gray-600 hover:text-navy-900 hover:underline transition-colors"
+        >
+          Docs
+        </a>
+        <a
+          href="https://app.getanswerlayer.com/sign-up"
+          class="inline-flex items-center justify-center uppercase tracking-wide font-display font-semibold text-sm px-4 py-2 border-2 border-transparent text-navy-900 hover:border-navy-900 transition-all duration-150 hover:no-underline"
+        >
+          Get Started
+        </a>
+      </nav>
 
-    <button class="nav-mobile-toggle" id="nav-toggle" aria-label="Toggle navigation">
-      Menu
-    </button>
+      <!-- Mobile Menu Toggle -->
+      <button
+        class="md:hidden border-2 border-navy-900 px-4 py-2 uppercase text-sm font-display font-semibold hover:bg-navy-900 hover:text-white transition-colors"
+        id="nav-toggle"
+        aria-label="Toggle navigation"
+        aria-expanded="false"
+      >
+        Menu
+      </button>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <nav
+      class="hidden md:hidden flex-col gap-2 pb-4 border-t border-gray-200 pt-4"
+      id="mobile-nav"
+    >
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class:list={[
+            'uppercase text-sm tracking-wide font-mono py-2 hover:underline',
+            currentPath === link.href || currentPath.startsWith(link.href + '/')
+              ? 'text-navy-900 font-bold'
+              : 'text-gray-600'
+          ]}
+        >
+          {link.label}
+        </a>
+      ))}
+      <a
+        href="https://docs.getanswerlayer.com"
+        target="_blank"
+        rel="noopener"
+        class="uppercase text-sm tracking-wide font-mono text-gray-600 py-2 hover:underline"
+      >
+        Docs
+      </a>
+      <a
+        href="https://app.getanswerlayer.com/sign-up"
+        class="inline-flex items-center justify-center uppercase tracking-wide font-display font-semibold text-sm px-4 py-2 mt-2 border-2 border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white transition-colors"
+      >
+        Get Started
+      </a>
+    </nav>
   </div>
 </header>
 
 <script>
   const toggle = document.getElementById('nav-toggle');
-  const nav = document.getElementById('nav');
+  const mobileNav = document.getElementById('mobile-nav');
 
   toggle?.addEventListener('click', () => {
-    nav?.classList.toggle('open');
+    const isOpen = mobileNav?.classList.contains('flex');
+
+    if (isOpen) {
+      mobileNav?.classList.remove('flex');
+      mobileNav?.classList.add('hidden');
+      toggle.setAttribute('aria-expanded', 'false');
+    } else {
+      mobileNav?.classList.remove('hidden');
+      mobileNav?.classList.add('flex');
+      toggle.setAttribute('aria-expanded', 'true');
+    }
   });
 </script>
-
-<style>
-  .nav a.active {
-    color: var(--fg);
-    background: var(--border-subtle);
-  }
-</style>

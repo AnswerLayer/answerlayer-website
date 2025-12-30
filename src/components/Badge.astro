@@ -1,0 +1,36 @@
+---
+/**
+ * Badge Component
+ * Per ANS-486: variant="default" and variant="filled" are approved
+ */
+interface Props {
+  variant?: 'default' | 'outlined' | 'filled';
+  size?: 'sm' | 'md';
+  class?: string;
+}
+
+const {
+  variant = 'default',
+  size = 'md',
+  class: className = ''
+} = Astro.props;
+
+const baseStyles = 'inline-flex items-center justify-center uppercase tracking-wider border font-mono';
+
+const variants = {
+  default: 'bg-white text-navy-900 border-navy-900',
+  outlined: 'bg-transparent text-navy-900 border-2 border-navy-900',
+  filled: 'bg-navy-900 text-white border-navy-900'
+};
+
+const sizes = {
+  sm: 'px-2 py-1 text-xs',
+  md: 'px-3 py-1.5 text-sm'
+};
+
+const classes = `${baseStyles} ${variants[variant]} ${sizes[size]} ${className}`;
+---
+
+<span class={classes}>
+  <slot />
+</span>

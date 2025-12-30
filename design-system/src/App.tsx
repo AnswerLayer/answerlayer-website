@@ -13,6 +13,7 @@ import { Stats } from "./components/Stats";
 import { CodeBlock } from "./components/CodeBlock";
 import { CTA } from "./components/CTA";
 import { Footer } from "./components/Footer";
+import { FontComparison } from "./components/FontComparison";
 
 export default function App() {
   return (
@@ -298,7 +299,7 @@ export function Example() {
             title="TYPE SYSTEM"
             description="Monospace-first typography for technical precision."
           />
-          <div className="space-y-8">
+          <div className="space-y-8 mb-16">
             <div>
               <h1>HEADING 1 - DISPLAY</h1>
             </div>
@@ -334,6 +335,15 @@ export function Example() {
             <div>
               <small>SMALL TEXT - METADATA AND CAPTIONS</small>
             </div>
+          </div>
+
+          {/* Body Font Comparison */}
+          <div className="border-t-2 border-navy-300 pt-12">
+            <h3 className="mb-2 crt-text">BODY FONT OPTIONS</h3>
+            <p className="text-gray-600 mb-8">
+              Readable sans-serif alternatives for paragraph text.
+            </p>
+            <FontComparison />
           </div>
         </div>
       </Section>
