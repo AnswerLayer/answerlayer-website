@@ -14,21 +14,21 @@ import Button from '../components/Button.astro';
       <div class="technical-card crt-glow">
         <div class="title-box">
           <h1 class="home-title crt-text">
-            Generative Semantic Layer
+            A shared language for your data
           </h1>
         </div>
 
         <p class="body-text crt-text" style="margin-bottom: 1.25rem;">
-          AnswerLayer generates a semantic layer from your database. Connect a data warehouse—PostgreSQL, BigQuery, Snowflake, MySQL—and get a complete semantic model in minutes. Entities, metrics, dimensions, filters, and relationships are created automatically by analyzing your actual data, not just the schema.
+          AnswerLayer generates a semantic layer from any database. A semantic layer is a business ontology—a concept map that humans and AI can navigate together. It aligns organizations with their data through shared definitions. Entities, metrics, dimensions, and relationships are created automatically by analyzing actual data, not just schema.
         </p>
 
-        <p class="body-text crt-text" style="margin-bottom: 1.25rem;">
-          The generated layer is fully editable. Domain experts refine definitions, add business logic, and control what's exposed. No YAML to maintain. No manual configuration. The AI does the grunt work; you curate the result.
+        <p class="body-text crt-text" style="margin-bottom: 1.5rem;">
+          The result: consistent answers, confident decisions, and a data culture where everyone speaks the same language.
         </p>
 
-        <p class="body-text crt-text">
-          Runs in your cloud. VPC deployment is standard—data never leaves your infrastructure. PII detection flags sensitive columns before exposure. Query guardrails prevent runaway operations. Full audit trails for compliance.
-        </p>
+        <div class="continue-section">
+          <a href="/discover" class="continue-button crt-text">Continue</a>
+        </div>
       </div>
 
     </div>
@@ -93,6 +93,29 @@ import Button from '../components/Button.astro';
     .crt-link:hover {
       opacity: 0.7;
       text-decoration: underline;
+    }
+    .continue-section {
+      border-top: 2px solid var(--color-navy-900);
+      margin: 0 -2.5rem -2rem -2.5rem;
+      padding: 1rem 2.5rem;
+    }
+    .continue-button {
+      font-family: var(--font-mono);
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--color-navy-900);
+      background: transparent;
+      border: 2px solid var(--color-navy-900);
+      padding: 0.625rem 1.5rem;
+      text-decoration: none;
+      display: inline-block;
+      transition: all 0.15s ease;
+    }
+    .continue-button:hover {
+      background: var(--color-navy-900);
+      color: var(--color-background);
+      text-decoration: none;
     }
   </style>
 </Layout>

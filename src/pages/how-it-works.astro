@@ -1,4 +1,8 @@
 ---
+/**
+ * How It Works Page
+ * CRT brutalist aesthetic with multiple sections and visual hierarchy
+ */
 import Layout from '../layouts/Layout.astro';
 ---
 
@@ -6,127 +10,139 @@ import Layout from '../layouts/Layout.astro';
   title="How It Works - AnswerLayer"
   description="See how AnswerLayer generates your semantic layer from actual data, then lets experts curate and refine it."
 >
-  <!-- Intro -->
-  <section class="section">
-    <div class="container container-narrow">
-      <h1 class="mb-lg">How It Works</h1>
-      <p class="text-lg" style="max-width: 600px;">
-        Traditional semantic layers require weeks of manual YAML configuration.
-        AnswerLayer generates yours in minutes—then gives you full control to refine it.
-      </p>
+  <!-- Hero -->
+  <section class="crt-screen">
+    <div class="container mx-auto px-6 py-16 md:py-24" style="max-width: 56rem;">
+      <div class="technical-card crt-glow">
+        <div class="title-box">
+          <h1 class="page-title crt-text">How It Works</h1>
+        </div>
+        <p class="body-text crt-text">
+          Traditional semantic layers require weeks of manual YAML configuration.
+          AnswerLayer generates yours in minutes—then gives you full control to refine it.
+        </p>
+      </div>
     </div>
   </section>
 
+  <div class="section-spacer crt-screen"></div>
+
   <!-- The Problem -->
-  <section class="section-sm" >
-    <div class="container container-narrow">
-      <h2 class="mb-lg">The Problem with Traditional Semantic Layers</h2>
-      <p class="mb-md">
+  <section class="crt-screen">
+    <div class="container mx-auto px-6 py-16 md:py-20" style="max-width: 56rem;">
+      <h2 class="section-title crt-text">The Problem with Traditional Semantic Layers</h2>
+      <p class="body-text crt-text mb-6">
         Semantic layers are essential for consistent analytics. They define what "revenue" means,
         how tables relate, and which metrics matter. But traditional tools require you to:
       </p>
-      <ul class="feature-list">
-        <li>Write hundreds of lines of YAML or configuration code</li>
-        <li>Manually map every table, column, and relationship</li>
-        <li>Define metrics one by one with exact SQL expressions</li>
-        <li>Maintain it all as your schema evolves</li>
+      <ul class="problem-list">
+        <li class="crt-text">Write hundreds of lines of YAML or configuration code</li>
+        <li class="crt-text">Manually map every table, column, and relationship</li>
+        <li class="crt-text">Define metrics one by one with exact SQL expressions</li>
+        <li class="crt-text">Maintain it all as your schema evolves</li>
       </ul>
-      <p class="mt-lg text-muted">
+      <p class="body-text crt-text text-navy-500 mt-6">
         This means weeks of upfront work and ongoing maintenance. Meanwhile, your team needs answers now.
       </p>
     </div>
   </section>
 
+  <div class="section-spacer crt-screen"></div>
+
   <!-- The AnswerLayer Approach -->
-  <section class="section-sm" >
-    <div class="container container-narrow">
-      <h2 class="mb-xl">The AnswerLayer Approach</h2>
+  <section class="crt-screen">
+    <div class="container mx-auto px-6 py-16 md:py-20" style="max-width: 56rem;">
+      <h2 class="section-title crt-text mb-10">The AnswerLayer Approach</h2>
 
-      <div class="step">
-        <div class="step-number">1</div>
-        <div class="step-content">
-          <h3>Connect your database</h3>
-          <p>
-            PostgreSQL, BigQuery, Snowflake, MySQL, Athena—connect any SQL database.
-            Runs in your VPC, so credentials stay encrypted and data never leaves your infrastructure.
-          </p>
+      <div class="steps-container">
+        <div class="step">
+          <div class="step-number crt-text">1</div>
+          <div class="step-content">
+            <h3 class="step-title crt-text">Connect your database</h3>
+            <p class="body-text crt-text">
+              PostgreSQL, BigQuery, Snowflake, MySQL, Athena—connect any SQL database.
+              Runs in your VPC, so credentials stay encrypted and data never leaves your infrastructure.
+            </p>
+          </div>
         </div>
-      </div>
 
-      <div class="step">
-        <div class="step-number">2</div>
-        <div class="step-content">
-          <h3>AI generates your semantic layer</h3>
-          <p>
-            Not just schema inspection—AnswerLayer analyzes actual data samples to understand
-            business context. It identifies entities (Customer, Order, Product), creates metrics
-            with meaningful names (Revenue, Churn Rate), and defines useful dimensions and filters.
-          </p>
+        <div class="step">
+          <div class="step-number crt-text">2</div>
+          <div class="step-content">
+            <h3 class="step-title crt-text">AI generates your semantic layer</h3>
+            <p class="body-text crt-text">
+              Not just schema inspection—AnswerLayer analyzes actual data samples to understand
+              business context. It identifies entities (Customer, Order, Product), creates metrics
+              with meaningful names (Revenue, Churn Rate), and defines useful dimensions and filters.
+            </p>
+          </div>
         </div>
-      </div>
 
-      <div class="step">
-        <div class="step-number">3</div>
-        <div class="step-content">
-          <h3>Experts curate and refine</h3>
-          <p>
-            Review what AI generated. Override PII detection decisions. Add business context
-            the AI missed. Lock down definitions that matter. You're in control—the AI just
-            gave you a head start.
-          </p>
+        <div class="step">
+          <div class="step-number crt-text">3</div>
+          <div class="step-content">
+            <h3 class="step-title crt-text">Experts curate and refine</h3>
+            <p class="body-text crt-text">
+              Review what AI generated. Override PII detection decisions. Add business context
+              the AI missed. Lock down definitions that matter. You're in control—the AI just
+              gave you a head start.
+            </p>
+          </div>
         </div>
-      </div>
 
-      <div class="step">
-        <div class="step-number">4</div>
-        <div class="step-content">
-          <h3>Query with natural language</h3>
-          <p>
-            AI agents and business users ask questions in plain English. AnswerLayer translates
-            them to accurate SQL using your curated semantic layer. PII is automatically filtered.
-            Row limits prevent runaway queries.
-          </p>
+        <div class="step">
+          <div class="step-number crt-text">4</div>
+          <div class="step-content">
+            <h3 class="step-title crt-text">Query with natural language</h3>
+            <p class="body-text crt-text">
+              AI agents and business users ask questions in plain English. AnswerLayer translates
+              them to accurate SQL using your curated semantic layer. PII is automatically filtered.
+              Row limits prevent runaway queries.
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Four Core Objects -->
-  <section class="section-sm" >
-    <div class="container container-narrow">
-      <h2 class="mb-lg">The Semantic Layer Structure</h2>
-      <p class="mb-xl text-muted">
+  <div class="section-spacer crt-screen"></div>
+
+  <!-- Semantic Layer Structure -->
+  <section class="crt-screen">
+    <div class="container mx-auto px-6 py-16 md:py-20" style="max-width: 56rem;">
+      <h2 class="section-title crt-text">The Semantic Layer Structure</h2>
+      <p class="body-text crt-text text-navy-500 mb-8">
         AnswerLayer organizes your data model into four core objects:
       </p>
 
       <div class="object-grid">
-        <div class="object-card">
-          <h4>Entities</h4>
-          <p>
+        <div class="object-card crt-glow">
+          <h4 class="object-title crt-text">Entities</h4>
+          <p class="object-desc crt-text">
             The nouns in your data. Customers, Orders, Products, Employees.
             Each entity maps to a table or view with a clear business meaning.
           </p>
         </div>
 
-        <div class="object-card">
-          <h4>Metrics</h4>
-          <p>
+        <div class="object-card crt-glow">
+          <h4 class="object-title crt-text">Metrics</h4>
+          <p class="object-desc crt-text">
             The numbers you care about. Revenue, Churn Rate, Average Order Value.
             Defined once, used consistently across every query.
           </p>
         </div>
 
-        <div class="object-card">
-          <h4>Dimensions</h4>
-          <p>
+        <div class="object-card crt-glow">
+          <h4 class="object-title crt-text">Dimensions</h4>
+          <p class="object-desc crt-text">
             The ways you slice data. By region, by product category, by time period.
             Dimensions let users explore without writing SQL.
           </p>
         </div>
 
-        <div class="object-card">
-          <h4>Filters</h4>
-          <p>
+        <div class="object-card crt-glow">
+          <h4 class="object-title crt-text">Filters</h4>
+          <p class="object-desc crt-text">
             Predefined constraints. "Active customers only" or "Last 90 days."
             Reusable conditions that ensure consistent analysis.
           </p>
@@ -135,159 +151,258 @@ import Layout from '../layouts/Layout.astro';
     </div>
   </section>
 
-  <!-- Technical Details -->
-  <section class="section-sm" >
-    <div class="container container-narrow">
-      <h2 class="mb-lg">Under the Hood</h2>
+  <div class="section-spacer crt-screen"></div>
 
-      <div class="detail-row">
-        <h4>Data Sampling Analysis</h4>
-        <p>
-          We don't just read your schema. We analyze actual data samples to understand
-          statistical distributions, detect data types, identify relationships, and
-          infer business meaning. This is how we know that <code>cust_id</code> refers to customers.
-        </p>
-      </div>
+  <!-- Under the Hood -->
+  <section class="crt-screen">
+    <div class="container mx-auto px-6 py-16 md:py-20" style="max-width: 56rem;">
+      <h2 class="section-title crt-text mb-10">Under the Hood</h2>
 
-      <div class="detail-row">
-        <h4>Chain-of-Thought Reasoning</h4>
-        <p>
-          Built on DSPy, our semantic layer generation uses chain-of-thought prompting
-          to reason through complex schemas. Each decision comes with a confidence score
-          so you know what to review.
-        </p>
-      </div>
+      <div class="details-container">
+        <div class="detail-row">
+          <h4 class="detail-title crt-text">Data Sampling Analysis</h4>
+          <p class="body-text crt-text">
+            We don't just read your schema. We analyze actual data samples to understand
+            statistical distributions, detect data types, identify relationships, and
+            infer business meaning. This is how we know that <code>cust_id</code> refers to customers.
+          </p>
+        </div>
 
-      <div class="detail-row">
-        <h4>PII Detection</h4>
-        <p>
-          AI-powered detection scans columns for personally identifiable information.
-          Email addresses, phone numbers, SSNs—flagged with confidence scores and human
-          override available. Catch sensitive data before it's exposed.
-        </p>
-      </div>
+        <div class="detail-row">
+          <h4 class="detail-title crt-text">Chain-of-Thought Reasoning</h4>
+          <p class="body-text crt-text">
+            Built on DSPy, our semantic layer generation uses chain-of-thought prompting
+            to reason through complex schemas. Each decision comes with a confidence score
+            so you know what to review.
+          </p>
+        </div>
 
-      <div class="detail-row">
-        <h4>Query Validation</h4>
-        <p>
-          Generated SQL is validated against your schema before execution. DROP, DELETE,
-          TRUNCATE, ALTER blocked by default. Row limits prevent runaway queries.
-          Timeout protection stops long-running operations.
-        </p>
-      </div>
-    </div>
-  </section>
+        <div class="detail-row">
+          <h4 class="detail-title crt-text">PII Detection</h4>
+          <p class="body-text crt-text">
+            AI-powered detection scans columns for personally identifiable information.
+            Email addresses, phone numbers, SSNs—flagged with confidence scores and human
+            override available. Catch sensitive data before it's exposed.
+          </p>
+        </div>
 
-  <!-- CTA -->
-  <section class="section text-center" >
-    <div class="container container-narrow">
-      <h2 class="mb-md">See it in action</h2>
-      <p class="text-muted mb-lg">
-        Connect a database and watch your semantic layer generate in minutes.
-      </p>
-      <div class="flex gap-md" style="justify-content: center;">
-        <a href="https://app.getanswerlayer.com/sign-up" class="btn btn-primary">Get Started</a>
-        <a href="https://docs.getanswerlayer.com" class="btn btn-link">Read the Docs</a>
+        <div class="detail-row">
+          <h4 class="detail-title crt-text">Query Validation</h4>
+          <p class="body-text crt-text">
+            Generated SQL is validated against your schema before execution. DROP, DELETE,
+            TRUNCATE, ALTER blocked by default. Row limits prevent runaway queries.
+            Timeout protection stops long-running operations.
+          </p>
+        </div>
       </div>
     </div>
   </section>
+
 </Layout>
 
 <style>
+  /* Typography */
+  .page-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--color-navy-900);
+    margin: 0;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--color-navy-900);
+    margin-bottom: 1rem;
+  }
+
+  .body-text {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 1.0625rem;
+    color: #374151;
+    line-height: 1.75;
+  }
+
+  /* Hero Card */
+  .technical-card {
+    background: transparent;
+    border: 2px solid var(--color-navy-900);
+    padding: 2rem 2.5rem;
+    position: relative;
+  }
+
+  .technical-card::before {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border: 1px solid var(--color-navy-300);
+    pointer-events: none;
+  }
+
+  .title-box {
+    border: none;
+    border-bottom: 2px solid var(--color-navy-900);
+    padding: 1rem 1.5rem;
+    margin: -2rem -2.5rem 1.5rem -2.5rem;
+    background: transparent;
+  }
+
+  /* Problem List */
+  .problem-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .problem-list li {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 1rem;
+    color: #374151;
+    line-height: 1.75;
+    padding-left: 1.5rem;
+    margin-bottom: 0.5rem;
+    position: relative;
+  }
+
+  .problem-list li::before {
+    content: "—";
+    position: absolute;
+    left: 0;
+    color: var(--color-navy-600);
+  }
+
+  /* Steps */
+  .steps-container {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
   .step {
     display: flex;
-    gap: 20px;
-    margin-bottom: 30px;
+    gap: 1.25rem;
+    align-items: flex-start;
   }
 
   .step-number {
     flex-shrink: 0;
-    width: 32px;
-    height: 32px;
-    background: var(--accent);
-    color: white;
-    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--color-navy-900);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: var(--font-heading);
-    font-weight: bold;
-    font-size: 14px;
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: 1rem;
+    color: var(--color-navy-900);
+    background: transparent;
   }
 
-  .step-content h3 {
-    margin: 0 0 8px 0;
-    font-size: 16px;
+  .step-content {
+    flex: 1;
   }
 
-  .step-content p {
-    margin: 0;
-    color: var(--fg-muted);
-    font-size: 14px;
-    line-height: 1.6;
+  .step-title {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 500;
+    color: var(--color-navy-900);
+    margin: 0 0 0.5rem 0;
   }
 
+  /* Object Grid */
   .object-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
+    gap: 1.25rem;
   }
 
-  @media (max-width: 600px) {
+  @media (max-width: 640px) {
     .object-grid {
       grid-template-columns: 1fr;
     }
   }
 
   .object-card {
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    padding: 20px;
-    border-radius: 4px;
+    background: transparent;
+    border: 2px solid var(--color-navy-900);
+    padding: 1.5rem;
   }
 
-  .object-card h4 {
-    margin: 0 0 8px 0;
-    font-size: 14px;
-    color: var(--accent);
+  .object-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-navy-900);
+    margin: 0 0 0.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
   }
 
-  .object-card p {
+  .object-desc {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 0.9375rem;
+    color: #4b5563;
+    line-height: 1.6;
     margin: 0;
-    font-size: 13px;
-    color: var(--fg-muted);
-    line-height: 1.5;
+  }
+
+  /* Details */
+  .details-container {
+    display: flex;
+    flex-direction: column;
   }
 
   .detail-row {
-    margin-bottom: 24px;
-    padding-bottom: 24px;
-    border-bottom: 1px solid var(--border-subtle);
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--color-navy-300);
+  }
+
+  .detail-row:first-child {
+    padding-top: 0;
   }
 
   .detail-row:last-child {
     border-bottom: none;
-    margin-bottom: 0;
     padding-bottom: 0;
   }
 
-  .detail-row h4 {
-    margin: 0 0 8px 0;
-    font-size: 14px;
-  }
-
-  .detail-row p {
-    margin: 0;
-    font-size: 14px;
-    color: var(--fg-muted);
-    line-height: 1.6;
+  .detail-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--color-navy-900);
+    margin: 0 0 0.5rem 0;
   }
 
   .detail-row code {
-    background: var(--bg);
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 12px;
-    border: 1px solid var(--border-subtle);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    background: var(--color-navy-100);
+    border: 1px solid var(--color-navy-300);
+    padding: 0.125rem 0.375rem;
+    color: var(--color-navy-900);
   }
+
+  /* Section Spacer */
+  .section-spacer {
+    height: 6rem;
+  }
+
+  @media (min-width: 768px) {
+    .section-spacer {
+      height: 8rem;
+    }
+  }
+
+  /* Utility */
+  .mb-6 { margin-bottom: 1.5rem; }
+  .mb-8 { margin-bottom: 2rem; }
+  .mb-10 { margin-bottom: 2.5rem; }
+  .mt-6 { margin-top: 1.5rem; }
+  .text-navy-500 { color: var(--color-navy-500); }
+  .text-navy-600 { color: var(--color-navy-600); }
 </style>

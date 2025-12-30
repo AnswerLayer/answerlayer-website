@@ -1,0 +1,191 @@
+---
+/**
+ * Discovery Wizard - Index Route
+ *
+ * Renders the home node of the discovery wizard.
+ */
+import Layout from '../../layouts/Layout.astro';
+import { nodes, externalLinks, isExternalNode } from '../../data/discover-nodes';
+
+const node = nodes['home'];
+
+// Process content - convert markdown-like syntax to HTML
+function processContent(content: string): string {
+  let html = content;
+
+  // Convert **bold** to <strong>
+  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+
+  // Convert `code` to <code>
+  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
+
+  // Convert paragraphs (double newlines)
+  html = html.split('\n\n').map(p => `<p>${p}</p>`).join('\n');
+
+  return html;
+}
+
+const processedContent = processContent(node.content);
+
+// Build the option URLs
+const optionUrls = node.options.map(opt => {
+  if (isExternalNode(opt.target)) {
+    return externalLinks[opt.target] || '#';
+  }
+  return `/discover/${opt.target}`;
+});
+---
+
+<Layout
+  title={`${node.title} - AnswerLayer`}
+  description="Discover AnswerLayer - a generative semantic layer for databases"
+>
+  <div class="discover-page crt-screen">
+    <div class="container mx-auto px-6 py-12 md:py-20" style="max-width: 48rem;">
+
+      <div class="discover-card crt-glow">
+        <!-- Title -->
+        <div class="title-box">
+          <h1 class="discover-title crt-text">{node.title}</h1>
+        </div>
+
+        <!-- Content -->
+        <div class="discover-content crt-text" set:html={processedContent} />
+
+        <!-- Options -->
+        {node.options.length > 0 && (
+          <div class="discover-options">
+            {node.options.map((option, index) => {
+              const isExternal = isExternalNode(option.target);
+              const url = optionUrls[index];
+
+              return (
+                <a
+                  href={url}
+                  class="discover-option crt-text"
+                  target={isExternal && url.startsWith('http') ? '_blank' : undefined}
+                  rel={isExternal && url.startsWith('http') ? 'noopener' : undefined}
+                >
+                  {option.label}
+                </a>
+              );
+            })}
+          </div>
+        )}
+      </div>
+
+      <!-- Breadcrumb hint -->
+      <div class="discover-hint crt-text">
+        <span class="hint-text">Use the header to navigate elsewhere, or explore below.</span>
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .discover-page {
+    min-height: calc(100vh - 160px);
+    display: flex;
+    align-items: flex-start;
+    padding-top: 2rem;
+  }
+
+  @media (min-height: 700px) {
+    .discover-page {
+      align-items: center;
+      padding-top: 0;
+    }
+  }
+
+  .discover-card {
+    background: transparent;
+    border: 2px solid var(--color-navy-900);
+    position: relative;
+  }
+
+  .discover-card::before {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border: 1px solid var(--color-navy-300);
+    pointer-events: none;
+  }
+
+  .title-box {
+    border-bottom: 2px solid var(--color-navy-900);
+    padding: 1.25rem 1.5rem;
+    background: transparent;
+  }
+
+  .discover-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: var(--color-navy-900);
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  @media (min-width: 640px) {
+    .discover-title {
+      font-size: 1.75rem;
+    }
+  }
+
+  .discover-content {
+    padding: 1.5rem;
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 1rem;
+    color: #374151;
+    line-height: 1.75;
+  }
+
+  .discover-content :global(p) {
+    margin-bottom: 1rem;
+  }
+
+  .discover-content :global(p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .discover-options {
+    border-top: 2px solid var(--color-navy-900);
+    padding: 1rem 1.5rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .discover-option {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-navy-900);
+    background: transparent;
+    border: 2px solid var(--color-navy-900);
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  .discover-option:hover {
+    background: var(--color-navy-900);
+    color: var(--color-background);
+    text-decoration: none;
+  }
+
+  .discover-hint {
+    margin-top: 2rem;
+    text-align: center;
+  }
+
+  .hint-text {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-navy-500);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+</style>
