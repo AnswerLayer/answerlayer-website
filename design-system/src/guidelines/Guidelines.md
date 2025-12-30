@@ -4,6 +4,45 @@
 
 A brutalist design system inspired by technical documentation, patent diagrams, and industrial aesthetics, featuring vintage CRT screen effects with chromatic aberration and pixelated edges.
 
+---
+
+## Design Approval Status (ANS-486)
+
+> **Key Principle**: "Use the aesthetic but make it feel just a little less aggressive, softer."
+>
+> "Part of what distinguishes this style is the lack of complicated padding and pixel pushing. This makes the code easier to work with and the finished product more consistent when working with agents."
+
+### ✅ Approved Elements
+
+| Category | Element | Notes |
+|----------|---------|-------|
+| **CRT Effects** | Large text with `.crt-text` | Good balance, subtle |
+| **CRT Effects** | Scanline containers (`.crt-screen`, `.crt-container`) | Approved |
+| **CRT Effects** | `.crt-glow` on cards | Subtle depth effect |
+| **Buttons** | `variant="ghost"` | Preferred - softer |
+| **Badges** | `variant="default"` and `variant="filled"` | Approved |
+| **Cards** | `variant="technical"` | Preferred - blueprint feel |
+| **Components** | CRTHero, CodeBlock, TechnicalDiagram | Core components |
+| **Components** | Header menu | Nearly perfect, minimal changes |
+| **Visual** | Navy color palette | Approved as-is |
+| **Visual** | Circle schematic + ® symbol in hero | Approved |
+| **Philosophy** | Minimal padding | Intentional, agent-friendly |
+
+### ❌ Elements to Avoid
+
+| Element | Reason | Alternative |
+|---------|--------|-------------|
+| `.crt-heading` | Too aggressive | Use `.crt-text` instead |
+| `.crt-pixelated` / EDGE EFFECT | Too harsh | Omit or use `.crt-glow` |
+| `.crt-interactive`, `.crt-badge` on showcases | Too much flourish | Keep these minimal |
+| ALL CAPS everywhere | Overwhelming | Use Title Case or lowercase |
+| Background patterns on feature sections | Misses aesthetic | Use solid backgrounds |
+| Hard white badges on dark backgrounds | Low contrast | Adjust color for readability |
+
+### Styling Fixes Needed
+
+- GET STARTED button - needs softening
+
 ## Visual Aesthetic
 
 ### Core Principles
