@@ -103,37 +103,16 @@ export function CRTHero({
           {/* Right Column - Technical Graphics */}
           <div className="relative">
             {showCircularBadge && (
-              <div className="relative">
-                <CircularBadge 
-                  text={circularText}
-                  size={320}
-                  className="mx-auto crt-glow"
-                />
-                
-                {/* Technical diagram overlay */}
-                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                  <div className="relative w-48 h-48">
-                    {/* Orbital rings */}
-                    <div className="absolute inset-0 border-2 border-navy-300 rounded-full crt-glow opacity-60"></div>
-                    <div className="absolute inset-4 border-2 border-navy-400 rounded-full crt-glow opacity-50" style={{ transform: 'rotate(45deg)' }}></div>
-                    <div className="absolute inset-8 border-2 border-navy-500 rounded-full crt-glow opacity-40" style={{ transform: 'rotate(90deg)' }}></div>
-                    
-                    {/* Center dot */}
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-navy-600 rounded-full crt-glow"></div>
-                    
-                    {/* Connection nodes */}
-                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-navy-300 rounded-full"></div>
-                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-3 h-3 bg-navy-300 rounded-full"></div>
-                    <div className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-1/2 w-3 h-3 bg-navy-300 rounded-full"></div>
-                    <div className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-1/2 w-3 h-3 bg-navy-300 rounded-full"></div>
-                  </div>
-                </div>
-              </div>
+              <CircularBadge
+                text={circularText}
+                size={360}
+                className="mx-auto"
+              />
             )}
 
             {/* Registration mark in corner */}
-            <div className="absolute top-4 right-4 w-12 h-12 border-2 border-navy-300 rounded-full flex items-center justify-center crt-badge text-navy-600">
-              <span className="text-2xl">®</span>
+            <div className="absolute top-4 right-4 w-10 h-10 border border-navy-300 rounded-full flex items-center justify-center crt-badge text-navy-500 text-sm">
+              ®
             </div>
           </div>
         </div>
