@@ -2,8 +2,8 @@
 /**
  * Footer Component
  * Technical metadata bar style matching CRTHero bottom section
+ * Features live ticking clock instead of static year
  */
-const currentYear = new Date().getFullYear();
 ---
 
 <footer class="crt-screen border-t border-navy-300">
@@ -12,20 +12,23 @@ const currentYear = new Date().getFullYear();
       <div class="flex flex-wrap gap-6 md:gap-8 items-center justify-between">
         <!-- Left side: Links -->
         <div class="flex flex-wrap gap-6 md:gap-8 items-center">
-          <a href="/how-it-works" class="crt-text hover:text-navy-900 transition-colors">
-            How It Works
-          </a>
-          <a href="/pricing" class="crt-text hover:text-navy-900 transition-colors">
-            Pricing
-          </a>
-          <a href="https://docs.getanswerlayer.com" target="_blank" rel="noopener" class="crt-text hover:text-navy-900 transition-colors">
-            Docs
+          <a href="/customers" class="crt-text hover:text-navy-900 transition-colors">
+            Customers
           </a>
           <a href="/trust" class="crt-text hover:text-navy-900 transition-colors">
             Trust
           </a>
-          <a href="/customers" class="crt-text hover:text-navy-900 transition-colors">
-            Customers
+          <a href="/architecture" class="crt-text hover:text-navy-900 transition-colors">
+            Architecture
+          </a>
+          <a href="/install" class="crt-text hover:text-navy-900 transition-colors">
+            Install
+          </a>
+          <a href="/open-source" class="crt-text hover:text-navy-900 transition-colors">
+            Open Source
+          </a>
+          <a href="/careers" class="crt-text hover:text-navy-900 transition-colors">
+            Careers
           </a>
         </div>
 
@@ -37,9 +40,27 @@ const currentYear = new Date().getFullYear();
           <a href="mailto:hello@getanswerlayer.com" class="crt-text hover:text-navy-900 transition-colors">
             Contact
           </a>
-          <span class="crt-text text-navy-500">© {currentYear} AnswerLayer</span>
+          <span id="footer-clock" class="crt-text text-navy-500">© 00:00:00 AnswerLayer</span>
         </div>
       </div>
     </div>
   </div>
 </footer>
+
+<script>
+  function updateClock() {
+    const now = new Date();
+    const time = now.toLocaleTimeString('en-US', {
+      hour12: false,
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit'
+    });
+    const el = document.getElementById('footer-clock');
+    if (el) {
+      el.textContent = `© ${time} AnswerLayer`;
+    }
+  }
+  updateClock();
+  setInterval(updateClock, 1000);
+</script>

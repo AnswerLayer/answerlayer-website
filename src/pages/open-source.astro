@@ -1,0 +1,299 @@
+---
+/**
+ * Open Source Page
+ *
+ * Grid of cards showing open source components and agent integrations.
+ * Inspired by unit.software card grid layout.
+ */
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Open Source - AnswerLayer"
+  description="Open source components, contributing guidelines, and agent integrations"
+>
+  <div class="crt-screen">
+    <div class="container mx-auto px-6 py-12 md:py-20">
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title crt-text">Open Source</h1>
+        <p class="page-subtitle">Components, integrations, and contributions</p>
+      </div>
+
+      <!-- Card Grid -->
+      <div class="card-grid">
+
+        <a href="/discover/build-contribute" class="topic-card">
+          <div class="card-visual">
+            <div class="visual-pattern contribute"></div>
+          </div>
+          <div class="card-content">
+            <h2 class="card-title">Contributing</h2>
+            <p class="card-description">Query parser, schema analyzer, and semantic types are open source. Core generation uses proprietary models, surrounding infrastructure is open.</p>
+          </div>
+        </a>
+
+        <a href="/discover/agents-integration" class="topic-card">
+          <div class="card-visual">
+            <div class="visual-pattern api"></div>
+          </div>
+          <div class="card-content">
+            <h2 class="card-title">Agent Integration</h2>
+            <p class="card-description">REST API, MCP Server, Python SDK, TypeScript SDK. Agents authenticate with API keys. Permissions scoped per key.</p>
+          </div>
+        </a>
+
+        <a href="/discover/agents-mcp" class="topic-card">
+          <div class="card-visual">
+            <div class="visual-pattern mcp"></div>
+          </div>
+          <div class="card-content">
+            <h2 class="card-title">Model Context Protocol</h2>
+            <p class="card-description">MCP server exposes entities, metrics, query tool, and schema tool. Agents using MCP discover and use AnswerLayer automatically.</p>
+          </div>
+        </a>
+
+        <a href="/discover/path-agents" class="topic-card">
+          <div class="card-visual">
+            <div class="visual-pattern agents"></div>
+          </div>
+          <div class="card-content">
+            <h2 class="card-title">Why Agents Need This</h2>
+            <p class="card-description">Without semantic layers, agents hallucinate queries, expose PII, run destructive queries. With them: accurate, safe, consistent.</p>
+          </div>
+        </a>
+
+        <a href="https://github.com/AnswerLayer" target="_blank" rel="noopener" class="topic-card external">
+          <div class="card-visual">
+            <div class="visual-pattern github"></div>
+          </div>
+          <div class="card-content">
+            <h2 class="card-title">GitHub ↗</h2>
+            <p class="card-description">View repositories, open issues, and contribution guidelines. Star the project to show support.</p>
+          </div>
+        </a>
+
+        <a href="https://docs.getanswerlayer.com" target="_blank" rel="noopener" class="topic-card external">
+          <div class="card-visual">
+            <div class="visual-pattern docs"></div>
+          </div>
+          <div class="card-content">
+            <h2 class="card-title">Documentation ↗</h2>
+            <p class="card-description">API reference, SDK examples, integration guides. Everything needed to build with AnswerLayer.</p>
+          </div>
+        </a>
+
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--color-navy-900);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .page-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-navy-500);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .card-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .card-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .topic-card {
+    display: flex;
+    flex-direction: row;
+    background: var(--color-navy-100);
+    border: 2px solid var(--color-navy-300);
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  .topic-card:hover {
+    border-color: var(--color-navy-900);
+    text-decoration: none;
+  }
+
+  .topic-card.external {
+    border-style: dashed;
+  }
+
+  .card-visual {
+    width: 120px;
+    min-height: 120px;
+    background: var(--color-navy-900);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .visual-pattern {
+    width: 60px;
+    height: 60px;
+    border: 2px solid var(--color-navy-500);
+    position: relative;
+  }
+
+  .visual-pattern.contribute {
+    border-radius: 50%;
+  }
+
+  .visual-pattern.contribute::before {
+    content: "+";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-navy-500);
+    font-size: 2rem;
+    font-weight: 300;
+  }
+
+  .visual-pattern.api {
+    border: none;
+  }
+
+  .visual-pattern.api::before,
+  .visual-pattern.api::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    background: var(--color-navy-500);
+  }
+
+  .visual-pattern.api::before {
+    top: 20px;
+    left: 10px;
+    right: 10px;
+  }
+
+  .visual-pattern.api::after {
+    bottom: 20px;
+    left: 10px;
+    right: 10px;
+  }
+
+  .visual-pattern.mcp {
+    border-radius: 4px;
+  }
+
+  .visual-pattern.mcp::before {
+    content: "MCP";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-navy-500);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+  }
+
+  .visual-pattern.agents {
+    border-style: dashed;
+    border-radius: 50%;
+  }
+
+  .visual-pattern.agents::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    background: var(--color-navy-500);
+    border-radius: 50%;
+  }
+
+  .visual-pattern.github {
+    border: none;
+  }
+
+  .visual-pattern.github::before {
+    content: "< >";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-navy-500);
+    font-family: var(--font-mono);
+    font-size: 1rem;
+  }
+
+  .visual-pattern.docs {
+    border: none;
+  }
+
+  .visual-pattern.docs::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 15px;
+    right: 15px;
+    bottom: 10px;
+    border: 2px solid var(--color-navy-500);
+  }
+
+  .visual-pattern.docs::after {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    height: 2px;
+    background: var(--color-navy-500);
+  }
+
+  .card-content {
+    padding: 1rem;
+    flex: 1;
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-navy-900);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .card-description {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 0.875rem;
+    color: #374151;
+    line-height: 1.5;
+    margin: 0;
+  }
+</style>

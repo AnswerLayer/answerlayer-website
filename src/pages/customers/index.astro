@@ -1,109 +1,334 @@
 ---
+/**
+ * Customers Page
+ *
+ * Grid of cards showing problems AnswerLayer solves and customer segments.
+ * Inspired by unit.software card grid layout.
+ */
 import Layout from '../../layouts/Layout.astro';
-
-const customers = [
-  {
-    title: 'Data & Analytics Teams',
-    slug: 'data-analytics-teams',
-    summary: 'Reduce analyst ticket volume. Let business users self-serve with consistent definitions.',
-  },
-  {
-    title: 'AI Product Companies',
-    slug: 'ai-product-companies',
-    summary: 'Add natural language analytics to your product in days, not months.',
-  },
-  {
-    title: 'Security-Conscious Organizations',
-    slug: 'security-conscious-organizations',
-    summary: 'Analytics without data leaving your cloud. Full audit trails.',
-  },
-  {
-    title: 'Data Platform Teams',
-    slug: 'data-platform-teams',
-    summary: 'Safe, accurate, controlled AI-to-database access with guardrails built in.',
-  },
-];
 ---
 
 <Layout
   title="Customers - AnswerLayer"
-  description="How different teams use AnswerLayer to unlock insights from their data."
+  description="Problems AnswerLayer solves and customer segments"
 >
-  <section class="section">
-    <div class="container container-narrow">
-      <h1 class="mb-lg">Customers</h1>
-      <p class="text-lg" style="max-width: 600px;">
-        Different teams use AnswerLayer in different ways.
-        Here's how our customers are building with the platform.
-      </p>
-    </div>
-  </section>
+  <div class="crt-screen">
+    <div class="container mx-auto px-6 py-12 md:py-20">
 
-  <section class="section-sm">
-    <div class="container container-narrow">
-      <div class="customer-list">
-        {customers.map((customer) => (
-          <a href={`/customers/${customer.slug}`} class="customer-card">
-            <h3>{customer.title}</h3>
-            <p>{customer.summary}</p>
-            <span class="customer-link">Learn more →</span>
-          </a>
-        ))}
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title crt-text">Customers</h1>
+        <p class="page-subtitle">Problems solved and who benefits</p>
       </div>
-    </div>
-  </section>
 
-  <section class="section text-center">
-    <div class="container container-narrow">
-      <h2 class="mb-md">Which describes you?</h2>
-      <p class="text-muted mb-lg">
-        Tell us about your use case and we'll help you get started.
-      </p>
-      <div class="flex gap-md" style="justify-content: center;">
-        <a href="https://app.getanswerlayer.com/sign-up" class="btn btn-primary">Get Started</a>
-        <a href="mailto:hello@getanswerlayer.com" class="btn btn-link">Talk to Us</a>
+      <!-- Card Grid -->
+      <div class="card-grid">
+
+        <a href="/discover/access-waiting" class="topic-card">
+          <div class="card-visual">
+            <div class="visual-pattern waiting"></div>
+          </div>
+          <div class="card-content">
+            <h2 class="card-title">Waiting for Answers</h2>
+            <p class="card-description">Data team is a bottleneck. Every question joins a queue. Self-service fails when users cannot write SQL. Natural language makes it work.</p>
+          </div>
+        </a>
+
+        <a href="/discover/access-inconsistent" class="topic-card">
+          <div class="card-visual">
+            <div class="visual-pattern inconsistent"></div>
+          </div>
+          <div class="card-content">
+            <h2 class="card-title">Inconsistent Numbers</h2>
+            <p class="card-description">Different people pull different numbers. Different filters, date ranges, aggregations, data sources. One definition for each metric solves this.</p>
+          </div>
+        </a>
+
+        <a href="/discover/access-hallucination" class="topic-card">
+          <div class="card-visual">
+            <div class="visual-pattern hallucination"></div>
+          </div>
+          <div class="card-content">
+            <h2 class="card-title">AI Hallucination</h2>
+            <p class="card-description">ChatGPT invents column names and relationships. LLMs do not know the schema. Semantic layers ground AI in actual database structure.</p>
+          </div>
+        </a>
+
+        <a href="/discover/access-sql-complexity" class="topic-card">
+          <div class="card-visual">
+            <div class="visual-pattern sql"></div>
+          </div>
+          <div class="card-content">
+            <h2 class="card-title">SQL Complexity</h2>
+            <p class="card-description">JOIN syntax, window functions, date handling, performance tuning. Business users should not need SQL to answer business questions.</p>
+          </div>
+        </a>
+
+        <a href="/discover/access-alignment" class="topic-card">
+          <div class="card-visual">
+            <div class="visual-pattern alignment"></div>
+          </div>
+          <div class="card-content">
+            <h2 class="card-title">Data Alignment</h2>
+            <p class="card-description">Sales says X, finance says Y. Definitions drift. Tribal knowledge locked in senior heads. Semantic layer creates one source of truth.</p>
+          </div>
+        </a>
+
+        <a href="/discover/access-culture" class="topic-card">
+          <div class="card-visual">
+            <div class="visual-pattern culture"></div>
+          </div>
+          <div class="card-content">
+            <h2 class="card-title">Data Culture</h2>
+            <p class="card-description">Shared language, self-service, trust, iteration. Higher revenue per employee because information flows efficiently.</p>
+          </div>
+        </a>
+
       </div>
+
+      <!-- CTA -->
+      <div class="cta-row">
+        <a href="/discover/path-access" class="cta-button secondary">Explore Use Cases</a>
+      </div>
+
     </div>
-  </section>
+  </div>
 </Layout>
 
 <style>
-  .customer-list {
+  .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--color-navy-900);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .page-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-navy-500);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .card-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .card-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .topic-card {
     display: flex;
-    flex-direction: column;
-    gap: 16px;
-  }
-
-  .customer-card {
-    display: block;
-    background: var(--bg-alt);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 20px;
+    flex-direction: row;
+    background: var(--color-navy-100);
+    border: 2px solid var(--color-navy-300);
     text-decoration: none;
-    color: inherit;
-    transition: border-color 0.1s;
+    transition: all 0.15s ease;
   }
 
-  .customer-card:hover {
-    border-color: var(--accent);
+  .topic-card:hover {
+    border-color: var(--color-navy-900);
+    text-decoration: none;
   }
 
-  .customer-card h3 {
-    margin: 0 0 8px 0;
-    font-size: 16px;
-    color: var(--fg);
+  .card-visual {
+    width: 120px;
+    min-height: 120px;
+    background: var(--color-navy-900);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
-  .customer-card p {
-    margin: 0 0 12px 0;
-    font-size: 14px;
-    color: var(--fg-muted);
+  .visual-pattern {
+    width: 60px;
+    height: 60px;
+    border: 2px solid var(--color-navy-500);
+    position: relative;
+  }
+
+  .visual-pattern.waiting {
+    border-radius: 50%;
+  }
+
+  .visual-pattern.waiting::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    height: 20px;
+    background: var(--color-navy-500);
+    transform-origin: bottom;
+    transform: translateX(-50%);
+  }
+
+  .visual-pattern.waiting::after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    height: 15px;
+    background: var(--color-navy-500);
+    transform-origin: bottom;
+    transform: translateX(-50%) rotate(90deg);
+  }
+
+  .visual-pattern.inconsistent {
+    border: none;
+  }
+
+  .visual-pattern.inconsistent::before {
+    content: "≠";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-navy-500);
+    font-size: 2rem;
+  }
+
+  .visual-pattern.hallucination {
+    border-style: dashed;
+  }
+
+  .visual-pattern.hallucination::before {
+    content: "?";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-navy-500);
+    font-size: 2rem;
+  }
+
+  .visual-pattern.sql {
+    border: none;
+  }
+
+  .visual-pattern.sql::before {
+    content: "SQL";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-navy-500);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+  }
+
+  .visual-pattern.alignment {
+    border: none;
+  }
+
+  .visual-pattern.alignment::before,
+  .visual-pattern.alignment::after {
+    content: "";
+    position: absolute;
+    height: 2px;
+    background: var(--color-navy-500);
+    left: 10px;
+    right: 10px;
+  }
+
+  .visual-pattern.alignment::before {
+    top: 25px;
+  }
+
+  .visual-pattern.alignment::after {
+    bottom: 25px;
+  }
+
+  .visual-pattern.culture {
+    border-radius: 4px;
+  }
+
+  .visual-pattern.culture::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--color-navy-500);
+    border-radius: 50%;
+  }
+
+  .card-content {
+    padding: 1rem;
+    flex: 1;
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-navy-900);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .card-description {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 0.875rem;
+    color: #374151;
     line-height: 1.5;
+    margin: 0;
   }
 
-  .customer-link {
-    font-size: 13px;
-    color: var(--accent);
+  .cta-row {
+    margin-top: 3rem;
+    text-align: center;
+  }
+
+  .cta-button {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    display: inline-block;
+    border: 2px solid var(--color-navy-900);
+    color: var(--color-navy-900);
+  }
+
+  .cta-button:hover {
+    background: var(--color-navy-900);
+    color: var(--color-background);
+    text-decoration: none;
+  }
+
+  .cta-button.secondary {
+    border-color: var(--color-navy-400);
+    color: var(--color-navy-600);
+  }
+
+  .cta-button.secondary:hover {
+    background: var(--color-navy-400);
+    border-color: var(--color-navy-400);
+    color: var(--color-background);
   }
 </style>

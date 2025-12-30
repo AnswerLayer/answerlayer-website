@@ -1,262 +1,312 @@
 ---
+/**
+ * Trust Page
+ *
+ * Grid of cards showing security, compliance, and data protection.
+ * Inspired by unit.software card grid layout.
+ */
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout
   title="Trust - AnswerLayer"
-  description="How AnswerLayer keeps your data secure with VPC deployment, guardrails, and compliance-ready infrastructure."
+  description="Security architecture, compliance, and data protection"
 >
-  <section class="section">
-    <div class="container container-narrow">
-      <h1 class="mb-lg">Trust</h1>
-      <p class="text-lg" style="max-width: 600px;">
-        Security isn't an add-on. AnswerLayer is built for organizations that can't
-        compromise on data protection.
-      </p>
-    </div>
-  </section>
+  <div class="crt-screen">
+    <div class="container mx-auto px-6 py-12 md:py-20">
 
-  <!-- Data Stays in Your Cloud -->
-  <section class="section-sm" >
-    <div class="container container-narrow">
-      <div class="trust-section">
-        <h2>Data Stays in Your Cloud</h2>
-
-        <div class="trust-item">
-          <span class="trust-icon">✓</span>
-          <div>
-            <strong>VPC deployment is standard</strong>
-            <p class="text-muted text-sm mt-xs">
-              Not a premium feature, not an afterthought. AnswerLayer is designed to run
-              in your infrastructure from day one.
-            </p>
-          </div>
-        </div>
-
-        <div class="trust-item">
-          <span class="trust-icon">✓</span>
-          <div>
-            <strong>Query execution in your environment</strong>
-            <p class="text-muted text-sm mt-xs">
-              SQL runs against your database, in your cloud. Results never traverse
-              external networks.
-            </p>
-          </div>
-        </div>
-
-        <div class="trust-item">
-          <span class="trust-icon">✓</span>
-          <div>
-            <strong>Only metadata for generation</strong>
-            <p class="text-muted text-sm mt-xs">
-              Schema structure and data samples power the semantic layer generation.
-              Your actual data rows stay where they are.
-            </p>
-          </div>
-        </div>
-
-        <div class="trust-item">
-          <span class="trust-icon">✓</span>
-          <div>
-            <strong>Static outbound IP</strong>
-            <p class="text-muted text-sm mt-xs">
-              Whitelist a single IP address in your firewall. No dynamic ranges,
-              no guesswork.
-            </p>
-          </div>
-        </div>
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title crt-text">Trust</h1>
+        <p class="page-subtitle">Security, compliance, and data protection</p>
       </div>
-    </div>
-  </section>
 
-  <!-- Guardrails at Every Level -->
-  <section class="section-sm" >
-    <div class="container container-narrow">
-      <div class="trust-section">
-        <h2>Guardrails at Every Level</h2>
+      <!-- Card Grid -->
+      <div class="card-grid">
 
-        <div class="trust-item">
-          <span class="trust-icon">✓</span>
-          <div>
-            <strong>PII detection with confidence scoring</strong>
-            <p class="text-muted text-sm mt-xs">
-              AI-powered detection scans columns for emails, phone numbers, SSNs, and other
-              sensitive data. Each detection comes with a confidence score, and you can
-              override any decision.
-            </p>
+        <a href="/discover/build-security" class="topic-card">
+          <div class="card-visual">
+            <div class="visual-pattern security"></div>
           </div>
-        </div>
-
-        <div class="trust-item">
-          <span class="trust-icon">✓</span>
-          <div>
-            <strong>Query validation blocks dangerous operations</strong>
-            <p class="text-muted text-sm mt-xs">
-              DROP, DELETE, TRUNCATE, ALTER are blocked by default. Generated SQL is validated
-              against your schema before execution.
-            </p>
+          <div class="card-content">
+            <h2 class="card-title">Security Architecture</h2>
+            <p class="card-description">VPC deployment, credential encryption, no data export, query logging, role-based access. Security is foundational, not an add-on.</p>
           </div>
-        </div>
+        </a>
 
-        <div class="trust-item">
-          <span class="trust-icon">✓</span>
-          <div>
-            <strong>Row limits prevent runaway queries</strong>
-            <p class="text-muted text-sm mt-xs">
-              Configurable caps on result set size. Default is 10,000 rows—enough for
-              analysis, not enough for exfiltration.
-            </p>
+        <a href="/discover/build-vpc" class="topic-card">
+          <div class="card-visual">
+            <div class="visual-pattern vpc"></div>
           </div>
-        </div>
+          <div class="card-content">
+            <h2 class="card-title">VPC Deployment</h2>
+            <p class="card-description">Runs in customer infrastructure on AWS, GCP, or Azure. No data transits public internet. Database credentials remain within customer cloud.</p>
+          </div>
+        </a>
 
-        <div class="trust-item">
-          <span class="trust-icon">✓</span>
-          <div>
-            <strong>Timeout protection</strong>
-            <p class="text-muted text-sm mt-xs">
-              Queries time out after 2 minutes by default. Long-running operations
-              are stopped before they impact your database.
-            </p>
+        <a href="/discover/build-compliance" class="topic-card">
+          <div class="card-visual">
+            <div class="visual-pattern compliance"></div>
           </div>
-        </div>
+          <div class="card-content">
+            <h2 class="card-title">Compliance</h2>
+            <p class="card-description">SOC 2 Type II certified. GDPR compliant with DPAs available. HIPAA compatible with BAA for healthcare deployments.</p>
+          </div>
+        </a>
+
+        <a href="/discover/build-credentials" class="topic-card">
+          <div class="card-visual">
+            <div class="visual-pattern credentials"></div>
+          </div>
+          <div class="card-content">
+            <h2 class="card-title">Credential Handling</h2>
+            <p class="card-description">AES-256 encryption at rest, TLS 1.3 in transit. Credentials loaded into memory only when needed. Rotation support without downtime.</p>
+          </div>
+        </a>
+
+        <a href="/discover/build-pii" class="topic-card">
+          <div class="card-visual">
+            <div class="visual-pattern pii"></div>
+          </div>
+          <div class="card-content">
+            <h2 class="card-title">PII Detection</h2>
+            <p class="card-description">AI-powered detection for email, phone, SSN patterns. Block, mask, or allow with audit trail. All decisions logged for compliance.</p>
+          </div>
+        </a>
+
+        <a href="/discover/access-security" class="topic-card">
+          <div class="card-visual">
+            <div class="visual-pattern audit"></div>
+          </div>
+          <div class="card-content">
+            <h2 class="card-title">Query Logging</h2>
+            <p class="card-description">Full audit trail of all executed queries. Every query recorded for compliance. Auditors can see who accessed what, when, and why.</p>
+          </div>
+        </a>
+
       </div>
+
     </div>
-  </section>
-
-  <!-- Credential Security -->
-  <section class="section-sm" >
-    <div class="container container-narrow">
-      <div class="trust-section">
-        <h2>Credential Security</h2>
-
-        <div class="trust-item">
-          <span class="trust-icon">✓</span>
-          <div>
-            <strong>PBKDF2 + Fernet encryption</strong>
-            <p class="text-muted text-sm mt-xs">
-              Database credentials are encrypted at rest using industry-standard
-              algorithms. Not stored in plaintext, ever.
-            </p>
-          </div>
-        </div>
-
-        <div class="trust-item">
-          <span class="trust-icon">✓</span>
-          <div>
-            <strong>Cloud KMS key management</strong>
-            <p class="text-muted text-sm mt-xs">
-              Encryption keys are managed through your cloud provider's KMS—GCP,
-              AWS, or Azure. You control access.
-            </p>
-          </div>
-        </div>
-
-        <div class="trust-item">
-          <span class="trust-icon">✓</span>
-          <div>
-            <strong>Decrypted only at connection time</strong>
-            <p class="text-muted text-sm mt-xs">
-              Credentials are decrypted when connecting to your database and immediately
-              discarded after. No credential caching.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Access Controls -->
-  <section class="section-sm" >
-    <div class="container container-narrow">
-      <div class="trust-section">
-        <h2>Access Controls</h2>
-
-        <div class="trust-item">
-          <span class="trust-icon">✓</span>
-          <div>
-            <strong>Organization-level isolation</strong>
-            <p class="text-muted text-sm mt-xs">
-              Each organization's data is completely isolated. No cross-tenant access,
-              no shared resources.
-            </p>
-          </div>
-        </div>
-
-        <div class="trust-item">
-          <span class="trust-icon">✓</span>
-          <div>
-            <strong>Role-based access from your identity provider</strong>
-            <p class="text-muted text-sm mt-xs">
-              Sync roles from Okta, Azure AD, or your existing identity provider.
-              SSO via SAML 2.0 and OpenID Connect.
-            </p>
-          </div>
-        </div>
-
-        <div class="trust-item">
-          <span class="trust-icon">✓</span>
-          <div>
-            <strong>Full audit logging</strong>
-            <p class="text-muted text-sm mt-xs">
-              Every query, every API call, every configuration change is logged.
-              Export to your SIEM for compliance reporting.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Compliance -->
-  <section class="section-sm" >
-    <div class="container container-narrow">
-      <div class="trust-section">
-        <h2>Compliance</h2>
-
-        <div class="trust-item">
-          <span class="trust-icon">✓</span>
-          <div>
-            <strong>SOC 2 Type II</strong>
-            <p class="text-muted text-sm mt-xs">
-              In progress. Built on SOC 2-compliant infrastructure from day one.
-            </p>
-          </div>
-        </div>
-
-        <div class="trust-item">
-          <span class="trust-icon">✓</span>
-          <div>
-            <strong>GDPR ready</strong>
-            <p class="text-muted text-sm mt-xs">
-              Data processing agreements available. EU data residency options
-              for VPC deployments.
-            </p>
-          </div>
-        </div>
-
-        <div class="trust-item">
-          <span class="trust-icon">✓</span>
-          <div>
-            <strong>HIPAA considerations</strong>
-            <p class="text-muted text-sm mt-xs">
-              VPC deployments can be configured for HIPAA compliance.
-              BAA available for enterprise customers.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact -->
-  <section class="section text-center" >
-    <div class="container container-narrow">
-      <h2 class="mb-md">Security Questions?</h2>
-      <p class="text-muted mb-lg">
-        Contact our security team for detailed documentation, penetration test reports,
-        or to schedule a security review.
-      </p>
-      <a href="mailto:security@getanswerlayer.com" class="btn btn-link">security@getanswerlayer.com</a>
-    </div>
-  </section>
+  </div>
 </Layout>
+
+<style>
+  .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--color-navy-900);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .page-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-navy-500);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  @media (min-width: 640px) {
+    .card-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .card-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .topic-card {
+    display: flex;
+    flex-direction: row;
+    background: var(--color-navy-100);
+    border: 2px solid var(--color-navy-300);
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  .topic-card:hover {
+    border-color: var(--color-navy-900);
+    text-decoration: none;
+  }
+
+  .card-visual {
+    width: 120px;
+    min-height: 120px;
+    background: var(--color-navy-900);
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .visual-pattern {
+    width: 60px;
+    height: 60px;
+    border: 2px solid var(--color-navy-500);
+    position: relative;
+  }
+
+  .visual-pattern.security {
+    border-radius: 4px;
+  }
+
+  .visual-pattern.security::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-navy-500);
+    border-radius: 50%;
+  }
+
+  .visual-pattern.security::after {
+    content: "";
+    position: absolute;
+    bottom: 8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30px;
+    height: 15px;
+    border: 2px solid var(--color-navy-500);
+    border-radius: 0 0 15px 15px;
+    border-top: none;
+  }
+
+  .visual-pattern.vpc {
+    border-style: dashed;
+    border-radius: 4px;
+  }
+
+  .visual-pattern.vpc::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--color-navy-500);
+  }
+
+  .visual-pattern.compliance {
+    border: none;
+  }
+
+  .visual-pattern.compliance::before {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-navy-500);
+    font-size: 2rem;
+  }
+
+  .visual-pattern.credentials {
+    border-radius: 50%;
+  }
+
+  .visual-pattern.credentials::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 6px;
+    height: 6px;
+    background: var(--color-navy-500);
+    border-radius: 50%;
+  }
+
+  .visual-pattern.credentials::after {
+    content: "";
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 15px;
+    background: var(--color-navy-500);
+  }
+
+  .visual-pattern.pii {
+    border: none;
+  }
+
+  .visual-pattern.pii::before {
+    content: "PII";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-navy-500);
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    text-decoration: line-through;
+  }
+
+  .visual-pattern.audit {
+    border: none;
+  }
+
+  .visual-pattern.audit::before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    right: 10px;
+    bottom: 10px;
+    border: 2px solid var(--color-navy-500);
+  }
+
+  .visual-pattern.audit::after {
+    content: "";
+    position: absolute;
+    top: 18px;
+    left: 15px;
+    right: 15px;
+    height: 2px;
+    background: var(--color-navy-500);
+    box-shadow: 0 8px 0 var(--color-navy-500), 0 16px 0 var(--color-navy-500);
+  }
+
+  .card-content {
+    padding: 1rem;
+    flex: 1;
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-navy-900);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .card-description {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 0.875rem;
+    color: #374151;
+    line-height: 1.5;
+    margin: 0;
+  }
+</style>

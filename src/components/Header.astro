@@ -7,10 +7,11 @@
 const currentPath = Astro.url.pathname;
 
 const navLinks = [
-  { href: '/how-it-works', label: 'How It Works' },
   { href: '/customers', label: 'Customers' },
   { href: '/trust', label: 'Trust' },
-  { href: '/pricing', label: 'Pricing' },
+  { href: '/architecture', label: 'Architecture' },
+  { href: '/open-source', label: 'Open Source' },
+  { href: '/careers', label: 'Careers' },
 ];
 ---
 
@@ -38,20 +39,11 @@ const navLinks = [
             {link.label}
           </a>
         ))}
-        <span class="text-gray-300">|</span>
         <a
-          href="https://docs.getanswerlayer.com"
-          target="_blank"
-          rel="noopener"
-          class="uppercase text-sm tracking-wide font-mono text-gray-600 hover:text-navy-900 hover:underline transition-colors"
+          href="/install"
+          class="inline-flex items-center justify-center uppercase tracking-wide font-display font-semibold text-sm px-4 py-2 border-2 border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white transition-all duration-150 hover:no-underline"
         >
-          Docs
-        </a>
-        <a
-          href="https://app.getanswerlayer.com/sign-up"
-          class="inline-flex items-center justify-center uppercase tracking-wide font-display font-semibold text-sm px-4 py-2 border-2 border-transparent text-navy-900 hover:border-navy-900 transition-all duration-150 hover:no-underline"
-        >
-          Get Started
+          Install
         </a>
       </nav>
 
@@ -85,18 +77,10 @@ const navLinks = [
         </a>
       ))}
       <a
-        href="https://docs.getanswerlayer.com"
-        target="_blank"
-        rel="noopener"
-        class="uppercase text-sm tracking-wide font-mono text-gray-600 py-2 hover:underline"
-      >
-        Docs
-      </a>
-      <a
-        href="https://app.getanswerlayer.com/sign-up"
+        href="/install"
         class="inline-flex items-center justify-center uppercase tracking-wide font-display font-semibold text-sm px-4 py-2 mt-2 border-2 border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white transition-colors"
       >
-        Get Started
+        Install
       </a>
     </nav>
   </div>
