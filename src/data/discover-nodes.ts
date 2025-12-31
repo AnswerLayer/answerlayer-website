@@ -39,7 +39,7 @@ The result: consistent answers, confident decisions, and a data culture where ev
     options: [
       { label: "Build data definitions", target: "path-build" },
       { label: "Query databases", target: "path-access" },
-      { label: "Back", target: "home" }
+      { label: "Back", target: "external-home" }
     ]
   },
 
@@ -1217,11 +1217,19 @@ Custom deployment, priority support, SLAs, and dedicated success management.`,
     title: "Contact",
     content: `Redirecting to contact form...`,
     options: []
+  },
+
+  "external-home": {
+    id: "external-home",
+    title: "Home",
+    content: `Redirecting to home...`,
+    options: []
   }
 };
 
 // External link mappings
 export const externalLinks: Record<string, string> = {
+  "external-home": "/",
   "external-pricing": "/pricing",
   "external-demo": "/pricing", // TODO: Add demo page
   "external-trust": "/trust",

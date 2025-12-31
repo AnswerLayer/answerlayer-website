@@ -274,30 +274,35 @@ pre {
     1px 0 rgba(137, 151, 214, 0.3);
 }
 
-/* Full CRT screen effect with scanlines */
-.crt-screen {
-  background: var(--color-background);
-  position: relative;
+/* Scanline scroll animation */
+@keyframes scanline-scroll {
+  0% {
+    background-position-y: 0;
+  }
+  100% {
+    background-position-y: 2px;
+  }
 }
 
-.crt-screen::before {
-  content: "";
-  position: absolute;
+/* Global scanline overlay - covers entire viewport including fixed headers */
+.scanline-overlay {
+  position: fixed;
   inset: 0;
   background:
     repeating-linear-gradient(
       0deg,
-      rgba(21, 28, 63, 0.04) 0,
+      rgba(21, 28, 63, 0.02) 0,
       transparent 1px,
-      transparent 3px
+      transparent 2px
     );
   pointer-events: none;
-  z-index: 0;
+  z-index: 9999;
+  animation: scanline-scroll 1.5s linear infinite;
 }
 
-.crt-screen > * {
-  position: relative;
-  z-index: 1;
+/* Full CRT screen effect (for background color) */
+.crt-screen {
+  background: var(--color-background);
 }
 
 /* Interactive hover effect */
