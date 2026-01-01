@@ -2,19 +2,23 @@
 /**
  * Discovery Wizard - Dynamic Route
  *
- * Handles all /discover/* routes, rendering content from the node tree.
+ * Handles all /discover/* routes, rendering content from the discover collection.
  * External nodes redirect to their destinations.
  */
 import Layout from '../../layouts/Layout.astro';
-import { nodes, externalLinks, isExternalNode, getAllNodeIds } from '../../data/discover-nodes';
+import { getCollection, getEntry } from 'astro:content';
 
-// Generate static paths for all nodes
-export function getStaticPaths() {
-  const allNodes = getAllNodeIds();
+// Generate static paths for all non-external nodes
+export async function getStaticPaths() {
+  const allNodes = await getCollection('discover');
 
-  return allNodes.map((nodeId) => ({
-    params: { slug: nodeId === 'home' ? undefined : nodeId },
-    props: { nodeId }
+  // Filter out external nodes (they redirect, don't need pages)
+  const pageNodes = allNodes.filter(node => !node.data.external);
+
+  return pageNodes.map((node) => ({
+    // Use slug (without .md extension) for URL paths
+    params: { slug: node.slug === 'home' ? undefined : node.slug },
+    props: { nodeId: node.slug }
   }));
 }
 
@@ -27,83 +31,53 @@ const slug = Astro.params.slug;
 
 // Determine the actual node ID
 const actualNodeId = slug || 'home';
-const node = nodes[actualNodeId];
+const entry = await getEntry('discover', actualNodeId);
 
 // Handle missing nodes
-if (!node) {
+if (!entry) {
   return Astro.redirect('/discover');
 }
 
-// Handle external redirects
-if (isExternalNode(actualNodeId)) {
-  const externalUrl = externalLinks[actualNodeId];
-  if (externalUrl) {
-    return Astro.redirect(externalUrl);
-  }
+// Handle external redirects (shouldn't hit this since they're filtered from paths,
+// but keep as safety for direct URL access)
+if (entry.data.external && entry.data.externalUrl) {
+  return Astro.redirect(entry.data.externalUrl);
 }
 
-// Process content - convert markdown-like syntax to HTML
-function processContent(content: string): string {
-  let html = content;
+// Render the markdown content
+const { Content } = await entry.render();
 
-  // Convert **bold** to <strong>
-  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
-
-  // Convert `code` to <code>
-  html = html.replace(/`([^`]+)`/g, '<code>$1</code>');
-
-  // Convert ```sql blocks to <pre><code>
-  html = html.replace(/```sql\n([\s\S]*?)```/g, '<pre class="code-block"><code>$1</code></pre>');
-  html = html.replace(/```\n([\s\S]*?)```/g, '<pre class="code-block"><code>$1</code></pre>');
-
-  // Convert bullet points
-  html = html.replace(/^• (.+)$/gm, '<li>$1</li>');
-  html = html.replace(/(<li>.*<\/li>\n?)+/g, '<ul class="bullet-list">$&</ul>');
-
-  // Convert numbered lists
-  html = html.replace(/^\d+\. (.+)$/gm, '<li>$1</li>');
-
-  // Convert tables (simple markdown tables)
-  const tableRegex = /\|(.+)\|\n\|[-|]+\|\n((?:\|.+\|\n?)+)/g;
-  html = html.replace(tableRegex, (match, header, body) => {
-    const headerCells = header.split('|').filter((c: string) => c.trim()).map((c: string) => `<th>${c.trim()}</th>`).join('');
-    const rows = body.trim().split('\n').map((row: string) => {
-      const cells = row.split('|').filter((c: string) => c.trim()).map((c: string) => `<td>${c.trim()}</td>`).join('');
-      return `<tr>${cells}</tr>`;
-    }).join('');
-    return `<table class="content-table"><thead><tr>${headerCells}</tr></thead><tbody>${rows}</tbody></table>`;
-  });
-
-  // Convert paragraphs (double newlines)
-  html = html.split('\n\n').map(p => {
-    // Don't wrap if already wrapped in block elements
-    if (p.startsWith('<ul') || p.startsWith('<ol') || p.startsWith('<pre') || p.startsWith('<table')) {
-      return p;
-    }
-    return `<p>${p}</p>`;
-  }).join('\n');
-
-  // Clean up single newlines within paragraphs
-  html = html.replace(/<p>([^<]*)<\/p>/g, (match, content) => {
-    return `<p>${content.replace(/\n/g, '<br>')}</p>`;
-  });
-
-  return html;
+// Build the option URLs with external URL lookups
+async function getOptionUrl(targetId: string): Promise<string> {
+  const targetEntry = await getEntry('discover', targetId);
+  if (targetEntry?.data.external && targetEntry.data.externalUrl) {
+    return targetEntry.data.externalUrl;
+  }
+  return targetId === 'home' ? '/discover' : `/discover/${targetId}`;
 }
 
-const processedContent = processContent(node.content);
+// Pre-compute option URLs
+const optionData = await Promise.all(
+  entry.data.options.map(async (opt) => {
+    const targetEntry = await getEntry('discover', opt.target);
+    const isExternal = targetEntry?.data.external ?? false;
+    const url = isExternal && targetEntry?.data.externalUrl
+      ? targetEntry.data.externalUrl
+      : (opt.target === 'home' ? '/discover' : `/discover/${opt.target}`);
 
-// Build the option URLs
-const optionUrls = node.options.map(opt => {
-  if (isExternalNode(opt.target)) {
-    return externalLinks[opt.target] || '#';
-  }
-  return opt.target === 'home' ? '/discover' : `/discover/${opt.target}`;
-});
+    return {
+      label: opt.label,
+      target: opt.target,
+      url,
+      isExternal,
+      isBack: opt.label === 'Back'
+    };
+  })
+);
 ---
 
 <Layout
-  title={`${node.title} - AnswerLayer`}
+  title={`${entry.data.title} - AnswerLayer`}
   description="Discover AnswerLayer - a generative semantic layer for databases"
 >
   <div class="discover-page crt-screen">
@@ -112,39 +86,35 @@ const optionUrls = node.options.map(opt => {
       <div class="discover-card crt-glow">
         <!-- Title -->
         <div class="title-box">
-          <h1 class="discover-title crt-text">{node.title}</h1>
+          <h1 class="discover-title crt-text">{entry.data.title}</h1>
         </div>
 
         <!-- Content -->
-        <div class="discover-content crt-text" set:html={processedContent} />
+        <div class="discover-content crt-text">
+          <Content />
+        </div>
 
         <!-- Options -->
-        {node.options.length > 0 && (
+        {optionData.length > 0 && (
           <div class="discover-options">
-            {node.options.map((option, index) => {
-              const isExternal = isExternalNode(option.target);
-              const url = optionUrls[index];
-              const isBack = option.label === 'Back';
-
-              return (
-                <a
-                  href={url}
-                  class:list={[
-                    'discover-option',
-                    'crt-text',
-                    { 'option-back': isBack },
-                    { 'option-external': isExternal }
-                  ]}
-                  target={isExternal && url.startsWith('http') ? '_blank' : undefined}
-                  rel={isExternal && url.startsWith('http') ? 'noopener' : undefined}
-                >
-                  {option.label}
-                  {isExternal && url.startsWith('http') && (
-                    <span class="external-indicator">↗</span>
-                  )}
-                </a>
-              );
-            })}
+            {optionData.map((option) => (
+              <a
+                href={option.url}
+                class:list={[
+                  'discover-option',
+                  'crt-text',
+                  { 'option-back': option.isBack },
+                  { 'option-external': option.isExternal }
+                ]}
+                target={option.isExternal && option.url.startsWith('http') ? '_blank' : undefined}
+                rel={option.isExternal && option.url.startsWith('http') ? 'noopener' : undefined}
+              >
+                {option.label}
+                {option.isExternal && option.url.startsWith('http') && (
+                  <span class="external-indicator">↗</span>
+                )}
+              </a>
+            ))}
           </div>
         )}
       </div>
@@ -238,7 +208,7 @@ const optionUrls = node.options.map(opt => {
     color: var(--color-navy-900);
   }
 
-  .discover-content :global(.code-block) {
+  .discover-content :global(pre) {
     background: var(--color-navy-900);
     color: var(--color-navy-100);
     padding: 1rem;
@@ -250,7 +220,7 @@ const optionUrls = node.options.map(opt => {
     border: 2px solid var(--color-navy-800);
   }
 
-  .discover-content :global(.code-block code) {
+  .discover-content :global(pre code) {
     background: transparent;
     border: none;
     padding: 0;
@@ -258,40 +228,49 @@ const optionUrls = node.options.map(opt => {
     font-size: inherit;
   }
 
-  .discover-content :global(.bullet-list) {
+  .discover-content :global(ul) {
     list-style: none;
     padding: 0;
     margin: 1rem 0;
   }
 
-  .discover-content :global(.bullet-list li) {
+  .discover-content :global(ul li) {
     padding-left: 1.25rem;
     margin-bottom: 0.5rem;
     position: relative;
   }
 
-  .discover-content :global(.bullet-list li::before) {
+  .discover-content :global(ul li::before) {
     content: "—";
     position: absolute;
     left: 0;
     color: var(--color-navy-500);
   }
 
-  .discover-content :global(.content-table) {
+  .discover-content :global(ol) {
+    padding-left: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .discover-content :global(ol li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .discover-content :global(table) {
     width: 100%;
     border-collapse: collapse;
     margin: 1rem 0;
     font-size: 0.875rem;
   }
 
-  .discover-content :global(.content-table th),
-  .discover-content :global(.content-table td) {
+  .discover-content :global(th),
+  .discover-content :global(td) {
     border: 1px solid var(--color-navy-300);
     padding: 0.5rem 0.75rem;
     text-align: left;
   }
 
-  .discover-content :global(.content-table th) {
+  .discover-content :global(th) {
     background: var(--color-navy-100);
     font-weight: 600;
     color: var(--color-navy-900);
