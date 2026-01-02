@@ -25,6 +25,37 @@ const discoverCollection = defineCollection({
   }),
 });
 
+/**
+ * Blog Collection Schema
+ *
+ * Each markdown file represents a blog post.
+ * The content body is rendered as markdown for the post content.
+ *
+ * Frontmatter fields:
+ * - title: Post title
+ * - description: Short description for SEO and previews
+ * - publishedAt: Publication date
+ * - updatedAt: Last update date (optional)
+ * - author: Author name
+ * - tags: Array of topic tags
+ * - featured: Whether to highlight on blog index
+ * - draft: If true, hidden from production builds
+ */
+const blogCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    publishedAt: z.date(),
+    updatedAt: z.date().optional(),
+    author: z.string().default('AnswerLayer Team'),
+    tags: z.array(z.string()).default([]),
+    featured: z.boolean().default(false),
+    draft: z.boolean().default(false),
+  }),
+});
+
 export const collections = {
   discover: discoverCollection,
+  blog: blogCollection,
 };

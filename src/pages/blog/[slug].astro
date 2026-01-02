@@ -1,0 +1,360 @@
+---
+/**
+ * Blog Post Page
+ *
+ * Renders individual blog posts from the blog collection.
+ */
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, getEntry } from 'astro:content';
+
+// Generate static paths for all posts
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => {
+    return import.meta.env.PROD ? !data.draft : true;
+  });
+
+  return posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post }
+  }));
+}
+
+interface Props {
+  post: Awaited<ReturnType<typeof getCollection<'blog'>>>[number];
+}
+
+const { post } = Astro.props;
+const { Content } = await post.render();
+
+// Format date helper
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+---
+
+<Layout
+  title={`${post.data.title} - AnswerLayer Blog`}
+  description={post.data.description}
+>
+  <article class="blog-post crt-screen">
+    <div class="container mx-auto px-6 py-12 md:py-20">
+
+      <!-- Back link -->
+      <a href="/blog" class="back-link crt-text">
+        ← Back to blog
+      </a>
+
+      <!-- Post header -->
+      <header class="post-header">
+        <div class="post-meta">
+          <time datetime={post.data.publishedAt.toISOString()} class="post-date crt-text">
+            {formatDate(post.data.publishedAt)}
+          </time>
+          {post.data.draft && (
+            <span class="draft-badge">Draft</span>
+          )}
+        </div>
+        <h1 class="post-title crt-text">{post.data.title}</h1>
+        <p class="post-description crt-text">{post.data.description}</p>
+        <div class="post-byline">
+          <span class="post-author crt-text">By {post.data.author}</span>
+          {post.data.tags.length > 0 && (
+            <div class="post-tags">
+              {post.data.tags.map((tag) => (
+                <span class="post-tag crt-badge">{tag}</span>
+              ))}
+            </div>
+          )}
+        </div>
+      </header>
+
+      <!-- Post content -->
+      <div class="post-content crt-text">
+        <Content />
+      </div>
+
+      <!-- Post footer -->
+      <footer class="post-footer">
+        <div class="footer-divider"></div>
+        <div class="footer-cta">
+          <p class="crt-text">Ready to try AnswerLayer?</p>
+          <a href="/install" class="cta-button crt-text">Get Started →</a>
+        </div>
+      </footer>
+
+    </div>
+  </article>
+</Layout>
+
+<style>
+  .blog-post {
+    min-height: calc(100vh - 160px);
+  }
+
+  .back-link {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-navy-600);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 2rem;
+  }
+
+  .back-link:hover {
+    color: var(--color-navy-900);
+    text-decoration: underline;
+  }
+
+  .post-header {
+    max-width: 48rem;
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 2px solid var(--color-navy-200);
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .post-date {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-navy-600);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .draft-badge {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.5rem;
+    color: #b45309;
+    border: 1px solid #b45309;
+    background: #fef3c7;
+  }
+
+  .post-title {
+    font-family: var(--font-display);
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--color-navy-900);
+    margin: 0 0 1rem 0;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+  }
+
+  .post-description {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 1.25rem;
+    color: #4b5563;
+    line-height: 1.5;
+    margin: 0 0 1.5rem 0;
+  }
+
+  .post-byline {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .post-author {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-navy-600);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .post-tag {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.5rem;
+    background: var(--color-navy-100);
+    border: 1px solid var(--color-navy-300);
+    color: var(--color-navy-700);
+  }
+
+  /* Post content styles */
+  .post-content {
+    max-width: 48rem;
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 1.125rem;
+    color: #374151;
+    line-height: 1.8;
+  }
+
+  .post-content :global(h2) {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--color-navy-900);
+    margin: 2.5rem 0 1rem 0;
+    line-height: 1.3;
+  }
+
+  .post-content :global(h3) {
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 600;
+    color: var(--color-navy-900);
+    margin: 2rem 0 0.75rem 0;
+    line-height: 1.4;
+  }
+
+  .post-content :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .post-content :global(strong) {
+    color: var(--color-navy-900);
+    font-weight: 600;
+  }
+
+  .post-content :global(a) {
+    color: var(--color-navy-700);
+    text-decoration: underline;
+  }
+
+  .post-content :global(a:hover) {
+    color: var(--color-navy-900);
+  }
+
+  .post-content :global(code) {
+    font-family: var(--font-mono);
+    font-size: 0.9em;
+    background: var(--color-navy-100);
+    border: 1px solid var(--color-navy-300);
+    padding: 0.125rem 0.375rem;
+    color: var(--color-navy-900);
+  }
+
+  .post-content :global(pre) {
+    background: var(--color-navy-900);
+    color: var(--color-navy-100);
+    padding: 1.25rem;
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    line-height: 1.6;
+    border: 2px solid var(--color-navy-800);
+  }
+
+  .post-content :global(pre code) {
+    background: transparent;
+    border: none;
+    padding: 0;
+    color: inherit;
+    font-size: inherit;
+  }
+
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    margin: 1.5rem 0;
+    padding-left: 1.5rem;
+  }
+
+  .post-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .post-content :global(ul li) {
+    list-style-type: none;
+    position: relative;
+    padding-left: 1rem;
+  }
+
+  .post-content :global(ul li::before) {
+    content: "—";
+    position: absolute;
+    left: -1rem;
+    color: var(--color-navy-500);
+  }
+
+  .post-content :global(blockquote) {
+    border-left: 3px solid var(--color-navy-400);
+    padding-left: 1.5rem;
+    margin: 1.5rem 0;
+    font-style: italic;
+    color: #4b5563;
+  }
+
+  .post-content :global(hr) {
+    border: none;
+    border-top: 2px solid var(--color-navy-200);
+    margin: 2.5rem 0;
+  }
+
+  /* Post footer */
+  .post-footer {
+    max-width: 48rem;
+    margin-top: 3rem;
+  }
+
+  .footer-divider {
+    height: 2px;
+    background: var(--color-navy-200);
+    margin-bottom: 2rem;
+  }
+
+  .footer-cta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .footer-cta p {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-navy-600);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+
+  .cta-button {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-navy-900);
+    background: transparent;
+    border: 2px solid var(--color-navy-900);
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  .cta-button:hover {
+    background: var(--color-navy-900);
+    color: var(--color-background);
+    text-decoration: none;
+  }
+
+  @media (min-width: 640px) {
+    .post-title {
+      font-size: 3rem;
+    }
+  }
+</style>

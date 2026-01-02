@@ -1,0 +1,277 @@
+---
+/**
+ * Blog Index Page
+ *
+ * Lists all published blog posts, sorted by date.
+ * Filters out drafts in production builds.
+ */
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+// Get all blog posts, filter drafts in production
+const allPosts = await getCollection('blog', ({ data }) => {
+  return import.meta.env.PROD ? !data.draft : true;
+});
+
+// Sort by publish date, newest first
+const posts = allPosts.sort((a, b) =>
+  b.data.publishedAt.getTime() - a.data.publishedAt.getTime()
+);
+
+// Format date helper
+function formatDate(date: Date): string {
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+  });
+}
+---
+
+<Layout
+  title="Blog - AnswerLayer"
+  description="Technical insights on semantic layers, data analytics, and AI-powered data infrastructure."
+>
+  <div class="blog-page crt-screen">
+    <div class="container mx-auto px-6 py-12 md:py-20">
+
+      <!-- Header -->
+      <div class="blog-header">
+        <h1 class="blog-title crt-text">Blog</h1>
+        <p class="blog-subtitle crt-text">
+          Technical insights on semantic layers, data analytics, and the future of AI-powered data infrastructure.
+        </p>
+      </div>
+
+      <!-- Post List -->
+      {posts.length > 0 ? (
+        <div class="post-list">
+          {posts.map((post) => (
+            <article class="post-card crt-glow">
+              <div class="post-meta">
+                <time datetime={post.data.publishedAt.toISOString()} class="post-date crt-text">
+                  {formatDate(post.data.publishedAt)}
+                </time>
+                {post.data.draft && (
+                  <span class="draft-badge">Draft</span>
+                )}
+                {post.data.featured && !post.data.draft && (
+                  <span class="featured-badge">Featured</span>
+                )}
+              </div>
+              <h2 class="post-title">
+                <a href={`/blog/${post.slug}`} class="crt-text">{post.data.title}</a>
+              </h2>
+              <p class="post-description crt-text">{post.data.description}</p>
+              <div class="post-footer">
+                <span class="post-author crt-text">By {post.data.author}</span>
+                {post.data.tags.length > 0 && (
+                  <div class="post-tags">
+                    {post.data.tags.slice(0, 3).map((tag) => (
+                      <span class="post-tag crt-badge">{tag}</span>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <a href={`/blog/${post.slug}`} class="read-more crt-text">
+                Read article →
+              </a>
+            </article>
+          ))}
+        </div>
+      ) : (
+        <div class="no-posts crt-glow">
+          <p class="crt-text">No posts yet. Check back soon!</p>
+        </div>
+      )}
+
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .blog-page {
+    min-height: calc(100vh - 160px);
+  }
+
+  .blog-header {
+    margin-bottom: 3rem;
+    max-width: 48rem;
+  }
+
+  .blog-title {
+    font-family: var(--font-display);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--color-navy-900);
+    margin: 0 0 1rem 0;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+  }
+
+  .blog-subtitle {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 1.125rem;
+    color: #4b5563;
+    line-height: 1.6;
+    margin: 0;
+  }
+
+  .post-list {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    max-width: 48rem;
+  }
+
+  .post-card {
+    background: transparent;
+    border: 2px solid var(--color-navy-900);
+    padding: 1.5rem;
+    position: relative;
+  }
+
+  .post-card::before {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border: 1px solid var(--color-navy-300);
+    pointer-events: none;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .post-date {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-navy-600);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .draft-badge,
+  .featured-badge {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.5rem;
+    border: 1px solid;
+  }
+
+  .draft-badge {
+    color: #b45309;
+    border-color: #b45309;
+    background: #fef3c7;
+  }
+
+  .featured-badge {
+    color: var(--color-navy-700);
+    border-color: var(--color-navy-400);
+    background: var(--color-navy-100);
+  }
+
+  .post-title {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0 0 0.75rem 0;
+    line-height: 1.3;
+  }
+
+  .post-title a {
+    color: var(--color-navy-900);
+    text-decoration: none;
+  }
+
+  .post-title a:hover {
+    text-decoration: underline;
+  }
+
+  .post-description {
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+    font-size: 1rem;
+    color: #4b5563;
+    line-height: 1.6;
+    margin: 0 0 1rem 0;
+  }
+
+  .post-footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .post-author {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-navy-600);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .post-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .post-tag {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.25rem 0.5rem;
+    background: var(--color-navy-100);
+    border: 1px solid var(--color-navy-300);
+    color: var(--color-navy-700);
+  }
+
+  .read-more {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-navy-900);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    border-bottom: 2px solid var(--color-navy-900);
+    padding-bottom: 0.125rem;
+  }
+
+  .read-more:hover {
+    text-decoration: none;
+    color: var(--color-navy-700);
+    border-color: var(--color-navy-700);
+  }
+
+  .no-posts {
+    background: transparent;
+    border: 2px solid var(--color-navy-300);
+    padding: 3rem;
+    text-align: center;
+    max-width: 48rem;
+  }
+
+  .no-posts p {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--color-navy-600);
+    margin: 0;
+  }
+
+  @media (min-width: 640px) {
+    .blog-title {
+      font-size: 3.5rem;
+    }
+  }
+</style>
