@@ -1,7 +1,7 @@
 ---
 /**
  * Home Page
- * Minimal approach with IBM Plex Sans body text, technical card, CRT effects
+ * Minimal approach with W95FA body text, technical card, CRT effects
  */
 import Layout from '../layouts/Layout.astro';
 import Button from '../components/Button.astro';
@@ -49,9 +49,9 @@ import Button from '../components/Button.astro';
       background: transparent;
     }
     .home-title {
-      font-family: var(--font-display);
+      font-family: 'MS Sans Serif', 'Microsoft Sans Serif', Tahoma, sans-serif;
       font-size: 2rem;
-      font-weight: 500;
+      font-weight: 400;
       text-transform: none;
       margin: 0;
       color: #151c3f;
@@ -62,8 +62,9 @@ import Button from '../components/Button.astro';
       }
     }
     .body-text {
-      font-family: 'IBM Plex Sans', system-ui, sans-serif;
+      font-family: var(--font-body);
       font-size: 1.0625rem;
+      font-weight: 200;
       color: #374151;
       line-height: 1.75;
     }
@@ -100,8 +101,9 @@ import Button from '../components/Button.astro';
       padding: 1rem 2.5rem;
     }
     .continue-button {
-      font-family: var(--font-mono);
+      font-family: var(--font-body);
       font-size: 0.875rem;
+      font-weight: 400;
       text-transform: uppercase;
       letter-spacing: 0.05em;
       color: var(--color-navy-900);

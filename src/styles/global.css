@@ -1,6 +1,16 @@
 /* Google Fonts - MUST come before @import "tailwindcss" */
 @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap");
 
+/* W95FA - Windows 95 recreation font for body text (hosted locally) */
+@font-face {
+  font-family: 'W95FA';
+  src: url('/fonts/w95font.woff2') format('woff2'),
+       url('/fonts/w95font.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @import "tailwindcss";
 
 /* ============================================
@@ -31,6 +41,7 @@
 
   /* Font Families */
   --font-display: "Space Grotesk", "Inter", system-ui, -apple-system, sans-serif;
+  --font-body: "MS Sans Serif", "Microsoft Sans Serif", Tahoma, sans-serif;
   --font-mono: "Space Mono", "IBM Plex Mono", "Courier New", monospace;
   --font-sans: "Inter", system-ui, -apple-system, sans-serif;
 
@@ -140,8 +151,9 @@ h6 {
 }
 
 p {
+  font-family: var(--font-body);
   font-size: 1rem;
-  font-weight: 400;
+  font-weight: 200;
   line-height: 1.6;
   white-space: normal;
   word-wrap: break-word;

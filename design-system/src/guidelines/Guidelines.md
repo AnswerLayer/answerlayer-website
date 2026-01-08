@@ -104,9 +104,12 @@ A brutalist design system inspired by technical documentation, patent diagrams, 
 
 ```css
 --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
+--font-body: "W95FA", "MS Sans Serif", Tahoma, sans-serif;
 --font-mono: "Space Mono", "IBM Plex Mono", "Courier New", monospace;
 --font-sans: "Inter", system-ui, sans-serif;
 ```
+
+**W95FA** is a faithful recreation of the Windows 95/98 system font, providing an authentic retro aesthetic that complements the CRT effects. It's loaded from jsDelivr CDN.
 
 ### Type Scale
 
@@ -114,16 +117,17 @@ A brutalist design system inspired by technical documentation, patent diagrams, 
 - **H2**: 2.5rem (40px) - Title, uppercase, Space Grotesk
 - **H3**: 1.75rem (28px) - Section, uppercase, Space Grotesk
 - **H4**: 1.25rem (20px) - Subsection, uppercase, Space Grotesk
-- **Body**: 1rem (16px) - Space Mono (monospace)
+- **Body**: 1rem (16px) - W95FA, font-weight: 300
 - **Small**: 0.875rem (14px) - Metadata, captions
 
 ### Typography Rules
 
 1. All headings use **Space Grotesk** (geometric, bold)
 2. All headings are **UPPERCASE**
-3. Body text uses **Space Mono** (monospace)
-4. Letter spacing: -0.02em to -0.01em for headings
-5. Line height: 1.1-1.3 for headings, 1.6 for body
+3. Body/paragraph text uses **W95FA** (Windows 95 recreation, weight 300)
+4. UI elements and technical text use **Space Mono** (monospace)
+5. Letter spacing: -0.02em to -0.01em for headings
+6. Line height: 1.1-1.3 for headings, 1.6 for body
 
 ---
 
