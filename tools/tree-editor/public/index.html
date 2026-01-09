@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Concept Tree Editor</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background: #0d1117;
+  color: #c9d1d9;
+  height: 100vh;
+  overflow: hidden;
+}
+.app { display: flex; height: 100vh; }
+
+/* Sidebar */
+.sidebar {
+  width: 320px;
+  background: #161b22;
+  border-right: 1px solid #30363d;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.sidebar-header {
+  padding: 16px;
+  border-bottom: 1px solid #30363d;
+}
+.sidebar-header h1 { font-size: 16px; color: #58a6ff; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; }
+.stats { font-size: 12px; color: #8b949e; }
+.stats b { color: #c9d1d9; }
+.stats .orphan { color: #d29922; }
+
+.search {
+  width: 100%;
+  padding: 8px 12px;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  color: #c9d1d9;
+  margin-top: 12px;
+  font-size: 13px;
+}
+
+.node-list {
+  flex: 1;
+  overflow-y: auto;
+  padding: 8px;
+}
+
+.category { margin-bottom: 16px; }
+.category-header {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #8b949e;
+  padding: 8px;
+  position: sticky;
+  top: 0;
+  background: #161b22;
+  display: flex;
+  justify-content: space-between;
+}
+
+.node-item {
+  padding: 10px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+  transition: all 0.1s;
+  border: 1px solid transparent;
+}
+.node-item:hover { background: #21262d; }
+.node-item.selected { background: #1f6feb22; border-color: #1f6feb; }
+.node-item.is-orphan { border-left: 3px solid #d29922; }
+.node-item.is-modified { border-right: 3px solid #a371f7; }
+
+.node-icon {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: #3fb950;
+}
+.node-icon.external { background: #1f6feb; }
+.node-icon.orphan { background: #d29922; }
+
+.node-name { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.node-badge {
+  font-size: 9px;
+  padding: 2px 6px;
+  border-radius: 10px;
+  background: #30363d;
+}
+
+/* Editor */
+.editor {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.editor-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 24px;
+}
+
+.editor-placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color: #8b949e;
+  font-size: 14px;
+  gap: 8px;
+}
+.editor-placeholder .icon { font-size: 48px; opacity: 0.5; }
+
+/* Form */
+.field { margin-bottom: 20px; }
+.field label {
+  display: block;
+  font-size: 12px;
+  color: #8b949e;
+  margin-bottom: 6px;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+.field input, .field textarea, .field select {
+  width: 100%;
+  padding: 10px 12px;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  color: #c9d1d9;
+  font-size: 14px;
+  font-family: inherit;
+}
+.field input:focus, .field textarea:focus {
+  outline: none;
+  border-color: #1f6feb;
+}
+.field textarea {
+  min-height: 200px;
+  resize: vertical;
+  font-family: 'SF Mono', Monaco, 'Courier New', monospace;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.field .hint { font-size: 11px; color: #8b949e; margin-top: 4px; }
+.field input.slug { font-family: monospace; }
+
+.field-row {
+  display: flex;
+  gap: 16px;
+}
+.field-row .field { flex: 1; }
+
+/* Options editor */
+.options-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+.options-list { margin-top: 8px; }
+.option-item {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 10px;
+  background: #21262d;
+  border-radius: 6px;
+  margin-bottom: 6px;
+  border: 1px solid #30363d;
+}
+.option-item input { flex: 1; }
+.option-item select { width: 180px; }
+.option-item .btn-icon {
+  background: none;
+  border: none;
+  color: #8b949e;
+  cursor: pointer;
+  padding: 4px;
+  font-size: 16px;
+  opacity: 0.7;
+}
+.option-item .btn-icon:hover { opacity: 1; color: #f85149; }
+.option-item .drag-handle { cursor: grab; color: #8b949e; }
+
+/* Buttons */
+.btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  border: 1px solid #30363d;
+  background: #21262d;
+  color: #c9d1d9;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.1s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn:hover { background: #30363d; }
+.btn-primary { background: #238636; border-color: #238636; }
+.btn-primary:hover { background: #2ea043; }
+.btn-danger { background: #da3633; border-color: #da3633; }
+.btn-danger:hover { background: #f85149; }
+.btn-sm { padding: 6px 12px; font-size: 12px; }
+
+.btn-group { display: flex; gap: 8px; margin-top: 24px; }
+
+/* Status bar */
+.status-bar {
+  padding: 10px 24px;
+  border-top: 1px solid #30363d;
+  background: #161b22;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #8b949e;
+}
+.status-bar .status { display: flex; align-items: center; gap: 8px; }
+.status-bar .status.saving { color: #d29922; }
+.status-bar .status.saved { color: #3fb950; }
+.status-bar .status.error { color: #f85149; }
+
+/* Toast notifications */
+.toast {
+  position: fixed;
+  bottom: 80px;
+  right: 24px;
+  background: #21262d;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 12px 16px;
+  font-size: 13px;
+  display: none;
+  animation: slideIn 0.2s ease;
+  z-index: 100;
+}
+.toast.show { display: block; }
+.toast.success { border-color: #238636; }
+.toast.error { border-color: #da3633; }
+@keyframes slideIn {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+/* Delete confirmation modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
+.modal-overlay.active { display: flex; }
+.modal {
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 12px;
+  padding: 24px;
+  max-width: 400px;
+  text-align: center;
+}
+.modal h3 { color: #f85149; margin-bottom: 12px; }
+.modal p { color: #8b949e; margin-bottom: 20px; font-size: 14px; }
+.modal .btn-group { justify-content: center; }
+</style>
+</head>
+<body>
+
+<div class="app">
+  <div class="sidebar">
+    <div class="sidebar-header">
+      <h1>🌳 Concept Tree Editor</h1>
+      <div class="stats" id="stats">Loading...</div>
+      <input type="text" class="search" id="search" placeholder="Search nodes..." oninput="filterNodes(this.value)">
+    </div>
+    <div class="node-list" id="nodeList">
+      <div class="editor-placeholder">
+        <div class="icon">⏳</div>
+        Loading nodes...
+      </div>
+    </div>
+  </div>
+
+  <div class="editor">
+    <div class="editor-content" id="editorContent">
+      <div class="editor-placeholder">
+        <div class="icon">👈</div>
+        Select a node from the sidebar to edit
+      </div>
+    </div>
+
+    <div class="status-bar">
+      <div class="status" id="status">Ready</div>
+      <div>Changes save automatically</div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="modal-overlay" id="deleteModal">
+  <div class="modal">
+    <h3>🗑️ Delete Node?</h3>
+    <p id="deleteMessage">Are you sure you want to delete this node? This cannot be undone.</p>
+    <div class="btn-group">
+      <button class="btn" onclick="hideDeleteModal()">Cancel</button>
+      <button class="btn btn-danger" onclick="confirmDelete()">Delete</button>
+    </div>
+  </div>
+</div>
+
+<script>
+let nodes = {};
+let selectedNode = null;
+let saveTimeout = null;
+let nodeToDelete = null;
+
+// Categories for grouping
+const categories = [
+  { name: 'Core', filter: id => ['home', 'branch-root'].includes(id) },
+  { name: 'Build Path', filter: id => id === 'path-build' || id.startsWith('build-') },
+  { name: 'Access Path', filter: id => id === 'path-access' || id.startsWith('access-') },
+  { name: 'Agents Path', filter: id => id === 'path-agents' || id.startsWith('agents-') },
+  { name: 'FAQ', filter: id => id.startsWith('faq-') },
+  { name: 'External Links', filter: id => id.startsWith('external-') },
+];
+
+// Find reachable nodes from home
+function findReachable() {
+  const reachable = new Set();
+  const queue = ['home'];
+  while (queue.length > 0) {
+    const id = queue.shift();
+    if (!reachable.has(id) && nodes[id]) {
+      reachable.add(id);
+      for (const opt of nodes[id].options || []) {
+        queue.push(opt.target);
+      }
+    }
+  }
+  return reachable;
+}
+
+// Load all nodes from API
+async function loadNodes() {
+  try {
+    const res = await fetch('/api/nodes');
+    nodes = await res.json();
+    updateStats();
+    renderNodeList();
+  } catch (err) {
+    showToast('Failed to load nodes: ' + err.message, 'error');
+  }
+}
+
+function updateStats() {
+  const total = Object.keys(nodes).length;
+  const reachable = findReachable();
+  const orphans = Object.keys(nodes).filter(id => !reachable.has(id)).length;
+
+  document.getElementById('stats').innerHTML = `
+    <b>${total}</b> nodes · <span class="orphan"><b>${orphans}</b> orphans</span>
+  `;
+}
+
+function renderNodeList() {
+  const reachable = findReachable();
+  let html = '';
+
+  categories.forEach(cat => {
+    const nodeIds = Object.keys(nodes).filter(cat.filter).sort();
+    if (nodeIds.length === 0) return;
+
+    html += `<div class="category">`;
+    html += `<div class="category-header"><span>${cat.name}</span><span>${nodeIds.length}</span></div>`;
+
+    nodeIds.forEach(id => {
+      const node = nodes[id];
+      const isSelected = selectedNode === id;
+      const isOrphan = !reachable.has(id);
+      const isExternal = node.external;
+
+      let classes = ['node-item'];
+      if (isSelected) classes.push('selected');
+      if (isOrphan) classes.push('is-orphan');
+
+      let iconClass = 'node-icon';
+      if (isExternal) iconClass += ' external';
+      else if (isOrphan) iconClass += ' orphan';
+
+      let badge = '';
+      if (isExternal) badge = '<span class="node-badge" style="background:#1f6feb">EXIT</span>';
+      else if (isOrphan) badge = '<span class="node-badge" style="background:#9e6a03">ORPHAN</span>';
+
+      html += `
+        <div class="${classes.join(' ')}" onclick="selectNode('${id}')" data-id="${id}">
+          <div class="${iconClass}"></div>
+          <span class="node-name">${node.title}</span>
+          ${badge}
+        </div>
+      `;
+    });
+
+    html += `</div>`;
+  });
+
+  document.getElementById('nodeList').innerHTML = html;
+}
+
+function selectNode(id) {
+  selectedNode = id;
+  renderNodeList();
+  renderEditor();
+}
+
+function renderEditor() {
+  if (!selectedNode || !nodes[selectedNode]) {
+    document.getElementById('editorContent').innerHTML = `
+      <div class="editor-placeholder">
+        <div class="icon">👈</div>
+        Select a node from the sidebar to edit
+      </div>
+    `;
+    return;
+  }
+
+  const node = nodes[selectedNode];
+  const reachable = findReachable();
+  const isOrphan = !reachable.has(selectedNode);
+
+  // Build options list
+  let optionsHtml = '';
+  (node.options || []).forEach((opt, i) => {
+    optionsHtml += `
+      <div class="option-item">
+        <span class="drag-handle">⋮⋮</span>
+        <input type="text" value="${escapeHtml(opt.label)}"
+               onchange="updateOption(${i}, 'label', this.value)"
+               placeholder="Button label">
+        <select onchange="updateOption(${i}, 'target', this.value)">
+          ${Object.keys(nodes).sort().map(id =>
+            `<option value="${id}" ${id === opt.target ? 'selected' : ''}>${id}</option>`
+          ).join('')}
+        </select>
+        <button class="btn-icon" onclick="removeOption(${i})" title="Remove">✕</button>
+      </div>
+    `;
+  });
+
+  document.getElementById('editorContent').innerHTML = `
+    <div style="max-width: 700px;">
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 24px;">
+        <div>
+          <h2 style="font-size: 20px; color: #58a6ff; margin-bottom: 4px;">${escapeHtml(node.title)}</h2>
+          <code style="color: #8b949e; font-size: 13px;">${selectedNode}.md</code>
+        </div>
+        ${isOrphan ? '<span class="node-badge" style="background:#9e6a03;padding:6px 12px;font-size:12px;">⚠️ ORPHAN - Not reachable from home</span>' : ''}
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label>Slug (filename)</label>
+          <input type="text" class="slug" id="slugInput" value="${selectedNode}" onchange="renameNode(this.value)">
+          <div class="hint">URL path: /discover/${selectedNode}</div>
+        </div>
+        <div class="field">
+          <label>Title</label>
+          <input type="text" id="titleInput" value="${escapeHtml(node.title)}" onchange="updateField('title', this.value)">
+        </div>
+      </div>
+
+      <div class="field">
+        <label>Content (Markdown)</label>
+        <textarea id="bodyInput" onchange="updateField('body', this.value)">${escapeHtml(node.body || '')}</textarea>
+        <div class="hint">This is the main content displayed on the card</div>
+      </div>
+
+      ${!node.external ? `
+        <div class="field">
+          <div class="options-header">
+            <label style="margin:0">Navigation Options</label>
+            <button class="btn btn-sm" onclick="addOption()">+ Add Option</button>
+          </div>
+          <div class="options-list" id="optionsList">${optionsHtml || '<div style="color:#8b949e;padding:12px;text-align:center;">No options - add some navigation buttons</div>'}</div>
+        </div>
+      ` : `
+        <div class="field">
+          <label>External URL</label>
+          <input type="text" value="${escapeHtml(node.externalUrl || '')}" onchange="updateField('externalUrl', this.value)">
+          <div class="hint">Where this node redirects to</div>
+        </div>
+      `}
+
+      <div class="btn-group">
+        <button class="btn btn-danger" onclick="showDeleteModal('${selectedNode}')">
+          🗑️ Delete Node
+        </button>
+      </div>
+    </div>
+  `;
+}
+
+function escapeHtml(str) {
+  if (!str) return '';
+  return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+// Update a field and save
+function updateField(field, value) {
+  if (!selectedNode) return;
+  nodes[selectedNode][field] = value;
+  scheduleSave();
+}
+
+// Schedule auto-save (debounced)
+function scheduleSave() {
+  if (saveTimeout) clearTimeout(saveTimeout);
+  setStatus('saving', '💾 Saving...');
+
+  saveTimeout = setTimeout(async () => {
+    try {
+      await fetch(`/api/nodes/${selectedNode}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(nodes[selectedNode])
+      });
+      setStatus('saved', '✓ Saved');
+      setTimeout(() => setStatus('', 'Ready'), 2000);
+    } catch (err) {
+      setStatus('error', '✕ Save failed');
+      showToast('Failed to save: ' + err.message, 'error');
+    }
+  }, 500);
+}
+
+function setStatus(type, text) {
+  const el = document.getElementById('status');
+  el.className = 'status ' + type;
+  el.textContent = text;
+}
+
+// Rename node
+async function renameNode(newId) {
+  if (!selectedNode || newId === selectedNode) return;
+
+  // Validate
+  newId = newId.toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-');
+  document.getElementById('slugInput').value = newId;
+
+  if (nodes[newId]) {
+    showToast('A node with that slug already exists', 'error');
+    document.getElementById('slugInput').value = selectedNode;
+    return;
+  }
+
+  setStatus('saving', '💾 Renaming...');
+
+  try {
+    const res = await fetch(`/api/nodes/${selectedNode}/rename`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ newId })
+    });
+
+    const data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+
+    // Update local state
+    nodes[newId] = { ...nodes[selectedNode], id: newId };
+    delete nodes[selectedNode];
+
+    // Update references in local state too
+    Object.values(nodes).forEach(node => {
+      node.options = (node.options || []).map(opt => ({
+        ...opt,
+        target: opt.target === selectedNode ? newId : opt.target
+      }));
+    });
+
+    selectedNode = newId;
+    showToast(`Renamed! Updated ${data.referencesUpdated} references.`, 'success');
+    setStatus('saved', '✓ Renamed');
+
+    renderNodeList();
+    renderEditor();
+  } catch (err) {
+    showToast('Rename failed: ' + err.message, 'error');
+    setStatus('error', '✕ Rename failed');
+    document.getElementById('slugInput').value = selectedNode;
+  }
+}
+
+// Options management
+function updateOption(index, field, value) {
+  if (!selectedNode) return;
+  nodes[selectedNode].options[index][field] = value;
+  scheduleSave();
+}
+
+function addOption() {
+  if (!selectedNode) return;
+  if (!nodes[selectedNode].options) nodes[selectedNode].options = [];
+  nodes[selectedNode].options.push({ label: 'New Option', target: 'home' });
+  scheduleSave();
+  renderEditor();
+}
+
+function removeOption(index) {
+  if (!selectedNode) return;
+  nodes[selectedNode].options.splice(index, 1);
+  scheduleSave();
+  renderEditor();
+}
+
+// Delete node
+function showDeleteModal(id) {
+  nodeToDelete = id;
+  document.getElementById('deleteMessage').textContent =
+    `Are you sure you want to delete "${nodes[id].title}" (${id}.md)? This cannot be undone.`;
+  document.getElementById('deleteModal').classList.add('active');
+}
+
+function hideDeleteModal() {
+  document.getElementById('deleteModal').classList.remove('active');
+  nodeToDelete = null;
+}
+
+async function confirmDelete() {
+  if (!nodeToDelete) return;
+
+  try {
+    const res = await fetch(`/api/nodes/${nodeToDelete}`, { method: 'DELETE' });
+    if (!res.ok) {
+      const data = await res.json();
+      throw new Error(data.error);
+    }
+
+    delete nodes[nodeToDelete];
+    if (selectedNode === nodeToDelete) selectedNode = null;
+
+    showToast(`Deleted ${nodeToDelete}.md`, 'success');
+    hideDeleteModal();
+    updateStats();
+    renderNodeList();
+    renderEditor();
+  } catch (err) {
+    showToast('Delete failed: ' + err.message, 'error');
+  }
+}
+
+// Filter nodes
+function filterNodes(query) {
+  query = query.toLowerCase();
+  document.querySelectorAll('.node-item').forEach(el => {
+    const id = el.dataset.id;
+    const node = nodes[id];
+    const match = id.includes(query) || (node && node.title.toLowerCase().includes(query));
+    el.style.display = match ? '' : 'none';
+  });
+}
+
+// Toast notifications
+function showToast(message, type = '') {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.className = 'toast show ' + type;
+  setTimeout(() => toast.classList.remove('show'), 3000);
+}
+
+// Keyboard shortcuts
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && e.key === 's') {
+    e.preventDefault();
+    // Already auto-saving
+  }
+  if (e.key === 'Escape') {
+    hideDeleteModal();
+  }
+});
+
+// Initialize
+loadNodes();
+</script>
+
+</body>
+</html>
