@@ -1,5 +1,5 @@
 ---
-title: "Compliance and certifications"
+title: "Compliance roadmap"
 options:
   - label: "Visit Trust Centre"
     target: "external-trust"
@@ -10,10 +10,17 @@ options:
 external: false
 externalUrl: null
 ---
-AnswerLayer maintains:
+Our approach to compliance reflects our BYOC deployment model:
 
-- **SOC 2 Type II** — Annual audit of security controls
-- **GDPR compliance** — Data processing agreements available
-- **HIPAA compatibility** — BAA available for healthcare deployments
+**Current security foundations:**
+- Secure development lifecycle with code review and static analysis
+- Penetration testing and vulnerability management
+- Encrypted credential handling (AES-256 at rest, TLS 1.3 in transit)
+- Control plane secured separately from customer data
+
+**On our roadmap:**
+- SOC 2 Type II certification for control plane infrastructure
+- HIPAA BAA availability for healthcare deployments
+- Additional compliance frameworks as customer needs evolve
 
 The VPC deployment model simplifies compliance—customer data remains in customer infrastructure under customer controls.

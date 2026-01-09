@@ -3,7 +3,7 @@ title: "Security architecture"
 options:
   - label: "See VPC deployment details"
     target: "build-vpc"
-  - label: "Review compliance certifications"
+  - label: "Review compliance roadmap"
     target: "build-compliance"
   - label: "Understand credential handling"
     target: "build-credentials"
@@ -19,3 +19,4 @@ Security is foundational, not an add-on:
 - **No data export** — Analysis happens through queries; raw data never leaves the database
 - **Query logging** — Full audit trail of all executed queries
 - **Role-based access** — Fine-grained permissions at entity and column level
+- **Control plane isolation** — Lightweight control plane handles updates and telemetry; no customer data transits through it
