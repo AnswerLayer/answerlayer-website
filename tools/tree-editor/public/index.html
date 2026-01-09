@@ -277,6 +277,64 @@ body {
 .modal h3 { color: #f85149; margin-bottom: 12px; }
 .modal p { color: #8b949e; margin-bottom: 20px; font-size: 14px; }
 .modal .btn-group { justify-content: center; }
+
+/* Parent/Child links */
+.node-links {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 20px;
+  padding: 16px;
+  background: #21262d;
+  border-radius: 8px;
+  border: 1px solid #30363d;
+}
+.node-links-section {
+  flex: 1;
+}
+.node-links-section h4 {
+  font-size: 11px;
+  text-transform: uppercase;
+  color: #8b949e;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.node-links-section h4 .icon { font-size: 14px; }
+.node-links-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.node-link {
+  padding: 4px 10px;
+  background: #0d1117;
+  border: 1px solid #30363d;
+  border-radius: 4px;
+  font-size: 12px;
+  color: #58a6ff;
+  cursor: pointer;
+  transition: all 0.1s;
+  text-decoration: none;
+}
+.node-link:hover {
+  background: #1f6feb22;
+  border-color: #1f6feb;
+}
+.node-link.external {
+  color: #a371f7;
+  border-color: #a371f755;
+}
+.node-link.missing {
+  color: #f85149;
+  border-color: #f8514955;
+  cursor: default;
+}
+.node-links-empty {
+  color: #6e7681;
+  font-size: 12px;
+  font-style: italic;
+}
 </style>
 </head>
 <body>
@@ -354,6 +412,24 @@ function findReachable() {
     }
   }
   return reachable;
+}
+
+// Find parent nodes (nodes that link TO this node)
+function findParents(nodeId) {
+  const parents = [];
+  Object.entries(nodes).forEach(([id, node]) => {
+    if (node.options && node.options.some(opt => opt.target === nodeId)) {
+      parents.push(id);
+    }
+  });
+  return parents.sort();
+}
+
+// Find child nodes (nodes this node links TO)
+function findChildren(nodeId) {
+  const node = nodes[nodeId];
+  if (!node || !node.options) return [];
+  return [...new Set(node.options.map(opt => opt.target))].filter(id => nodes[id]).sort();
 }
 
 // Load all nodes from API
@@ -443,6 +519,30 @@ function renderEditor() {
   const reachable = findReachable();
   const isOrphan = !reachable.has(selectedNode);
 
+  // Find parents and children
+  const parents = findParents(selectedNode);
+  const children = findChildren(selectedNode);
+
+  // Build parent links HTML
+  const parentLinksHtml = parents.length > 0
+    ? parents.map(id => {
+        const p = nodes[id];
+        return `<a class="node-link" onclick="selectNode('${id}')" title="${p ? p.title : id}">${id}</a>`;
+      }).join('')
+    : '<span class="node-links-empty">No parents (root or orphan)</span>';
+
+  // Build child links HTML
+  const childLinksHtml = children.length > 0
+    ? children.map(id => {
+        const c = nodes[id];
+        const isExternal = c && c.external;
+        const classes = ['node-link'];
+        if (isExternal) classes.push('external');
+        if (!c) classes.push('missing');
+        return `<a class="${classes.join(' ')}" onclick="${c ? `selectNode('${id}')` : ''}" title="${c ? c.title : 'Missing node!'}">${id}${isExternal ? ' ↗' : ''}</a>`;
+      }).join('')
+    : '<span class="node-links-empty">No children (leaf node)</span>';
+
   // Build options list
   let optionsHtml = '';
   (node.options || []).forEach((opt, i) => {
@@ -470,6 +570,17 @@ function renderEditor() {
           <code style="color: #8b949e; font-size: 13px;">${selectedNode}.md</code>
         </div>
         ${isOrphan ? '<span class="node-badge" style="background:#9e6a03;padding:6px 12px;font-size:12px;">⚠️ ORPHAN - Not reachable from home</span>' : ''}
+      </div>
+
+      <div class="node-links">
+        <div class="node-links-section">
+          <h4><span class="icon">⬆️</span> Parents (${parents.length})</h4>
+          <div class="node-links-list">${parentLinksHtml}</div>
+        </div>
+        <div class="node-links-section">
+          <h4><span class="icon">⬇️</span> Children (${children.length})</h4>
+          <div class="node-links-list">${childLinksHtml}</div>
+        </div>
       </div>
 
       <div class="field-row">
