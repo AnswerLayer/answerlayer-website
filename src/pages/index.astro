@@ -1,10 +1,35 @@
 ---
 /**
  * Home Page
+ * Renders content from the discover collection's "home" node
  * Minimal approach with W95FA body text, technical card, CRT effects
  */
 import Layout from '../layouts/Layout.astro';
-import Button from '../components/Button.astro';
+import { getEntry } from 'astro:content';
+
+// Fetch the home node from the discover collection
+const homeEntry = await getEntry('discover', 'home');
+if (!homeEntry) {
+  throw new Error('Missing home.md in discover collection');
+}
+
+const { Content } = await homeEntry.render();
+
+// Build option URLs (same logic as [...slug].astro)
+async function getOptionUrl(targetId: string): Promise<string> {
+  const targetEntry = await getEntry('discover', targetId);
+  if (targetEntry?.data.external && targetEntry.data.externalUrl) {
+    return targetEntry.data.externalUrl;
+  }
+  return targetId === 'home' ? '/' : `/discover/${targetId}`;
+}
+
+const optionData = await Promise.all(
+  homeEntry.data.options.map(async (opt) => {
+    const url = await getOptionUrl(opt.target);
+    return { label: opt.label, url };
+  })
+);
 ---
 
 <Layout title="AnswerLayer">
@@ -14,20 +39,18 @@ import Button from '../components/Button.astro';
       <div class="technical-card crt-glow">
         <div class="title-box">
           <h1 class="home-title crt-text">
-            A shared language for your data
+            {homeEntry.data.title}
           </h1>
         </div>
 
-        <p class="body-text crt-text" style="margin-bottom: 1.25rem;">
-          AnswerLayer generates a semantic layer from any database. A semantic layer is a business ontology—a concept map that humans and AI can navigate together. It aligns organizations with their data through shared definitions. Entities, metrics, dimensions, and relationships are created automatically by analyzing actual data, not just schema.
-        </p>
-
-        <p class="body-text crt-text" style="margin-bottom: 1.5rem;">
-          The result: consistent answers, confident decisions, and a data culture where everyone speaks the same language.
-        </p>
+        <div class="body-content crt-text">
+          <Content />
+        </div>
 
         <div class="continue-section">
-          <a href="/discover/branch-root" class="continue-button crt-text">Continue</a>
+          {optionData.map((opt) => (
+            <a href={opt.url} class="continue-button crt-text">{opt.label}</a>
+          ))}
         </div>
       </div>
 
@@ -61,12 +84,19 @@ import Button from '../components/Button.astro';
         white-space: nowrap;
       }
     }
-    .body-text {
+    .body-content {
       font-family: var(--font-body);
       font-size: 1.0625rem;
       font-weight: 200;
       color: #374151;
       line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+    .body-content :global(p) {
+      margin-bottom: 1.25rem;
+    }
+    .body-content :global(p:last-child) {
+      margin-bottom: 0;
     }
     .technical-card {
       background: transparent;

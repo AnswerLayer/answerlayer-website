@@ -1,5 +1,5 @@
 ---
-title: "A shared language for your data"
+title: "Data Language for Data Culture"
 options:
   - label: "Continue"
     target: "branch-root"
