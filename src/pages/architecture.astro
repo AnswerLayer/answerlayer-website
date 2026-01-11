@@ -3,7 +3,7 @@
  * Architecture Page
  *
  * Grid of cards showing system architecture topics.
- * Inspired by unit.software card grid layout.
+ * Consistent styling with double-border cards.
  */
 import Layout from '../layouts/Layout.astro';
 ---
@@ -13,7 +13,7 @@ import Layout from '../layouts/Layout.astro';
   description="System architecture and technical deep-dive into how AnswerLayer works"
 >
   <div class="crt-screen">
-    <div class="container mx-auto px-6 py-12 md:py-20">
+    <div class="container mx-auto px-6 py-12 md:py-20" style="padding-top: 6rem;">
 
       <!-- Page Header -->
       <div class="page-header">
@@ -25,63 +25,33 @@ import Layout from '../layouts/Layout.astro';
       <div class="card-grid">
 
         <a href="/discover/build-architecture" class="topic-card">
-          <div class="card-visual">
-            <div class="visual-pattern architecture"></div>
-          </div>
-          <div class="card-content">
-            <h2 class="card-title">System Architecture</h2>
-            <p class="card-description">Query engine, semantic store, generation service, and API layer. Stateless and horizontally scalable. PostgreSQL for storage, Claude for reasoning.</p>
-          </div>
+          <h2 class="card-title">System Architecture</h2>
+          <p class="card-description">Query engine, semantic store, generation service, and API layer. Stateless and horizontally scalable. PostgreSQL for storage, Claude for reasoning.</p>
         </a>
 
         <a href="/discover/build-generation" class="topic-card">
-          <div class="card-visual">
-            <div class="visual-pattern generation"></div>
-          </div>
-          <div class="card-content">
-            <h2 class="card-title">Generation Process</h2>
-            <p class="card-description">Connect, sample, analyze, generate, curate. AI analyzes actual data to produce semantic models with entities, metrics, dimensions, and filters.</p>
-          </div>
+          <h2 class="card-title">Generation Process</h2>
+          <p class="card-description">Connect, sample, analyze, generate, curate. AI analyzes actual data to produce semantic models with entities, metrics, dimensions, and filters.</p>
         </a>
 
         <a href="/discover/build-sampling" class="topic-card">
-          <div class="card-visual">
-            <div class="visual-pattern sampling"></div>
-          </div>
-          <div class="card-content">
-            <h2 class="card-title">Data Sampling</h2>
-            <p class="card-description">Statistical distributions, data types, relationships, and business context. Analysis happens through queries—data never leaves the database.</p>
-          </div>
+          <h2 class="card-title">Data Sampling</h2>
+          <p class="card-description">Statistical distributions, data types, relationships, and business context. Analysis happens through queries—data never leaves the database.</p>
         </a>
 
         <a href="/discover/build-reasoning" class="topic-card">
-          <div class="card-visual">
-            <div class="visual-pattern reasoning"></div>
-          </div>
-          <div class="card-content">
-            <h2 class="card-title">Chain-of-Thought</h2>
-            <p class="card-description">DSPy-powered reasoning with confidence scores, reasoning traces, and alternative interpretations. Low-confidence inferences flagged for human review.</p>
-          </div>
+          <h2 class="card-title">Chain-of-Thought</h2>
+          <p class="card-description">DSPy-powered reasoning with confidence scores, reasoning traces, and alternative interpretations. Low-confidence inferences flagged for human review.</p>
         </a>
 
         <a href="/discover/build-validation" class="topic-card">
-          <div class="card-visual">
-            <div class="visual-pattern validation"></div>
-          </div>
-          <div class="card-content">
-            <h2 class="card-title">Query Guardrails</h2>
-            <p class="card-description">Schema validation, operation filtering, row limits, timeout protection, and cost estimation. Configurable per role.</p>
-          </div>
+          <h2 class="card-title">Query Guardrails</h2>
+          <p class="card-description">Schema validation, operation filtering, row limits, timeout protection, and cost estimation. Configurable per role.</p>
         </a>
 
         <a href="/discover/build-curation" class="topic-card">
-          <div class="card-visual">
-            <div class="visual-pattern curation"></div>
-          </div>
-          <div class="card-content">
-            <h2 class="card-title">Curation Workflow</h2>
-            <p class="card-description">Review entities, adjust relationships, refine metrics, lock definitions. Generation provides the draft—curation makes it accurate.</p>
-          </div>
+          <h2 class="card-title">Curation Workflow</h2>
+          <p class="card-description">Review entities, adjust relationships, refine metrics, lock definitions. Generation provides the draft—curation makes it accurate.</p>
         </a>
 
       </div>
@@ -116,7 +86,7 @@ import Layout from '../layouts/Layout.astro';
   .card-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1rem;
+    gap: 1.5rem;
   }
 
   @media (min-width: 640px) {
@@ -132,160 +102,43 @@ import Layout from '../layouts/Layout.astro';
   }
 
   .topic-card {
-    display: flex;
-    flex-direction: row;
-    background: var(--color-navy-100);
-    border: 2px solid var(--color-navy-300);
+    display: block;
+    background: transparent;
+    border: 2px solid var(--color-navy-900);
+    padding: 1.5rem;
     text-decoration: none;
     transition: all 0.15s ease;
-  }
-
-  .topic-card:hover {
-    border-color: var(--color-navy-900);
-    text-decoration: none;
-  }
-
-  .card-visual {
-    width: 120px;
-    min-height: 120px;
-    background: var(--color-navy-900);
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .visual-pattern {
-    width: 60px;
-    height: 60px;
-    border: 2px solid var(--color-navy-500);
     position: relative;
   }
 
-  .visual-pattern.architecture {
-    border-radius: 0;
-  }
-
-  .visual-pattern.architecture::before {
+  .topic-card::before {
     content: "";
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 20px;
-    height: 20px;
-    border: 2px solid var(--color-navy-500);
+    inset: -6px;
+    border: 1px solid var(--color-navy-300);
+    pointer-events: none;
   }
 
-  .visual-pattern.generation {
-    border-radius: 50%;
-  }
-
-  .visual-pattern.generation::before {
-    content: "";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 30px;
-    height: 2px;
-    background: var(--color-navy-500);
-  }
-
-  .visual-pattern.sampling {
-    border: none;
-  }
-
-  .visual-pattern.sampling::before,
-  .visual-pattern.sampling::after {
-    content: "";
-    position: absolute;
-    width: 10px;
-    height: 10px;
-    border: 2px solid var(--color-navy-500);
-    border-radius: 50%;
-  }
-
-  .visual-pattern.sampling::before {
-    top: 10px;
-    left: 10px;
-  }
-
-  .visual-pattern.sampling::after {
-    bottom: 10px;
-    right: 10px;
-  }
-
-  .visual-pattern.reasoning {
-    border-style: dashed;
-  }
-
-  .visual-pattern.reasoning::before {
-    content: "→";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--color-navy-500);
-    font-size: 1.5rem;
-  }
-
-  .visual-pattern.validation {
-    border-color: var(--color-navy-400);
-  }
-
-  .visual-pattern.validation::before {
-    content: "✓";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--color-navy-400);
-    font-size: 1.5rem;
-  }
-
-  .visual-pattern.curation {
-    border-radius: 4px;
-  }
-
-  .visual-pattern.curation::before {
-    content: "";
-    position: absolute;
-    top: 8px;
-    left: 8px;
-    right: 8px;
-    height: 2px;
-    background: var(--color-navy-500);
-  }
-
-  .visual-pattern.curation::after {
-    content: "";
-    position: absolute;
-    top: 16px;
-    left: 8px;
-    width: 60%;
-    height: 2px;
-    background: var(--color-navy-500);
-  }
-
-  .card-content {
-    padding: 1rem;
-    flex: 1;
+  .topic-card:hover {
+    border-color: var(--color-navy-600);
+    text-decoration: none;
   }
 
   .card-title {
-    font-family: Tahoma, 'Segoe UI', sans-serif;
+    font-family: 'MS Sans Serif', 'Microsoft Sans Serif', Tahoma, sans-serif;
     font-size: 1rem;
-    font-weight: 300;
+    font-weight: 600;
     color: var(--color-navy-900);
     margin: 0 0 0.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
   }
 
   .card-description {
     font-family: var(--font-body);
     font-size: 0.875rem;
-    font-weight: 200;
-    color: #374151;
+    font-weight: 400;
+    color: var(--color-navy-700);
     line-height: 1.5;
     margin: 0;
   }

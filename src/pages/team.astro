@@ -1,0 +1,129 @@
+---
+/**
+ * Team Page
+ *
+ * Grid of cards showing team, culture, and business info.
+ * Consistent styling with double-border cards.
+ */
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Team - AnswerLayer"
+  description="Meet the AnswerLayer team - building the future of data access"
+>
+  <div class="crt-screen">
+    <div class="container mx-auto px-6 py-12 md:py-20" style="padding-top: 6rem;">
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title crt-text">Team</h1>
+        <p class="page-subtitle">People, culture, and vision</p>
+      </div>
+
+      <!-- Card Grid -->
+      <div class="card-grid">
+
+        <a href="/discover/build-team" class="topic-card">
+          <h2 class="card-title">The Team</h2>
+          <p class="card-description">Data infrastructure at scale. Natural language processing. Enterprise software deployment. Developer tools and DX. Venture-backed and growing.</p>
+        </a>
+
+        <a href="/discover/build-business" class="topic-card">
+          <h2 class="card-title">Vision</h2>
+          <p class="card-description">Every organization should have a semantic layer. AnswerLayer makes them accessible to any organization with a database—from weeks to minutes.</p>
+        </a>
+
+        <a href="/discover/build-investors" class="topic-card">
+          <h2 class="card-title">Backing</h2>
+          <p class="card-description">Backed by investors who understand data infrastructure and enterprise software. Focused on sustainable business through customer value.</p>
+        </a>
+
+        <a href="mailto:hello@getanswerlayer.com?subject=Hello" class="topic-card">
+          <h2 class="card-title">Get in Touch</h2>
+          <p class="card-description">Interested in joining or learning more? Reach out with what excites you about semantic layers and data infrastructure.</p>
+        </a>
+
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--color-navy-900);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .page-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-navy-500);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .card-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .topic-card {
+    display: block;
+    background: transparent;
+    border: 2px solid var(--color-navy-900);
+    padding: 1.5rem;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    position: relative;
+  }
+
+  .topic-card::before {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border: 1px solid var(--color-navy-300);
+    pointer-events: none;
+  }
+
+  .topic-card:hover {
+    border-color: var(--color-navy-600);
+    text-decoration: none;
+  }
+
+  .card-title {
+    font-family: 'MS Sans Serif', 'Microsoft Sans Serif', Tahoma, sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-navy-900);
+    margin: 0 0 0.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+  }
+
+  .card-description {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--color-navy-700);
+    line-height: 1.5;
+    margin: 0;
+  }
+</style>
