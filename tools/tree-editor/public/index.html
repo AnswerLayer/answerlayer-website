@@ -573,11 +573,11 @@ function renderGraph() {
     };
   });
 
-  // Build vis.js edges
+  // Build vis.js edges (exclude Back links for cleaner tree view)
   const visEdges = [];
   Object.entries(nodes).forEach(([id, node]) => {
     (node.options || []).forEach(opt => {
-      if (nodes[opt.target]) {
+      if (nodes[opt.target] && opt.label !== 'Back') {
         visEdges.push({
           from: id,
           to: opt.target,
