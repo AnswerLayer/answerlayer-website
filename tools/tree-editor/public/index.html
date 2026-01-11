@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>Concept Tree Editor</title>
+<script src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 body {
@@ -335,6 +336,68 @@ body {
   font-size: 12px;
   font-style: italic;
 }
+
+/* Graph view */
+.view-toggle {
+  display: flex;
+  gap: 4px;
+  margin-top: 12px;
+}
+.view-toggle button {
+  flex: 1;
+  padding: 8px;
+  background: #21262d;
+  border: 1px solid #30363d;
+  color: #8b949e;
+  cursor: pointer;
+  font-size: 12px;
+  transition: all 0.1s;
+}
+.view-toggle button:first-child { border-radius: 6px 0 0 6px; }
+.view-toggle button:last-child { border-radius: 0 6px 6px 0; }
+.view-toggle button:hover { background: #30363d; }
+.view-toggle button.active {
+  background: #1f6feb;
+  border-color: #1f6feb;
+  color: #fff;
+}
+.graph-container {
+  position: fixed;
+  top: 0;
+  left: 320px;
+  right: 0;
+  bottom: 0;
+  background: #0d1117;
+  display: none;
+  z-index: 50;
+}
+.graph-container.active { display: block; }
+#graphCanvas {
+  width: 100%;
+  height: 100%;
+}
+.graph-legend {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
+  background: #161b22;
+  border: 1px solid #30363d;
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: 11px;
+}
+.graph-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.graph-legend-item:last-child { margin-bottom: 0; }
+.graph-legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
 </style>
 </head>
 <body>
@@ -345,6 +408,10 @@ body {
       <h1>🌳 Concept Tree Editor</h1>
       <div class="stats" id="stats">Loading...</div>
       <input type="text" class="search" id="search" placeholder="Search nodes..." oninput="filterNodes(this.value)">
+      <div class="view-toggle">
+        <button id="btnListView" class="active" onclick="setView('list')">📋 List</button>
+        <button id="btnGraphView" onclick="setView('graph')">🔗 Graph</button>
+      </div>
     </div>
     <div class="node-list" id="nodeList">
       <div class="editor-placeholder">
@@ -382,11 +449,26 @@ body {
   </div>
 </div>
 
+<div class="graph-container" id="graphContainer">
+  <div id="graphCanvas"></div>
+  <div class="graph-legend">
+    <div class="graph-legend-item"><div class="graph-legend-dot" style="background:#58a6ff"></div> Core</div>
+    <div class="graph-legend-item"><div class="graph-legend-dot" style="background:#3fb950"></div> Build Path</div>
+    <div class="graph-legend-item"><div class="graph-legend-dot" style="background:#a371f7"></div> Access Path</div>
+    <div class="graph-legend-item"><div class="graph-legend-dot" style="background:#f0883e"></div> Agents Path</div>
+    <div class="graph-legend-item"><div class="graph-legend-dot" style="background:#8b949e"></div> FAQ</div>
+    <div class="graph-legend-item"><div class="graph-legend-dot" style="background:#1f6feb"></div> External</div>
+    <div class="graph-legend-item"><div class="graph-legend-dot" style="background:#d29922"></div> Orphan</div>
+  </div>
+</div>
+
 <script>
 let nodes = {};
 let selectedNode = null;
 let saveTimeout = null;
 let nodeToDelete = null;
+let currentView = 'list';
+let graphNetwork = null;
 
 // Categories for grouping
 const categories = [
@@ -397,6 +479,176 @@ const categories = [
   { name: 'FAQ', filter: id => id.startsWith('faq-') },
   { name: 'External Links', filter: id => id.startsWith('external-') },
 ];
+
+// Color mapping for graph nodes
+const categoryColors = {
+  'Core': '#58a6ff',
+  'Build Path': '#3fb950',
+  'Access Path': '#a371f7',
+  'Agents Path': '#f0883e',
+  'FAQ': '#8b949e',
+  'External Links': '#1f6feb',
+  'Other': '#6e7681'
+};
+
+// Get category for a node
+function getNodeCategory(id) {
+  for (const cat of categories) {
+    if (cat.filter(id)) return cat.name;
+  }
+  return 'Other';
+}
+
+// View toggle
+function setView(view) {
+  currentView = view;
+  document.getElementById('btnListView').classList.toggle('active', view === 'list');
+  document.getElementById('btnGraphView').classList.toggle('active', view === 'graph');
+  document.getElementById('graphContainer').classList.toggle('active', view === 'graph');
+
+  if (view === 'graph') {
+    renderGraph();
+  }
+}
+
+// Calculate depth from home using BFS
+function calculateDepths() {
+  const depths = {};
+  const queue = [{ id: 'home', depth: 0 }];
+  const visited = new Set();
+
+  while (queue.length > 0) {
+    const { id, depth } = queue.shift();
+    if (visited.has(id) || !nodes[id]) continue;
+    visited.add(id);
+    depths[id] = depth;
+
+    (nodes[id].options || []).forEach(opt => {
+      if (!visited.has(opt.target)) {
+        queue.push({ id: opt.target, depth: depth + 1 });
+      }
+    });
+  }
+
+  // Orphans get a high level
+  Object.keys(nodes).forEach(id => {
+    if (depths[id] === undefined) depths[id] = 10;
+  });
+
+  return depths;
+}
+
+// Render the graph visualization
+function renderGraph() {
+  const reachable = findReachable();
+  const depths = calculateDepths();
+
+  // Build vis.js nodes
+  const visNodes = Object.entries(nodes).map(([id, node]) => {
+    const isOrphan = !reachable.has(id);
+    const category = getNodeCategory(id);
+    const color = isOrphan ? '#d29922' : categoryColors[category] || categoryColors['Other'];
+
+    return {
+      id,
+      label: id, // Use slug for cleaner labels
+      title: `${node.title}\n\nSlug: ${id}\nDepth: ${depths[id]}\nChildren: ${(node.options || []).length}`,
+      level: depths[id], // Explicitly set level for hierarchical layout
+      color: {
+        background: color,
+        border: color,
+        highlight: { background: '#fff', border: color },
+        hover: { background: color, border: '#fff' }
+      },
+      font: {
+        color: '#c9d1d9',
+        size: 11,
+        face: 'monospace'
+      },
+      shape: node.external ? 'diamond' : 'box',
+      margin: 8,
+      widthConstraint: { minimum: 80, maximum: 150 },
+      borderWidth: selectedNode === id ? 3 : 1,
+      borderWidthSelected: 3
+    };
+  });
+
+  // Build vis.js edges
+  const visEdges = [];
+  Object.entries(nodes).forEach(([id, node]) => {
+    (node.options || []).forEach(opt => {
+      if (nodes[opt.target]) {
+        visEdges.push({
+          from: id,
+          to: opt.target,
+          arrows: 'to',
+          color: { color: '#30363d', highlight: '#58a6ff', hover: '#58a6ff' },
+          smooth: { type: 'curvedCW', roundness: 0.2 }
+        });
+      }
+    });
+  });
+
+  // Create or update network
+  const container = document.getElementById('graphCanvas');
+  const data = { nodes: new vis.DataSet(visNodes), edges: new vis.DataSet(visEdges) };
+  const options = {
+    layout: {
+      hierarchical: {
+        enabled: true,
+        direction: 'LR', // Left-to-Right for better readability
+        sortMethod: 'directed',
+        levelSeparation: 180,
+        nodeSpacing: 40,
+        treeSpacing: 80,
+        blockShifting: true,
+        edgeMinimization: true,
+        parentCentralization: true
+      }
+    },
+    physics: {
+      enabled: false // Disable physics for hierarchical layout
+    },
+    interaction: {
+      hover: true,
+      tooltipDelay: 100,
+      zoomView: true,
+      dragView: true,
+      dragNodes: true
+    },
+    edges: {
+      smooth: {
+        type: 'cubicBezier',
+        forceDirection: 'horizontal',
+        roundness: 0.5
+      },
+      color: { color: '#30363d', highlight: '#58a6ff' },
+      arrows: { to: { scaleFactor: 0.5 } }
+    }
+  };
+
+  if (graphNetwork) {
+    graphNetwork.destroy();
+  }
+
+  graphNetwork = new vis.Network(container, data, options);
+
+  // Handle node clicks
+  graphNetwork.on('click', function(params) {
+    if (params.nodes.length > 0) {
+      const clickedId = params.nodes[0];
+      selectNode(clickedId);
+      setView('list'); // Switch back to list view to edit
+    }
+  });
+
+  // Handle double-click to focus
+  graphNetwork.on('doubleClick', function(params) {
+    if (params.nodes.length > 0) {
+      graphNetwork.focus(params.nodes[0], { scale: 1.5, animation: true });
+    }
+  });
+}
 
 // Find reachable nodes from home
 function findReachable() {
