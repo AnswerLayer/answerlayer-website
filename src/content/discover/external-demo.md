@@ -2,6 +2,6 @@
 title: "Request Demo"
 options: []
 external: true
-externalUrl: "/pricing"
+externalUrl: "/contact"
 ---
 Redirecting to demo request...
