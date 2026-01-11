@@ -1,8 +1,6 @@
 ---
 title: "Common questions"
 options:
-  - label: "General questions"
-    target: "faq-general"
   - label: "Technical questions"
     target: "faq-technical"
   - label: "Security questions"
@@ -10,7 +8,7 @@ options:
   - label: "Pricing questions"
     target: "faq-pricing"
   - label: "Back"
-    target: "home"
+    target: "branch-root"
 external: false
 externalUrl: null
 ---
