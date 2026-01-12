@@ -5,8 +5,6 @@ options:
     target: "path-build"
   - label: "Query databases"
     target: "path-access"
-  - label: "Common questions"
-    target: "faq-root"
   - label: "Back"
     target: "home"
 external: false
