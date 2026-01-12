@@ -7,8 +7,6 @@ options:
     target: "external-contributing"
   - label: "See open issues"
     target: "external-issues"
-  - label: "Learn about the team"
-    target: "build-team"
   - label: "Back"
     target: "path-build"
 external: false

@@ -1,8 +1,8 @@
 ---
 title: "GCP deployment"
 options:
-  - label: "Review Terraform modules"
-    target: "external-terraform"
+  - label: "Get in touch"
+    target: "external-contact"
   - label: "See deployment process"
     target: "build-deployment-process"
   - label: "Back"

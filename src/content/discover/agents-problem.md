@@ -5,8 +5,6 @@ options:
     target: "agents-integration"
   - label: "Learn about guardrails"
     target: "access-guardrails"
-  - label: "Back"
-    target: "path-agents"
 external: false
 externalUrl: null
 ---

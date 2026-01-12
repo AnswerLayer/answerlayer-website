@@ -173,9 +173,9 @@ app.post('/api/nodes/:id/rename', (req, res) => {
       let content = fs.readFileSync(filepath, 'utf-8');
 
       // Replace target references
-      const oldPattern = new RegExp(`target: "${oldId}"`, 'g');
-      if (oldPattern.test(content)) {
-        content = content.replace(oldPattern, `target: "${newId}"`);
+      const searchStr = `target: "${oldId}"`;
+      if (content.includes(searchStr)) {
+        content = content.replaceAll(searchStr, `target: "${newId}"`);
         fs.writeFileSync(filepath, content, 'utf-8');
         updatedCount++;
       }
