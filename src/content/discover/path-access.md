@@ -3,8 +3,6 @@ title: "Accessing data through natural language"
 options:
   - label: "Understand how this works"
     target: "access-how"
-  - label: "See what problems this solves"
-    target: "access-problems"
   - label: "Review security and trust"
     target: "access-security"
   - label: "Try it out"

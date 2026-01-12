@@ -5,8 +5,10 @@ options:
     target: "path-build"
   - label: "Query databases"
     target: "path-access"
+  - label: "Common questions"
+    target: "faq-root"
   - label: "Back"
-    target: "external-home"
+    target: "home"
 external: false
 externalUrl: null
 ---

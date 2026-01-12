@@ -1,16 +1,12 @@
 ---
 title: "Building semantic layers"
 options:
-  - label: "Understand the problem"
-    target: "build-problem"
   - label: "See how generation works"
     target: "build-generation"
   - label: "Review security model"
     target: "build-security"
   - label: "Evaluate for purchase"
     target: "build-evaluate"
-  - label: "Contribute to the project"
-    target: "build-contribute"
   - label: "Back"
     target: "branch-root"
 external: false

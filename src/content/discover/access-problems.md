@@ -7,8 +7,6 @@ options:
     target: "access-inconsistent"
   - label: "AI tools that hallucinate"
     target: "access-hallucination"
-  - label: "Complex SQL requirements"
-    target: "access-sql-complexity"
   - label: "Back"
     target: "path-access"
 external: false

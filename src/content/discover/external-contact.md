@@ -2,6 +2,6 @@
 title: "Contact"
 options: []
 external: true
-externalUrl: "mailto:hello@getanswerlayer.com"
+externalUrl: "/contact"
 ---
-Redirecting to contact form...
+Redirecting to contact page...

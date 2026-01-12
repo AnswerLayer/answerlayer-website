@@ -3,8 +3,6 @@ title: "How semantic layer generation works"
 options:
   - label: "Examine data sampling"
     target: "build-sampling"
-  - label: "Understand chain-of-thought reasoning"
-    target: "build-reasoning"
   - label: "See PII detection"
     target: "build-pii"
   - label: "Review query validation"

@@ -1,0 +1,387 @@
+---
+/**
+ * Pricing Page
+ *
+ * Two tiers: Free (cloud) and Pro (BYOC for data sovereignty).
+ * Matching site's CRT/technical aesthetic.
+ */
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Pricing - AnswerLayer"
+  description="AnswerLayer pricing - Free cloud tier and Pro BYOC for data sovereignty"
+>
+  <div class="crt-screen">
+    <div class="container mx-auto px-6 py-12 md:py-20">
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title crt-text">Pricing</h1>
+        <p class="page-subtitle">Simple, transparent pricing</p>
+      </div>
+
+      <!-- Pricing Cards -->
+      <div class="pricing-container">
+
+        <!-- Free Tier -->
+        <div class="pricing-card">
+          <div class="plan-header">
+            <span class="plan-badge">Cloud Hosted</span>
+            <h2 class="plan-name">Free</h2>
+            <div class="plan-price">
+              <span class="price-amount">$0</span>
+              <span class="price-period">/ month</span>
+            </div>
+          </div>
+
+          <div class="plan-features">
+            <h3 class="features-title">Included:</h3>
+            <ul class="feature-list">
+              <li>Semantic layer generation</li>
+              <li>Natural language queries</li>
+              <li>Multi-database connectivity</li>
+              <li>Real-time data processing</li>
+              <li>Automated insights</li>
+              <li>Data visualization</li>
+              <li>SOC2 compliant infrastructure</li>
+              <li>Community support</li>
+            </ul>
+          </div>
+
+          <div class="plan-cta">
+            <a href="/contact" class="cta-button">Get Started</a>
+            <p class="cta-note">No credit card required</p>
+          </div>
+        </div>
+
+        <!-- Pro Tier -->
+        <div class="pricing-card featured">
+          <div class="plan-header">
+            <span class="plan-badge">BYOC</span>
+            <h2 class="plan-name">Pro</h2>
+            <div class="plan-price">
+              <span class="price-amount">Custom</span>
+            </div>
+            <p class="plan-validity">Bring Your Own Cloud</p>
+          </div>
+
+          <div class="plan-features">
+            <h3 class="features-title">Everything in Free, plus:</h3>
+            <ul class="feature-list">
+              <li>Deploy in your cloud (AWS, GCP, Azure)</li>
+              <li>Complete data sovereignty</li>
+              <li>Your security perimeter</li>
+              <li>VPC / private network deployment</li>
+              <li>Custom SSO / SAML integration</li>
+              <li>Audit logging & compliance</li>
+              <li>Dedicated support</li>
+              <li>SLA guarantees</li>
+            </ul>
+          </div>
+
+          <div class="plan-cta">
+            <a href="https://calendly.com/josh-getanswerlayer/30min" target="_blank" rel="noopener noreferrer" class="cta-button cta-primary">Contact Sales</a>
+            <p class="cta-note">For enterprises with strict data requirements</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- FAQ Section -->
+      <div class="faq-section">
+        <h2 class="faq-title">Questions</h2>
+
+        <div class="faq-grid">
+          <div class="faq-item">
+            <h3 class="faq-question">Why is the Free tier free?</h3>
+            <p class="faq-answer">We're building the future of data access. Early users help us refine the product and shape the roadmap. Your feedback is valuable.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3 class="faq-question">What is BYOC?</h3>
+            <p class="faq-answer">Bring Your Own Cloud. AnswerLayer deploys directly into your AWS, GCP, or Azure account. Data never leaves your infrastructure.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3 class="faq-question">Who needs Pro?</h3>
+            <p class="faq-answer">Organizations with strict data sovereignty requirements, regulated industries, or security policies that prohibit third-party data access.</p>
+          </div>
+
+          <div class="faq-item">
+            <h3 class="faq-question">Is the Free tier secure?</h3>
+            <p class="faq-answer">Yes. SOC2 compliant with encrypted connections. We query your database directly—we don't store your data. Pro adds your own security perimeter.</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .page-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--color-navy-900);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .page-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-navy-500);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+
+  .pricing-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    justify-content: center;
+    margin-bottom: 4rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  @media (min-width: 640px) {
+    .pricing-container {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .pricing-card {
+    background: transparent;
+    border: 2px solid var(--color-navy-300);
+    width: 100%;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .pricing-card::before {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border: 1px solid var(--color-navy-200);
+    pointer-events: none;
+  }
+
+  .pricing-card.featured {
+    border-color: var(--color-navy-900);
+  }
+
+  .pricing-card.featured::before {
+    border-color: var(--color-navy-300);
+  }
+
+  .pricing-card.featured .plan-badge {
+    background: var(--color-navy-900);
+    color: var(--color-background);
+  }
+
+  .plan-header {
+    border-bottom: 2px solid var(--color-navy-300);
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .pricing-card.featured .plan-header {
+    border-bottom-color: var(--color-navy-900);
+  }
+
+  .plan-badge {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    background: var(--color-navy-900);
+    color: var(--color-background);
+    padding: 0.25rem 0.75rem;
+    margin-bottom: 1rem;
+  }
+
+  .plan-name {
+    font-family: 'MS Sans Serif', 'Microsoft Sans Serif', Tahoma, sans-serif;
+    font-size: 1.5rem;
+    font-weight: 400;
+    color: var(--color-navy-900);
+    margin: 0 0 1rem 0;
+  }
+
+  .plan-price {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .price-amount {
+    font-family: var(--font-mono);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--color-navy-900);
+  }
+
+  .price-period {
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    color: var(--color-navy-500);
+  }
+
+  .plan-validity {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    color: var(--color-navy-500);
+    margin: 0;
+  }
+
+  .plan-features {
+    padding: 1.5rem;
+    border-bottom: 2px solid var(--color-navy-300);
+    flex: 1;
+  }
+
+  .pricing-card.featured .plan-features {
+    border-bottom-color: var(--color-navy-900);
+  }
+
+  .features-title {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-navy-500);
+    margin: 0 0 1rem 0;
+  }
+
+  .feature-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .feature-list li {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    font-weight: 200;
+    color: #374151;
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
+    position: relative;
+    border-bottom: 1px solid var(--color-navy-200);
+  }
+
+  .feature-list li:last-child {
+    border-bottom: none;
+  }
+
+  .feature-list li::before {
+    content: "✓";
+    position: absolute;
+    left: 0;
+    color: var(--color-navy-900);
+    font-weight: 600;
+  }
+
+  .plan-cta {
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .cta-button {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-background);
+    background: var(--color-navy-900);
+    border: 2px solid var(--color-navy-900);
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    transition: all 0.15s ease;
+  }
+
+  .cta-button:hover {
+    background: transparent;
+    color: var(--color-navy-900);
+  }
+
+  .cta-button.cta-primary {
+    background: var(--color-navy-900);
+    color: var(--color-background);
+  }
+
+  .cta-button.cta-primary:hover {
+    background: transparent;
+    color: var(--color-navy-900);
+  }
+
+  .cta-note {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-navy-500);
+    margin: 0.75rem 0 0 0;
+  }
+
+  .faq-section {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .faq-title {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-navy-500);
+    text-align: center;
+    margin: 0 0 2rem 0;
+  }
+
+  .faq-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .faq-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .faq-item {
+    padding: 1rem;
+    border: 1px solid var(--color-navy-300);
+  }
+
+  .faq-question {
+    font-family: Tahoma, 'Segoe UI', sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    color: var(--color-navy-900);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .faq-answer {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 200;
+    color: #374151;
+    line-height: 1.6;
+    margin: 0;
+  }
+</style>

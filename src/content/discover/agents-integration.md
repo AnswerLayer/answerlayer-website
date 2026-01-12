@@ -7,8 +7,6 @@ options:
     target: "agents-mcp"
   - label: "View SDK examples"
     target: "external-github"
-  - label: "Back"
-    target: "path-agents"
 external: false
 externalUrl: null
 ---
