@@ -14,7 +14,6 @@ Pricing is based on:
 
 - **Deployment type** — Self-hosted vs. managed
 - **Query volume** — Monthly natural language queries
-- **Users** — Number of active users
 - **Support tier** — Standard, priority, or dedicated
 
-Enterprise agreements available for large deployments.
+Enterprise and BYOC (bring your own cloud) is our default deployment model.
