@@ -2,7 +2,7 @@
 /**
  * Customers Page
  *
- * Grid of cards showing problems AnswerLayer solves and customer segments.
+ * Grid of cards showing use cases and industries where AnswerLayer is used.
  * Consistent styling with double-border cards.
  */
 import Layout from '../../layouts/Layout.astro';
@@ -10,7 +10,7 @@ import Layout from '../../layouts/Layout.astro';
 
 <Layout
   title="Customers - AnswerLayer"
-  description="Problems AnswerLayer solves and customer segments"
+  description="Teams building semantic layers across industries"
 >
   <div class="crt-screen">
     <div class="container mx-auto px-6 py-12 md:py-20" style="padding-top: 6rem;">
@@ -18,47 +18,57 @@ import Layout from '../../layouts/Layout.astro';
       <!-- Page Header -->
       <div class="page-header">
         <h1 class="page-title crt-text">Customers</h1>
-        <p class="page-subtitle">Problems solved and who benefits</p>
+        <p class="page-subtitle">Teams building semantic layers across industries</p>
       </div>
 
       <!-- Card Grid -->
       <div class="card-grid">
 
-        <a href="/discover/access-waiting" class="topic-card">
-          <h2 class="card-title">Waiting for Answers</h2>
-          <p class="card-description">Data team is a bottleneck. Every question joins a queue. Self-service fails when users cannot write SQL. Natural language makes it work.</p>
-        </a>
+        <div class="topic-card">
+          <h2 class="card-title">Product Analytics</h2>
+          <p class="card-description">Product teams tracking user behavior, feature adoption, and engagement across complex event schemas. Ask questions about funnels, cohorts, and usage patterns without writing SQL.</p>
+        </div>
 
-        <a href="/discover/access-inconsistent" class="topic-card">
-          <h2 class="card-title">Inconsistent Numbers</h2>
-          <p class="card-description">Different people pull different numbers. Different filters, date ranges, aggregations, data sources. One definition for each metric solves this.</p>
-        </a>
+        <div class="topic-card">
+          <h2 class="card-title">Finance</h2>
+          <p class="card-description">Finance teams navigating multi-entity accounting, revenue recognition, and forecasting. Turn financial data sprawl into a unified source of truth for reporting and planning.</p>
+        </div>
 
-        <a href="/discover/access-hallucination" class="topic-card">
-          <h2 class="card-title">AI Hallucination</h2>
-          <p class="card-description">ChatGPT invents column names and relationships. LLMs do not know the schema. Semantic layers ground AI in actual database structure.</p>
-        </a>
+        <div class="topic-card">
+          <h2 class="card-title">Healthcare</h2>
+          <p class="card-description">Clinical and operational teams working with sensitive patient data, outcomes research, and regulatory reporting. Maintain strict governance while enabling faster insights.</p>
+        </div>
 
-        <a href="/discover/access-sql-complexity" class="topic-card">
-          <h2 class="card-title">SQL Complexity</h2>
-          <p class="card-description">JOIN syntax, window functions, date handling, performance tuning. Business users should not need SQL to answer business questions.</p>
-        </a>
+        <div class="topic-card">
+          <h2 class="card-title">Public Sector & Policy Research</h2>
+          <p class="card-description">Government agencies, civic organizations, and policy researchers analyzing demographic, economic, and program data. Enable evidence-based decisions with secure, auditable data access.</p>
+        </div>
 
-        <a href="/discover/access-alignment" class="topic-card">
-          <h2 class="card-title">Data Alignment</h2>
-          <p class="card-description">Sales says X, finance says Y. Definitions drift. Tribal knowledge locked in senior heads. Semantic layer creates one source of truth.</p>
-        </a>
+        <div class="topic-card">
+          <h2 class="card-title">Scientific Research</h2>
+          <p class="card-description">Research groups managing experimental data, statistical analysis, and reproducible workflows. Bridge the gap between domain expertise and data infrastructure.</p>
+        </div>
 
-        <a href="/discover/access-culture" class="topic-card">
-          <h2 class="card-title">Data Culture</h2>
-          <p class="card-description">Shared language, self-service, trust, iteration. Higher revenue per employee because information flows efficiently.</p>
-        </a>
+        <div class="topic-card">
+          <h2 class="card-title">Complex Sensitive Data</h2>
+          <p class="card-description">Organizations where data security and governance are non-negotiable. Build semantic layers that enforce access controls, audit trails, and compliance requirements by design.</p>
+        </div>
+
+        <div class="topic-card">
+          <h2 class="card-title">E-commerce & Retail</h2>
+          <p class="card-description">Retail and e-commerce teams analyzing inventory, orders, customer lifetime value, and merchandising performance. Unify data from storefronts, warehouses, and marketing into actionable insights.</p>
+        </div>
+
+        <div class="topic-card">
+          <h2 class="card-title">HR & People Analytics</h2>
+          <p class="card-description">People teams tracking headcount, retention, compensation, and workforce planning. Enable data-driven talent decisions while maintaining confidentiality and compliance.</p>
+        </div>
 
       </div>
 
       <!-- CTA -->
       <div class="cta-row">
-        <a href="/discover/path-access" class="cta-button secondary">Explore Use Cases</a>
+        <a href="/contact" class="cta-button">Contact Us</a>
       </div>
 
     </div>
@@ -111,8 +121,6 @@ import Layout from '../../layouts/Layout.astro';
     background: transparent;
     border: 2px solid var(--color-navy-900);
     padding: 1.5rem;
-    text-decoration: none;
-    transition: all 0.15s ease;
     position: relative;
   }
 
@@ -122,11 +130,6 @@ import Layout from '../../layouts/Layout.astro';
     inset: -6px;
     border: 1px solid var(--color-navy-300);
     pointer-events: none;
-  }
-
-  .topic-card:hover {
-    border-color: var(--color-navy-600);
-    text-decoration: none;
   }
 
   .card-title {
@@ -170,16 +173,5 @@ import Layout from '../../layouts/Layout.astro';
     background: var(--color-navy-900);
     color: var(--color-background);
     text-decoration: none;
-  }
-
-  .cta-button.secondary {
-    border-color: var(--color-navy-400);
-    color: var(--color-navy-600);
-  }
-
-  .cta-button.secondary:hover {
-    background: var(--color-navy-400);
-    border-color: var(--color-navy-400);
-    color: var(--color-background);
   }
 </style>
