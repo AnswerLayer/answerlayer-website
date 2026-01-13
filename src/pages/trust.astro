@@ -23,7 +23,7 @@ import Layout from '../layouts/Layout.astro';
             <span class="badge-text crt-badge">BYOC</span>
           </div>
           <h1 class="hero-title crt-text">Your data never leaves your environment</h1>
-          <p class="hero-subtitle">
+          <p class="hero-subtitle crt-text">
             AnswerLayer deploys to your VPC. Database credentials stay in your cloud.
             Queries run against your data without extraction. We built secure software—you control where it runs.
           </p>
@@ -33,38 +33,38 @@ import Layout from '../layouts/Layout.astro';
       <!-- Shared Responsibility Model -->
       <section class="responsibility-section">
         <h2 class="section-title crt-text">Shared Responsibility Model</h2>
-        <p class="section-subtitle">Security is a partnership. Here's how responsibilities are divided.</p>
+        <p class="section-subtitle crt-text">Security is a partnership. Here's how responsibilities are divided.</p>
 
         <div class="responsibility-grid">
           <!-- Your Environment -->
           <div class="responsibility-card your-responsibility">
             <div class="responsibility-header">
-              <span class="responsibility-label">You Secure</span>
+              <span class="responsibility-label crt-text">You Secure</span>
             </div>
             <ul class="responsibility-list">
               <li>
                 <span class="item-icon">&#9632;</span>
-                <span class="item-text">VPC and network configuration</span>
+                <span class="item-text crt-text">VPC and network configuration</span>
               </li>
               <li>
                 <span class="item-icon">&#9632;</span>
-                <span class="item-text">Database credentials and access</span>
+                <span class="item-text crt-text">Database credentials and access</span>
               </li>
               <li>
                 <span class="item-icon">&#9632;</span>
-                <span class="item-text">IAM roles and policies</span>
+                <span class="item-text crt-text">IAM roles and policies</span>
               </li>
               <li>
                 <span class="item-icon">&#9632;</span>
-                <span class="item-text">Infrastructure patching</span>
+                <span class="item-text crt-text">Infrastructure patching</span>
               </li>
               <li>
                 <span class="item-icon">&#9632;</span>
-                <span class="item-text">Network security groups</span>
+                <span class="item-text crt-text">Network security groups</span>
               </li>
               <li>
                 <span class="item-icon">&#9632;</span>
-                <span class="item-text">Data classification and governance</span>
+                <span class="item-text crt-text">Data classification and governance</span>
               </li>
             </ul>
           </div>
@@ -73,14 +73,14 @@ import Layout from '../layouts/Layout.astro';
           <div class="responsibility-divider">
             <div class="divider-diagram">
               <div class="diagram-box customer-box">
-                <span class="box-label">Your VPC</span>
+                <span class="box-label crt-text">Your VPC</span>
                 <div class="inner-box runtime-box">
-                  <span class="inner-label">AnswerLayer Runtime</span>
+                  <span class="inner-label crt-text">AnswerLayer Runtime</span>
                 </div>
               </div>
               <div class="diagram-arrow">&#8595;</div>
               <div class="diagram-box control-box">
-                <span class="box-label">Control Plane</span>
+                <span class="box-label crt-text">Control Plane</span>
               </div>
             </div>
           </div>
@@ -88,32 +88,32 @@ import Layout from '../layouts/Layout.astro';
           <!-- AnswerLayer Secures -->
           <div class="responsibility-card our-responsibility">
             <div class="responsibility-header">
-              <span class="responsibility-label">We Secure</span>
+              <span class="responsibility-label crt-text">We Secure</span>
             </div>
             <ul class="responsibility-list">
               <li>
                 <span class="item-icon">&#9632;</span>
-                <span class="item-text">Application code security</span>
+                <span class="item-text crt-text">Application code security</span>
               </li>
               <li>
                 <span class="item-icon">&#9632;</span>
-                <span class="item-text">Dependency management</span>
+                <span class="item-text crt-text">Dependency management</span>
               </li>
               <li>
                 <span class="item-icon">&#9632;</span>
-                <span class="item-text">Control plane infrastructure</span>
+                <span class="item-text crt-text">Control plane infrastructure</span>
               </li>
               <li>
                 <span class="item-icon">&#9632;</span>
-                <span class="item-text">Secure update delivery</span>
+                <span class="item-text crt-text">Secure update delivery</span>
               </li>
               <li>
                 <span class="item-icon">&#9632;</span>
-                <span class="item-text">Vulnerability scanning</span>
+                <span class="item-text crt-text">Vulnerability scanning</span>
               </li>
               <li>
                 <span class="item-icon">&#9632;</span>
-                <span class="item-text">Security testing and audits</span>
+                <span class="item-text crt-text">Security testing and audits</span>
               </li>
             </ul>
           </div>
@@ -123,15 +123,15 @@ import Layout from '../layouts/Layout.astro';
       <!-- Security Practices -->
       <section class="practices-section">
         <h2 class="section-title crt-text">Security Practices</h2>
-        <p class="section-subtitle">How we build and deliver secure software.</p>
+        <p class="section-subtitle crt-text">How we build and deliver secure software.</p>
 
         <div class="practices-grid">
           <div class="practice-card">
             <div class="practice-header">
-              <span class="practice-number">01</span>
-              <h3 class="practice-title">Secure Development</h3>
+              <span class="practice-number crt-text">01</span>
+              <h3 class="practice-title crt-text">Secure Development</h3>
             </div>
-            <p class="practice-description">
+            <p class="practice-description crt-text">
               Code review required for all changes. Static analysis in CI/CD pipeline.
               Dependency scanning for known vulnerabilities. Security-focused design reviews for new features.
             </p>
@@ -139,10 +139,10 @@ import Layout from '../layouts/Layout.astro';
 
           <div class="practice-card">
             <div class="practice-header">
-              <span class="practice-number">02</span>
-              <h3 class="practice-title">Control Plane Security</h3>
+              <span class="practice-number crt-text">02</span>
+              <h3 class="practice-title crt-text">Control Plane Security</h3>
             </div>
-            <p class="practice-description">
+            <p class="practice-description crt-text">
               Lightweight control plane handles updates, telemetry, and license validation.
               No customer data transits through control plane. Encrypted communications only.
             </p>
@@ -150,10 +150,10 @@ import Layout from '../layouts/Layout.astro';
 
           <div class="practice-card">
             <div class="practice-header">
-              <span class="practice-number">03</span>
-              <h3 class="practice-title">Deployment Security</h3>
+              <span class="practice-number crt-text">03</span>
+              <h3 class="practice-title crt-text">Deployment Security</h3>
             </div>
-            <p class="practice-description">
+            <p class="practice-description crt-text">
               VPC-isolated deployment. Database credentials encrypted at rest (AES-256) and in transit (TLS 1.3).
               Query results never leave your environment. Full audit logging of all operations.
             </p>
@@ -161,10 +161,10 @@ import Layout from '../layouts/Layout.astro';
 
           <div class="practice-card">
             <div class="practice-header">
-              <span class="practice-number">04</span>
-              <h3 class="practice-title">Access Control</h3>
+              <span class="practice-number crt-text">04</span>
+              <h3 class="practice-title crt-text">Access Control</h3>
             </div>
-            <p class="practice-description">
+            <p class="practice-description crt-text">
               Role-based access at entity and column level. PII detection with configurable blocking or masking.
               Query guardrails prevent expensive or dangerous operations.
             </p>
@@ -175,7 +175,7 @@ import Layout from '../layouts/Layout.astro';
       <!-- Security Roadmap -->
       <section class="roadmap-section">
         <h2 class="section-title crt-text">Security Roadmap</h2>
-        <p class="section-subtitle">Our path to formal compliance certifications.</p>
+        <p class="section-subtitle crt-text">Our path to formal compliance certifications.</p>
 
         <div class="roadmap-timeline">
           <div class="roadmap-item current">
@@ -184,13 +184,13 @@ import Layout from '../layouts/Layout.astro';
               <span class="marker-line"></span>
             </div>
             <div class="roadmap-content">
-              <span class="roadmap-status">Current</span>
-              <h3 class="roadmap-title">Security Foundations</h3>
+              <span class="roadmap-status crt-text">Current</span>
+              <h3 class="roadmap-title crt-text">Security Foundations</h3>
               <ul class="roadmap-list">
-                <li>Secure development lifecycle</li>
-                <li>Penetration testing</li>
-                <li>Vulnerability management</li>
-                <li>Encrypted credential handling</li>
+                <li class="crt-text">Secure development lifecycle</li>
+                <li class="crt-text">Penetration testing</li>
+                <li class="crt-text">Vulnerability management</li>
+                <li class="crt-text">Encrypted credential handling</li>
               </ul>
             </div>
           </div>
@@ -201,12 +201,12 @@ import Layout from '../layouts/Layout.astro';
               <span class="marker-line"></span>
             </div>
             <div class="roadmap-content">
-              <span class="roadmap-status">Planned</span>
-              <h3 class="roadmap-title">SOC 2 Type II</h3>
+              <span class="roadmap-status crt-text">Planned</span>
+              <h3 class="roadmap-title crt-text">SOC 2 Type II</h3>
               <ul class="roadmap-list">
-                <li>Control plane certification</li>
-                <li>Security trust criteria</li>
-                <li>Availability trust criteria</li>
+                <li class="crt-text">Control plane certification</li>
+                <li class="crt-text">Security trust criteria</li>
+                <li class="crt-text">Availability trust criteria</li>
               </ul>
             </div>
           </div>
@@ -216,12 +216,12 @@ import Layout from '../layouts/Layout.astro';
               <span class="marker-dot"></span>
             </div>
             <div class="roadmap-content">
-              <span class="roadmap-status">Future</span>
-              <h3 class="roadmap-title">Extended Compliance</h3>
+              <span class="roadmap-status crt-text">Future</span>
+              <h3 class="roadmap-title crt-text">Extended Compliance</h3>
               <ul class="roadmap-list">
-                <li>ISO 27001 consideration</li>
-                <li>HIPAA BAA availability</li>
-                <li>Additional frameworks as needed</li>
+                <li class="crt-text">ISO 27001 consideration</li>
+                <li class="crt-text">HIPAA BAA availability</li>
+                <li class="crt-text">Additional frameworks as needed</li>
               </ul>
             </div>
           </div>
@@ -231,37 +231,37 @@ import Layout from '../layouts/Layout.astro';
       <!-- Technical Deep-Dives -->
       <section class="deepdive-section">
         <h2 class="section-title crt-text">Technical Details</h2>
-        <p class="section-subtitle">Deep-dive into specific security topics.</p>
+        <p class="section-subtitle crt-text">Deep-dive into specific security topics.</p>
 
         <div class="card-grid">
           <a href="/discover/build-security" class="topic-card">
-            <h3 class="card-title">Security Architecture</h3>
-            <p class="card-description">VPC deployment, credential encryption, no data export, query logging, role-based access.</p>
+            <h3 class="card-title crt-text">Security Architecture</h3>
+            <p class="card-description crt-text">VPC deployment, credential encryption, no data export, query logging, role-based access.</p>
           </a>
 
           <a href="/discover/build-vpc" class="topic-card">
-            <h3 class="card-title">VPC Deployment</h3>
-            <p class="card-description">Runs in customer infrastructure on AWS, GCP, or Azure. Database credentials remain within your cloud.</p>
+            <h3 class="card-title crt-text">VPC Deployment</h3>
+            <p class="card-description crt-text">Runs in customer infrastructure on AWS, GCP, or Azure. Database credentials remain within your cloud.</p>
           </a>
 
           <a href="/discover/build-credentials" class="topic-card">
-            <h3 class="card-title">Credential Handling</h3>
-            <p class="card-description">AES-256 encryption at rest, TLS 1.3 in transit. Credentials loaded into memory only when needed.</p>
+            <h3 class="card-title crt-text">Credential Handling</h3>
+            <p class="card-description crt-text">AES-256 encryption at rest, TLS 1.3 in transit. Credentials loaded into memory only when needed.</p>
           </a>
 
           <a href="/discover/build-pii" class="topic-card">
-            <h3 class="card-title">PII Detection</h3>
-            <p class="card-description">AI-powered detection for sensitive data. Block, mask, or allow with audit trail.</p>
+            <h3 class="card-title crt-text">PII Detection</h3>
+            <p class="card-description crt-text">AI-powered detection for sensitive data. Block, mask, or allow with audit trail.</p>
           </a>
 
           <a href="/discover/access-security" class="topic-card">
-            <h3 class="card-title">Query Logging</h3>
-            <p class="card-description">Full audit trail of all executed queries. See who accessed what, when, and why.</p>
+            <h3 class="card-title crt-text">Query Logging</h3>
+            <p class="card-description crt-text">Full audit trail of all executed queries. See who accessed what, when, and why.</p>
           </a>
 
           <a href="/discover/build-validation" class="topic-card">
-            <h3 class="card-title">Query Guardrails</h3>
-            <p class="card-description">Schema validation, operation filtering, row limits, timeout protection. Configurable per role.</p>
+            <h3 class="card-title crt-text">Query Guardrails</h3>
+            <p class="card-description crt-text">Schema validation, operation filtering, row limits, timeout protection. Configurable per role.</p>
           </a>
         </div>
       </section>
