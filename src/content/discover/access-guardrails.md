@@ -1,10 +1,7 @@
 ---
 title: "Query guardrails"
-options:
-  - label: "See security architecture"
-    target: "access-security"
-  - label: "Back"
-    target: "access-how"
+# ORPHANED
+options: []
 external: false
 externalUrl: null
 ---

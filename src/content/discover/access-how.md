@@ -3,8 +3,6 @@ title: "The semantic layer"
 options:
   - label: "See how semantic layers are built"
     target: "access-generation"
-  - label: "Understand guardrails"
-    target: "access-guardrails"
   - label: "Back"
     target: "path-access"
 external: false
