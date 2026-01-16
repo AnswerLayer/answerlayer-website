@@ -16,5 +16,5 @@ Data security is non-negotiable:
 
 - **VPC deployment** — AnswerLayer runs in customer infrastructure
 - **No data export** — Queries execute against the database; raw data stays put
-- **Encrypted credentials** — Database passwords never leave the cloud
+- **Encrypted credentials** — Database passwords never leave your cloud
 - **Audit logging** — Every query recorded for compliance
