@@ -12,6 +12,9 @@ export default defineConfig({
   integrations: [sitemap(), react()],
 
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    server: {
+      allowedHosts: ['intel', 'intel.tail0b4a76.ts.net', 'dev.local'],
+    }
   }
 });

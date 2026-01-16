@@ -1,0 +1,211 @@
+---
+/**
+ * About Page
+ *
+ * Grid of cards about the team and company.
+ * Consistent styling with double-border cards.
+ */
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="About - AnswerLayer"
+  description="About AnswerLayer - semantic layers for every organization"
+>
+  <div class="crt-screen">
+    <div class="container mx-auto px-6 py-12 md:py-20" style="padding-top: 2rem;">
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title crt-text">About</h1>
+        <p class="page-subtitle crt-text">Semantic layers for every organization</p>
+      </div>
+
+      <!-- Card Grid -->
+      <div class="card-grid">
+
+        <a href="/discover/path-build" class="topic-card">
+          <h2 class="card-title crt-text">Build</h2>
+          <p class="card-description crt-text">Generate a semantic layer from your existing database schema. Define metrics, dimensions, and relationships in minutes.</p>
+        </a>
+
+        <a href="/discover/path-access" class="topic-card">
+          <h2 class="card-title crt-text">Access</h2>
+          <p class="card-description crt-text">Query your data with natural language. Get SQL, visualizations, and insights without writing code.</p>
+        </a>
+
+        <div class="topic-card">
+          <h2 class="card-title crt-text">Vision</h2>
+          <p class="card-description crt-text">Every organization should have a semantic layer. AnswerLayer makes them accessible to any organization with a database—from months to minutes.</p>
+        </div>
+
+        <div class="topic-card">
+          <h2 class="card-title crt-text">Backing</h2>
+          <p class="card-description crt-text">Supported by customers, backers, and experts who understand data infrastructure and enterprise software. Focused on sustainable business through customer value.</p>
+        </div>
+
+        <div class="topic-card">
+          <h2 class="card-title crt-text">Supporting Cast</h2>
+          <p class="card-description crt-text">Advisors with deep expertise in data infrastructure and enterprise software. Open source contributors who improve our tools and catch our mistakes. Community members who test early releases, report issues, and share feedback. Early customers who took a chance on something new.</p>
+        </div>
+
+        <a href="/open-source" class="topic-card">
+          <h2 class="card-title crt-text">Open Source</h2>
+          <p class="card-description crt-text">We maintain several open source projects. Explore our tools for inference economics, semantic layer testing, and coding agent evaluation.</p>
+        </a>
+
+        <a href="/team" class="topic-card">
+          <h2 class="card-title crt-text">Team</h2>
+          <p class="card-description crt-text">Meet the people building AnswerLayer.</p>
+        </a>
+
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .page-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--color-navy-900);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .page-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-navy-500);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .card-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .card-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .topic-card {
+    display: block;
+    background: transparent;
+    border: 2px solid var(--color-navy-900);
+    padding: 1.5rem;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    position: relative;
+  }
+
+  .topic-card::before {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border: 1px solid var(--color-navy-300);
+    pointer-events: none;
+  }
+
+  a.topic-card:hover {
+    border-color: var(--color-navy-600);
+    text-decoration: none;
+  }
+
+  .card-title {
+    font-family: 'MS Sans Serif', 'Microsoft Sans Serif', Tahoma, sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-navy-900);
+    margin: 0 0 0.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+  }
+
+  .card-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-navy-600);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 0.75rem 0;
+  }
+
+  .card-description {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--color-navy-700);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .card-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+  }
+
+  .card-link {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-navy-900);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-navy-400);
+    padding-bottom: 0.125rem;
+  }
+
+  .card-link:hover {
+    border-color: var(--color-navy-900);
+    text-decoration: none;
+  }
+
+  .profile-card {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .profile-image {
+    width: 80px;
+    height: 80px;
+    border: 2px solid var(--color-navy-900);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .profile-content {
+    flex: 1;
+  }
+
+  .profile-content .card-title {
+    margin-bottom: 0.25rem;
+  }
+</style>

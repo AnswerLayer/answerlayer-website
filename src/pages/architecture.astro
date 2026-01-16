@@ -13,45 +13,45 @@ import Layout from '../layouts/Layout.astro';
   description="System architecture and technical deep-dive into how AnswerLayer works"
 >
   <div class="crt-screen">
-    <div class="container mx-auto px-6 py-12 md:py-20" style="padding-top: 6rem;">
+    <div class="container mx-auto px-6 py-12 md:py-20" style="padding-top: 2rem;">
 
       <!-- Page Header -->
       <div class="page-header">
         <h1 class="page-title crt-text">Architecture</h1>
-        <p class="page-subtitle">System design and technical implementation</p>
+        <p class="page-subtitle crt-text">System design and technical implementation</p>
       </div>
 
       <!-- Card Grid -->
       <div class="card-grid">
 
         <a href="/discover/build-architecture" class="topic-card">
-          <h2 class="card-title">System Architecture</h2>
-          <p class="card-description">Query engine, semantic store, generation service, and API layer. Stateless and horizontally scalable. PostgreSQL for storage, Claude for reasoning.</p>
+          <h2 class="card-title crt-text">System Architecture</h2>
+          <p class="card-description crt-text">Query engine, semantic store, generation service, and API layer. Stateless and horizontally scalable. PostgreSQL for storage, LLM of choice for reasoning.</p>
         </a>
 
         <a href="/discover/build-generation" class="topic-card">
-          <h2 class="card-title">Generation Process</h2>
-          <p class="card-description">Connect, sample, analyze, generate, curate. AI analyzes actual data to produce semantic models with entities, metrics, dimensions, and filters.</p>
+          <h2 class="card-title crt-text">Generation Process</h2>
+          <p class="card-description crt-text">Connect, sample, analyze, generate, curate. AI analyzes actual data to produce semantic models with entities, metrics, dimensions, and filters.</p>
         </a>
 
         <a href="/discover/build-sampling" class="topic-card">
-          <h2 class="card-title">Data Sampling</h2>
-          <p class="card-description">Statistical distributions, data types, relationships, and business context. Analysis happens through queries—data never leaves the database.</p>
+          <h2 class="card-title crt-text">Data Sampling</h2>
+          <p class="card-description crt-text">Statistical distributions, data types, relationships, and business context. Analysis happens through queries—data never leaves the database.</p>
         </a>
 
         <a href="/discover/build-reasoning" class="topic-card">
-          <h2 class="card-title">Chain-of-Thought</h2>
-          <p class="card-description">DSPy-powered reasoning with confidence scores, reasoning traces, and alternative interpretations. Low-confidence inferences flagged for human review.</p>
+          <h2 class="card-title crt-text">Chain-of-Thought</h2>
+          <p class="card-description crt-text">DSPy-powered reasoning with confidence scores, reasoning traces, and alternative interpretations. Low-confidence inferences flagged for human review.</p>
         </a>
 
         <a href="/discover/build-validation" class="topic-card">
-          <h2 class="card-title">Query Guardrails</h2>
-          <p class="card-description">Schema validation, operation filtering, row limits, timeout protection, and cost estimation. Configurable per role.</p>
+          <h2 class="card-title crt-text">Query Guardrails</h2>
+          <p class="card-description crt-text">Schema validation, operation filtering, row limits, timeout protection, and cost estimation. Configurable per role.</p>
         </a>
 
         <a href="/discover/build-curation" class="topic-card">
-          <h2 class="card-title">Curation Workflow</h2>
-          <p class="card-description">Review entities, adjust relationships, refine metrics, lock definitions. Generation provides the draft—curation makes it accurate.</p>
+          <h2 class="card-title crt-text">Curation Workflow</h2>
+          <p class="card-description crt-text">Review entities, adjust relationships, refine metrics, lock definitions. Generation provides the draft—curation makes it accurate.</p>
         </a>
 
       </div>
@@ -63,7 +63,7 @@ import Layout from '../layouts/Layout.astro';
 <style>
   .page-header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
 
   .page-title {

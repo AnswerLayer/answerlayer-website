@@ -2,7 +2,7 @@
 /**
  * Open Source Page
  *
- * Grid of cards showing open source components and agent integrations.
+ * Grid of cards showing AnswerLayer's open source projects.
  * Consistent styling with double-border cards.
  */
 import Layout from '../layouts/Layout.astro';
@@ -10,48 +10,43 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout
   title="Open Source - AnswerLayer"
-  description="Open source components, contributing guidelines, and agent integrations"
+  description="Open source projects we maintain"
 >
   <div class="crt-screen">
-    <div class="container mx-auto px-6 py-12 md:py-20" style="padding-top: 6rem;">
+    <div class="container mx-auto px-6 py-12 md:py-20" style="padding-top: 2rem;">
 
       <!-- Page Header -->
       <div class="page-header">
         <h1 class="page-title crt-text">Open Source</h1>
-        <p class="page-subtitle">Components, integrations, and contributions</p>
+        <p class="page-subtitle crt-text">Projects we maintain</p>
       </div>
 
       <!-- Card Grid -->
       <div class="card-grid">
 
-        <a href="/discover/build-contribute" class="topic-card">
-          <h2 class="card-title">Contributing</h2>
-          <p class="card-description">Query parser, schema analyzer, and semantic types are open source. Core generation uses proprietary models, surrounding infrastructure is open.</p>
+        <a href="https://github.com/AnswerLayer/semiosis" target="_blank" rel="noopener" class="topic-card">
+          <h2 class="card-title crt-text">Semiosis ↗</h2>
+          <p class="card-description crt-text">Unit testing for your knowledge base. A Python framework for evaluating semantic quality of documentation and context systems using LLMs.</p>
         </a>
 
-        <a href="/discover/agents-integration" class="topic-card">
-          <h2 class="card-title">Agent Integration</h2>
-          <p class="card-description">REST API, MCP Server, Python SDK, TypeScript SDK. Agents authenticate with API keys. Permissions scoped per key.</p>
+        <a href="https://github.com/AnswerLayer/sniffbench" target="_blank" rel="noopener" class="topic-card">
+          <h2 class="card-title crt-text">Sniffbench ↗</h2>
+          <p class="card-description crt-text">Custom eval cases for coding agent harnesses. Test new skills, configs, and tools against your actual GitHub issues or tasks you design.</p>
         </a>
 
-        <a href="/discover/agents-mcp" class="topic-card">
-          <h2 class="card-title">Model Context Protocol</h2>
-          <p class="card-description">MCP server exposes entities, metrics, query tool, and schema tool. Agents using MCP discover and use AnswerLayer automatically.</p>
+        <a href="https://github.com/jharris1679/inference-economics" target="_blank" rel="noopener" class="topic-card">
+          <h2 class="card-title crt-text">Inference Economics ↗</h2>
+          <p class="card-description crt-text">Compare LLM inference costs across local hardware, cloud GPU rentals, and API providers. Make decisions using real benchmark data, not vibes.</p>
         </a>
 
-        <a href="/discover/path-agents" class="topic-card">
-          <h2 class="card-title">Why Agents Need This</h2>
-          <p class="card-description">Without semantic layers, agents hallucinate queries, expose PII, run destructive queries. With them: accurate, safe, consistent.</p>
+        <a href="https://github.com/AnswerLayer/answerlayer-website" target="_blank" rel="noopener" class="topic-card">
+          <h2 class="card-title crt-text">Website ↗</h2>
+          <p class="card-description crt-text">This website is open source. Built with Astro, Tailwind, and a custom CRT-inspired design system.</p>
         </a>
 
-        <a href="https://github.com/AnswerLayer" target="_blank" rel="noopener" class="topic-card external">
-          <h2 class="card-title">GitHub ↗</h2>
-          <p class="card-description">View repositories, open issues, and contribution guidelines. Star the project to show support.</p>
-        </a>
-
-        <a href="https://docs.getanswerlayer.com" target="_blank" rel="noopener" class="topic-card external">
-          <h2 class="card-title">Documentation ↗</h2>
-          <p class="card-description">API reference, SDK examples, integration guides. Everything needed to build with AnswerLayer.</p>
+        <a href="/contact" class="topic-card">
+          <h2 class="card-title crt-text">Contribute</h2>
+          <p class="card-description crt-text">Want to contribute or collaborate? Reach out to discuss ideas, report issues, or get involved with our projects.</p>
         </a>
 
       </div>
@@ -63,7 +58,7 @@ import Layout from '../layouts/Layout.astro';
 <style>
   .page-header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
 
   .page-title {
@@ -97,7 +92,7 @@ import Layout from '../layouts/Layout.astro';
 
   @media (min-width: 1024px) {
     .card-grid {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 

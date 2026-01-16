@@ -2,7 +2,7 @@
 /**
  * Team Page
  *
- * Grid of cards showing team, culture, and business info.
+ * Grid of cards showing team members.
  * Consistent styling with double-border cards.
  */
 import Layout from '../layouts/Layout.astro';
@@ -10,39 +10,36 @@ import Layout from '../layouts/Layout.astro';
 
 <Layout
   title="Team - AnswerLayer"
-  description="Meet the AnswerLayer team - building the future of data access"
+  description="Meet the people building AnswerLayer"
 >
   <div class="crt-screen">
-    <div class="container mx-auto px-6 py-12 md:py-20" style="padding-top: 6rem;">
+    <div class="container mx-auto px-6 py-12 md:py-20" style="padding-top: 2rem;">
 
       <!-- Page Header -->
       <div class="page-header">
         <h1 class="page-title crt-text">Team</h1>
-        <p class="page-subtitle">People, culture, and vision</p>
+        <p class="page-subtitle crt-text">The people building AnswerLayer</p>
       </div>
 
       <!-- Card Grid -->
       <div class="card-grid">
 
-        <a href="/discover/build-team" class="topic-card">
-          <h2 class="card-title">The Team</h2>
-          <p class="card-description">Data infrastructure at scale. Natural language processing. Enterprise software deployment. Developer tools and DX. Venture-backed and growing.</p>
-        </a>
-
-        <a href="/discover/build-business" class="topic-card">
-          <h2 class="card-title">Vision</h2>
-          <p class="card-description">Every organization should have a semantic layer. AnswerLayer makes them accessible to any organization with a database—from weeks to minutes.</p>
-        </a>
-
-        <a href="/discover/build-investors" class="topic-card">
-          <h2 class="card-title">Backing</h2>
-          <p class="card-description">Backed by investors who understand data infrastructure and enterprise software. Focused on sustainable business through customer value.</p>
-        </a>
-
-        <a href="mailto:hello@getanswerlayer.com?subject=Hello" class="topic-card">
-          <h2 class="card-title">Get in Touch</h2>
-          <p class="card-description">Interested in joining or learning more? Reach out with what excites you about semantic layers and data infrastructure.</p>
-        </a>
+        <div class="topic-card profile-card">
+          <div class="profile-image">
+            <img src="/josh-harris.jpg" alt="Josh Harris" />
+          </div>
+          <div class="profile-content">
+            <h2 class="card-title crt-text">Josh Harris</h2>
+            <p class="card-subtitle crt-text">Founder & CEO</p>
+            <p class="card-description crt-text">Building tools that make data accessible. Background in data infrastructure, NLP, and enterprise software.</p>
+            <div class="card-links">
+              <a href="https://github.com/jharris1679" target="_blank" rel="noopener" class="card-link crt-text">GitHub ↗</a>
+              <a href="https://www.linkedin.com/in/josh-harris-86188983/" target="_blank" rel="noopener" class="card-link crt-text">LinkedIn ↗</a>
+              <a href="https://bsky.app/profile/jodaha.bsky.social" target="_blank" rel="noopener" class="card-link crt-text">Bluesky ↗</a>
+              <a href="https://x.com/dynemetis" target="_blank" rel="noopener" class="card-link crt-text">X ↗</a>
+            </div>
+          </div>
+        </div>
 
       </div>
 
@@ -53,7 +50,7 @@ import Layout from '../layouts/Layout.astro';
 <style>
   .page-header {
     text-align: center;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
   }
 
   .page-title {
@@ -85,6 +82,12 @@ import Layout from '../layouts/Layout.astro';
     }
   }
 
+  @media (min-width: 1024px) {
+    .card-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
   .topic-card {
     display: block;
     background: transparent;
@@ -103,9 +106,29 @@ import Layout from '../layouts/Layout.astro';
     pointer-events: none;
   }
 
-  .topic-card:hover {
-    border-color: var(--color-navy-600);
-    text-decoration: none;
+  .profile-card {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .profile-image {
+    width: 80px;
+    height: 80px;
+    border: 2px solid var(--color-navy-900);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .profile-content {
+    flex: 1;
   }
 
   .card-title {
@@ -113,9 +136,18 @@ import Layout from '../layouts/Layout.astro';
     font-size: 1rem;
     font-weight: 600;
     color: var(--color-navy-900);
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 0.25rem 0;
     text-transform: uppercase;
     letter-spacing: 0.025em;
+  }
+
+  .card-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-navy-600);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 0.75rem 0;
   }
 
   .card-description {
@@ -125,5 +157,28 @@ import Layout from '../layouts/Layout.astro';
     color: var(--color-navy-700);
     line-height: 1.5;
     margin: 0;
+  }
+
+  .card-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+  }
+
+  .card-link {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-navy-900);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-navy-400);
+    padding-bottom: 0.125rem;
+  }
+
+  .card-link:hover {
+    border-color: var(--color-navy-900);
+    text-decoration: none;
   }
 </style>
