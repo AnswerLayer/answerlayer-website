@@ -12,4 +12,4 @@ options:
 external: false
 externalUrl: null
 ---
-Databases contain answers. Getting those answers typically requires SQL expertise or waiting for someone who has it. AnswerLayer enables natural language questions against any database, with consistent and trustworthy results.
+Databases contain information you need to answer important questions. Getting those answers typically requires SQL expertise or waiting for someone who has it. AnswerLayer enables natural language questions against any database, with consistent and trustworthy results.
