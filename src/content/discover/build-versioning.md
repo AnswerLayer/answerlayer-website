@@ -1,8 +1,7 @@
 ---
 title: "Version control and change management"
-options:
-  - label: "Back"
-    target: "build-curation"
+# ORPHANED
+options: []
 external: false
 externalUrl: null
 ---

@@ -1,8 +1,6 @@
 ---
 title: "Curating the semantic layer"
 options:
-  - label: "See version control integration"
-    target: "build-versioning"
   - label: "Back"
     target: "build-reasoning"
 external: false
