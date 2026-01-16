@@ -1,8 +1,8 @@
 ---
 title: "Credential handling"
 options:
-  - label: "Review full security model"
-    target: "build-security"
+  - label: "Visit Trust Centre"
+    target: "external-trust"
   - label: "See compliance certifications"
     target: "build-compliance"
   - label: "Back"
