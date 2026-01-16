@@ -5,8 +5,8 @@ options:
     target: "access-how"
   - label: "Review security and trust"
     target: "access-security"
-  - label: "Try it out"
-    target: "external-demo"
+  - label: "Get started"
+    target: "access-evaluate"
   - label: "Back"
     target: "branch-root"
 external: false
