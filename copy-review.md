@@ -151,6 +151,11 @@
 - **Title:** "Data sampling analysis"
 - **Notes:** Reorganized as child of build-reasoning
 
+### 30. Access Shared Responsibility (`/discover/access-shared-responsibility.md`)
+- **Status:** Created
+- **Title:** "Shared responsibility"
+- **Notes:** New page under access-security explaining BYOC security partnership model
+
 ---
 
 ## Deleted Pages
@@ -173,4 +178,4 @@
 ---
 
 ## Review Complete
-24 connected content pages reviewed and approved.
+25 connected content pages reviewed and approved.
