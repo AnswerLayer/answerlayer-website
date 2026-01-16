@@ -1,45 +1,53 @@
 ---
 /**
- * Team Page
+ * About Page
  *
- * Grid of cards showing team members.
+ * Grid of cards about the team and company.
  * Consistent styling with double-border cards.
  */
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout
-  title="Team - AnswerLayer"
-  description="Meet the people building AnswerLayer"
+  title="About - AnswerLayer"
+  description="Meet the team behind AnswerLayer"
 >
   <div class="crt-screen">
     <div class="container mx-auto px-6 py-12 md:py-20" style="padding-top: 2rem;">
 
       <!-- Page Header -->
       <div class="page-header">
-        <h1 class="page-title crt-text">Team</h1>
-        <p class="page-subtitle crt-text">The people building AnswerLayer</p>
+        <h1 class="page-title crt-text">About</h1>
+        <p class="page-subtitle crt-text">The team behind AnswerLayer</p>
       </div>
 
       <!-- Card Grid -->
       <div class="card-grid">
 
-        <div class="topic-card profile-card">
-          <div class="profile-image">
-            <img src="/josh-harris.jpg" alt="Josh Harris" />
-          </div>
-          <div class="profile-content">
-            <h2 class="card-title crt-text">Josh Harris</h2>
-            <p class="card-subtitle crt-text">Founder & CEO</p>
-            <p class="card-description crt-text">Building tools that make data accessible. Background in data infrastructure, NLP, and enterprise software.</p>
-            <div class="card-links">
-              <a href="https://github.com/jharris1679" target="_blank" rel="noopener" class="card-link crt-text">GitHub ↗</a>
-              <a href="https://www.linkedin.com/in/josh-harris-86188983/" target="_blank" rel="noopener" class="card-link crt-text">LinkedIn ↗</a>
-              <a href="https://bsky.app/profile/jodaha.bsky.social" target="_blank" rel="noopener" class="card-link crt-text">Bluesky ↗</a>
-              <a href="https://x.com/dynemetis" target="_blank" rel="noopener" class="card-link crt-text">X ↗</a>
-            </div>
-          </div>
+        <div class="topic-card">
+          <h2 class="card-title crt-text">Vision</h2>
+          <p class="card-description crt-text">Every organization should have a semantic layer. AnswerLayer makes them accessible to any organization with a database—from months to minutes.</p>
         </div>
+
+        <div class="topic-card">
+          <h2 class="card-title crt-text">Backing</h2>
+          <p class="card-description crt-text">Supported by customers, backers, and experts who understand data infrastructure and enterprise software. Focused on sustainable business through customer value.</p>
+        </div>
+
+        <div class="topic-card">
+          <h2 class="card-title crt-text">Supporting Cast</h2>
+          <p class="card-description crt-text">Advisors with deep expertise in data infrastructure and enterprise software. Open source contributors who improve our tools and catch our mistakes. Community members who test early releases, report issues, and share feedback. Early customers who took a chance on something new.</p>
+        </div>
+
+        <a href="/open-source" class="topic-card">
+          <h2 class="card-title crt-text">Open Source</h2>
+          <p class="card-description crt-text">We maintain several open source projects. Explore our tools for inference economics, semantic layer testing, and coding agent evaluation.</p>
+        </a>
+
+        <a href="/team" class="topic-card">
+          <h2 class="card-title crt-text">Team</h2>
+          <p class="card-description crt-text">Meet the people building AnswerLayer.</p>
+        </a>
 
       </div>
 
@@ -106,29 +114,9 @@ import Layout from '../layouts/Layout.astro';
     pointer-events: none;
   }
 
-  .profile-card {
-    display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    align-items: flex-start;
-  }
-
-  .profile-image {
-    width: 80px;
-    height: 80px;
-    border: 2px solid var(--color-navy-900);
-    overflow: hidden;
-    flex-shrink: 0;
-  }
-
-  .profile-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .profile-content {
-    flex: 1;
+  a.topic-card:hover {
+    border-color: var(--color-navy-600);
+    text-decoration: none;
   }
 
   .card-title {
@@ -136,7 +124,7 @@ import Layout from '../layouts/Layout.astro';
     font-size: 1rem;
     font-weight: 600;
     color: var(--color-navy-900);
-    margin: 0 0 0.25rem 0;
+    margin: 0 0 0.5rem 0;
     text-transform: uppercase;
     letter-spacing: 0.025em;
   }
@@ -180,5 +168,34 @@ import Layout from '../layouts/Layout.astro';
   .card-link:hover {
     border-color: var(--color-navy-900);
     text-decoration: none;
+  }
+
+  .profile-card {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    align-items: flex-start;
+  }
+
+  .profile-image {
+    width: 80px;
+    height: 80px;
+    border: 2px solid var(--color-navy-900);
+    overflow: hidden;
+    flex-shrink: 0;
+  }
+
+  .profile-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .profile-content {
+    flex: 1;
+  }
+
+  .profile-content .card-title {
+    margin-bottom: 0.25rem;
   }
 </style>
