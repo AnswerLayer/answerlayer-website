@@ -3,9 +3,9 @@
 ## Reviewed Pages
 
 ### 1. Home (`/discover/home.md`)
-- **Status:** Approved (no changes)
-- **Title:** "Data Language for Data Culture"
-- **Notes:** Kept original payoff line
+- **Status:** Approved with changes
+- **Title:** "DATA LANGUAGE FOR DATA CULTURE" (all caps)
+- **Changes:** Rewrote body copy — institutional knowledge framing, bottleneck problem, consistent answers
 
 ### 2. Branch Root (`/discover/branch-root.md`)
 - **Status:** Approved with changes
