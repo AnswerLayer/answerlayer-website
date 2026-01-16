@@ -64,7 +64,12 @@
 
 ### 13. Trust Page (`/src/pages/trust.astro`)
 - **Status:** Approved with changes
-- **Changes:** Removed Azure, SOC 2 now "In Progress", added sovereignty to hero
+- **Changes:**
+  - Removed Azure (AWS/GCP only)
+  - SOC 2 now "in progress"
+  - Added sovereignty to subtitle
+  - Linked cards to discover pages (build-security, build-vpc, build-credentials, access-security, build-compliance)
+  - Removed PII Detection and Query Guardrails cards (orphaned pages)
 
 ### 14. Build Credentials (`/discover/build-credentials.md`)
 - **Status:** Approved with changes
