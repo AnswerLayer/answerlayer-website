@@ -22,12 +22,20 @@
 - **Title:** "Evaluation and pricing"
 - **Changes:** Removed per-user billing, positioned enterprise/BYOC as default
 
+### 5. Build Generation (`/discover/build-generation.md`)
+- **Status:** Approved with changes
+- **Title:** "How semantic layer generation works"
+- **Changes:** Removed database list, added document linking, added interactive/automatic modes, removed PII option, added object model option
+
+### 6. Build Object Model (`/discover/build-object-model.md`)
+- **Status:** Created
+- **Title:** "The semantic layer object model"
+- **Notes:** New page describing entities, measures, metrics, dimensions, filters
+
 ---
 
 ## Still To Review
-- path-access
-- build-generation
 - build-security
-- build-evaluate
+- path-access branch
 - All other discover nodes
 - FAQ pages (to be linked elsewhere)
