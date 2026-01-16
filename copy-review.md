@@ -139,16 +139,16 @@
 - build-pii
 - build-deployment-process
 - build-azure
+- build-collaboration
+- build-confidence
 - 28 additional pages (bulk orphaned — options cleared)
 
 ---
 
 ## Still To Review
-- build-collaboration
-- build-confidence
+- build-reasoning (currently reviewing)
 - build-curation
 - build-deployment
-- build-reasoning
 - build-sampling
 - build-validation
 - build-versioning
