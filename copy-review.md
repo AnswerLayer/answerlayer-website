@@ -71,10 +71,14 @@
 - **Title:** "Credential handling"
 - **Changes:** Simplified to reflect BYOC reality — credentials stay in customer infrastructure, we don't handle them
 
+### 15. Build Cloud Choice (`/discover/build-cloud-choice.md`)
+- **Status:** Approved with changes
+- **Title:** "Cloud provider options"
+- **Changes:** Removed Azure, updated compute options (ECS/EKS for AWS, GKE/Cloud Run for GCP), removed database list
+
 ---
 
 ## Still To Review
-- build-cloud-choice
 - build-deployment-process
 - path-access branch (and all its children)
 - Remaining FAQ pages
