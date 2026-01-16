@@ -1,0 +1,128 @@
+---
+/**
+ * Deploy Page
+ *
+ * Deployment options hub with links to signup, VPC docs, pricing, and contact.
+ */
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="Deploy - AnswerLayer"
+  description="Get started with AnswerLayer - cloud or bring your own cloud"
+>
+  <div class="crt-screen">
+    <div class="container mx-auto px-6 py-12 md:py-20" style="padding-top: 2rem;">
+
+      <!-- Page Header -->
+      <div class="page-header">
+        <h1 class="page-title crt-text">Deploy</h1>
+        <p class="page-subtitle crt-text">Get started with AnswerLayer</p>
+      </div>
+
+      <!-- Card Grid -->
+      <div class="card-grid">
+
+        <a href="https://app.getanswerlayer.com/sign-up" target="_blank" rel="noopener" class="topic-card">
+          <h2 class="card-title crt-text">Cloud ↗</h2>
+          <p class="card-description crt-text">Start immediately with our hosted platform. Free tier available. SOC2 compliant infrastructure with encrypted connections.</p>
+        </a>
+
+        <a href="/discover/build-vpc" class="topic-card">
+          <h2 class="card-title crt-text">Bring Your Own Cloud</h2>
+          <p class="card-description crt-text">Deploy within your AWS, GCP, or Azure environment. Data never leaves your infrastructure. VPC peering, private endpoints, full control.</p>
+        </a>
+
+        <a href="https://calendly.com/josh-getanswerlayer/30min" target="_blank" rel="noopener" class="topic-card">
+          <h2 class="card-title crt-text">Schedule a Call ↗</h2>
+          <p class="card-description crt-text">Talk through your requirements, get answers to technical questions, or discuss enterprise deployment options.</p>
+        </a>
+
+        <a href="/pricing" class="topic-card">
+          <h2 class="card-title crt-text">Pricing</h2>
+          <p class="card-description crt-text">Simple, transparent pricing. Free cloud tier for getting started. Custom pricing for BYOC deployments.</p>
+        </a>
+
+      </div>
+
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .page-header {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .page-title {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--color-navy-900);
+    margin: 0 0 0.5rem 0;
+  }
+
+  .page-subtitle {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    color: var(--color-navy-500);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0;
+  }
+
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (min-width: 640px) {
+    .card-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .topic-card {
+    display: block;
+    background: transparent;
+    border: 2px solid var(--color-navy-900);
+    padding: 1.5rem;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    position: relative;
+  }
+
+  .topic-card::before {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border: 1px solid var(--color-navy-300);
+    pointer-events: none;
+  }
+
+  .topic-card:hover {
+    border-color: var(--color-navy-600);
+    text-decoration: none;
+  }
+
+  .card-title {
+    font-family: 'MS Sans Serif', 'Microsoft Sans Serif', Tahoma, sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-navy-900);
+    margin: 0 0 0.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+  }
+
+  .card-description {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--color-navy-700);
+    line-height: 1.5;
+    margin: 0;
+  }
+</style>
