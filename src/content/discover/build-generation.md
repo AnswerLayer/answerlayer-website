@@ -3,8 +3,6 @@ title: "How semantic layer generation works"
 options:
   - label: "Examine data sampling"
     target: "build-sampling"
-  - label: "Review query validation"
-    target: "build-validation"
   - label: "Explore the object model"
     target: "build-object-model"
   - label: "Back"
