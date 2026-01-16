@@ -1,6 +1,8 @@
 ---
 title: "Security and trust"
 options:
+  - label: "Understand shared responsibility"
+    target: "access-shared-responsibility"
   - label: "See deployment details"
     target: "build-vpc"
   - label: "Review compliance"
