@@ -26,6 +26,7 @@ import Layout from '../../layouts/Layout.astro';
 
         <a href="https://jharris1679.github.io/inference-economics/" target="_blank" rel="noopener" class="topic-card">
           <h2 class="card-title crt-text">Inference Economics ↗</h2>
+          <p class="card-meta crt-text">Josh Harris · Jan 2025</p>
           <p class="card-description crt-text">Compare LLM inference costs across local hardware, cloud GPU rentals, and API providers. Interactive analysis with real benchmark data.</p>
         </a>
 
@@ -104,9 +105,18 @@ import Layout from '../../layouts/Layout.astro';
     font-size: 1rem;
     font-weight: 600;
     color: var(--color-navy-900);
-    margin: 0 0 0.5rem 0;
+    margin: 0 0 0.25rem 0;
     text-transform: uppercase;
     letter-spacing: 0.025em;
+  }
+
+  .card-meta {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-navy-500);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0 0 0.75rem 0;
   }
 
   .card-description {
