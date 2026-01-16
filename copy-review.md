@@ -124,6 +124,11 @@
 - **Status:** Updated
 - **Changes:** Fixed duplicate build-security link → external-trust
 
+### 26. Access Security (`/discover/access-security.md`)
+- **Status:** Approved with changes
+- **Title:** "Security and trust"
+- **Changes:** "never leave your cloud" (was "never leave the cloud")
+
 ---
 
 ## Orphaned Pages
@@ -139,5 +144,11 @@
 ---
 
 ## Still To Review
-- access-security
-- Remaining build-* pages as needed
+- build-collaboration
+- build-confidence
+- build-curation
+- build-deployment
+- build-reasoning
+- build-sampling
+- build-validation
+- build-versioning
