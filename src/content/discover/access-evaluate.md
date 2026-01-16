@@ -1,5 +1,5 @@
 ---
-title: "Getting started"
+title: "Evaluate for purchase"
 options:
   - label: "Get in touch"
     target: "external-contact"

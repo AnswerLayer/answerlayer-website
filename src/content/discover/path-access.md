@@ -5,7 +5,7 @@ options:
     target: "access-how"
   - label: "Review security and trust"
     target: "access-security"
-  - label: "Get started"
+  - label: "Evaluate for purchase"
     target: "access-evaluate"
   - label: "Back"
     target: "branch-root"
