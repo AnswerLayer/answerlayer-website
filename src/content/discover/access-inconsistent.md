@@ -2,11 +2,6 @@
 title: "Inconsistent numbers"
 # ORPHANED
 options: []
-    target: "access-alignment"
-  - label: "See how definitions work"
-    target: "access-semantic"
-  - label: "Back"
-    target: "access-problems"
 external: false
 externalUrl: null
 ---

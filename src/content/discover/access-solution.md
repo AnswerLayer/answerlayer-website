@@ -2,13 +2,6 @@
 title: "How AnswerLayer creates alignment"
 # ORPHANED
 options: []
-    target: "access-generation"
-  - label: "Try the product"
-    target: "external-demo"
-  - label: "Review pricing"
-    target: "external-pricing"
-  - label: "Back"
-    target: "access-alignment"
 external: false
 externalUrl: null
 ---

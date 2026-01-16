@@ -2,11 +2,6 @@
 title: "Technical debt in semantic layers"
 # ORPHANED
 options: []
-    target: "build-generation"
-  - label: "Understand the architecture"
-    target: "build-architecture"
-  - label: "Back"
-    target: "build-problem"
 external: false
 externalUrl: null
 ---

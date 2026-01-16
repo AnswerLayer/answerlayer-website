@@ -2,9 +2,6 @@
 title: "Technical questions"
 # ORPHANED
 options: []
-    target: "faq-security"
-  - label: "Back"
-    target: "faq-root"
 external: false
 externalUrl: null
 ---

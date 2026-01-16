@@ -2,11 +2,6 @@
 title: "Data culture"
 # ORPHANED
 options: []
-    target: "access-solution"
-  - label: "Learn about AnswerLayer's approach"
-    target: "access-generation"
-  - label: "Back"
-    target: "access-alignment"
 external: false
 externalUrl: null
 ---

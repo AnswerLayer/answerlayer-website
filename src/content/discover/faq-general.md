@@ -2,9 +2,6 @@
 title: "General questions"
 # ORPHANED
 options: []
-    target: "faq-technical"
-  - label: "Back"
-    target: "faq-root"
 external: false
 externalUrl: null
 ---

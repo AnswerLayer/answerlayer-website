@@ -2,11 +2,6 @@
 title: "Investors and backing"
 # ORPHANED
 options: []
-    target: "build-investor-request"
-  - label: "Read more about the business"
-    target: "build-business"
-  - label: "Back"
-    target: "build-team"
 external: false
 externalUrl: null
 ---

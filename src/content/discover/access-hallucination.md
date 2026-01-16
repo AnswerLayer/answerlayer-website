@@ -2,13 +2,6 @@
 title: "AI hallucination in data queries"
 # ORPHANED
 options: []
-    target: "access-how"
-  - label: "Learn about semantic layers"
-    target: "access-semantic"
-  - label: "Try it out"
-    target: "external-demo"
-  - label: "Back"
-    target: "access-problems"
 external: false
 externalUrl: null
 ---

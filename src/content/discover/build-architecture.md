@@ -2,13 +2,6 @@
 title: "System architecture"
 # ORPHANED
 options: []
-    target: "build-deployment"
-  - label: "Review security model"
-    target: "build-security"
-  - label: "Evaluate pricing"
-    target: "build-evaluate"
-  - label: "Back"
-    target: "build-problem-technical"
 external: false
 externalUrl: null
 ---

@@ -2,11 +2,6 @@
 title: "Security questions"
 # ORPHANED
 options: []
-    target: "faq-pricing"
-  - label: "Visit Trust Centre"
-    target: "external-trust"
-  - label: "Back"
-    target: "faq-root"
 external: false
 externalUrl: null
 ---

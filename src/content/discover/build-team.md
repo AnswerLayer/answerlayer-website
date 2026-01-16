@@ -2,13 +2,6 @@
 title: "The team"
 # ORPHANED
 options: []
-    target: "external-careers"
-  - label: "Read the blog"
-    target: "external-blog"
-  - label: "Learn about investors"
-    target: "build-investors"
-  - label: "Back"
-    target: "build-contribute"
 external: false
 externalUrl: null
 ---

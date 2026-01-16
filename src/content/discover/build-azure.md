@@ -2,11 +2,6 @@
 title: "Azure deployment"
 # ORPHANED
 options: []
-    target: "external-contact"
-  - label: "See deployment process"
-    target: "build-deployment-process"
-  - label: "Back"
-    target: "build-cloud-choice"
 external: false
 externalUrl: null
 ---

@@ -2,13 +2,6 @@
 title: "Contributing to AnswerLayer"
 # ORPHANED
 options: []
-    target: "external-github"
-  - label: "Read contribution guidelines"
-    target: "external-contributing"
-  - label: "See open issues"
-    target: "external-issues"
-  - label: "Back"
-    target: "path-build"
 external: false
 externalUrl: null
 ---

@@ -2,11 +2,6 @@
 title: "Pricing questions"
 # ORPHANED
 options: []
-    target: "external-pricing"
-  - label: "Contact sales"
-    target: "external-demo"
-  - label: "Back"
-    target: "faq-root"
 external: false
 externalUrl: null
 ---

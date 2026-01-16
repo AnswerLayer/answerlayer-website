@@ -2,11 +2,6 @@
 title: "Agent integration"
 # ORPHANED
 options: []
-    target: "external-docs"
-  - label: "See MCP integration"
-    target: "agents-mcp"
-  - label: "View SDK examples"
-    target: "external-github"
 external: false
 externalUrl: null
 ---

@@ -2,11 +2,6 @@
 title: "Business model and vision"
 # ORPHANED
 options: []
-    target: "external-pricing"
-  - label: "Contact for partnership"
-    target: "external-contact"
-  - label: "Back"
-    target: "build-investors"
 external: false
 externalUrl: null
 ---

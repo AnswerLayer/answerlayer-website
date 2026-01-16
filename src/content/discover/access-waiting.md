@@ -2,11 +2,6 @@
 title: "Waiting for answers"
 # ORPHANED
 options: []
-    target: "access-how"
-  - label: "Try asking questions"
-    target: "external-demo"
-  - label: "Back"
-    target: "access-problems"
 external: false
 externalUrl: null
 ---

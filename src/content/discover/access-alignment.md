@@ -2,11 +2,6 @@
 title: "The alignment problem"
 # ORPHANED
 options: []
-    target: "access-solution"
-  - label: "Read about data culture"
-    target: "access-culture"
-  - label: "Back"
-    target: "access-semantic"
 external: false
 externalUrl: null
 ---

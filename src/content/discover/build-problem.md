@@ -2,13 +2,6 @@
 title: "The semantic layer maintenance problem"
 # ORPHANED
 options: []
-    target: "build-generation"
-  - label: "Read technical deep-dive"
-    target: "build-problem-technical"
-  - label: "Compare to existing tools"
-    target: "build-problem-compare"
-  - label: "Back"
-    target: "path-build"
 external: false
 externalUrl: null
 ---

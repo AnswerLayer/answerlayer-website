@@ -2,11 +2,6 @@
 title: "Model Context Protocol integration"
 # ORPHANED
 options: []
-    target: "external-docs"
-  - label: "View open source MCP server"
-    target: "external-github"
-  - label: "Back"
-    target: "agents-integration"
 external: false
 externalUrl: null
 ---
