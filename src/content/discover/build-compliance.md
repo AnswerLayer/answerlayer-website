@@ -1,5 +1,5 @@
 ---
-title: "Compliance roadmap"
+title: "Compliance and data sovereignty"
 options:
   - label: "Visit Trust Centre"
     target: "external-trust"
@@ -10,17 +10,16 @@ options:
 external: false
 externalUrl: null
 ---
-Our approach to compliance reflects our BYOC deployment model:
+Your data stays in your infrastructure, in your region. The BYOC deployment model means customer data never crosses into AnswerLayer-controlled systems—simplifying compliance with data residency and sovereignty requirements.
 
-**Current security foundations:**
+**Security foundations:**
 - Secure development lifecycle with code review and static analysis
 - Penetration testing and vulnerability management
 - Encrypted credential handling (AES-256 at rest, TLS 1.3 in transit)
-- Control plane secured separately from customer data
+- Third-party IAM monitoring and audit platform
+- Control plane isolated from customer data
 
-**On our roadmap:**
-- SOC 2 Type II certification for control plane infrastructure
-- HIPAA BAA availability for healthcare deployments
-- Additional compliance frameworks as customer needs evolve
-
-The VPC deployment model simplifies compliance—customer data remains in customer infrastructure under customer controls.
+**In progress:**
+- SOC 2 Type II certification
+- Liability insurance
+- Business continuity policies
