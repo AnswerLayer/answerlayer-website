@@ -3,7 +3,7 @@ title: "Discovering AnswerLayer"
 options:
   - label: "Build data definitions"
     target: "path-build"
-  - label: "Query databases"
+  - label: "Get answers"
     target: "path-access"
   - label: "Back"
     target: "home"
