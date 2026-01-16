@@ -3,8 +3,6 @@ title: "Curating the semantic layer"
 options:
   - label: "See version control integration"
     target: "build-versioning"
-  - label: "Understand collaboration features"
-    target: "build-collaboration"
   - label: "Back"
     target: "build-confidence"
 external: false
