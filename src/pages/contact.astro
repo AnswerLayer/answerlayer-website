@@ -2,7 +2,8 @@
 /**
  * Contact Page
  *
- * Get in touch via email, calendar, or LinkedIn.
+ * Grid of cards for getting in touch.
+ * Consistent styling with double-border cards.
  */
 import Layout from '../layouts/Layout.astro';
 ---
@@ -12,45 +13,30 @@ import Layout from '../layouts/Layout.astro';
   description="Get in touch with the AnswerLayer team"
 >
   <div class="crt-screen">
-    <div class="container mx-auto px-6 py-12 md:py-20">
+    <div class="container mx-auto px-6 py-12 md:py-20" style="padding-top: 2rem;">
 
       <!-- Page Header -->
       <div class="page-header">
         <h1 class="page-title crt-text">Contact</h1>
-        <p class="page-subtitle">Get in touch</p>
+        <p class="page-subtitle crt-text">Get in touch</p>
       </div>
 
-      <!-- Contact Cards -->
+      <!-- Card Grid -->
       <div class="card-grid">
 
         <a href="mailto:josh@getanswerlayer.com" class="topic-card">
-          <div class="card-visual">
-            <div class="visual-pattern email"></div>
-          </div>
-          <div class="card-content">
-            <h2 class="card-title">Email</h2>
-            <p class="card-description">josh@getanswerlayer.com</p>
-          </div>
+          <h2 class="card-title crt-text">Email</h2>
+          <p class="card-description crt-text">josh@getanswerlayer.com</p>
         </a>
 
-        <a href="https://calendly.com/josh-getanswerlayer/30min" target="_blank" rel="noopener noreferrer" class="topic-card">
-          <div class="card-visual">
-            <div class="visual-pattern calendar"></div>
-          </div>
-          <div class="card-content">
-            <h2 class="card-title">Schedule a Call</h2>
-            <p class="card-description">Book a 30-minute conversation to discuss your needs.</p>
-          </div>
+        <a href="https://calendly.com/josh-getanswerlayer/30min" target="_blank" rel="noopener" class="topic-card">
+          <h2 class="card-title crt-text">Schedule a Call ↗</h2>
+          <p class="card-description crt-text">Book a 30-minute conversation to discuss your needs.</p>
         </a>
 
-        <a href="https://www.linkedin.com/company/answerlayer" target="_blank" rel="noopener noreferrer" class="topic-card">
-          <div class="card-visual">
-            <div class="visual-pattern linkedin"></div>
-          </div>
-          <div class="card-content">
-            <h2 class="card-title">LinkedIn</h2>
-            <p class="card-description">Follow AnswerLayer for updates and announcements.</p>
-          </div>
+        <a href="https://www.linkedin.com/company/answerlayer" target="_blank" rel="noopener" class="topic-card">
+          <h2 class="card-title crt-text">LinkedIn ↗</h2>
+          <p class="card-description crt-text">Follow AnswerLayer for updates and announcements.</p>
         </a>
 
       </div>
@@ -85,123 +71,53 @@ import Layout from '../layouts/Layout.astro';
   .card-grid {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1rem;
-    max-width: 600px;
-    margin: 0 auto;
+    gap: 1.5rem;
   }
 
   @media (min-width: 640px) {
     .card-grid {
-      grid-template-columns: 1fr;
+      grid-template-columns: repeat(2, 1fr);
     }
   }
 
   .topic-card {
-    display: flex;
-    flex-direction: row;
-    background: var(--color-navy-100);
-    border: 2px solid var(--color-navy-300);
+    display: block;
+    background: transparent;
+    border: 2px solid var(--color-navy-900);
+    padding: 1.5rem;
     text-decoration: none;
     transition: all 0.15s ease;
-  }
-
-  .topic-card:hover {
-    border-color: var(--color-navy-900);
-    text-decoration: none;
-  }
-
-  .card-visual {
-    width: 100px;
-    min-height: 100px;
-    background: var(--color-navy-900);
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .visual-pattern {
-    width: 50px;
-    height: 50px;
-    border: 2px solid var(--color-navy-500);
     position: relative;
   }
 
-  .visual-pattern.email {
-    border-radius: 4px;
-  }
-
-  .visual-pattern.email::before {
-    content: "@";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--color-navy-500);
-    font-size: 1.5rem;
-  }
-
-  .visual-pattern.calendar {
-    border-radius: 4px;
-  }
-
-  .visual-pattern.calendar::before {
+  .topic-card::before {
     content: "";
     position: absolute;
-    top: 8px;
-    left: 8px;
-    right: 8px;
-    height: 2px;
-    background: var(--color-navy-500);
+    inset: -6px;
+    border: 1px solid var(--color-navy-300);
+    pointer-events: none;
   }
 
-  .visual-pattern.calendar::after {
-    content: "";
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    width: 12px;
-    height: 12px;
-    border: 2px solid var(--color-navy-500);
-  }
-
-  .visual-pattern.linkedin {
-    border-radius: 4px;
-  }
-
-  .visual-pattern.linkedin::before {
-    content: "in";
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    color: var(--color-navy-500);
-    font-size: 1.25rem;
-    font-weight: 700;
-    font-family: var(--font-mono);
-  }
-
-  .card-content {
-    padding: 1rem;
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  .topic-card:hover {
+    border-color: var(--color-navy-600);
+    text-decoration: none;
   }
 
   .card-title {
-    font-family: Tahoma, 'Segoe UI', sans-serif;
+    font-family: 'MS Sans Serif', 'Microsoft Sans Serif', Tahoma, sans-serif;
     font-size: 1rem;
-    font-weight: 300;
+    font-weight: 600;
     color: var(--color-navy-900);
-    margin: 0 0 0.25rem 0;
+    margin: 0 0 0.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
   }
 
   .card-description {
     font-family: var(--font-body);
     font-size: 0.875rem;
-    font-weight: 200;
-    color: #374151;
+    font-weight: 400;
+    color: var(--color-navy-700);
     line-height: 1.5;
     margin: 0;
   }
