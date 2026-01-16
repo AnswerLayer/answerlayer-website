@@ -76,9 +76,13 @@
 - **Title:** "Cloud provider options"
 - **Changes:** Removed Azure, updated compute options (ECS/EKS for AWS, GKE/Cloud Run for GCP), removed database list
 
+### 16. Build Deployment Process (`/discover/build-deployment-process.md`)
+- **Status:** Orphaned
+- **Title:** "Deployment process"
+- **Notes:** Removed links from build-aws and build-gcp; page needs timeline/process review before reintegration
+
 ---
 
 ## Still To Review
-- build-deployment-process
 - path-access branch (and all its children)
 - Remaining FAQ pages
