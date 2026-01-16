@@ -1,5 +1,5 @@
 ---
-title: "Who curates the semantic layer?"
+title: "Who governs definitions?"
 options:
   - label: "Learn about maintenance"
     target: "access-maintenance"
