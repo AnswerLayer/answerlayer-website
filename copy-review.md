@@ -84,11 +84,60 @@
 ### 17. Path Access (`/discover/path-access.md`)
 - **Status:** Approved with changes
 - **Title:** "Accessing data through natural language"
-- **Changes:** Refined opening — "information you need to answer important questions", added "institutional knowledge" framing
+- **Changes:** Refined opening — "information you need to answer important questions", added "institutional knowledge" framing, changed "Try it out" to "Evaluate for purchase"
+
+### 18. Access How (`/discover/access-how.md`)
+- **Status:** Approved with changes
+- **Title:** "The semantic layer"
+- **Changes:** Complete rewrite — intro to semantic layers, synonyms (ontology, context graph, data dictionary, knowledge base), institutional knowledge framing
+
+### 19. Access Generation (`/discover/access-generation.md`)
+- **Status:** Approved with changes
+- **Title:** "Capturing institutional knowledge"
+- **Changes:** Reframed from autonomous to collaborative; interactive capture, synonyms/terminology, temporal annotations, continuous updates
+
+### 20. Access Integrations (`/discover/access-integrations.md`)
+- **Status:** Created
+- **Title:** "Data integrations"
+- **Notes:** New page — data sources (no ETL), context sources (Notion, Jira, etc. possible), get in touch CTA
+
+### 21. Access Evaluate (`/discover/access-evaluate.md`)
+- **Status:** Created
+- **Title:** "Evaluate for purchase"
+- **Notes:** New page — pilot program, time to value, success metrics
+
+### 22. Access Curation (`/discover/access-curation.md`)
+- **Status:** Approved with changes
+- **Title:** "Governance"
+- **Changes:** Reframed as governance — ownership, conflict resolution, approval workflows, audit trail
+
+### 23. Access Who Curates (`/discover/access-who-curates.md`)
+- **Status:** Approved with changes
+- **Title:** "Who governs definitions?"
+- **Changes:** Updated title to match governance framing
+
+### 24. Branch Root (`/discover/branch-root.md`)
+- **Status:** Approved with changes
+- **Changes:** "Query databases" → "Get answers"
+
+### 25. Build Credentials (`/discover/build-credentials.md`)
+- **Status:** Updated
+- **Changes:** Fixed duplicate build-security link → external-trust
+
+---
+
+## Orphaned Pages
+- access-maintenance
+- access-pii
+- build-pii
+- build-deployment-process
+- build-azure
+- 28 additional pages (bulk orphaned — options cleared)
 
 ---
 
 ## Still To Review
-- access-how (currently reviewing)
-- Remaining access-* pages
-- Remaining FAQ pages
+- access-examples
+- access-guardrails
+- access-security
+- Remaining build-* pages as needed
