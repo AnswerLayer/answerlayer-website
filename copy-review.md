@@ -52,12 +52,29 @@
 - **Title:** "GCP deployment"
 - **Changes:** Updated compute to "GKE or Cloud Run"
 
+### 11. Build Compliance (`/discover/build-compliance.md`)
+- **Status:** Approved with changes
+- **Title:** "Compliance and data sovereignty"
+- **Changes:** Lead with data sovereignty, added IAM monitoring, restructured to "Security foundations" and "In progress"
+
+### 12. FAQ Security (`/discover/faq-security.md`)
+- **Status:** Approved with changes
+- **Title:** "Security questions"
+- **Changes:** Removed Azure, fixed SOC 2 (was wrongly claiming certified), added sovereignty messaging
+
+### 13. Trust Page (`/src/pages/trust.astro`)
+- **Status:** Approved with changes
+- **Changes:** Removed Azure, SOC 2 now "In Progress", added sovereignty to hero
+
+### 14. Build Credentials (`/discover/build-credentials.md`)
+- **Status:** Approved with changes
+- **Title:** "Credential handling"
+- **Changes:** Simplified to reflect BYOC reality — credentials stay in customer infrastructure, we don't handle them
+
 ---
 
 ## Still To Review
-- build-compliance
-- build-credentials
 - build-cloud-choice
 - build-deployment-process
 - path-access branch (and all its children)
-- FAQ pages (to be linked elsewhere)
+- Remaining FAQ pages
