@@ -81,8 +81,14 @@
 - **Title:** "Deployment process"
 - **Notes:** Removed links from build-aws and build-gcp; page needs timeline/process review before reintegration
 
+### 17. Path Access (`/discover/path-access.md`)
+- **Status:** Approved with changes
+- **Title:** "Accessing data through natural language"
+- **Changes:** Refined opening — "information you need to answer important questions", added "institutional knowledge" framing
+
 ---
 
 ## Still To Review
-- path-access branch (and all its children)
+- access-how (currently reviewing)
+- Remaining access-* pages
 - Remaining FAQ pages
