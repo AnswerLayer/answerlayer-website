@@ -32,10 +32,32 @@
 - **Title:** "The semantic layer object model"
 - **Notes:** New page describing entities, measures, metrics, dimensions, filters
 
+### 7. Build Security (`/discover/build-security.md`)
+- **Status:** Approved with changes
+- **Title:** "Security architecture"
+- **Changes:** Removed "not an add-on"
+
+### 8. Build VPC (`/discover/build-vpc.md`)
+- **Status:** Approved with changes
+- **Title:** "VPC deployment"
+- **Changes:** Added BYOC link, updated to ECS/EKS for AWS, GKE/Cloud Run for GCP, removed Azure, added contact option, removed deployment process option (moved to cloud provider pages)
+
+### 9. Build AWS (`/discover/build-aws.md`)
+- **Status:** Approved with changes
+- **Title:** "AWS deployment"
+- **Changes:** Updated compute to "ECS or EKS"
+
+### 10. Build GCP (`/discover/build-gcp.md`)
+- **Status:** Approved with changes
+- **Title:** "GCP deployment"
+- **Changes:** Updated compute to "GKE or Cloud Run"
+
 ---
 
 ## Still To Review
-- build-security
-- path-access branch
-- All other discover nodes
+- build-compliance
+- build-credentials
+- build-cloud-choice
+- build-deployment-process
+- path-access branch (and all its children)
 - FAQ pages (to be linked elsewhere)

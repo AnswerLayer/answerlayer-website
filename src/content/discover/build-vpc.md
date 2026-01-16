@@ -5,8 +5,6 @@ options:
     target: "build-cloud-choice"
   - label: "Review compliance"
     target: "build-compliance"
-  - label: "See deployment process"
-    target: "build-deployment-process"
   - label: "Ask about deployment"
     target: "external-contact"
   - label: "Back"

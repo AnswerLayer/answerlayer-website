@@ -10,10 +10,10 @@ options:
 external: false
 externalUrl: null
 ---
-GCP deployment uses GKE with the following architecture:
+GCP deployment uses the following architecture:
 
 - **VPC** — Dedicated or shared VPC with private subnets
-- **GKE** — Managed Kubernetes for compute
+- **GKE or Cloud Run** — Managed container orchestration for compute
 - **Cloud SQL** — PostgreSQL for semantic store
 - **Secret Manager** — Database credential storage
 - **Cloud Logging** — Centralized logging
