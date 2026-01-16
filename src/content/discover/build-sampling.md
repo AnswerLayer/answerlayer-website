@@ -1,12 +1,10 @@
 ---
 title: "Data sampling analysis"
 options:
-  - label: "See chain-of-thought reasoning"
-    target: "build-reasoning"
   - label: "Review security model"
     target: "build-security"
   - label: "Back"
-    target: "build-generation"
+    target: "build-reasoning"
 external: false
 externalUrl: null
 ---

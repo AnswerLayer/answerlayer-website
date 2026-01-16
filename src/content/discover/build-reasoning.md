@@ -1,6 +1,8 @@
 ---
 title: "Traces and observability"
 options:
+  - label: "See data sampling analysis"
+    target: "build-sampling"
   - label: "See the curation workflow"
     target: "build-curation"
   - label: "Back"
