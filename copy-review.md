@@ -129,6 +129,8 @@
 ## Orphaned Pages
 - access-maintenance
 - access-pii
+- access-examples
+- access-guardrails
 - build-pii
 - build-deployment-process
 - build-azure
@@ -137,7 +139,5 @@
 ---
 
 ## Still To Review
-- access-examples
-- access-guardrails
 - access-security
 - Remaining build-* pages as needed
