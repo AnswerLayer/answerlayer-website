@@ -3,8 +3,6 @@ title: "Confidence calibration"
 options:
   - label: "See the curation workflow"
     target: "build-curation"
-  - label: "Review PII detection"
-    target: "build-pii"
   - label: "Back"
     target: "build-reasoning"
 external: false

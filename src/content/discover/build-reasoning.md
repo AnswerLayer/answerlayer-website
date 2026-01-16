@@ -1,8 +1,6 @@
 ---
 title: "Chain-of-thought semantic analysis"
 options:
-  - label: "See PII detection"
-    target: "build-pii"
   - label: "Understand confidence calibration"
     target: "build-confidence"
   - label: "Back"
