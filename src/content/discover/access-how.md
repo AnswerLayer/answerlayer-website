@@ -1,8 +1,8 @@
 ---
-title: "How natural language querying works"
+title: "The semantic layer"
 options:
-  - label: "Learn about semantic layers"
-    target: "access-semantic"
+  - label: "See how semantic layers are built"
+    target: "access-generation"
   - label: "See query examples"
     target: "access-examples"
   - label: "Understand guardrails"
@@ -12,12 +12,14 @@ options:
 external: false
 externalUrl: null
 ---
-The process:
+A semantic layer is a structured representation of your data—what it means, how it relates, and how it should be used. You might know it as an ontology, context graph, data dictionary, or knowledge base.
 
-1. **Question** — Ask in plain English: "What was revenue last quarter by region?"
-2. **Translation** — AnswerLayer translates to SQL using the semantic layer
-3. **Validation** — Query is checked against guardrails before execution
-4. **Execution** — SQL runs against the database
-5. **Response** — Results returned with explanation of how they were computed
+It captures institutional knowledge:
+- What "revenue" means in your organization
+- Which tables contain customer data
+- How regions map to sales territories
+- Which metrics are approved for reporting
 
-The semantic layer is the key. Without it, AI models hallucinate column names and invent relationships. With it, queries are grounded in actual database structure.
+Without a semantic layer, AI models hallucinate column names and invent relationships. With one, every query is grounded in your actual data structure and business logic.
+
+The result: consistent, trustworthy answers that anyone in the organization can access—without needing SQL expertise or waiting for someone who has it.
