@@ -1,5 +1,5 @@
 ---
-title: "Chain-of-thought semantic analysis"
+title: "Traces and observability"
 options:
   - label: "See the curation workflow"
     target: "build-curation"
@@ -8,19 +8,10 @@ options:
 external: false
 externalUrl: null
 ---
-Built on DSPy, the generation process uses chain-of-thought prompting to reason through complex schemas. Each decision is logged with:
+Every inference is logged. Full traces and observability are available for:
 
-- **Confidence score** — How certain the analysis is about each inference
-- **Reasoning trace** — The logical steps that led to the conclusion
-- **Alternative interpretations** — Other possible meanings considered
+- **Auditing** — Understand why a definition exists
+- **Debugging** — Trace unexpected results back to their source
+- **Review** — Evaluate suggestions before accepting them
 
-Low-confidence inferences are flagged for human review. High-confidence inferences can be auto-approved. The threshold is configurable per organization.
-
-Example reasoning trace:
-```
-Column: cust_id (integer)
-- High cardinality (50,000+ unique values)
-- Referenced by orders.customer_id, support_tickets.cust_id
-- Values are sequential integers
-→ Inference: Primary key for Customer entity (confidence: 0.94)
-```
+Nothing is a black box. If you need to understand the details of an analysis, the reasoning is there.
