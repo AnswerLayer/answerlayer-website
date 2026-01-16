@@ -309,7 +309,7 @@ pre {
     );
   pointer-events: none;
   z-index: 9999;
-  animation: scanline-scroll 1.5s linear infinite;
+  animation: scanline-scroll 0.1s linear infinite;
 }
 
 /* Full CRT screen effect (for background color) */
