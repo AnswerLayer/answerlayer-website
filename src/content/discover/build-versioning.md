@@ -1,8 +1,6 @@
 ---
 title: "Version control and change management"
 options:
-  - label: "Review deployment options"
-    target: "build-deployment"
   - label: "Back"
     target: "build-curation"
 external: false
