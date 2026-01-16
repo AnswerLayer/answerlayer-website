@@ -4,7 +4,7 @@ options:
   - label: "See version control integration"
     target: "build-versioning"
   - label: "Back"
-    target: "build-confidence"
+    target: "build-reasoning"
 external: false
 externalUrl: null
 ---

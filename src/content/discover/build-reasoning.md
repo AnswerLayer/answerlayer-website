@@ -1,8 +1,8 @@
 ---
 title: "Chain-of-thought semantic analysis"
 options:
-  - label: "Understand confidence calibration"
-    target: "build-confidence"
+  - label: "See the curation workflow"
+    target: "build-curation"
   - label: "Back"
     target: "build-generation"
 external: false
