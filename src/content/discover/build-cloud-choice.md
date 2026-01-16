@@ -5,19 +5,16 @@ options:
     target: "build-aws"
   - label: "See GCP deployment"
     target: "build-gcp"
-  - label: "See Azure deployment"
-    target: "build-azure"
   - label: "Back"
     target: "build-vpc"
 external: false
 externalUrl: null
 ---
-Deployment is supported on:
+AnswerLayer deploys to your cloud:
 
-| Provider | Compute | Database Support |
-|----------|---------|------------------|
-| AWS | EKS | RDS, Redshift, Athena |
-| GCP | GKE | Cloud SQL, BigQuery |
-| Azure | AKS | Azure SQL, Synapse |
+| Provider | Compute Options |
+|----------|-----------------|
+| AWS | ECS or EKS |
+| GCP | GKE or Cloud Run |
 
-Multi-cloud configurations are possible for organizations with databases across providers. Each deployment connects to databases in its region.
+Multi-cloud configurations are possible for organizations with databases across providers.
