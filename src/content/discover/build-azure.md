@@ -1,7 +1,7 @@
 ---
 title: "Azure deployment"
-options:
-  - label: "Get in touch"
+# ORPHANED
+options: []
     target: "external-contact"
   - label: "See deployment process"
     target: "build-deployment-process"

@@ -1,7 +1,7 @@
 ---
 title: "How AnswerLayer creates alignment"
-options:
-  - label: "See generation in detail"
+# ORPHANED
+options: []
     target: "access-generation"
   - label: "Try the product"
     target: "external-demo"

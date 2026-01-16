@@ -1,7 +1,7 @@
 ---
 title: "The alignment problem"
-options:
-  - label: "See how AnswerLayer helps"
+# ORPHANED
+options: []
     target: "access-solution"
   - label: "Read about data culture"
     target: "access-culture"

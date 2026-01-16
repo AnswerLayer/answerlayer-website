@@ -1,7 +1,7 @@
 ---
 title: "General questions"
-options:
-  - label: "More questions"
+# ORPHANED
+options: []
     target: "faq-technical"
   - label: "Back"
     target: "faq-root"

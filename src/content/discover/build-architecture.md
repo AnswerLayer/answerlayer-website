@@ -1,7 +1,7 @@
 ---
 title: "System architecture"
-options:
-  - label: "See deployment options"
+# ORPHANED
+options: []
     target: "build-deployment"
   - label: "Review security model"
     target: "build-security"

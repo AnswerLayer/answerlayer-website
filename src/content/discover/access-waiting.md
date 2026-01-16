@@ -1,7 +1,7 @@
 ---
 title: "Waiting for answers"
-options:
-  - label: "See how self-service works"
+# ORPHANED
+options: []
     target: "access-how"
   - label: "Try asking questions"
     target: "external-demo"

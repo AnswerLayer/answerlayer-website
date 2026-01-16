@@ -1,7 +1,7 @@
 ---
 title: "Pricing questions"
-options:
-  - label: "See pricing details"
+# ORPHANED
+options: []
     target: "external-pricing"
   - label: "Contact sales"
     target: "external-demo"

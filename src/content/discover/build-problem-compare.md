@@ -1,7 +1,7 @@
 ---
 title: "Comparison with existing tools"
-options:
-  - label: "See generation in action"
+# ORPHANED
+options: []
     target: "build-generation"
   - label: "Review security considerations"
     target: "build-security"

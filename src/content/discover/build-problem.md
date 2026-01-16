@@ -1,7 +1,7 @@
 ---
 title: "The semantic layer maintenance problem"
-options:
-  - label: "See how generation solves this"
+# ORPHANED
+options: []
     target: "build-generation"
   - label: "Read technical deep-dive"
     target: "build-problem-technical"

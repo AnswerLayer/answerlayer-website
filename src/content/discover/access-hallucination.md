@@ -1,7 +1,7 @@
 ---
 title: "AI hallucination in data queries"
-options:
-  - label: "See how grounding works"
+# ORPHANED
+options: []
     target: "access-how"
   - label: "Learn about semantic layers"
     target: "access-semantic"

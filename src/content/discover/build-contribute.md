@@ -1,7 +1,7 @@
 ---
 title: "Contributing to AnswerLayer"
-options:
-  - label: "View GitHub repositories"
+# ORPHANED
+options: []
     target: "external-github"
   - label: "Read contribution guidelines"
     target: "external-contributing"

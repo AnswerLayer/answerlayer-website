@@ -1,7 +1,7 @@
 ---
 title: "Model Context Protocol integration"
-options:
-  - label: "Read MCP documentation"
+# ORPHANED
+options: []
     target: "external-docs"
   - label: "View open source MCP server"
     target: "external-github"

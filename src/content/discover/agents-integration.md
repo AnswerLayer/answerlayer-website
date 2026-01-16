@@ -1,7 +1,7 @@
 ---
 title: "Agent integration"
-options:
-  - label: "Read API documentation"
+# ORPHANED
+options: []
     target: "external-docs"
   - label: "See MCP integration"
     target: "agents-mcp"

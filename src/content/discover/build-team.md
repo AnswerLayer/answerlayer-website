@@ -1,7 +1,7 @@
 ---
 title: "The team"
-options:
-  - label: "View open positions"
+# ORPHANED
+options: []
     target: "external-careers"
   - label: "Read the blog"
     target: "external-blog"

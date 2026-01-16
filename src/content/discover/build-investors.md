@@ -1,7 +1,7 @@
 ---
 title: "Investors and backing"
-options:
-  - label: "Request more information"
+# ORPHANED
+options: []
     target: "build-investor-request"
   - label: "Read more about the business"
     target: "build-business"

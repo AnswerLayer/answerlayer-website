@@ -1,7 +1,7 @@
 ---
 title: "Why agents need semantic layers"
-options:
-  - label: "See integration options"
+# ORPHANED
+options: []
     target: "agents-integration"
   - label: "Learn about guardrails"
     target: "access-guardrails"

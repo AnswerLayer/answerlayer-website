@@ -1,7 +1,7 @@
 ---
 title: "Technical questions"
-options:
-  - label: "Security questions"
+# ORPHANED
+options: []
     target: "faq-security"
   - label: "Back"
     target: "faq-root"

@@ -1,7 +1,7 @@
 ---
 title: "Investor information request"
-options:
-  - label: "Contact for information"
+# ORPHANED
+options: []
     target: "external-contact"
   - label: "Back"
     target: "build-investors"

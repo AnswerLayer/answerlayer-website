@@ -1,7 +1,7 @@
 ---
 title: "Security questions"
-options:
-  - label: "Pricing questions"
+# ORPHANED
+options: []
     target: "faq-pricing"
   - label: "Visit Trust Centre"
     target: "external-trust"

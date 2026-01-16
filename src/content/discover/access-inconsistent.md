@@ -1,7 +1,7 @@
 ---
 title: "Inconsistent numbers"
-options:
-  - label: "Learn about alignment"
+# ORPHANED
+options: []
     target: "access-alignment"
   - label: "See how definitions work"
     target: "access-semantic"

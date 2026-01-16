@@ -1,7 +1,7 @@
 ---
 title: "Data culture"
-options:
-  - label: "See how to build this"
+# ORPHANED
+options: []
     target: "access-solution"
   - label: "Learn about AnswerLayer's approach"
     target: "access-generation"
