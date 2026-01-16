@@ -131,6 +131,26 @@
 
 ---
 
+### 27. Build Reasoning (`/discover/build-reasoning.md`)
+- **Status:** Approved with changes
+- **Title:** "Traces and observability"
+- **Changes:** Removed DSPy/chain-of-thought mentions, focused on observability for auditing/debugging/review
+
+### 28. Build Curation (`/discover/build-curation.md`)
+- **Status:** Approved with changes
+- **Title:** "Curating the semantic layer"
+- **Changes:** Simplified to key capabilities (lock, approve, preserve), NLP acceleration message
+
+### 29. Build Sampling (`/discover/build-sampling.md`)
+- **Status:** Approved (no changes)
+- **Title:** "Data sampling analysis"
+- **Notes:** Reorganized as child of build-reasoning
+
+---
+
+## Deleted Pages
+- build-deployment (redundant with BYOC positioning)
+
 ## Orphaned Pages
 - access-maintenance
 - access-pii
@@ -141,14 +161,11 @@
 - build-azure
 - build-collaboration
 - build-confidence
+- build-validation
+- build-versioning
 - 28 additional pages (bulk orphaned — options cleared)
 
 ---
 
-## Still To Review
-- build-reasoning (currently reviewing)
-- build-curation
-- build-deployment
-- build-sampling
-- build-validation
-- build-versioning
+## Review Complete
+24 connected content pages reviewed and approved.
