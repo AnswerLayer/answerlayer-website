@@ -3,8 +3,6 @@ title: "Governance"
 options:
   - label: "See who does curation"
     target: "access-who-curates"
-  - label: "Learn about ongoing maintenance"
-    target: "access-maintenance"
   - label: "Back"
     target: "access-generation"
 external: false

@@ -1,8 +1,6 @@
 ---
 title: "Who governs definitions?"
 options:
-  - label: "Learn about maintenance"
-    target: "access-maintenance"
   - label: "See the interface"
     target: "external-demo"
   - label: "Back"
