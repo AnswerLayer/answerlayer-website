@@ -68,8 +68,9 @@
   - Removed Azure (AWS/GCP only)
   - SOC 2 now "in progress"
   - Added sovereignty to subtitle
-  - Linked cards to discover pages (build-security, build-vpc, build-credentials, access-security, build-compliance)
+  - 7 cards linked to discover pages
   - Removed PII Detection and Query Guardrails cards (orphaned pages)
+  - Added Shared Responsibility and Traces/Observability cards
 
 ### 14. Build Credentials (`/discover/build-credentials.md`)
 - **Status:** Approved with changes
@@ -155,6 +156,16 @@
 - **Status:** Created
 - **Title:** "Shared responsibility"
 - **Notes:** New page under access-security explaining BYOC security partnership model
+
+### 31. Architecture Page (`/src/pages/architecture.astro`)
+- **Status:** Approved with changes
+- **Changes:**
+  - Removed System Architecture card (orphaned page)
+  - Removed Chain-of-Thought card (outdated DSPy references)
+  - Removed Query Guardrails card (orphaned page)
+  - Added Object Model card
+  - Added VPC Deployment card
+  - 5 cards total, all linked to connected discover pages
 
 ---
 
