@@ -51,6 +51,11 @@ import Layout from '../layouts/Layout.astro';
 
       </div>
 
+      <!-- CTA -->
+      <div class="cta-row">
+        <a href="/contact" class="cta-button crt-text">Contact Us</a>
+      </div>
+
     </div>
   </div>
 </Layout>
@@ -136,5 +141,29 @@ import Layout from '../layouts/Layout.astro';
     color: var(--color-navy-700);
     line-height: 1.5;
     margin: 0;
+  }
+
+  .cta-row {
+    margin-top: 3rem;
+    text-align: center;
+  }
+
+  .cta-button {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    display: inline-block;
+    border: 2px solid var(--color-navy-900);
+    color: var(--color-navy-900);
+  }
+
+  .cta-button:hover {
+    background: var(--color-navy-900);
+    color: var(--color-background);
+    text-decoration: none;
   }
 </style>
