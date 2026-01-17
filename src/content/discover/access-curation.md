@@ -3,7 +3,7 @@ title: "Governance"
 options:
   - label: "See who does curation"
     target: "access-who-curates"
-  - label: "Book a call"
+  - label: "Talk to us"
     target: "external-demo"
   - label: "Back"
     target: "access-generation"

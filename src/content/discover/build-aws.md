@@ -1,7 +1,7 @@
 ---
 title: "AWS deployment"
 options:
-  - label: "Get in touch"
+  - label: "Discuss deployment"
     target: "external-contact"
   - label: "See pricing"
     target: "external-pricing"

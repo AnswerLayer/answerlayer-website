@@ -3,7 +3,7 @@ title: "The semantic layer object model"
 options:
   - label: "How it all connects"
     target: "external-architecture"
-  - label: "Book a call"
+  - label: "Schedule a demo"
     target: "external-demo"
   - label: "Back"
     target: "build-generation"

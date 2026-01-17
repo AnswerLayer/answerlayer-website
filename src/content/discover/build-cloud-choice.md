@@ -5,7 +5,7 @@ options:
     target: "build-aws"
   - label: "See GCP deployment"
     target: "build-gcp"
-  - label: "Get in touch"
+  - label: "Discuss options"
     target: "external-contact"
   - label: "Back"
     target: "build-vpc"

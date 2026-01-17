@@ -1,7 +1,7 @@
 ---
 title: "Data integrations"
 options:
-  - label: "Get in touch"
+  - label: "Request an integration"
     target: "external-contact"
   - label: "Back"
     target: "access-generation"

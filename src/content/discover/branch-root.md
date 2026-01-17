@@ -5,7 +5,7 @@ options:
     target: "path-build"
   - label: "Get answers"
     target: "path-access"
-  - label: "Book a call"
+  - label: "Talk to us"
     target: "external-demo"
   - label: "Back"
     target: "home"
