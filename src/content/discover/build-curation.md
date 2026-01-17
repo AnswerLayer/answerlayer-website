@@ -1,6 +1,10 @@
 ---
 title: "Curating the semantic layer"
 options:
+  - label: "Book a call"
+    target: "external-demo"
+  - label: "Get in touch"
+    target: "external-contact"
   - label: "Back"
     target: "build-reasoning"
 external: false

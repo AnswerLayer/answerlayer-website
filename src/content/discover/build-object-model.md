@@ -3,6 +3,8 @@ title: "The semantic layer object model"
 options:
   - label: "View system architecture"
     target: "external-architecture"
+  - label: "Book a call"
+    target: "external-demo"
   - label: "Back"
     target: "build-generation"
 external: false

@@ -3,6 +3,8 @@ title: "Data sampling analysis"
 options:
   - label: "Review security model"
     target: "build-security"
+  - label: "View system architecture"
+    target: "external-architecture"
   - label: "Back"
     target: "build-reasoning"
 external: false

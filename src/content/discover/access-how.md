@@ -3,6 +3,10 @@ title: "The semantic layer"
 options:
   - label: "See how semantic layers are built"
     target: "access-generation"
+  - label: "Book a call"
+    target: "external-demo"
+  - label: "See who uses AnswerLayer"
+    target: "external-customers"
   - label: "Back"
     target: "path-access"
 external: false

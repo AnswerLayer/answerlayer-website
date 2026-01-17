@@ -3,6 +3,8 @@ title: "Who governs definitions?"
 options:
   - label: "See the interface"
     target: "external-demo"
+  - label: "Get in touch"
+    target: "external-contact"
   - label: "Back"
     target: "access-curation"
 external: false

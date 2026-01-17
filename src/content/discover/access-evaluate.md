@@ -1,6 +1,8 @@
 ---
 title: "Evaluate for purchase"
 options:
+  - label: "Book a call"
+    target: "external-demo"
   - label: "Get in touch"
     target: "external-contact"
   - label: "See pricing"

@@ -5,6 +5,8 @@ options:
     target: "external-trust"
   - label: "Review security architecture"
     target: "build-security"
+  - label: "Get in touch"
+    target: "external-contact"
   - label: "Back"
     target: "build-vpc"
 external: false

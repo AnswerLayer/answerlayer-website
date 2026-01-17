@@ -3,6 +3,8 @@ title: "Shared responsibility"
 options:
   - label: "Visit Trust Centre"
     target: "external-trust"
+  - label: "Get in touch"
+    target: "external-contact"
   - label: "Back"
     target: "access-security"
 external: false

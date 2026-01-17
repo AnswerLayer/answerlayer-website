@@ -5,6 +5,8 @@ options:
     target: "build-sampling"
   - label: "Explore the object model"
     target: "build-object-model"
+  - label: "Book a call"
+    target: "external-demo"
   - label: "Back"
     target: "path-build"
 external: false

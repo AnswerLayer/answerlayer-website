@@ -5,6 +5,8 @@ options:
     target: "build-sampling"
   - label: "See the curation workflow"
     target: "build-curation"
+  - label: "View system architecture"
+    target: "external-architecture"
   - label: "Back"
     target: "build-generation"
 external: false

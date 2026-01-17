@@ -5,6 +5,8 @@ options:
     target: "external-trust"
   - label: "See compliance certifications"
     target: "build-compliance"
+  - label: "Get in touch"
+    target: "external-contact"
   - label: "Back"
     target: "build-security"
 external: false

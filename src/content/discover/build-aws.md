@@ -3,6 +3,8 @@ title: "AWS deployment"
 options:
   - label: "Get in touch"
     target: "external-contact"
+  - label: "See pricing"
+    target: "external-pricing"
   - label: "Back"
     target: "build-cloud-choice"
 external: false
