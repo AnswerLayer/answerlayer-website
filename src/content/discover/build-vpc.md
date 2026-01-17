@@ -5,17 +5,16 @@ options:
     target: "build-cloud-choice"
   - label: "Review compliance"
     target: "build-compliance"
-  - label: "See deployment process"
-    target: "build-deployment-process"
+  - label: "Ask about deployment"
+    target: "external-contact"
   - label: "Back"
     target: "build-security"
 external: false
 externalUrl: null
 ---
-AnswerLayer deploys within customer cloud infrastructure:
+AnswerLayer uses a [BYOC (Bring Your Own Cloud)](https://nuon.co/blog/what-is-bring-your-own-cloud/) deployment model—containerized, managed infrastructure that runs in your environment:
 
-- **AWS** — EKS deployment with VPC peering or PrivateLink
-- **GCP** — GKE deployment with VPC peering or Private Service Connect
-- **Azure** — AKS deployment with VNet peering or Private Endpoints
+- **AWS** — ECS or EKS
+- **GCP** — GKE or Cloud Run
 
 No data transits public internet. The AnswerLayer control plane communicates with customer deployments through secure channels. Database credentials remain within customer infrastructure.

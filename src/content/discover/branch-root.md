@@ -3,8 +3,10 @@ title: "Discovering AnswerLayer"
 options:
   - label: "Build data definitions"
     target: "path-build"
-  - label: "Query databases"
+  - label: "Get answers"
     target: "path-access"
+  - label: "Talk to us"
+    target: "external-demo"
   - label: "Back"
     target: "home"
 external: false

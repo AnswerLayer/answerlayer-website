@@ -1,12 +1,7 @@
 ---
 title: "Investors and backing"
-options:
-  - label: "Request more information"
-    target: "build-investor-request"
-  - label: "Read more about the business"
-    target: "build-business"
-  - label: "Back"
-    target: "build-team"
+# ORPHANED
+options: []
 external: false
 externalUrl: null
 ---

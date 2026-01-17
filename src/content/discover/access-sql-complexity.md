@@ -1,12 +1,7 @@
 ---
 title: "SQL complexity barrier"
-options:
-  - label: "See query examples"
-    target: "access-examples"
-  - label: "Try asking questions"
-    target: "external-demo"
-  - label: "Back"
-    target: "access-problems"
+# ORPHANED
+options: []
 external: false
 externalUrl: null
 ---

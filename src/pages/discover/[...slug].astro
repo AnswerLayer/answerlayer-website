@@ -53,7 +53,7 @@ async function getOptionUrl(targetId: string): Promise<string> {
   if (targetEntry?.data.external && targetEntry.data.externalUrl) {
     return targetEntry.data.externalUrl;
   }
-  return targetId === 'home' ? '/discover' : `/discover/${targetId}`;
+  return targetId === 'home' ? '/' : `/discover/${targetId}`;
 }
 
 // Pre-compute option URLs
@@ -61,9 +61,7 @@ const optionData = await Promise.all(
   entry.data.options.map(async (opt) => {
     const targetEntry = await getEntry('discover', opt.target);
     const isExternal = targetEntry?.data.external ?? false;
-    const url = isExternal && targetEntry?.data.externalUrl
-      ? targetEntry.data.externalUrl
-      : (opt.target === 'home' ? '/discover' : `/discover/${opt.target}`);
+    const url = await getOptionUrl(opt.target);
 
     return {
       label: opt.label,
@@ -133,7 +131,6 @@ const optionData = await Promise.all(
     min-height: calc(100vh - 160px);
     display: flex;
     align-items: flex-start;
-    padding-top: 2rem;
   }
 
   @media (min-height: 700px) {
@@ -280,14 +277,21 @@ const optionData = await Promise.all(
   .discover-options {
     border-top: 2px solid var(--color-navy-900);
     padding: 1rem 1.5rem;
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 0.75rem;
   }
 
+  @media (max-width: 640px) {
+    .discover-options {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
   .discover-option {
-    font-family: var(--font-mono);
-    font-size: 0.8125rem;
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     color: var(--color-navy-900);
@@ -298,7 +302,9 @@ const optionData = await Promise.all(
     transition: all 0.15s ease;
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.375rem;
+    text-align: center;
   }
 
   .discover-option:hover {

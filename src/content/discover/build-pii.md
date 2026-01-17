@@ -1,12 +1,7 @@
 ---
 title: "PII detection"
-options:
-  - label: "See query validation"
-    target: "build-validation"
-  - label: "Review security architecture"
-    target: "build-security"
-  - label: "Back"
-    target: "build-generation"
+# ORPHANED
+options: []
 external: false
 externalUrl: null
 ---

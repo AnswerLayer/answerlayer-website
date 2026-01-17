@@ -1,19 +1,19 @@
 ---
 title: "AWS deployment"
 options:
-  - label: "Get in touch"
+  - label: "Discuss deployment"
     target: "external-contact"
-  - label: "See deployment process"
-    target: "build-deployment-process"
+  - label: "See pricing"
+    target: "external-pricing"
   - label: "Back"
     target: "build-cloud-choice"
 external: false
 externalUrl: null
 ---
-AWS deployment uses EKS with the following architecture:
+AWS deployment uses the following architecture:
 
 - **VPC** — Dedicated or shared VPC with private subnets
-- **EKS** — Managed Kubernetes for compute
+- **ECS or EKS** — Managed container orchestration for compute
 - **RDS** — PostgreSQL for semantic store
 - **Secrets Manager** — Database credential storage
 - **CloudWatch** — Logging and monitoring

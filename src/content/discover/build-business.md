@@ -1,12 +1,7 @@
 ---
 title: "Business model and vision"
-options:
-  - label: "Review pricing"
-    target: "external-pricing"
-  - label: "Contact for partnership"
-    target: "external-contact"
-  - label: "Back"
-    target: "build-investors"
+# ORPHANED
+options: []
 external: false
 externalUrl: null
 ---

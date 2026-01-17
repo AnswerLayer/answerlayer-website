@@ -1,12 +1,7 @@
 ---
 title: "Query examples"
-options:
-  - label: "Try asking questions"
-    target: "external-demo"
-  - label: "See how translation works"
-    target: "access-how"
-  - label: "Back"
-    target: "access-how"
+# ORPHANED
+options: []
 external: false
 externalUrl: null
 ---

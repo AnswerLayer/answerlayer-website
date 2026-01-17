@@ -5,6 +5,8 @@ options:
     target: "external-pricing"
   - label: "Request evaluation"
     target: "external-demo"
+  - label: "See who uses AnswerLayer"
+    target: "external-customers"
   - label: "Back"
     target: "path-build"
 external: false

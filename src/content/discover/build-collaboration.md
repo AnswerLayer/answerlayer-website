@@ -1,12 +1,7 @@
 ---
 title: "Team collaboration"
-options:
-  - label: "Review security and access control"
-    target: "build-security"
-  - label: "See deployment architecture"
-    target: "build-deployment"
-  - label: "Back"
-    target: "build-curation"
+# ORPHANED
+options: []
 external: false
 externalUrl: null
 ---

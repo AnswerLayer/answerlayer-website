@@ -1,12 +1,7 @@
 ---
 title: "Query validation and guardrails"
-options:
-  - label: "Review full security model"
-    target: "build-security"
-  - label: "See deployment options"
-    target: "build-deployment"
-  - label: "Back"
-    target: "build-generation"
+# ORPHANED
+options: []
 external: false
 externalUrl: null
 ---

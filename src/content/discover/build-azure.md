@@ -1,12 +1,7 @@
 ---
 title: "Azure deployment"
-options:
-  - label: "Get in touch"
-    target: "external-contact"
-  - label: "See deployment process"
-    target: "build-deployment-process"
-  - label: "Back"
-    target: "build-cloud-choice"
+# ORPHANED
+options: []
 external: false
 externalUrl: null
 ---

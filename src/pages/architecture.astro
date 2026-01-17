@@ -13,7 +13,7 @@ import Layout from '../layouts/Layout.astro';
   description="System architecture and technical deep-dive into how AnswerLayer works"
 >
   <div class="crt-screen">
-    <div class="container mx-auto px-6 py-12 md:py-20" style="padding-top: 2rem;">
+    <div class="container mx-auto px-6 py-12 md:py-20">
 
       <!-- Page Header -->
       <div class="page-header">
@@ -24,14 +24,14 @@ import Layout from '../layouts/Layout.astro';
       <!-- Card Grid -->
       <div class="card-grid">
 
-        <a href="/discover/build-architecture" class="topic-card">
-          <h2 class="card-title crt-text">System Architecture</h2>
-          <p class="card-description crt-text">Query engine, semantic store, generation service, and API layer. Stateless and horizontally scalable. PostgreSQL for storage, LLM of choice for reasoning.</p>
-        </a>
-
         <a href="/discover/build-generation" class="topic-card">
           <h2 class="card-title crt-text">Generation Process</h2>
           <p class="card-description crt-text">Connect, sample, analyze, generate, curate. AI analyzes actual data to produce semantic models with entities, metrics, dimensions, and filters.</p>
+        </a>
+
+        <a href="/discover/build-object-model" class="topic-card">
+          <h2 class="card-title crt-text">Object Model</h2>
+          <p class="card-description crt-text">Entities, measures, metrics, dimensions, and filters. Interconnected objects that define your data's business meaning.</p>
         </a>
 
         <a href="/discover/build-sampling" class="topic-card">
@@ -39,21 +39,21 @@ import Layout from '../layouts/Layout.astro';
           <p class="card-description crt-text">Statistical distributions, data types, relationships, and business context. Analysis happens through queries—data never leaves the database.</p>
         </a>
 
-        <a href="/discover/build-reasoning" class="topic-card">
-          <h2 class="card-title crt-text">Chain-of-Thought</h2>
-          <p class="card-description crt-text">DSPy-powered reasoning with confidence scores, reasoning traces, and alternative interpretations. Low-confidence inferences flagged for human review.</p>
-        </a>
-
-        <a href="/discover/build-validation" class="topic-card">
-          <h2 class="card-title crt-text">Query Guardrails</h2>
-          <p class="card-description crt-text">Schema validation, operation filtering, row limits, timeout protection, and cost estimation. Configurable per role.</p>
-        </a>
-
         <a href="/discover/build-curation" class="topic-card">
           <h2 class="card-title crt-text">Curation Workflow</h2>
           <p class="card-description crt-text">Review entities, adjust relationships, refine metrics, lock definitions. Generation provides the draft—curation makes it accurate.</p>
         </a>
 
+        <a href="/discover/build-vpc" class="topic-card">
+          <h2 class="card-title crt-text">VPC Deployment</h2>
+          <p class="card-description crt-text">BYOC model—runs in your environment on AWS (ECS/EKS) or GCP (GKE/Cloud Run). No data transits public internet.</p>
+        </a>
+
+      </div>
+
+      <!-- CTA -->
+      <div class="cta-row">
+        <a href="/contact" class="cta-button crt-text">Contact Us</a>
       </div>
 
     </div>
@@ -141,5 +141,29 @@ import Layout from '../layouts/Layout.astro';
     color: var(--color-navy-700);
     line-height: 1.5;
     margin: 0;
+  }
+
+  .cta-row {
+    margin-top: 3rem;
+    text-align: center;
+  }
+
+  .cta-button {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    transition: all 0.15s ease;
+    display: inline-block;
+    border: 2px solid var(--color-navy-900);
+    color: var(--color-navy-900);
+  }
+
+  .cta-button:hover {
+    background: var(--color-navy-900);
+    color: var(--color-background);
+    text-decoration: none;
   }
 </style>

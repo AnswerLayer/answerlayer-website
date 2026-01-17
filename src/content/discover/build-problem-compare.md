@@ -1,14 +1,7 @@
 ---
 title: "Comparison with existing tools"
-options:
-  - label: "See generation in action"
-    target: "build-generation"
-  - label: "Review security considerations"
-    target: "build-security"
-  - label: "Evaluate pricing"
-    target: "build-evaluate"
-  - label: "Back"
-    target: "build-problem"
+# ORPHANED
+options: []
 external: false
 externalUrl: null
 ---

@@ -1,21 +1,21 @@
 ---
 title: "Credential handling"
 options:
-  - label: "Review full security model"
-    target: "build-security"
+  - label: "Visit Trust Centre"
+    target: "external-trust"
   - label: "See compliance certifications"
     target: "build-compliance"
+  - label: "Security questions?"
+    target: "external-contact"
   - label: "Back"
     target: "build-security"
 external: false
 externalUrl: null
 ---
-Database credentials are handled with defense in depth:
+Database credentials stay entirely within your infrastructure:
 
-- **Encryption at rest** — AES-256 encryption in customer secret store
-- **Encryption in transit** — TLS 1.3 for all connections
-- **No persistence** — Credentials loaded into memory only when needed
-- **Rotation support** — Credential rotation without downtime
-- **Audit logging** — All credential access logged
+- Stored in your cloud secret manager (AWS Secrets Manager or GCP Secret Manager)
+- Read directly by the AnswerLayer service running in your VPC
+- Never transmitted to or accessible by AnswerLayer
 
-Credentials never transit AnswerLayer infrastructure. They remain within customer cloud.
+Your cloud provider's encryption, access controls, and audit logging apply.

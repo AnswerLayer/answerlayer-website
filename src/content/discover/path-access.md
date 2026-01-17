@@ -5,11 +5,18 @@ options:
     target: "access-how"
   - label: "Review security and trust"
     target: "access-security"
-  - label: "Try it out"
-    target: "external-demo"
+  - label: "Evaluate for purchase"
+    target: "access-evaluate"
   - label: "Back"
     target: "branch-root"
 external: false
 externalUrl: null
 ---
-Databases contain answers. Getting those answers typically requires SQL expertise or waiting for someone who has it. AnswerLayer enables natural language questions against any database, with consistent and trustworthy results.
+Organizations suffer from data misalignment:
+
+- **Different teams pull different numbers** — Sales says revenue is X, finance says Y
+- **Definitions drift over time** — What "active user" means changes but nobody updates the dashboard
+- **New hires struggle to find anything** — Tribal knowledge locked in senior employees' heads
+- **AI tools hallucinate** — ChatGPT invents plausible-sounding but wrong queries
+
+The semantic layer creates alignment. One definition. One source of truth. Every question answered consistently.

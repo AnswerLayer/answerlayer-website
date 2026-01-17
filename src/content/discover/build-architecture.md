@@ -1,14 +1,7 @@
 ---
 title: "System architecture"
-options:
-  - label: "See deployment options"
-    target: "build-deployment"
-  - label: "Review security model"
-    target: "build-security"
-  - label: "Evaluate pricing"
-    target: "build-evaluate"
-  - label: "Back"
-    target: "build-problem-technical"
+# ORPHANED
+options: []
 external: false
 externalUrl: null
 ---

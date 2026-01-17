@@ -1,14 +1,7 @@
 ---
 title: "Problems AnswerLayer solves"
-options:
-  - label: "Waiting for the data team"
-    target: "access-waiting"
-  - label: "Getting inconsistent numbers"
-    target: "access-inconsistent"
-  - label: "AI tools that hallucinate"
-    target: "access-hallucination"
-  - label: "Back"
-    target: "path-access"
+# ORPHANED
+options: []
 external: false
 externalUrl: null
 ---

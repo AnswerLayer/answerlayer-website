@@ -1,12 +1,7 @@
 ---
 title: "PII protection"
-options:
-  - label: "Review full security model"
-    target: "access-security"
-  - label: "See compliance details"
-    target: "build-compliance"
-  - label: "Back"
-    target: "access-guardrails"
+# ORPHANED
+options: []
 external: false
 externalUrl: null
 ---
