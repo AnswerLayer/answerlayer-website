@@ -207,5 +207,25 @@
 
 ---
 
+### 35. External Links Added to Discover Pages
+- **Status:** Complete
+- **Changes:** Added external links (demo, contact, pricing, architecture, customers) to 17 discover pages with fewer than 4 options
+- **Label variations:** Contextual labels instead of repetitive "Book a call" / "View architecture"
+  - Demo: "Talk to us", "Schedule a call", "See a demo", "Request a demo", "See it in action"
+  - Contact: "Request an integration", "Questions?", "Discuss deployment", "Need help?"
+  - Architecture: "How it all connects", "Technical deep-dive", "System overview"
+
+### 36. Layout and Spacing Cleanup
+- **Status:** Complete
+- **Changes:**
+  - Centralized 2rem header-to-content spacing in Layout.astro (main element)
+  - Removed inline `padding-top: 2rem` from 10 static pages
+  - Removed `padding-top: 2rem` from discover page component CSS
+  - Removed unused `.page-spacer` div from Layout.astro
+  - Fixed home routing: Back buttons now go to `/` instead of `/discover`
+  - Refactored duplicate URL logic in discover page to use `getOptionUrl()`
+
+---
+
 ## Review Complete
 25 connected content pages reviewed and approved.

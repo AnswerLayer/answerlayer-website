@@ -53,7 +53,7 @@ async function getOptionUrl(targetId: string): Promise<string> {
   if (targetEntry?.data.external && targetEntry.data.externalUrl) {
     return targetEntry.data.externalUrl;
   }
-  return targetId === 'home' ? '/discover' : `/discover/${targetId}`;
+  return targetId === 'home' ? '/' : `/discover/${targetId}`;
 }
 
 // Pre-compute option URLs
@@ -61,9 +61,7 @@ const optionData = await Promise.all(
   entry.data.options.map(async (opt) => {
     const targetEntry = await getEntry('discover', opt.target);
     const isExternal = targetEntry?.data.external ?? false;
-    const url = isExternal && targetEntry?.data.externalUrl
-      ? targetEntry.data.externalUrl
-      : (opt.target === 'home' ? '/discover' : `/discover/${opt.target}`);
+    const url = await getOptionUrl(opt.target);
 
     return {
       label: opt.label,
@@ -133,7 +131,6 @@ const optionData = await Promise.all(
     min-height: calc(100vh - 160px);
     display: flex;
     align-items: flex-start;
-    padding-top: 2rem;
   }
 
   @media (min-height: 700px) {
