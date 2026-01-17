@@ -5,7 +5,7 @@ options:
     target: "build-sampling"
   - label: "See the curation workflow"
     target: "build-curation"
-  - label: "View system architecture"
+  - label: "Technical deep-dive"
     target: "external-architecture"
   - label: "Back"
     target: "build-generation"

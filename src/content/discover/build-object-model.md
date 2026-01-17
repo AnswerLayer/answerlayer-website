@@ -1,7 +1,7 @@
 ---
 title: "The semantic layer object model"
 options:
-  - label: "View system architecture"
+  - label: "How it all connects"
     target: "external-architecture"
   - label: "Book a call"
     target: "external-demo"
