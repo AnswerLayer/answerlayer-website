@@ -167,10 +167,29 @@
   - Added VPC Deployment card
   - 5 cards total, all linked to connected discover pages
 
+### 32. Path Build (`/discover/path-build.md`)
+- **Status:** Approved with changes
+- **Title:** "Building semantic layers"
+- **Changes:** Replaced copy with maintenance problem content (competitors, months of YAML, bottleneck)
+
+### 33. Path Access (`/discover/path-access.md`)
+- **Status:** Approved with changes
+- **Title:** "Accessing data through natural language"
+- **Changes:** Replaced copy with alignment problem content (tribal knowledge, misalignment, AI hallucination)
+
+### 34. About Page (`/src/pages/about.astro`)
+- **Status:** Approved with changes
+- **Changes:**
+  - Updated Build card copy (institutional knowledge framing)
+  - Updated Access card copy (consistent answers, no waiting)
+  - Vision, Backing, Supporting Cast remain static
+
 ---
 
 ## Deleted Pages
 - build-deployment (redundant with BYOC positioning)
+- build-problem (merged into path-build)
+- access-alignment (merged into path-access)
 
 ## Orphaned Pages
 - access-maintenance
