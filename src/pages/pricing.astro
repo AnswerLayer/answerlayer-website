@@ -24,33 +24,37 @@ import Layout from '../layouts/Layout.astro';
       <div class="card-grid">
 
         <a href="https://app.getanswerlayer.com/sign-up" target="_blank" rel="noopener" class="topic-card">
-          <h2 class="card-title crt-text">Free ↗</h2>
+          <h2 class="card-title crt-text">Free For Now ↗</h2>
           <p class="card-badge crt-text">Cloud Hosted</p>
           <ul class="card-list">
-            <li class="crt-text">Semantic layer generation</li>
             <li class="crt-text">Natural language queries</li>
             <li class="crt-text">Multi-database connectivity</li>
-            <li class="crt-text">Real-time processing</li>
-            <li class="crt-text">Automated insights</li>
+            <li class="crt-text">CSV file uploads</li>
+            <li class="crt-text">Secure encrypted connections</li>
             <li class="crt-text">Community support</li>
-            <li class="crt-text">SOC 2 in progress</li>
+            <li class="crt-text">1000 free credits</li>
           </ul>
           <p class="card-description crt-text" style="margin-top: 0.75rem;">We're building the future of data access. Early users help shape the roadmap. No credit card required.</p>
         </a>
 
         <a href="https://calendly.com/josh-getanswerlayer/30min" target="_blank" rel="noopener" class="topic-card">
-          <h2 class="card-title crt-text">Pro ↗</h2>
+          <h2 class="card-title crt-text">Not Free ↗</h2>
           <p class="card-badge crt-text">Bring Your Own Cloud</p>
-          <ul class="card-list">
-            <li class="crt-text">Everything in Free</li>
-            <li class="crt-text">Deploy in your AWS or GCP</li>
+          <ul class="card-list two-column">
+            <li class="crt-text">Semantic layer generation</li>
+            <li class="crt-text">Unlimited user seats</li>
+            <li class="crt-text">Collaborative knowledge capture</li>
+            <li class="crt-text">Continuous learning</li>
             <li class="crt-text">Complete data sovereignty</li>
+            <li class="crt-text">Dedicated support</li>
+            <li class="crt-text">Deploy in your AWS or GCP</li>
             <li class="crt-text">VPC deployment</li>
             <li class="crt-text">Custom SSO/SAML</li>
             <li class="crt-text">Audit logging</li>
-            <li class="crt-text">Dedicated support & SLA</li>
+            <li class="crt-text">SLA guarantee</li>
+            <li class="crt-text">Priority feature requests</li>
           </ul>
-          <p class="card-description crt-text" style="margin-top: 0.75rem;">Data never leaves your infrastructure. For regulated industries and strict security requirements.</p>
+          <p class="card-description crt-text" style="margin-top: 0.75rem;">Security, privacy, and regulatory standards supported.</p>
         </a>
 
       </div>
@@ -157,6 +161,15 @@ import Layout from '../layouts/Layout.astro';
     position: absolute;
     left: 0;
     color: var(--color-navy-500);
+  }
+
+  .card-list.two-column {
+    columns: 2;
+    column-gap: 1.5rem;
+  }
+
+  .card-list.two-column li {
+    break-inside: avoid;
   }
 
   .card-description {
