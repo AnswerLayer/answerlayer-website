@@ -2,6 +2,6 @@
 title: "Request Demo"
 options: []
 external: true
-externalUrl: "/contact"
+externalUrl: "https://calendly.com/josh-getanswerlayer/30min"
 ---
 Redirecting to demo request...
