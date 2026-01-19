@@ -1,5 +1,5 @@
 ---
-title: "The semantic layer object model"
+title: "An Object Model Example"
 options:
   - label: "How it all connects"
     target: "external-architecture"
@@ -10,12 +10,12 @@ options:
 external: false
 externalUrl: null
 ---
-The semantic layer is composed of interconnected objects that define your data's business meaning:
+Here's an example of a semantic layer object model:
 
 - **Entities** — Core business objects like Customer, Order, Product (mapped to database tables)
-- **Measures** — Direct aggregations on entity columns (sums, counts, averages)
-- **Metrics** — Business-level calculations built from measures (simple, ratio, or derived)
-- **Dimensions** — Attributes used for grouping and segmentation
-- **Filters** — Reusable conditions for common data slices
+- **Measures** — Direct aggregations like total revenue, order count, average value
+- **Metrics** — Business calculations like growth rate, conversion rate, lifetime value
+- **Dimensions** — Attributes for grouping like region, category, segment
+- **Filters** — Reusable conditions like active users, last 30 days, high value
 
-Together, these objects form a navigable map of your business domain.
+These objects connect to form a navigable map of your business domain.
