@@ -23,10 +23,14 @@ import Layout from '../layouts/Layout.astro';
       <!-- Card Grid -->
       <div class="card-grid">
 
-        <a href="https://app.getanswerlayer.com/sign-up" target="_blank" rel="noopener" class="topic-card">
-          <h2 class="card-title crt-text">Free Cloud ↗</h2>
+        <div class="topic-card">
+          <h2 class="card-title crt-text">Free Cloud</h2>
           <p class="card-description crt-text">Start immediately with our hosted platform. No credit card required, encrypted connections. Limited capabilities.</p>
-        </a>
+          <div class="card-links">
+            <a href="https://app.getanswerlayer.com/sign-up" target="_blank" rel="noopener" class="card-link crt-text">Sign Up ↗</a>
+            <a href="https://app.getanswerlayer.com/sign-in" target="_blank" rel="noopener" class="card-link crt-text">Sign In ↗</a>
+          </div>
+        </div>
 
         <a href="https://calendly.com/josh-getanswerlayer/30min" target="_blank" rel="noopener" class="topic-card">
           <h2 class="card-title crt-text">Bring Your Own Cloud ↗</h2>
@@ -124,5 +128,28 @@ import Layout from '../layouts/Layout.astro';
     color: var(--color-navy-700);
     line-height: 1.5;
     margin: 0;
+  }
+
+  .card-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 0.75rem;
+  }
+
+  .card-link {
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-navy-900);
+    text-decoration: none;
+    border-bottom: 1px solid var(--color-navy-400);
+    padding-bottom: 0.125rem;
+  }
+
+  .card-link:hover {
+    border-color: var(--color-navy-900);
+    text-decoration: none;
   }
 </style>
