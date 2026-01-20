@@ -1,11 +1,11 @@
 ---
-title: "DATA LANGUAGE FOR DATA CULTURE"
+title: "Knowledge is precious."
 options:
   - label: "Continue"
     target: "branch-root"
 external: false
 externalUrl: null
 ---
-Institutional knowledge is precious. The people who understand data become bottlenecks, and everyone else waits.
+New knowledge is derived from data. Creating knowledge creates value. The people with existing knowledge become bottlenecks, and everyone else waits. 
 
-AnswerLayer captures that knowledge—so anyone can ask valuable questions and get consistent answers.
+AnswerLayer captures existing institutional knowledge about data systems—so anyone can ask valuable questions and get consistent answers.
