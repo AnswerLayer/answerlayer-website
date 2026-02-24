@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
+import vercel from '@astrojs/vercel';
 
 import tailwindcss from '@tailwindcss/vite';
 
@@ -10,6 +11,7 @@ import react from '@astrojs/react';
 export default defineConfig({
   site: 'https://www.answerlayer.io',
   integrations: [sitemap(), react()],
+  adapter: vercel(),
 
   vite: {
     plugins: [tailwindcss()],
