@@ -1,0 +1,20 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "destination": "https://www.answerlayer.io/:path*",
+      "permanent": true,
+      "has": [
+        { "type": "host", "value": "getanswerlayer.com" }
+      ]
+    },
+    {
+      "source": "/:path*",
+      "destination": "https://www.answerlayer.io/:path*",
+      "permanent": true,
+      "has": [
+        { "type": "host", "value": "www.getanswerlayer.com" }
+      ]
+    }
+  ]
+}

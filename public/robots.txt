@@ -17,7 +17,7 @@ Disallow: */private/
 Disallow: */temp/
 
 # Specify sitemap location
-Sitemap: https://www.getanswerlayer.com/sitemap.xml
+Sitemap: https://www.answerlayer.io/sitemap.xml
 
 # Crawl delay for slower bots
 User-agent: *

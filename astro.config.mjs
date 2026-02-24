@@ -8,7 +8,7 @@ import react from '@astrojs/react';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://www.getanswerlayer.com',
+  site: 'https://www.answerlayer.io',
   integrations: [sitemap(), react()],
 
   vite: {
