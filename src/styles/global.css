@@ -409,3 +409,24 @@ pre {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-navy-700);
 }
+
+/* ----------------------------------------
+   Legal Pages (Terms, Privacy)
+   ---------------------------------------- */
+.legal-content {
+  max-width: 800px;
+}
+
+.legal-content h2 {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+}
+
+.legal-content h3 {
+  font-size: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.legal-content ul {
+  font-family: var(--font-body);
+}
