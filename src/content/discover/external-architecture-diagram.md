@@ -2,6 +2,6 @@
 title: "Infrastructure Diagram"
 options: []
 external: true
-externalUrl: "/architecture-diagram.html"
+externalUrl: "/architecture-diagram"
 ---
 Redirecting to infrastructure diagram...
