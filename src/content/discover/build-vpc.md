@@ -5,6 +5,8 @@ options:
     target: "build-cloud-choice"
   - label: "Review compliance"
     target: "build-compliance"
+  - label: "View infrastructure diagram"
+    target: "external-architecture-diagram"
   - label: "Ask about deployment"
     target: "external-contact"
   - label: "Back"

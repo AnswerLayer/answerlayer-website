@@ -84,6 +84,16 @@ import Layout from '../layouts/Layout.astro';
           </div>
         </a>
 
+        <a href="/architecture-diagram.html" class="topic-card">
+          <div class="card-visual">
+            <div class="visual-pattern diagram"></div>
+          </div>
+          <div class="card-content">
+            <h2 class="card-title">Infrastructure Diagram</h2>
+            <p class="card-description">Full architecture diagram showing VPC, ECS Fargate, RDS, ALB, S3, Secrets Manager, and Bedrock VPC endpoint layout.</p>
+          </div>
+        </a>
+
       </div>
 
       <!-- CTA -->
@@ -229,6 +239,31 @@ import Layout from '../layouts/Layout.astro';
 
   .visual-pattern.azure::before {
     content: "AZ";
+  }
+
+  .visual-pattern.diagram {
+    border: 2px solid var(--color-navy-500);
+    position: relative;
+  }
+
+  .visual-pattern.diagram::before {
+    content: "";
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 18px;
+    height: 14px;
+    border: 2px solid var(--color-navy-500);
+  }
+
+  .visual-pattern.diagram::after {
+    content: "";
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    width: 18px;
+    height: 14px;
+    border: 2px solid var(--color-navy-500);
   }
 
   .visual-pattern.timeline {
