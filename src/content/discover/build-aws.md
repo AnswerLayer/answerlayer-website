@@ -1,6 +1,8 @@
 ---
 title: "AWS deployment"
 options:
+  - label: "View infrastructure diagram"
+    target: "external-architecture-diagram"
   - label: "Discuss deployment"
     target: "external-contact"
   - label: "See pricing"
