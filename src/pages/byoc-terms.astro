@@ -1,0 +1,153 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout
+  title="BYOC Deployment Terms - AnswerLayer"
+  description="AnswerLayer terms that apply to customer-hosted Bring Your Own Cloud deployments."
+>
+  <section class="section">
+    <div class="container legal-content">
+      <h1>BYOC Deployment Terms</h1>
+
+      <p class="text-sm text-gray-600 mb-2">Last updated: March 31, 2026</p>
+      <p class="text-sm text-gray-600 mb-8">
+        These terms supplement the <a href="/terms">Terms of Service</a> and apply only if you create,
+        manage, or use a Bring Your Own Cloud deployment of AnswerLayer.
+      </p>
+
+      <section class="mb-8">
+        <h2 class="mb-4">1. Scope</h2>
+        <p class="mb-4">
+          A Bring Your Own Cloud, or BYOC, deployment means an AnswerLayer deployment launched into
+          infrastructure controlled by you or your cloud provider account rather than solely hosted by
+          AnswerLayer.
+        </p>
+        <p class="mb-4">
+          These BYOC Deployment Terms apply in addition to the Terms of Service. If there is a
+          conflict between these BYOC Deployment Terms and the Terms of Service, these BYOC Deployment
+          Terms control for BYOC deployments.
+        </p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="mb-4">2. Your Cloud Environment</h2>
+        <p class="mb-4">
+          You are responsible for your cloud account, VPCs, networking, DNS, certificates, IAM,
+          logging, security controls, infrastructure costs, and any other resources used in
+          connection with your BYOC deployment.
+        </p>
+        <p class="mb-4">
+          You are also responsible for the accuracy of the deployment information you provide,
+          including AWS account identifiers, regions, domain configuration, and certificate details.
+        </p>
+        <p class="mb-4">
+          AnswerLayer is not responsible for failures, delays, outages, security events, or data
+          exposure caused by your cloud environment, your configuration choices, your cloud provider,
+          or third-party infrastructure under your control.
+        </p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="mb-4">3. Deployment and Operation</h2>
+        <p class="mb-4">
+          BYOC deployment workflows may provision or configure infrastructure in your environment
+          using third-party deployment tooling, cloud provider workflows, and CloudFormation or
+          similar templates.
+        </p>
+        <p class="mb-4">
+          You are responsible for reviewing deployment parameters before launch and for determining
+          whether the resulting environment is appropriate for your security, operational, legal, and
+          compliance requirements.
+        </p>
+        <p class="mb-4">
+          AnswerLayer may modify supported deployment patterns, required inputs, or supported cloud
+          regions over time.
+        </p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="mb-4">4. Cloud Charges and Third-Party Terms</h2>
+        <p class="mb-4">
+          You are solely responsible for all charges from AWS and any other third-party providers used
+          in connection with a BYOC deployment, including compute, storage, networking, load
+          balancers, certificates, data transfer, logging, and related services.
+        </p>
+        <p class="mb-4">
+          Your use of AWS and any other third-party products or services is governed by the terms you
+          have with those providers. AnswerLayer is not responsible for third-party service
+          availability, changes, pricing, or deprecations.
+        </p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="mb-4">5. Security and Shared Responsibility</h2>
+        <p class="mb-4">
+          AnswerLayer is responsible only for the portions of the BYOC deployment workflow and
+          software that AnswerLayer expressly agrees to provide. You remain responsible for your
+          broader cloud security posture, access controls, secrets management, network boundaries,
+          compliance obligations, backups, and business continuity planning.
+        </p>
+        <p class="mb-4">
+          You should validate the security and correctness of your deployed environment before
+          production use, including by testing networking, certificates, monitoring, and access
+          policies.
+        </p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="mb-4">6. Data Handling in BYOC</h2>
+        <p class="mb-4">
+          In a BYOC deployment, Customer Data may be processed within infrastructure that you control,
+          but AnswerLayer and its subprocessors may still process deployment metadata, support data,
+          logs, diagnostics, and service-related information as needed to provide the platform,
+          support the deployment, and improve the Service, subject to the Terms of Service and
+          applicable law.
+        </p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="mb-4">7. Deletion and Deprovisioning</h2>
+        <p class="mb-4">
+          If you delete or tear down a BYOC deployment through AnswerLayer or its deployment tooling,
+          that action may trigger deprovisioning of infrastructure, applications, or related resources
+          in your cloud environment.
+        </p>
+        <p class="mb-4">
+          You are responsible for understanding the operational effect of deletion actions before you
+          take them. Deletion may result in downtime, loss of access, removal of deployed components,
+          or other irreversible effects.
+        </p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="mb-4">8. Support and Service Levels</h2>
+        <p class="mb-4">
+          Unless AnswerLayer expressly agrees otherwise in an order form, statement of work, or other
+          written agreement, BYOC deployments are provided without a separate service level agreement
+          and without any obligation to provide custom infrastructure operations, incident response, or
+          environment-specific remediation beyond standard product support.
+        </p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="mb-4">9. Termination</h2>
+        <p class="mb-4">
+          Termination of your account, subscription, or BYOC deployment does not by itself eliminate
+          obligations you may have to your cloud provider or other third parties. You remain
+          responsible for any ongoing cloud resources and charges unless and until those resources are
+          properly deprovisioned.
+        </p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="mb-4">10. Enterprise Agreements Control</h2>
+        <p class="mb-4">
+          If you and AnswerLayer have entered into a separate master services agreement, order form,
+          statement of work, or other written agreement covering BYOC deployments, that agreement will
+          control to the extent it conflicts with these BYOC Deployment Terms.
+        </p>
+      </section>
+    </div>
+  </section>
+</Layout>
