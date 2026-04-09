@@ -16,7 +16,7 @@ export default defineConfig({
   vite: {
     plugins: [tailwindcss()],
     server: {
-      allowedHosts: ['intel', 'intel.tail0b4a76.ts.net', 'dev.local'],
+      allowedHosts: ['intel', 'intel.tail0b4a76.ts.net', 'dev.local', 'studio', 'studio.tail0b4a76.ts.net'],
     }
   }
 });

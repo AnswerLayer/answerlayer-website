@@ -55,7 +55,30 @@ const blogCollection = defineCollection({
   }),
 });
 
+/**
+ * Docs Collection Schema
+ *
+ * Each markdown file represents a documentation page.
+ * Rendered at /docs/{slug}.
+ *
+ * Frontmatter fields:
+ * - title: Page title
+ * - description: Short description for SEO
+ * - order: Sort order within the sidebar (lower = higher)
+ * - section: Grouping label in the sidebar
+ */
+const docsCollection = defineCollection({
+  type: 'content',
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    order: z.number().default(100),
+    section: z.string().default('General'),
+  }),
+});
+
 export const collections = {
   discover: discoverCollection,
   blog: blogCollection,
+  docs: docsCollection,
 };
