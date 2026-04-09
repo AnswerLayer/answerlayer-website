@@ -2,6 +2,6 @@
 title: "Documentation"
 options: []
 external: true
-externalUrl: "https://docs.getanswerlayer.com"
+externalUrl: "/docs"
 ---
 Redirecting to documentation...
