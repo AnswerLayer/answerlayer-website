@@ -2,6 +2,6 @@
 title: "Documentation"
 options: []
 external: true
-externalUrl: "/docs"
+externalUrl: "/docs/overview"
 ---
 Redirecting to documentation...
