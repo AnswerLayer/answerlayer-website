@@ -19,7 +19,7 @@ Include the key in every request:
 
 ```bash
 curl https://app.answerlayer.io/api/v1/connections/ \
-  -H "X-API-Key: al_live_abc12345_yoursecretkey..."
+  -H "X-API-Key: $ANSWERLAYER_API_KEY"
 ```
 
 ## Scopes
@@ -60,7 +60,7 @@ These headers are opaque strings -- AnswerLayer stores them as-is for audit logg
 
 ```bash
 curl -N -X POST https://app.answerlayer.io/api/v1/inquiry/sessions/{session_id}/turns/stream \
-  -H "X-API-Key: al_live_abc12345_yoursecretkey..." \
+  -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "X-Subject-Org-ID: acme-widgets" \
   -H "X-Subject-User-ID: user-42" \
   -H "Content-Type: application/json" \

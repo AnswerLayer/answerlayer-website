@@ -11,7 +11,7 @@ Inquiries are multi-turn conversational sessions. Each session maintains context
 
 **Required scope:** `inquiry:execute`
 
-```
+```http
 POST /api/v1/inquiry/sessions
 ```
 
@@ -26,7 +26,7 @@ POST /api/v1/inquiry/sessions
 
 **Required scope:** `inquiry:execute`
 
-```
+```http
 POST /api/v1/inquiry/sessions/{session_id}/turns/stream
 ```
 
@@ -43,19 +43,19 @@ Submits a follow-up question within an existing session. The agent has access to
 ```bash
 # Create a session
 curl -X POST https://app.answerlayer.io/api/v1/inquiry/sessions \
-  -H "X-API-Key: al_live_abc12345_yoursecretkey..." \
+  -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"connection_id": "d290f1ee-6c54-4b01-90e6-d701748f0851"}'
 
 # Ask a question (streaming)
 curl -N -X POST https://app.answerlayer.io/api/v1/inquiry/sessions/{session_id}/turns/stream \
-  -H "X-API-Key: al_live_abc12345_yoursecretkey..." \
+  -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"question": "What are our top 10 customers by revenue?"}'
 
 # Follow up (agent remembers the previous context)
 curl -N -X POST https://app.answerlayer.io/api/v1/inquiry/sessions/{session_id}/turns/stream \
-  -H "X-API-Key: al_live_abc12345_yoursecretkey..." \
+  -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"question": "Now show me their month-over-month growth"}'
 ```
@@ -64,7 +64,7 @@ curl -N -X POST https://app.answerlayer.io/api/v1/inquiry/sessions/{session_id}/
 
 **Required scope:** `inquiry:read`
 
-```
+```http
 GET /api/v1/inquiry/sessions
 ```
 
@@ -72,7 +72,7 @@ GET /api/v1/inquiry/sessions
 
 **Required scope:** `inquiry:read`
 
-```
+```http
 GET /api/v1/inquiry/sessions/{session_id}
 ```
 

@@ -9,7 +9,7 @@ The AnswerLayer API provides programmatic access to a semantic layer and natural
 
 ## Base URL
 
-```
+```text
 https://app.answerlayer.io/api/v1
 ```
 
@@ -56,13 +56,13 @@ All requests use JSON. Include `Content-Type: application/json` for request bodi
 ```bash
 # Create a session
 curl -X POST https://app.answerlayer.io/api/v1/inquiry/sessions \
-  -H "X-API-Key: al_live_abc12345_yoursecretkey..." \
+  -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"connection_id": "your-connection-uuid"}'
 
 # Ask a question (streaming)
 curl -N -X POST https://app.answerlayer.io/api/v1/inquiry/sessions/{session_id}/turns/stream \
-  -H "X-API-Key: al_live_abc12345_yoursecretkey..." \
+  -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"question": "What's the month-over-month change in average order value for our top 5 regions?"}'
 ```

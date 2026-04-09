@@ -44,7 +44,7 @@ for (const doc of sorted) {
     <div class="docs-container">
 
       <!-- Sidebar -->
-      <nav class="docs-sidebar">
+      <nav class="docs-sidebar" aria-label="Documentation navigation">
         <a href="/docs" class="sidebar-home">Docs</a>
         {Object.entries(sections).map(([section, docs]) => (
           <div class="sidebar-section">
@@ -55,6 +55,7 @@ for (const doc of sorted) {
                   <a
                     href={`/docs/${doc.slug}`}
                     class:list={['sidebar-link', { active: doc.slug === slug }]}
+                    aria-current={doc.slug === slug ? 'page' : undefined}
                   >
                     {doc.data.title}
                   </a>

@@ -9,9 +9,7 @@ Connections represent a link to your data warehouse. AnswerLayer supports Postgr
 
 ## List connections
 
-**Required scope:** `query:execute` (for API key auth)
-
-```
+```http
 GET /api/v1/connections/
 ```
 
@@ -19,7 +17,7 @@ Returns all active connections for the organization.
 
 ## Test a connection
 
-```
+```http
 POST /api/v1/connections/{connection_id}/test_existing
 ```
 
@@ -27,7 +25,7 @@ Tests that an existing connection can reach the database.
 
 ## Schema metadata
 
-```
+```http
 GET /api/v1/connections/{connection_id}/schema
 ```
 
@@ -46,7 +44,7 @@ AnswerLayer also supports direct file uploads as data sources:
 
 ```bash
 curl -X POST https://app.answerlayer.io/api/v1/csv/upload \
-  -H "X-API-Key: al_live_abc12345_yoursecretkey..." \
+  -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -F "file=@sales_data.csv" \
   -F "name=Sales Data" \
   -F "has_header=true" \

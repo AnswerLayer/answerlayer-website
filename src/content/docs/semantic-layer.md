@@ -24,7 +24,7 @@ Each component type has a streaming generation endpoint that uses AI to analyze 
 
 **Required scope:** `semantic:generate`
 
-```
+```http
 POST /api/v1/semantic/{component}/generate/stream
 ```
 
@@ -34,7 +34,7 @@ Where `{component}` is one of: `entities`, `relationships`, `dimensions`, `measu
 
 ```bash
 curl -N -X POST https://app.answerlayer.io/api/v1/semantic/entities/generate/stream \
-  -H "X-API-Key: al_live_abc12345_yoursecretkey..." \
+  -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
     "connection_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
@@ -46,7 +46,7 @@ curl -N -X POST https://app.answerlayer.io/api/v1/semantic/entities/generate/str
 
 **Required scope:** `semantic:read`
 
-```
+```http
 GET /api/v1/semantic/{component}?connection_id={uuid}
 ```
 
@@ -65,14 +65,114 @@ Returns all components of the given type for a connection.
 
 ## Generation jobs
 
-For long-running generation tasks, use the jobs API:
+Generation is a long-running, interactive process. The agent analyzes your schema, but periodically needs human input to make decisions -- for example, choosing which tables represent core entities, or clarifying business logic for a metric definition. This human-in-the-loop pattern is called **guidance**.
 
-**Required scope:** `semantic:generate` (create, cancel, provide guidance) or `semantic:read` (list, get status)
+### Job lifecycle
+
+```text
+QUEUED → RUNNING → AWAITING_GUIDANCE → RUNNING → ... → COMPLETED
+                                                    └→ FAILED
+                                                    └→ CANCELLED
+```
+
+1. **Create** a job -- status starts as `queued`
+2. **Stream** the job -- connects via SSE, agent starts running
+3. Agent hits a decision point -- status moves to `awaiting_guidance`, the stream emits a `guidance_needed` event with questions
+4. **Poll questions** or read from the stream to get what the agent is asking
+5. **Provide guidance** -- submit answers, agent unblocks and continues automatically
+6. Steps 3-5 repeat until the agent completes or fails
+
+### Endpoints
 
 | Operation | Method | Path | Scope |
 |-----------|--------|------|-------|
 | Create job | POST | `/api/v1/semantic/jobs` | `semantic:generate` |
-| List jobs | GET | `/api/v1/semantic/jobs` | `semantic:read` |
+| Stream job | GET | `/api/v1/semantic/jobs/{id}/stream` | `semantic:generate` |
+| Get pending questions | GET | `/api/v1/semantic/jobs/{id}/questions` | `semantic:read` |
+| Provide guidance | POST | `/api/v1/semantic/jobs/{id}/guidance` | `semantic:generate` |
 | Get job status | GET | `/api/v1/semantic/jobs/{id}/status` | `semantic:read` |
+| List jobs | GET | `/api/v1/semantic/jobs` | `semantic:read` |
 | Cancel job | POST | `/api/v1/semantic/jobs/{id}/cancel` | `semantic:generate` |
-| Stream job output | GET | `/api/v1/semantic/jobs/{id}/stream` | `semantic:generate` |
+
+### Create a job
+
+```bash
+curl -X POST https://app.answerlayer.io/api/v1/semantic/jobs \
+  -H "X-API-Key: $ANSWERLAYER_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "connection_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+    "component_type": "entities",
+    "prompt": "Focus on the e-commerce tables, ignore internal audit tables"
+  }'
+```
+
+`component_type` is one of: `entities`, `relationships`, `dimensions`, `measures`, `metrics`, `filters`.
+
+The optional `prompt` field provides business context that guides the agent's decisions.
+
+Returns `409 Conflict` if an active job already exists for this connection and component type.
+
+### Stream a job
+
+```bash
+curl -N https://app.answerlayer.io/api/v1/semantic/jobs/{job_id}/stream \
+  -H "X-API-Key: $ANSWERLAYER_API_KEY"
+```
+
+Returns an SSE stream. Event types include:
+
+| Event type | Meaning |
+|-----------|---------|
+| `progress` | Agent is working -- includes a summary of what it's doing |
+| `guidance_needed` | Agent is blocked and needs human input (see below) |
+| `complete` | Generation finished successfully |
+| `error` | Generation failed |
+
+### Handling guidance
+
+When the stream emits a `guidance_needed` event, the job is paused. The event payload contains the questions:
+
+```json
+{
+  "type": "guidance_needed",
+  "job_id": "abc-123",
+  "questions": [
+    {
+      "question_id": "q1",
+      "question": "Should 'audit_log' be treated as a core entity or excluded?",
+      "context": "This table has 50M rows and is referenced by 3 other tables.",
+      "options": ["Include as entity", "Exclude"],
+      "allow_freeform": true
+    }
+  ]
+}
+```
+
+You can also poll for pending questions:
+
+```bash
+curl https://app.answerlayer.io/api/v1/semantic/jobs/{job_id}/questions \
+  -H "X-API-Key: $ANSWERLAYER_API_KEY"
+```
+
+Submit answers to resume the agent:
+
+```bash
+curl -X POST https://app.answerlayer.io/api/v1/semantic/jobs/{job_id}/guidance \
+  -H "X-API-Key: $ANSWERLAYER_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "responses": [
+      {"question_id": "q1", "answer": "Exclude -- this is an internal audit table"}
+    ]
+  }'
+```
+
+The agent unblocks immediately and continues. No restart or reconnect is needed -- the SSE stream resumes with new progress events.
+
+### Integration patterns
+
+**Interactive UI**: Surface the questions in your admin dashboard. An operator reviews and answers them. This is how the AnswerLayer dashboard works.
+
+**Automated**: Use an LLM or rules engine to answer the guidance questions programmatically. The questions include context and often predefined options, so automated responses are feasible for many cases.
