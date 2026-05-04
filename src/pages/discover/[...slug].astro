@@ -6,7 +6,7 @@
  * External nodes redirect to their destinations.
  */
 import Layout from '../../layouts/Layout.astro';
-import { getCollection, getEntry } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 
 // Generate static paths for all non-external nodes
 export async function getStaticPaths() {
@@ -16,9 +16,9 @@ export async function getStaticPaths() {
   const pageNodes = allNodes.filter(node => !node.data.external);
 
   return pageNodes.map((node) => ({
-    // Use slug (without .md extension) for URL paths
-    params: { slug: node.slug === 'home' ? undefined : node.slug },
-    props: { nodeId: node.slug }
+    // Use id (without .md extension) for URL paths — Astro 5 content layer
+    params: { slug: node.id === 'home' ? undefined : node.id },
+    props: { nodeId: node.id }
   }));
 }
 
@@ -45,7 +45,7 @@ if (entry.data.external && entry.data.externalUrl) {
 }
 
 // Render the markdown content
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 
 // Build the option URLs with external URL lookups
 async function getOptionUrl(targetId: string): Promise<string> {

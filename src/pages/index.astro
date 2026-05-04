@@ -5,7 +5,7 @@
  * Minimal approach with W95FA body text, technical card, CRT effects
  */
 import Layout from '../layouts/Layout.astro';
-import { getEntry } from 'astro:content';
+import { getEntry, render } from 'astro:content';
 
 // Fetch the home node from the discover collection
 const homeEntry = await getEntry('discover', 'home');
@@ -13,7 +13,7 @@ if (!homeEntry) {
   throw new Error('Missing home.md in discover collection');
 }
 
-const { Content } = await homeEntry.render();
+const { Content } = await render(homeEntry);
 
 // Build option URLs (same logic as [...slug].astro)
 async function getOptionUrl(targetId: string): Promise<string> {
