@@ -7,13 +7,22 @@ section: Endpoints
 
 A saved query is a named, persisted record of an SQL query bound to a connection. It backs dashboard tiles and provides a stable reference for queries you want to reuse across users in your organization.
 
+**Required scopes:**
+
+| Operation | Scope |
+|---|---|
+| List, read | `saved_query:read` |
+| Create, update, delete | `saved_query:write` |
+
+`saved_query:*` grants both. `update` and `delete` are additionally restricted to the saved query's creator.
+
 ## Visibility
 
 Each saved query has a `visibility` value that controls who can see it:
 
 | Visibility | Who can see it |
 |---|---|
-| `private` *(default)* | The creator only. Admins also see all private saved queries in their organization. |
+| `private` *(default)* | The creator only. |
 | `org` | Anyone authenticated for the organization. |
 | `embed` | Anyone authenticated for the organization, plus embed contexts. |
 
