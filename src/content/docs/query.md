@@ -94,23 +94,4 @@ curl -X POST "https://app.answerlayer.io/api/v1/query/$CONNECTION_ID/export?form
   -o orders.xlsx
 ```
 
-## Agent stream
-
-**Required scope:** `query:execute`
-
-```http
-POST /api/v1/query/agent/stream
-```
-
-NL-to-SQL streaming endpoint. Submits a natural-language question and streams the agent's reasoning, generated SQL, and result rows over Server-Sent Events.
-
-### Request body
-
-| Field | Type | Required | Description |
-|---|---|---|---|
-| `question` | string | Yes | The natural language question |
-| `connection_id` | string (UUID) | Yes | Connection to query |
-| `chain_id` | string (UUID) | No | Existing chain to extend (multi-turn) |
-| `source` | string | No | Free-form provenance tag, e.g. `web`, `slack`, `mcp`. Default `web`. |
-
-For multi-turn conversational use, prefer [inquiry sessions](/docs/inquiry) — they manage chain state for you.
+For natural-language questions and multi-turn conversational use, see [inquiry sessions](/docs/inquiry).
