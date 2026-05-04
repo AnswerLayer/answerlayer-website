@@ -39,7 +39,7 @@ function formatDate(date: Date): string {
       <div class="card-grid">
 
         {posts.map((post) => (
-          <a href={`/blog/${post.slug}`} class="topic-card">
+          <a href={`/blog/${post.id}`} class="topic-card">
             <div class="card-header">
               <h2 class="card-title crt-text">{post.data.title}</h2>
               {post.data.draft && <span class="draft-tag">Draft</span>}

@@ -6,13 +6,13 @@
  * Includes a sidebar for navigation between doc pages.
  */
 import Layout from '../../layouts/Layout.astro';
-import { getCollection, getEntry } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const allDocs = await getCollection('docs');
   return allDocs.map((doc) => ({
-    params: { slug: doc.slug },
-    props: { slug: doc.slug },
+    params: { slug: doc.id },
+    props: { slug: doc.id },
   }));
 }
 
@@ -23,7 +23,7 @@ if (!entry) {
   return Astro.redirect('/docs');
 }
 
-const { Content } = await entry.render();
+const { Content } = await render(entry);
 
 // Build sidebar nav grouped by section
 const allDocs = await getCollection('docs');
@@ -53,9 +53,9 @@ for (const doc of sorted) {
               {docs.map((doc) => (
                 <li>
                   <a
-                    href={`/docs/${doc.slug}`}
-                    class:list={['sidebar-link', { active: doc.slug === slug }]}
-                    aria-current={doc.slug === slug ? 'page' : undefined}
+                    href={`/docs/${doc.id}`}
+                    class:list={['sidebar-link', { active: doc.id === slug }]}
+                    aria-current={doc.id === slug ? 'page' : undefined}
                   >
                     {doc.data.title}
                   </a>

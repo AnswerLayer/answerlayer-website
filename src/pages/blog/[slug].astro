@@ -5,7 +5,7 @@
  * Minimal layout focused on readability.
  */
 import Layout from '../../layouts/Layout.astro';
-import { getCollection } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import BlogEditor from '../../components/BlogEditor';
 
 const isDev = import.meta.env.DEV;
@@ -16,7 +16,7 @@ export async function getStaticPaths() {
   });
 
   return posts.map((post) => ({
-    params: { slug: post.slug },
+    params: { slug: post.id },
     props: { post }
   }));
 }
@@ -26,7 +26,7 @@ interface Props {
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
+const { Content } = await render(post);
 
 function formatDate(date: Date): string {
   return date.toLocaleDateString('en-US', {
@@ -76,7 +76,7 @@ function formatDate(date: Date): string {
     </div>
   </article>
 
-  {isDev && <BlogEditor slug={post.slug} client:only="react" />}
+  {isDev && <BlogEditor slug={post.id} client:only="react" />}
 </Layout>
 
 <style>

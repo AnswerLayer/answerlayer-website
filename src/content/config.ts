@@ -1,4 +1,5 @@
 import { defineCollection, z } from 'astro:content';
+import { glob } from 'astro/loaders';
 
 /**
  * Discover Collection Schema
@@ -13,7 +14,7 @@ import { defineCollection, z } from 'astro:content';
  * - externalUrl: The URL to redirect to (only used when external: true)
  */
 const discoverCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.md', base: './src/content/discover' }),
   schema: z.object({
     title: z.string(),
     options: z.array(z.object({
@@ -42,7 +43,7 @@ const discoverCollection = defineCollection({
  * - draft: If true, hidden from production builds
  */
 const blogCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.md', base: './src/content/blog' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
@@ -68,7 +69,7 @@ const blogCollection = defineCollection({
  * - section: Grouping label in the sidebar
  */
 const docsCollection = defineCollection({
-  type: 'content',
+  loader: glob({ pattern: '**/*.md', base: './src/content/docs' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),

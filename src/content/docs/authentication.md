@@ -47,9 +47,9 @@ Optionally, a key can be restricted to a single database connection. When set, t
 
 Set the connection when creating the key in the dashboard.
 
-## Runtime context headers
+## Runtime context headers (legacy mode)
 
-When embedding AnswerLayer into a multi-tenant application, pass your end-user's identity on each request using these headers:
+When embedding AnswerLayer into a multi-tenant application **and your organization has not registered an upstream IdP**, pass your end-user's identity on each request using these headers:
 
 | Header | Purpose | Example |
 |--------|---------|---------|
@@ -66,3 +66,26 @@ curl -N -X POST https://app.answerlayer.io/api/v1/inquiry/sessions/{session_id}/
   -H "Content-Type: application/json" \
   -d '{"question": "What was our revenue last quarter?"}'
 ```
+
+> These headers are **passthrough trust** -- AnswerLayer believes whatever string your backend sends. For production embedded integrations where end-user identity matters, register an IdP and use [verified subject tokens](#verified-subject-tokens) instead.
+
+## Verified subject tokens
+
+Once a T2 admin registers an upstream IdP (Okta, Auth0, Azure AD, etc.) for your organization, AnswerLayer requires a cryptographically verified end-user token on every protected request. The trusted-passthrough headers above are no longer accepted in IdP-configured mode.
+
+The flow:
+
+1. Your end-user authenticates with your IdP. Your backend gets a JWT.
+2. Your backend exchanges that JWT for an AnswerLayer-issued bearer token via `POST /api/v1/oauth/token`. See [Token Exchange](/docs/identity-broker/token-exchange).
+3. Subsequent API calls use the AnswerLayer token in the `Authorization` header instead of `X-API-Key`:
+
+```bash
+curl -X POST https://app.answerlayer.io/api/v1/inquiry/sessions \
+  -H "Authorization: Bearer $ANSWERLAYER_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{"connection_id": "..."}'
+```
+
+Subject context (which T3 sub-tenant, which T4 user) is encoded in the token's claims -- you don't pass it as separate headers. Scopes come from the RBAC mappings configured per-organization, not from the API key.
+
+Read the [Identity Broker overview](/docs/identity-broker/overview) before integrating.
