@@ -48,4 +48,9 @@ You start in API-key-only mode. The day a T2 admin registers an IdP, AnswerLayer
 
 ## Audit
 
-Every token exchange — success and failure — is recorded in the AnswerLayer audit log with the resolved sub-tenant, principal, mapped scopes, and IdP issuer. Subsequent API calls inherit the same correlation ID via the `X-Request-ID` header so a single end-user request can be traced across multiple AnswerLayer calls.
+Every token exchange — success and failure — is recorded in the AnswerLayer audit log.
+
+- **On success** the row carries the resolved sub-tenant, principal, mapped scopes, and IdP issuer.
+- **On failure** the row carries a `failure_reason` (signature mismatch, sub-tenant not registered, missing claim, etc.) and the `idp_issuer` when it could be determined from the unverified token. Earlier failures (malformed token, missing `iss`) won't have the issuer set.
+
+Subsequent API calls inherit the same correlation ID via the `X-Request-ID` header so a single end-user request can be traced across multiple AnswerLayer calls.

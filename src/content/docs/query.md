@@ -43,17 +43,56 @@ curl -X POST https://app.answerlayer.io/api/v1/query/$CONNECTION_ID \
 POST /api/v1/query/{connection_id}/validate
 ```
 
-Parses the SQL and rejects unsafe constructs (DDL, multi-statement, etc.) without running it. Returns 400 with a structured error on failure.
+Parses the SQL and reports whether it's safe to run, without executing it. Always returns `200`; the response body says whether it passed.
+
+### Response
+
+```json
+{
+  "is_valid": true,
+  "query_type": "select",
+  "tables": ["orders", "customers"],
+  "columns": ["amount", "customer_id"],
+  "warning": null
+}
+```
+
+On failure, the same shape with `is_valid: false`:
+
+```json
+{
+  "is_valid": false,
+  "error": "DDL statements are not permitted",
+  "query_type": "create",
+  "position": 0
+}
+```
 
 ## Export
 
 **Required scope:** `query:execute`
 
 ```http
-POST /api/v1/query/{connection_id}/export
+POST /api/v1/query/{connection_id}/export?format=csv
 ```
 
-Same body shape as `execute`, but returns the result set as a downloadable file rather than JSON. Format negotiated via `Accept: text/csv` or `Accept: application/json`.
+Same body shape as `execute`, but returns the result set as a downloadable file rather than JSON.
+
+### Query parameters
+
+| Name | Type | Default | Values |
+|---|---|---|---|
+| `format` | string | `csv` | `csv`, `json`, `excel` |
+
+### Example
+
+```bash
+curl -X POST "https://app.answerlayer.io/api/v1/query/$CONNECTION_ID/export?format=excel" \
+  -H "X-API-Key: $ANSWERLAYER_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"query": "SELECT * FROM orders LIMIT 10000"}' \
+  -o orders.xlsx
+```
 
 ## Agent stream
 

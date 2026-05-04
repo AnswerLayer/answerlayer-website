@@ -23,7 +23,7 @@ POST /api/v1/oauth/token
 |---|---|---|
 | `grant_type` | Yes | `urn:ietf:params:oauth:grant-type:token-exchange` |
 | `subject_token` | Yes | A JWT issued by your IdP for the end-user |
-| `subject_token_type` | Yes | `urn:ietf:params:oauth:token-type:jwt` |
+| `subject_token_type` | No | Defaults to `urn:ietf:params:oauth:token-type:jwt`, the only currently-supported value. RFC 8693 conformant clients should send it explicitly. |
 
 ```bash
 curl -X POST https://app.answerlayer.io/api/v1/oauth/token \
