@@ -29,6 +29,28 @@ GET /api/v1/saved-queries
 
 Returns saved queries the caller can see — their own private rows plus everything `visibility=org` or `visibility=embed` for the organization. Admins see all rows including other users' private ones.
 
+## List by dashboard
+
+```http
+GET /api/v1/dashboards/{dashboard_id}/saved-queries
+```
+
+Returns the id and name of every saved query referenced by a tile on the given dashboard. Use this to discover the saved-query IDs powering a dashboard you already know — typically before calling `POST /saved-queries/{id}/execute` to pull the underlying data.
+
+Tiles backed by ad-hoc inquiry turns are skipped. Soft-deleted saved queries are skipped. Results are de-duplicated when the same saved query backs multiple tiles. Standard dashboard read permissions apply (admins see everything in the org; dashboard-only users see only assigned dashboards).
+
+### Response
+
+```json
+{
+  "saved_queries": [
+    { "id": "5f1c7e3a-…", "name": "Revenue by region" },
+    { "id": "8a4b9d12-…", "name": "Active users (7d)" }
+  ],
+  "total": 2
+}
+```
+
 ## Create from SQL
 
 ```http
