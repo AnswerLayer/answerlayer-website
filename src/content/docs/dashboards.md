@@ -24,6 +24,47 @@ A `tile_key` must match `^[a-z][a-z0-9_]{0,99}$` — start with a lowercase lett
 
 A `tile_key` is unique within a dashboard. A tile with no `tile_key` set is returned in the manifest with `tile_key: null` — the host application should surface a configuration warning or skip the tile.
 
+## Visualization config
+
+Every manifest tile carries a typed **`visualization`** object describing how to render the tile's data. It tells the client which column plays which role — so you resolve a role to a column name and never hard-code column names.
+
+```json
+{
+  "chart_type": "metric",
+  "tile_key": "avg_engagement_score",
+  "encoding": { "kind": "metric", "value": "score", "label": "Avg Engagement" },
+  "raw": null
+}
+```
+
+| Field | Description |
+|---|---|
+| `chart_type` | One of `metric`, `bar`, `line`, `area`, `donut`, `table`. |
+| `tile_key` | The stable embedding key, or `null`. |
+| `encoding` | Role → column-name mapping for this chart type (see below). |
+| `raw` | Set only when the stored config could not be fully interpreted (an unrecognized chart type) — the original config dict, for fallback. `null` otherwise. |
+
+### Encoding by chart type
+
+`encoding.kind` discriminates the shape:
+
+| `chart_type` | `encoding` | Roles |
+|---|---|---|
+| `metric` | `{ "kind": "metric", "value", "label" }` | `value` — column holding the number |
+| `bar` / `line` / `area` | `{ "kind": "axis", "x", "y": [...], "series", "x_label", "y_label", "sort" }` | `x` — category/time column; `y` — one or more value columns; `series` — optional grouping column |
+| `donut` | `{ "kind": "donut", "label", "value" }` | `label` — category column; `value` — slice-size column |
+| `table` | `{ "kind": "table", "columns": [...] }` | `columns` — columns to show, in order; `null` means all |
+
+To render, resolve the role to a column name, then look up its index in the response `columns`:
+
+```js
+// metric tile
+const valueIdx = data.columns.indexOf(tile.visualization.encoding.value);
+const value = data.rows[0][valueIdx];
+```
+
+A tile published for embedding (one with a `tile_key`) is validated at save time to carry a complete encoding for its `chart_type` — a `metric` must name its `value` column, a `bar` its `x` and `y`, and so on — so an embed client can rely on the encoding being present. The raw stored form is still returned as `visualization_config`; prefer the typed `visualization`.
+
 ## Manifest
 
 ```http
@@ -43,6 +84,12 @@ Returns the dashboard's tiles and the URL to load each one's data. Performs no q
       "tile_id": "5f1c7e3a-8b2d-4c6e-9a1f-2e3d4c5b6a7f",
       "title": "Average engagement score",
       "tile_key": "avg_engagement_score",
+      "visualization": {
+        "chart_type": "metric",
+        "tile_key": "avg_engagement_score",
+        "encoding": { "kind": "metric", "value": "score", "label": "Avg Engagement" },
+        "raw": null
+      },
       "visualization_config": { "chart_type": "metric", "tile_key": "avg_engagement_score" },
       "data_url": "/api/v1/dashboards/d290f1ee-…/tiles/5f1c7e3a-…/data",
       "pagination": { "default_page_size": 1000, "max_page_size": 10000 }
@@ -56,7 +103,8 @@ Returns the dashboard's tiles and the URL to load each one's data. Performs no q
 | `tile_id` | The tile's UUID. Use it in the tile-data URL. |
 | `title` | Display text. Do not use as a contract key. |
 | `tile_key` | Stable embedding key, or `null` if unset. |
-| `visualization_config` | Render config — chart type, axes, formatting. |
+| `visualization` | Typed render contract — `chart_type` + per-type `encoding`. See [Visualization config](#visualization-config). |
+| `visualization_config` | The raw stored config dict. Prefer the typed `visualization`. |
 | `data_url` | Path to `POST` for this tile's data. |
 | `pagination` | `default_page_size` and `max_page_size` for tile-data requests. |
 
@@ -74,7 +122,7 @@ Executes the tile's saved query and returns its rows. Verifies the caller can ac
 |---|---|---|---|
 | `filters` | object | No | Parameter map applied to the tile's query. |
 | `pagination` | object | No | `{ "limit": int, "cursor": string }`. `limit` is capped at the manifest's `max_page_size`. |
-| `result_handle` | string | No | Continue paging an earlier result. See [Result handles](/docs/query-results). |
+| `result_handle` | string | No | Continue paging an earlier result. Must be a handle this same tile produced — a handle from another tile is rejected with `404`. See [Result handles](/docs/query-results). |
 
 ### Response
 
@@ -89,7 +137,8 @@ Executes the tile's saved query and returns its rows. Verifies the caller can ac
   "expires_at": null,
   "execution_time_ms": 8423,
   "computed_at": "2026-05-16T14:03:11Z",
-  "cache_hit": false
+  "cache_hit": false,
+  "encoding_warnings": []
 }
 ```
 
@@ -104,6 +153,7 @@ Executes the tile's saved query and returns its rows. Verifies the caller can ac
 | `execution_time_ms` | Source-database execution time. |
 | `computed_at` | When the underlying result was produced. |
 | `cache_hit` | `true` if served from cache without re-running the source query. |
+| `encoding_warnings` | Messages when the tile's `visualization.encoding` references a column the query did not return — e.g. the saved query was edited after the tile was configured. Empty when the encoding is consistent with the result. |
 
 ### Small vs. large results
 
