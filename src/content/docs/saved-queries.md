@@ -116,7 +116,7 @@ Returns `404` if the row doesn't exist or the caller's visibility doesn't includ
 POST /api/v1/saved-queries/{saved_query_id}/execute
 ```
 
-Resolves the saved query, then runs its SQL against its connection in one call. Same response shape as [`POST /api/v1/query/{connection_id}`](/docs/query#execute) — use this when you'd otherwise have to `GET` the saved query and then `POST` to `/query/{connection_id}` yourself.
+Resolves the saved query, then runs its SQL against its connection in one call. Use this when you'd otherwise have to `GET` the saved query and then `POST` to `/query/{connection_id}` yourself.
 
 The `connection_id` and `sql` come from the saved query record, not the request body.
 
@@ -127,8 +127,27 @@ Returns `404` if the saved query is missing or the caller's visibility doesn't i
 | Field | Type | Required | Description |
 |---|---|---|---|
 | `params` | object | No | Optional parameter map for parameterized queries |
-| `row_limit` | int | No | Caps the rows returned. Default 1000, max 10000. |
+| `row_limit` | int | No | Caps the rows fetched from the source. Default 1000, max 100000. |
 | `timeout` | int | No | Seconds. Default 30, max 120. |
+
+### Response
+
+The response is a paginated envelope:
+
+```json
+{
+  "columns": ["customer_id", "revenue"],
+  "rows": [["c_1029", 84210.55], ["c_0837", 79110.10]],
+  "row_count": 2,
+  "total_rows": 2,
+  "execution_time_ms": 412,
+  "next_cursor": null,
+  "result_handle": null,
+  "expires_at": null
+}
+```
+
+A result at or below 1,000 rows is returned **inline** — every row in this response, with `next_cursor` and `result_handle` both `null`. A larger result is **materialized**: the response carries the first page plus a `result_handle` and a `next_cursor`. Page through the rest with [`GET /api/v1/query-results/{handle}`](/docs/query-results).
 
 ### Example
 
