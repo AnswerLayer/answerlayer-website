@@ -5,7 +5,7 @@ order: 35
 section: Endpoints
 ---
 
-A dashboard is a named collection of tiles. Each tile is backed by a saved query and carries a `visualization_config` describing how to render it. The embedded-dashboard endpoints let a host application render a dashboard with its own UI: first fetch a lightweight **manifest** to discover the tiles, then fetch each tile's data **on demand**.
+A dashboard is a named collection of tiles. Each tile is backed by a query source and carries a typed `visualization` contract describing how to render it. The embedded-dashboard endpoints let a host application render a dashboard with its own UI: first fetch a lightweight **manifest** to discover the tiles, then fetch each tile's data **on demand**.
 
 ## Load model
 
@@ -18,7 +18,7 @@ Embedded dashboards use a two-step load, and the split is deliberate:
 
 ## Tile keys
 
-A tile's stable identifier for embedding is its **`tile_key`** — a value you set under `visualization_config.tile_key`. Bind your UI regions to `tile_key`, never to the tile's `title` (titles are editable display text) or to response order.
+A tile's stable identifier for embedding is its **`tile_key`** — a value set on the tile's `visualization.tile_key`. Bind your UI regions to `tile_key`, never to the tile's `title` (titles are editable display text) or to response order.
 
 A `tile_key` must match `^[a-z][a-z0-9_]{0,99}$` — start with a lowercase letter, then lowercase letters, digits, and underscores, up to 100 characters. Examples: `avg_engagement_score`, `high_churn_risk`, `member_engagement_table`.
 
@@ -32,8 +32,14 @@ Every manifest tile carries a typed **`visualization`** object describing how to
 {
   "chart_type": "metric",
   "tile_key": "avg_engagement_score",
-  "encoding": { "kind": "metric", "value": "score", "label": "Avg Engagement" },
-  "raw": null
+  "encoding": {
+    "kind": "metric",
+    "value": "score",
+    "label": "Avg Engagement",
+    "indicator": "score_delta",
+    "indicator_label": "vs last month",
+    "indicator_format": "points"
+  }
 }
 ```
 
@@ -42,7 +48,6 @@ Every manifest tile carries a typed **`visualization`** object describing how to
 | `chart_type` | One of `metric`, `bar`, `line`, `area`, `donut`, `table`. |
 | `tile_key` | The stable embedding key, or `null`. |
 | `encoding` | Role → column-name mapping for this chart type (see below). |
-| `raw` | Set only when the stored config could not be fully interpreted (an unrecognized chart type) — the original config dict, for fallback. `null` otherwise. |
 
 ### Encoding by chart type
 
@@ -50,7 +55,7 @@ Every manifest tile carries a typed **`visualization`** object describing how to
 
 | `chart_type` | `encoding` | Roles |
 |---|---|---|
-| `metric` | `{ "kind": "metric", "value", "label" }` | `value` — column holding the number |
+| `metric` | `{ "kind": "metric", "value", "label", "indicator", "indicator_label", "indicator_format" }` | `value` — column holding the number; `indicator` — optional comparison/change column; `indicator_format` — optional `number`, `integer`, `percent`, or `points` |
 | `bar` / `line` / `area` | `{ "kind": "axis", "x", "y": [...], "series", "x_label", "y_label", "sort" }` | `x` — category/time column; `y` — one or more value columns; `series` — optional grouping column |
 | `donut` | `{ "kind": "donut", "label", "value" }` | `label` — category column; `value` — slice-size column |
 | `table` | `{ "kind": "table", "columns": [...] }` | `columns` — columns to show, in order; `null` means all |
@@ -63,7 +68,7 @@ const valueIdx = data.columns.indexOf(tile.visualization.encoding.value);
 const value = data.rows[0][valueIdx];
 ```
 
-A tile published for embedding (one with a `tile_key`) is validated at save time to carry a complete encoding for its `chart_type` — a `metric` must name its `value` column, a `bar` its `x` and `y`, and so on — so an embed client can rely on the encoding being present. The raw stored form is still returned as `visualization_config`; prefer the typed `visualization`.
+A tile published for embedding (one with a `tile_key`) is validated at save time to carry a complete encoding for its `chart_type` — a `metric` must name its `value` column, a `bar` its `x` and `y`, and so on — so an embed client can rely on the encoding being present.
 
 ## Manifest
 
@@ -87,10 +92,16 @@ Returns the dashboard's tiles and the URL to load each one's data. Performs no q
       "visualization": {
         "chart_type": "metric",
         "tile_key": "avg_engagement_score",
-        "encoding": { "kind": "metric", "value": "score", "label": "Avg Engagement" },
-        "raw": null
+        "encoding": {
+          "kind": "metric",
+          "value": "score",
+          "label": "Avg Engagement",
+          "indicator": "score_delta",
+          "indicator_label": "vs last month",
+          "indicator_format": "points"
+        }
       },
-      "visualization_config": { "chart_type": "metric", "tile_key": "avg_engagement_score" },
+      "expected_columns": ["score", "score_delta"],
       "data_url": "/api/v1/dashboards/d290f1ee-…/tiles/5f1c7e3a-…/data",
       "pagination": { "default_page_size": 1000, "max_page_size": 10000 }
     }
@@ -104,7 +115,7 @@ Returns the dashboard's tiles and the URL to load each one's data. Performs no q
 | `title` | Display text. Do not use as a contract key. |
 | `tile_key` | Stable embedding key, or `null` if unset. |
 | `visualization` | Typed render contract — `chart_type` + per-type `encoding`. See [Visualization config](#visualization-config). |
-| `visualization_config` | The raw stored config dict. Prefer the typed `visualization`. |
+| `expected_columns` | Column names referenced by the tile's visualization encoding. Use this for early configuration checks before loading data. |
 | `data_url` | Path to `POST` for this tile's data. |
 | `pagination` | `default_page_size` and `max_page_size` for tile-data requests. |
 
@@ -191,22 +202,9 @@ curl -X POST "https://app.answerlayer.io$DATA_URL_FOR_MEMBER_ENGAGEMENT_TABLE" \
   -d '{"pagination": {"limit": 500}}'
 #   → { "rows": [...500...], "result_handle": "a1b2…", "next_cursor": "eyJvZmZ…", … }
 
-# 5. Fetch the next page with the handle and cursor.
-curl "https://app.answerlayer.io/api/v1/query-results/a1b2…?cursor=eyJvZmZ…&limit=500" \
-  -H "X-API-Key: $ANSWERLAYER_API_KEY"
+# 5. Fetch the next page with the same tile data URL, handle, and cursor.
+curl -X POST "https://app.answerlayer.io$DATA_URL_FOR_MEMBER_ENGAGEMENT_TABLE" \
+  -H "X-API-Key: $ANSWERLAYER_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"result_handle": "a1b2…", "pagination": {"cursor": "eyJvZmZ…", "limit": 500}}'
 ```
-
-## Migrating from saved-query-name lookup
-
-Earlier integrations discovered a dashboard's data by calling [`GET /api/v1/dashboards/{id}/saved-queries`](/docs/saved-queries#list-by-dashboard), matching saved queries by `name`, and executing each one with `POST /api/v1/saved-queries/{id}/execute`.
-
-Prefer the manifest flow instead:
-
-| Was | Now |
-|---|---|
-| `GET /dashboards/{id}/saved-queries` then match on `name` | `GET /dashboards/{id}/manifest`, bind on `tile_key` |
-| `POST /saved-queries/{id}/execute` per query | `POST /dashboards/{id}/tiles/{tile_id}/data` per tile |
-| No pagination; whole table returned | Inline small results; `result_handle` + cursor for large ones |
-| Re-runs the source query every call | Cached; `cache_hit` reported |
-
-Names and titles are editable display text and should not be contract keys; `tile_key` is the stable handle. The manifest also returns the `data_url` per tile, so the client never constructs endpoint paths itself.
