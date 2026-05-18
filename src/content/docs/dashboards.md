@@ -58,7 +58,7 @@ Every manifest tile carries a typed **`visualization`** object describing how to
 | `metric` | `{ "kind": "metric", "value", "label", "indicator", "indicator_label", "indicator_format" }` | `value` — column holding the number; `indicator` — optional comparison/change column; `indicator_format` — optional `number`, `integer`, `percent`, or `points` |
 | `bar` / `line` / `area` | `{ "kind": "axis", "x", "y": [...], "series", "x_label", "y_label", "sort" }` | `x` — category/time column; `y` — one or more value columns; `series` — optional grouping column |
 | `donut` | `{ "kind": "donut", "label", "value" }` | `label` — category column; `value` — slice-size column |
-| `table` | `{ "kind": "table", "columns": [...] }` | `columns` — columns to show, in order; `null` means all |
+| `table` | `{ "kind": "table", "columns": [...], "roles": { ... } }` | `columns` — columns to show, in order; `null` means all. `roles` — optional stable role names mapped to result columns |
 
 To render, resolve the role to a column name, then look up its index in the response `columns`:
 
@@ -67,6 +67,34 @@ To render, resolve the role to a column name, then look up its index in the resp
 const valueIdx = data.columns.indexOf(tile.visualization.encoding.value);
 const value = data.rows[0][valueIdx];
 ```
+
+For table tiles, `roles` lets an embed client bind product behavior to semantic column roles without hard-coding source column names. `columns` still controls display order; `roles` is metadata for integration logic.
+
+```json
+{
+  "chart_type": "table",
+  "tile_key": "member_engagement_table",
+  "encoding": {
+    "kind": "table",
+    "columns": ["member_name", "score", "last_activity_at"],
+    "roles": {
+      "member_name": "member_name",
+      "engagement_score": "score",
+      "last_activity": "last_activity_at"
+    }
+  }
+}
+```
+
+```js
+// table tile
+const roles = tile.visualization.encoding.roles ?? {};
+const scoreColumn = roles.engagement_score;
+const scoreIdx = data.columns.indexOf(scoreColumn);
+const score = data.rows[0][scoreIdx];
+```
+
+Role names use the same stable-key format as `tile_key`: `^[a-z][a-z0-9_]{0,99}$`. Values are result column names returned by the tile query.
 
 A tile published for embedding (one with a `tile_key`) is validated at save time to carry a complete encoding for its `chart_type` — a `metric` must name its `value` column, a `bar` its `x` and `y`, and so on — so an embed client can rely on the encoding being present.
 
@@ -115,7 +143,7 @@ Returns the dashboard's tiles and the URL to load each one's data. Performs no q
 | `title` | Display text. Do not use as a contract key. |
 | `tile_key` | Stable embedding key, or `null` if unset. |
 | `visualization` | Typed render contract — `chart_type` + per-type `encoding`. See [Visualization config](#visualization-config). |
-| `expected_columns` | Column names referenced by the tile's visualization encoding. Use this for early configuration checks before loading data. |
+| `expected_columns` | Column names referenced by the tile's visualization encoding, including table `columns` and table `roles`. Use this for early configuration checks before loading data. |
 | `data_url` | Path to `POST` for this tile's data. |
 | `pagination` | `default_page_size` and `max_page_size` for tile-data requests. |
 
