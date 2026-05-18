@@ -19,7 +19,7 @@ Each saved query has a `visibility` value that controls who can see it:
 | `org` | Anyone authenticated for the organization. |
 | `embed` | Anyone authenticated for the organization, plus embed contexts. |
 
-`sql` and `connection_id` are immutable after creation. To change them, create a new saved query and delete the old one.
+`sql` and `connection_id` can be updated by the saved query's owner or an organization admin. Updating either field clears approval because the reviewed query text or source connection has changed.
 
 ## List
 
@@ -35,7 +35,9 @@ Returns saved queries the caller can see — their own private rows plus everyth
 GET /api/v1/dashboards/{dashboard_id}/saved-queries
 ```
 
-Returns the id and name of every saved query referenced by a tile on the given dashboard. Use this to discover the saved-query IDs powering a dashboard you already know — typically before calling `POST /saved-queries/{id}/execute` to pull the underlying data.
+Returns the id and name of every saved query referenced by a tile on the given dashboard.
+
+For embedded dashboard rendering, prefer [`GET /api/v1/dashboards/{dashboard_id}/manifest`](/docs/dashboards#manifest) and dashboard-scoped tile data. The manifest exposes tile keys, visualization encodings, and each tile's `data_url`; saved-query discovery is primarily for administration and legacy integrations.
 
 Tiles backed by ad-hoc inquiry turns are skipped. Soft-deleted saved queries are skipped. Results are de-duplicated when the same saved query backs multiple tiles. Standard dashboard read permissions apply (admins see everything in the org; dashboard-only users see only assigned dashboards).
 
@@ -164,7 +166,7 @@ curl -X POST https://app.answerlayer.io/api/v1/saved-queries/$SAVED_QUERY_ID/exe
 PATCH /api/v1/saved-queries/{saved_query_id}
 ```
 
-Partial update. Only `name`, `description`, and `visibility` are mutable.
+Partial update. `name`, `description`, `visibility`, `sql`, and `connection_id` are mutable. Updating `sql` or `connection_id` clears approval.
 
 Only the saved query's owner or an organization admin may update it.
 
