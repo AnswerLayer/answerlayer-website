@@ -1,0 +1,85 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+
+<Layout
+  title="Sub-processors - AnswerLayer"
+  description="Sub-processors authorized to process Personal Data on behalf of AnswerLayer."
+>
+  <section class="section">
+    <div class="container legal-content">
+      <h1>Sub-processors</h1>
+
+      <p class="text-sm text-gray-600 mb-8">Last updated: May 23, 2026</p>
+
+      <section class="mb-8">
+        <p class="mb-4">
+          This page lists the sub-processors AnswerLayer engages to Process Personal Data on behalf of its customers. Sub-processor changes are governed by the AnswerLayer Data Processing Addendum (DPA); AnswerLayer provides at least thirty (30) days' prior written notice of the addition or replacement of a sub-processor, during which a customer may object on reasonable data protection grounds.
+        </p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="mb-4">Authorized sub-processors</h2>
+
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm border-collapse mb-4">
+            <thead>
+              <tr class="border-b border-gray-300 text-left">
+                <th class="py-2 pr-4 font-semibold">Sub-processor</th>
+                <th class="py-2 pr-4 font-semibold">Service</th>
+                <th class="py-2 pr-4 font-semibold">Processing location</th>
+                <th class="py-2 font-semibold">Personal Data categories</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b border-gray-200 align-top">
+                <td class="py-3 pr-4">Amazon Web Services, Inc.</td>
+                <td class="py-3 pr-4">Hosting of AnswerLayer Control Plane</td>
+                <td class="py-3 pr-4">us-west-2 (Oregon, USA)</td>
+                <td class="py-3">Control Plane data, telemetry, audit logs</td>
+              </tr>
+              <tr class="border-b border-gray-200 align-top">
+                <td class="py-3 pr-4">Nuon, Inc.</td>
+                <td class="py-3 pr-4">BYOC deployment orchestration</td>
+                <td class="py-3 pr-4">United States</td>
+                <td class="py-3">Deployment metadata, infrastructure state</td>
+              </tr>
+              <tr class="border-b border-gray-200 align-top">
+                <td class="py-3 pr-4">Cloudflare, Inc.</td>
+                <td class="py-3 pr-4">Processing of Control Plane operational alerts (Cloudflare Workers)</td>
+                <td class="py-3 pr-4">Global (Cloudflare edge network)</td>
+                <td class="py-3">Non-content operational alerts and metrics (designed to exclude Personal Data)</td>
+              </tr>
+              <tr class="border-b border-gray-200 align-top">
+                <td class="py-3 pr-4">Clerk, Inc.</td>
+                <td class="py-3 pr-4">Authentication and identity management for access to the AnswerLayer software</td>
+                <td class="py-3 pr-4">United States</td>
+                <td class="py-3">Customer Personnel authentication data (name, work email, role, login credentials, session metadata)</td>
+              </tr>
+              <tr class="border-b border-gray-200 align-top">
+                <td class="py-3 pr-4">PostHog, Inc.</td>
+                <td class="py-3 pr-4">Product and usage analytics</td>
+                <td class="py-3 pr-4">United States (PostHog US Cloud)</td>
+                <td class="py-3">Customer Personnel identifiers and product usage events</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="mb-4">LLM inference</h2>
+        <p class="mb-4">
+          LLM inference is performed via Amazon Bedrock operating within the Customer Environment, in the Customer's own AWS account and region. The foundation model provider is engaged by Customer (through Customer's own relationship with Amazon Web Services) and is not an AnswerLayer sub-processor. Inference inputs and outputs do not traverse AnswerLayer-managed infrastructure.
+        </p>
+      </section>
+
+      <section class="mb-8">
+        <h2 class="mb-4">Notification of changes</h2>
+        <p class="mb-4">
+          AnswerLayer will provide customers with at least thirty (30) days' prior written notice of the addition or replacement of a sub-processor. Customers receiving such notice may object on reasonable data protection grounds; if the parties cannot resolve the objection in good faith, the customer may terminate the affected portion of the Services without penalty, in accordance with the DPA.
+        </p>
+      </section>
+    </div>
+  </section>
+</Layout>
