@@ -64,12 +64,12 @@ The fastest way to ship is to pass your end-user's identity as opaque strings on
 | `X-Subject-User-ID` | Identifies the individual end-user within that organization | `user-42` |
 
 ```bash
-curl -N -X POST https://app.answerlayer.io/api/v1/inquiry/sessions/{session_id}/turns/stream \
+curl -N -X POST https://app.answerlayer.io/api/v1/inquiry/sessions/{session_id} \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "X-Subject-Org-ID: acme-widgets" \
   -H "X-Subject-User-ID: user-42" \
   -H "Content-Type: application/json" \
-  -d '{"question": "What was our revenue last quarter?"}'
+  -d '{"user_input": "What was our revenue last quarter?"}'
 ```
 
 These headers are **passthrough trust** — AnswerLayer believes whatever string your backend sends and stores them on the audit trail. They are not stored on the API key itself.
