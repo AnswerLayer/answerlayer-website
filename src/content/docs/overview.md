@@ -61,10 +61,10 @@ curl -X POST https://app.answerlayer.io/api/v1/inquiry/sessions \
   -d '{"connection_id": "your-connection-uuid"}'
 
 # Ask a question (streaming)
-curl -N -X POST https://app.answerlayer.io/api/v1/inquiry/sessions/{session_id}/turns/stream \
+curl -N -X POST https://app.answerlayer.io/api/v1/inquiry/sessions/{session_id} \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"question": "What's the month-over-month change in average order value for our top 5 regions?"}'
+  -d '{"user_input": "What'\''s the month-over-month change in average order value for our top 5 regions?"}'
 ```
 
 ## Response format
