@@ -1,11 +1,11 @@
 ---
 title: "Generative Semantic Layers"
 description: "Why context-light AI tools fail on real data models, and an approach that samples actual data to generate semantic layer definitions."
-publishedAt: 2026-01-15
+publishedAt: 2026-03-15
 author: "Josh Harris"
 tags: ["semantic-layer", "ai", "data-analytics", "automation"]
 featured: true
-draft: true
+draft: false
 ---
 
 Over the past year I've evaluated around 70 AI tools for data systems and built multiple prototypes of my own. A pattern emerged: context-light solutions break down on realistic data models. Tools that rely on schema names alone, or simple prompting over table structures, produce outputs that look impressive in demos but fall apart when you point them at a warehouse with hundreds of tables, cryptic column names, and business logic encoded in ways that aren't obvious from the DDL.
