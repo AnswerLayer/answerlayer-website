@@ -5,7 +5,7 @@ publishedAt: 2026-06-07
 author: "Josh Harris"
 tags: ["semantic-layer", "ai", "data-analytics", "governance", "evals"]
 featured: true
-draft: true
+draft: false
 ---
 
 Anthropic recently published a post on [how their internal data team enables self-service analytics with Claude](https://claude.com/blog/how-anthropic-enables-self-service-data-analytics-with-claude). It's worth reading in full. There are negative results in it, the wins have token and latency costs attached, and at no point does it claim the model does the hard part on its own.
