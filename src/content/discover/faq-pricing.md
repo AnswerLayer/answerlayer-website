@@ -1,12 +1,7 @@
 ---
 title: "Pricing questions"
-options:
-  - label: "See pricing details"
-    target: "external-pricing"
-  - label: "Contact sales"
-    target: "external-demo"
-  - label: "Back"
-    target: "faq-root"
+# ORPHANED
+options: []
 external: false
 externalUrl: null
 ---

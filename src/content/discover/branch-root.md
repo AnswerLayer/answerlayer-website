@@ -1,13 +1,15 @@
 ---
-title: "Discovering AnswerLayer"
+title: "What Brings You Here?"
 options:
   - label: "Build data definitions"
     target: "path-build"
-  - label: "Query databases"
+  - label: "Get answers"
     target: "path-access"
+  - label: "Talk to us"
+    target: "external-demo"
   - label: "Back"
     target: "home"
 external: false
 externalUrl: null
 ---
-AnswerLayer bridges the gap between raw databases and meaningful business questions. There are two ways to approach this.
+If you're the one everyone asks about data, we can help you scale that knowledge. If you're the one doing the asking, we can get you answers faster.

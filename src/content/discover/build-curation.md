@@ -1,21 +1,20 @@
 ---
 title: "Curating the semantic layer"
 options:
-  - label: "See version control integration"
-    target: "build-versioning"
-  - label: "Understand collaboration features"
-    target: "build-collaboration"
+  - label: "Request a demo"
+    target: "external-demo"
+  - label: "Need help?"
+    target: "external-contact"
   - label: "Back"
-    target: "build-confidence"
+    target: "build-reasoning"
 external: false
 externalUrl: null
 ---
-Generation provides a starting point. Curation makes it accurate. The curation workflow:
+Generation provides a starting point. Curation makes it accurate.
 
-- **Review generated entities** — Confirm or rename business objects
-- **Adjust relationships** — Fix incorrectly inferred joins
-- **Refine metrics** — Edit SQL expressions, add business rules
-- **Lock definitions** — Mark curated items as authoritative
-- **Add context** — Business descriptions, ownership, documentation links
+Key capabilities:
+- **Lock definitions** — Mark authoritative items that won't change during re-generation
+- **Approve changes** — Review and accept suggestions before they take effect
+- **Preserve work** — Curated definitions survive schema changes and updates
 
-Locked definitions are preserved across re-generations. New schema elements generate new suggestions without overwriting curated work.
+The process is accelerated by NLP—what traditionally takes months of manual configuration happens in hours, with humans focused on judgment rather than data entry.

@@ -1,12 +1,7 @@
 ---
 title: "Keeping the semantic layer current"
-options:
-  - label: "See technical architecture"
-    target: "build-architecture"
-  - label: "Evaluate pricing"
-    target: "external-pricing"
-  - label: "Back"
-    target: "access-curation"
+# ORPHANED: Technical detail - consider moving to build path
+options: []
 external: false
 externalUrl: null
 ---

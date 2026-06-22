@@ -1,12 +1,7 @@
 ---
 title: "What is a semantic layer?"
-options:
-  - label: "See why this matters"
-    target: "access-alignment"
-  - label: "Learn how it gets created"
-    target: "access-generation"
-  - label: "Back"
-    target: "access-how"
+# ORPHANED
+options: []
 external: false
 externalUrl: null
 ---

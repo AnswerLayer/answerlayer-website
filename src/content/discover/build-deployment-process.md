@@ -1,12 +1,7 @@
 ---
 title: "Deployment process"
-options:
-  - label: "Review pricing"
-    target: "build-evaluate"
-  - label: "Schedule deployment"
-    target: "external-demo"
-  - label: "Back"
-    target: "build-vpc"
+# ORPHANED: This page needs work - timeline and process need review
+options: []
 external: false
 externalUrl: null
 ---

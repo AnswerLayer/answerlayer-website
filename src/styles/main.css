@@ -372,6 +372,7 @@ pre code {
 /* Page spacer for fixed header */
 .page-spacer {
   height: var(--header-height);
+  margin-bottom: 2rem;
 }
 
 /* Footer */

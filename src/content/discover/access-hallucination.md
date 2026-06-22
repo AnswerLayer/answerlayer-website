@@ -1,14 +1,7 @@
 ---
 title: "AI hallucination in data queries"
-options:
-  - label: "See how grounding works"
-    target: "access-how"
-  - label: "Learn about semantic layers"
-    target: "access-semantic"
-  - label: "Try it out"
-    target: "external-demo"
-  - label: "Back"
-    target: "access-problems"
+# ORPHANED
+options: []
 external: false
 externalUrl: null
 ---

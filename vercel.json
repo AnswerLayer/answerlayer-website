@@ -1,0 +1,36 @@
+{
+  "redirects": [
+    {
+      "source": "/",
+      "destination": "https://www.answerlayer.io/",
+      "permanent": true,
+      "has": [
+        { "type": "host", "value": "getanswerlayer.com" }
+      ]
+    },
+    {
+      "source": "/:path+",
+      "destination": "https://www.answerlayer.io/:path+",
+      "permanent": true,
+      "has": [
+        { "type": "host", "value": "getanswerlayer.com" }
+      ]
+    },
+    {
+      "source": "/",
+      "destination": "https://www.answerlayer.io/",
+      "permanent": true,
+      "has": [
+        { "type": "host", "value": "www.getanswerlayer.com" }
+      ]
+    },
+    {
+      "source": "/:path+",
+      "destination": "https://www.answerlayer.io/:path+",
+      "permanent": true,
+      "has": [
+        { "type": "host", "value": "www.getanswerlayer.com" }
+      ]
+    }
+  ]
+}

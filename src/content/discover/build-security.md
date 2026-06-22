@@ -12,7 +12,7 @@ options:
 external: false
 externalUrl: null
 ---
-Security is foundational, not an add-on:
+Security is foundational:
 
 - **VPC deployment** — Runs in customer infrastructure
 - **Credential encryption** — Database credentials encrypted at rest and in transit

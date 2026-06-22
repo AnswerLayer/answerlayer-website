@@ -1,14 +1,7 @@
 ---
 title: "The team"
-options:
-  - label: "View open positions"
-    target: "external-careers"
-  - label: "Read the blog"
-    target: "external-blog"
-  - label: "Learn about investors"
-    target: "build-investors"
-  - label: "Back"
-    target: "build-contribute"
+# ORPHANED
+options: []
 external: false
 externalUrl: null
 ---

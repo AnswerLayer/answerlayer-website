@@ -1,12 +1,7 @@
 ---
 title: "Agent integration"
-options:
-  - label: "Read API documentation"
-    target: "external-docs"
-  - label: "See MCP integration"
-    target: "agents-mcp"
-  - label: "View SDK examples"
-    target: "external-github"
+# ORPHANED
+options: []
 external: false
 externalUrl: null
 ---

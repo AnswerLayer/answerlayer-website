@@ -1,14 +1,7 @@
 ---
 title: "Contributing to AnswerLayer"
-options:
-  - label: "View GitHub repositories"
-    target: "external-github"
-  - label: "Read contribution guidelines"
-    target: "external-contributing"
-  - label: "See open issues"
-    target: "external-issues"
-  - label: "Back"
-    target: "path-build"
+# ORPHANED
+options: []
 external: false
 externalUrl: null
 ---

@@ -218,10 +218,12 @@ app.post('/api/nodes', (req, res) => {
 });
 
 // Start server
-app.listen(PORT, () => {
+const HOST = '0.0.0.0';
+app.listen(PORT, HOST, () => {
   console.log(`\n  🌳 Concept Tree Editor`);
   console.log(`  ─────────────────────`);
-  console.log(`  Running at: http://localhost:${PORT}`);
-  console.log(`  Content:    ${DISCOVER_PATH}`);
+  console.log(`  Local:   http://localhost:${PORT}`);
+  console.log(`  Network: http://100.110.116.107:${PORT}`);
+  console.log(`  Content: ${DISCOVER_PATH}`);
   console.log(`\n  Press Ctrl+C to stop\n`);
 });

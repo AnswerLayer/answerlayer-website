@@ -1,12 +1,7 @@
 ---
 title: "Version control and change management"
-options:
-  - label: "Review deployment options"
-    target: "build-deployment"
-  - label: "See collaboration features"
-    target: "build-collaboration"
-  - label: "Back"
-    target: "build-curation"
+# ORPHANED
+options: []
 external: false
 externalUrl: null
 ---

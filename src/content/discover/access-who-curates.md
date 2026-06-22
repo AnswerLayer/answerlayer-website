@@ -1,10 +1,10 @@
 ---
-title: "Who curates the semantic layer?"
+title: "Who governs definitions?"
 options:
-  - label: "Learn about maintenance"
-    target: "access-maintenance"
   - label: "See the interface"
     target: "external-demo"
+  - label: "Have questions?"
+    target: "external-contact"
   - label: "Back"
     target: "access-curation"
 external: false

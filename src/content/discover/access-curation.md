@@ -1,20 +1,18 @@
 ---
-title: "Expert curation"
+title: "Governance"
 options:
   - label: "See who does curation"
     target: "access-who-curates"
-  - label: "Learn about ongoing maintenance"
-    target: "access-maintenance"
+  - label: "Talk to us"
+    target: "external-demo"
   - label: "Back"
     target: "access-generation"
 external: false
 externalUrl: null
 ---
-Generation provides a draft. Experts make it accurate:
+When "revenue" means different things to different teams, someone has to decide. Curation is governance:
 
-- **Review entities** — Confirm the business objects make sense
-- **Refine metrics** — Adjust calculations to match business rules
-- **Add context** — Descriptions that help users understand what is available
-- **Lock definitions** — Mark authoritative definitions that should not change
-
-Curation is where business knowledge enters the system. The AI handles the tedious mapping work. Humans provide the judgment.
+- **Ownership** — Assign definition owners by domain
+- **Conflict resolution** — Surface when teams use terms differently
+- **Approval workflows** — Changes to authoritative definitions require sign-off
+- **Audit trail** — Track who changed what, when, and why

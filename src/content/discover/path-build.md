@@ -12,4 +12,11 @@ options:
 external: false
 externalUrl: null
 ---
-Semantic layers define the business meaning of data. They map database tables to business concepts—turning `cust_id` into "Customer" and `SUM(amount)` into "Revenue." Traditional semantic layers require extensive YAML configuration and ongoing maintenance.
+Traditional semantic layers (dbt Semantic Layer, Cube, LookML, AtScale) require:
+
+- Hundreds of lines of YAML or configuration code
+- Manual mapping of every table, column, and relationship
+- Metric definitions written one by one with exact SQL expressions
+- Constant maintenance as schemas evolve
+
+This means months of upfront work. Every schema migration risks breaking definitions. Every new metric requires a pull request. The semantic layer becomes a bottleneck instead of an accelerator.

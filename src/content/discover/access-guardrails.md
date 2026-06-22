@@ -1,12 +1,7 @@
 ---
 title: "Query guardrails"
-options:
-  - label: "Learn about PII protection"
-    target: "access-pii"
-  - label: "See security architecture"
-    target: "access-security"
-  - label: "Back"
-    target: "access-how"
+# ORPHANED
+options: []
 external: false
 externalUrl: null
 ---

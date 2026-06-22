@@ -1,20 +1,24 @@
 ---
-title: "Automatic semantic layer generation"
+title: "Capturing institutional knowledge"
 options:
   - label: "See technical details"
     target: "build-generation"
   - label: "Understand the curation process"
     target: "access-curation"
+  - label: "Data integrations"
+    target: "access-integrations"
   - label: "Back"
-    target: "access-solution"
+    target: "access-how"
 external: false
 externalUrl: null
 ---
-Traditional semantic layers require weeks of manual configuration. AnswerLayer generates a complete semantic model in minutes:
+Traditional semantic layers require months of manual configuration—and become outdated the moment something changes.
 
-- **Entities identified** — Customer, Order, Product, Employee
-- **Metrics defined** — Revenue, Churn Rate, Average Order Value
-- **Dimensions created** — Region, Category, Time Period
-- **Relationships mapped** — How tables connect
+AnswerLayer takes a different approach:
 
-Generation analyzes actual data, not just schema metadata. This reveals business meaning that schema alone cannot show.
+- **Interactive capture** — Experts work with the system to define entities, relationships, measures, metrics, dimensions, and filters
+- **Synonyms and terminology** — Capture org-specific language, acronyms, and the different ways people refer to the same thing
+- **Temporal annotations** — Record significant events that impacted the data (reorgs, pricing changes, system migrations)
+- **Continuous updates** — Definitions evolve with usage as business logic changes
+
+The result isn't a static dictionary. It's living institutional knowledge that stays current.
