@@ -98,13 +98,56 @@ Role names use the same stable-key format as `tile_key`: `^[a-z][a-z0-9_]{0,99}$
 
 A tile published for embedding (one with a `tile_key`) is validated at save time to carry a complete encoding for its `chart_type` — a `metric` must name its `value` column, a `bar` its `x` and `y`, and so on — so an embed client can rely on the encoding being present.
 
+## Query parameters
+
+Tiles can declare typed query parameters for customer-provided settings, such as coefficients in a scoring formula. Parameters are declared on the tile, surfaced in the manifest, and resolved at execution time.
+
+Saved parameter settings are scoped by:
+
+```text
+organization + dashboard + tile + X-Subject-Org-ID
+```
+
+`X-Subject-Org-ID` is the tenant/customer identifier your backend sends for the embedded request. Parameter settings are not scoped by `X-Subject-User-ID` today.
+
+### Placeholder syntax
+
+Saved SQL should use named placeholders:
+
+```sql
+select
+  :retention_weight * retention_score
+  + :engagement_weight * engagement_score as score
+from member_scores
+```
+
+Parameters are bound scalar values only. They cannot be SQL fragments, identifiers, table names, or clauses.
+
+### Parameter contract
+
+Each parameter in the manifest has this shape:
+
+| Field | Description |
+|---|---|
+| `key` | Stable parameter key. Same format as `tile_key`: `^[a-z][a-z0-9_]{0,99}$`. |
+| `label` | Optional display label. |
+| `type` | One of `number`, `string`, `boolean`. |
+| `default` | Optional tile-level default value. |
+| `value` | Effective value for this request: saved subject-org setting if present, otherwise the default. May be `null` when a required value is not configured yet. |
+| `required` | Whether the tile requires a non-null value before execution. |
+| `min` / `max` | Optional numeric bounds for `number` parameters. |
+| `options` | Optional allowed values for `string` parameters. |
+| `viewer_editable` | Whether embedded viewers may update or override this parameter through the public settings/data endpoints. |
+
+Only `viewer_editable: true` parameters may be sent in `params` or `PUT /parameters`. Non-editable parameters may still appear in the manifest and may contribute to execution through defaults or previously saved settings.
+
 ## Manifest
 
 ```http
 GET /api/v1/dashboards/{dashboard_id}/manifest
 ```
 
-Returns the dashboard's tiles and the URL to load each one's data. Performs no query execution. Returns `404` if the dashboard does not exist or the caller cannot see it. Only tiles the caller can access through the dashboard are included.
+Returns the dashboard's tiles, each tile's visualization and parameter contract, and the URL to load each tile's data. Performs no query execution. Returns `404` if the dashboard does not exist or the caller cannot see it. Only tiles the caller can access through the dashboard are included.
 
 ### Response
 
@@ -130,6 +173,20 @@ Returns the dashboard's tiles and the URL to load each one's data. Performs no q
         }
       },
       "expected_columns": ["score", "score_delta"],
+      "parameters": [
+        {
+          "key": "retention_weight",
+          "label": "Retention weight",
+          "type": "number",
+          "default": 0.7,
+          "value": 0.8,
+          "required": false,
+          "min": 0,
+          "max": 1,
+          "options": null,
+          "viewer_editable": true
+        }
+      ],
       "data_url": "/api/v1/dashboards/d290f1ee-…/tiles/5f1c7e3a-…/data",
       "pagination": { "default_page_size": 1000, "max_page_size": 10000 }
     }
@@ -144,6 +201,7 @@ Returns the dashboard's tiles and the URL to load each one's data. Performs no q
 | `tile_key` | Stable embedding key, or `null` if unset. |
 | `visualization` | Typed render contract — `chart_type` + per-type `encoding`. See [Visualization config](#visualization-config). |
 | `expected_columns` | Column names referenced by the tile's visualization encoding, including table `columns` and table `roles`. Use this for early configuration checks before loading data. |
+| `parameters` | Parameter contract and effective values for the requesting subject org. Use this to render customer-facing settings controls. |
 | `data_url` | Path to `POST` for this tile's data. |
 | `pagination` | `default_page_size` and `max_page_size` for tile-data requests. |
 
@@ -160,8 +218,28 @@ Executes the tile's saved query and returns its rows. Verifies the caller can ac
 | Field | Type | Required | Description |
 |---|---|---|---|
 | `filters` | object | No | Parameter map applied to the tile's query. |
+| `params` | object | No | Runtime parameter overrides for this request. Keys must match `viewer_editable: true` tile parameters. Runtime params override saved subject-org settings for this request only. |
 | `pagination` | object | No | `{ "limit": int, "cursor": string }`. `limit` is capped at the manifest's `max_page_size`. |
 | `result_handle` | string | No | Continue paging an earlier result. Must be a handle this same tile produced — a handle from another tile is rejected with `404`. See [Result handles](/docs/query-results). |
+
+`filters` and `params` share one binding namespace when the query executes, so their keys must be distinct. Unknown params, non-editable params, missing required values, invalid types, and out-of-range values return `400`.
+
+Example with runtime params:
+
+```json
+{
+  "filters": {
+    "region": "east"
+  },
+  "params": {
+    "retention_weight": 0.8,
+    "engagement_weight": 0.2
+  },
+  "pagination": {
+    "limit": 1000
+  }
+}
+```
 
 ### Response
 
@@ -200,11 +278,40 @@ A result at or below 1,000 rows is returned **inline** — all rows in the respo
 
 A larger result is **materialized**: the response carries the first page plus a `result_handle` and a `next_cursor`. Fetch further pages with [`GET /api/v1/query-results/{handle}`](/docs/query-results), or by re-posting to this endpoint with the `result_handle` in the request body.
 
+## Parameter settings
+
+Use the parameter settings endpoints when your product needs to persist customer-specific tile settings, such as scoring weights for one tenant.
+
+```http
+GET /api/v1/dashboards/{dashboard_id}/tiles/{tile_id}/parameters
+PUT /api/v1/dashboards/{dashboard_id}/tiles/{tile_id}/parameters
+```
+
+`GET /parameters` returns the same effective parameter contract and values that appear in the manifest for that tile. Send `X-Subject-Org-ID` to receive that subject org's saved values. Without `X-Subject-Org-ID`, the endpoint still returns the contract, but values resolve from tile defaults only. It is safe to call before required values are configured; missing required values are returned as `null` so your UI can render the settings form.
+
+`PUT /parameters` requires `X-Subject-Org-ID`. The subject org is read from the authenticated request context and is never accepted from the JSON body.
+
+### PUT body
+
+```json
+{
+  "values": {
+    "retention_weight": 0.85
+  }
+}
+```
+
+`PUT /parameters` is a partial update. Include only the keys you want to change. Omitted previously saved values are preserved, including both editable and non-editable parameters. To clear an optional editable parameter, send that key with `null`; required parameters cannot be cleared.
+
+Only `viewer_editable: true` parameters may be included. The response returns the full effective parameter contract and resolved values after the update.
+
 ## Caching
 
 Tile data is cached so repeat dashboard views do not re-run slow source queries. A second request with the same dashboard, tile, filters, and embed context returns `cache_hit: true` and serves the stored result — typically in milliseconds rather than seconds.
 
-The cache key spans organization, embed/subject-org context, dashboard, tile, the tile's saved query and SQL, the connection, and the request `filters`. Any difference is a separate cache entry, so changing a filter never returns another filter's data. Editing the saved query behind a tile produces a new key, so stale results are bypassed. Cached entries expire after one hour; `computed_at` and `expires_at` report freshness.
+The cache key spans organization, embed/subject-org context, dashboard, tile, the tile's saved query and SQL, the connection, request `filters`, and resolved tile `params`. Any difference is a separate cache entry, so changing a filter or parameter never returns another configuration's data. Editing the saved query behind a tile produces a new key, so stale results are bypassed. Cached entries expire after one hour; `computed_at` and `expires_at` report freshness.
+
+If many subject orgs use different parameter values, each distinct resolved parameter set executes independently once per cache TTL. Repeated requests with the same resolved values reuse the AnswerLayer cache.
 
 ## End-to-end example
 
@@ -219,20 +326,30 @@ curl https://app.answerlayer.io/api/v1/dashboards/$DASHBOARD_ID/manifest \
 # 3. Load a metric tile (small — returned inline).
 curl -X POST "https://app.answerlayer.io$DATA_URL_FOR_AVG_ENGAGEMENT_SCORE" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
+  -H "X-Subject-Org-ID: acme-widgets" \
   -H "Content-Type: application/json" \
-  -d '{}'
+  -d '{"params": {"retention_weight": 0.8, "engagement_weight": 0.2}}'
 #   → { "rows": [[72.4]], "next_cursor": null, "cache_hit": false, … }
 
-# 4. Load a table tile (large — paginated). First page:
+# 4. Persist a customer-specific parameter setting.
+curl -X PUT "https://app.answerlayer.io/api/v1/dashboards/$DASHBOARD_ID/tiles/$TILE_ID/parameters" \
+  -H "X-API-Key: $ANSWERLAYER_API_KEY" \
+  -H "X-Subject-Org-ID: acme-widgets" \
+  -H "Content-Type: application/json" \
+  -d '{"values": {"retention_weight": 0.85}}'
+
+# 5. Load a table tile (large — paginated). First page:
 curl -X POST "https://app.answerlayer.io$DATA_URL_FOR_MEMBER_ENGAGEMENT_TABLE" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
+  -H "X-Subject-Org-ID: acme-widgets" \
   -H "Content-Type: application/json" \
   -d '{"pagination": {"limit": 500}}'
 #   → { "rows": [...500...], "result_handle": "a1b2…", "next_cursor": "eyJvZmZ…", … }
 
-# 5. Fetch the next page with the same tile data URL, handle, and cursor.
+# 6. Fetch the next page with the same tile data URL, handle, and cursor.
 curl -X POST "https://app.answerlayer.io$DATA_URL_FOR_MEMBER_ENGAGEMENT_TABLE" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
+  -H "X-Subject-Org-ID: acme-widgets" \
   -H "Content-Type: application/json" \
   -d '{"result_handle": "a1b2…", "pagination": {"cursor": "eyJvZmZ…", "limit": 500}}'
 ```
