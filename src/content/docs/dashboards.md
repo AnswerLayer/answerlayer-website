@@ -287,7 +287,7 @@ GET /api/v1/dashboards/{dashboard_id}/tiles/{tile_id}/parameters
 PUT /api/v1/dashboards/{dashboard_id}/tiles/{tile_id}/parameters
 ```
 
-`GET /parameters` returns the same effective parameter contract and values that appear in the manifest for that tile. It is safe to call before required values are configured; missing required values are returned as `null` so your UI can render the settings form.
+`GET /parameters` returns the same effective parameter contract and values that appear in the manifest for that tile. Send `X-Subject-Org-ID` to receive that subject org's saved values. Without `X-Subject-Org-ID`, the endpoint still returns the contract, but values resolve from tile defaults only. It is safe to call before required values are configured; missing required values are returned as `null` so your UI can render the settings form.
 
 `PUT /parameters` requires `X-Subject-Org-ID`. The subject org is read from the authenticated request context and is never accepted from the JSON body.
 
@@ -301,7 +301,9 @@ PUT /api/v1/dashboards/{dashboard_id}/tiles/{tile_id}/parameters
 }
 ```
 
-Only `viewer_editable: true` parameters may be included. Omitted non-editable values are preserved. The response returns the full effective parameter contract and resolved values after the update.
+`PUT /parameters` is a partial update. Include only the keys you want to change. Omitted previously saved values are preserved, including both editable and non-editable parameters. To clear an optional editable parameter, send that key with `null`; required parameters cannot be cleared.
+
+Only `viewer_editable: true` parameters may be included. The response returns the full effective parameter contract and resolved values after the update.
 
 ## Caching
 
@@ -326,7 +328,7 @@ curl -X POST "https://app.answerlayer.io$DATA_URL_FOR_AVG_ENGAGEMENT_SCORE" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "X-Subject-Org-ID: acme-widgets" \
   -H "Content-Type: application/json" \
-  -d '{"params": {"retention_weight": 0.8}}'
+  -d '{"params": {"retention_weight": 0.8, "engagement_weight": 0.2}}'
 #   → { "rows": [[72.4]], "next_cursor": null, "cache_hit": false, … }
 
 # 4. Persist a customer-specific parameter setting.
