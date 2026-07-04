@@ -69,11 +69,18 @@
 /* ----------------------------------------
    Base Styles
    ---------------------------------------- */
+/* NOTE: margin/padding reset intentionally omitted here. Tailwind v4 preflight
+   (@layer base) already zeroes margin/padding on all elements. Re-declaring it
+   unlayered would override every Tailwind padding/margin utility site-wide,
+   since unlayered rules beat layered ones regardless of specificity. */
 * {
   box-sizing: border-box;
-  margin: 0;
-  padding: 0;
 }
+
+/* Base element styles live in @layer base so Tailwind utilities (color, size,
+   weight, spacing) override them as intended. Left unlayered, these element
+   rules would beat every utility regardless of specificity. */
+@layer base {
 
 html {
   font-family: var(--font-mono);
@@ -190,6 +197,8 @@ pre {
   border: var(--border-medium) solid var(--color-navy-800);
   overflow-x: auto;
 }
+
+} /* end @layer base */
 
 /* ----------------------------------------
    Container

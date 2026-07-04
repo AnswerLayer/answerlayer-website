@@ -1,0 +1,121 @@
+# ============================================================
+# HOMEPAGE COPY
+# ------------------------------------------------------------
+# Edit the text between the quotes. Layout, colors, and spacing
+# live in src/pages/index.astro — you shouldn't need to touch that.
+# Lines starting with # are comments (ignored by the site).
+#
+# Note: headings, eyebrows, chips, and captions are DISPLAYED IN
+# UPPERCASE automatically — write them in normal case here.
+# ============================================================
+
+# Browser tab / social title
+meta:
+  title: "AnswerLayer — The trusted layer between your data and your AI"
+
+# Button labels used in the hero and the final call-to-action
+ctas:
+  primary: "Sign up free"
+  secondary: "Talk to us"
+
+# ---- 1. Hero ------------------------------------------------
+hero:
+  eyebrow: "The foundation for AI analytics"
+  heading: "The trusted layer between your data and your AI"
+  sub: "Define every business concept once. Serve it to every agent, dashboard, and model through a single governed API — running entirely inside your own cloud."
+
+# The diagram on the right of the hero
+schematic:
+  topChips: ["Agents", "Dashboards", "ML"]
+  contractLabel: "API contract"
+  centerTitle: "AnswerLayer"
+  centerCaption: "Semantic layer · Governed"
+  inPlaceLabel: "In place"
+  bottomChips: ["Warehouse", "Database", "Sources"]
+
+# ---- 2. Problem --------------------------------------------
+problem:
+  eyebrow: "The problem"
+  heading: "Ask an LLM one question. Get five answers."
+  sub: "There's no known-correct answer to retrieve, and one question has many defensible definitions — so the model guesses, confidently."
+  # Shown in the mono query chip (wrapped as: > "your text")
+  query: "What was revenue last quarter?"
+  # The four conflicting answers
+  answers:
+    - value: "$24.8M"
+      caption: "Gross · Booked · Close date"
+    - value: "$21.3M"
+      caption: "Net · Recognized · Ship date"
+    - value: "$23.1M"
+      caption: "Booked · EUR @ spot"
+    - value: "$19.9M"
+      caption: "Recognized · Ship date"
+  answersNote: "Illustrative — many defensible definitions, no ground truth."
+  punchline: "A confident wrong number is worse than no number."
+
+# ---- 3. The answer (semantic layer) ------------------------
+semanticLayer:
+  eyebrow: "The answer"
+  heading: "Define it once. Govern it everywhere."
+  sub: "A semantic layer is one trusted, governed place that defines what every business concept means and how it maps to the underlying data. These six primitives are the whole model."
+  # The six cards (numbered 01–06 automatically, in order)
+  primitives:
+    - title: "Entities"
+      body: "The nouns of your business: customers, orders, accounts."
+    - title: "Relationships"
+      body: "How entities join — defined once and reused."
+    - title: "Dimensions"
+      body: "The ways you slice: region, plan, channel."
+    - title: "Measures"
+      body: "Raw aggregations: sum of amount, count of orders."
+    - title: "Metrics"
+      body: "Governed business numbers: net revenue, active users."
+    - title: "Filters"
+      body: 'Shared definitions of "active," "paid," "churned."'
+
+# ---- 4. How it fits ----------------------------------------
+howItFits:
+  eyebrow: "How it fits"
+  heading: "Every consumer speaks business, not SQL"
+  leftChips: ["Agents", "Dashboards", "ML features"]
+  centerTitle: "AnswerLayer"
+  centerCaptionLines: ["one API contract", "governed definitions"]
+  rightChips: ["Warehouse", "Database", "More sources"]
+
+# ---- 5. Runs in your cloud ---------------------------------
+cloud:
+  eyebrow: "The differentiator"
+  heading: "It runs in your cloud"
+  sub: "Bring Your Own Cloud — the full stack deploys inside your own account. No third-party SaaS upload. Data never leaves."
+  containerLabel: "Your cloud account"
+  stackTitle: "Full AnswerLayer stack — installed here"
+  stackCaption: "All resources provisioned and managed within your account."
+  guarantees:
+    - title: "Data sovereignty"
+      body: "Data stays in your jurisdiction and your accounts."
+    - title: "Privacy & protection"
+      body: "No third-party SaaS upload — often a hard requirement."
+    - title: "No tradeoff"
+      body: "Modern AI analytics and governance, together."
+
+# ---- 6. Pricing --------------------------------------------
+pricing:
+  eyebrow: "Pricing"
+  heading: "Simple, and built for design partners"
+  platform:
+    label: "Platform fee"
+    price: "$15K"
+    unit: "/ yr"
+    body: "Flat. The full semantic-layer stack, deployed in your cloud."
+  users:
+    label: "Embedded users"
+    price: "$1–10"
+    unit: "/ user / mo"
+    body: "Tiered by volume. You pay only for active users."
+  perkLabel: "Design-partner perk"
+  perkBody: "3 months free Forward-Deployed Engineer (FDE) service."
+
+# ---- 7. Final call-to-action -------------------------------
+finalCta:
+  heading: "One source of truth for every agent you ship"
+  sub: "Deploy the semantic layer in your own cloud and stop shipping confident wrong numbers."

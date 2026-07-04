@@ -1,153 +1,342 @@
 ---
 /**
- * Home Page
- * Renders content from the discover collection's "home" node
- * Minimal approach with W95FA body text, technical card, CRT effects
+ * Home Page — marketing landing page.
+ *
+ * Recreated natively from the design handoff
+ * (design-system/design_handoff_homepage) using the existing Tailwind v4
+ * navy theme, font-display/font-mono, and .crt-text utilities. No inline hex.
+ *
+ * Narrative: problem -> semantic layer -> single API contract -> runs-in-your-cloud
+ * -> pricing -> sign up. The discover/explore flow lives at /discover (linked
+ * from the header "Explore" nav item); this page replaces the old intro card.
  */
 import Layout from '../layouts/Layout.astro';
-import { getEntry, render } from 'astro:content';
+import { getEntry } from 'astro:content';
 
-// Fetch the home node from the discover collection
-const homeEntry = await getEntry('discover', 'home');
-if (!homeEntry) {
-  throw new Error('Missing home.md in discover collection');
-}
+// All page copy lives in src/content/home/copy.yaml (edit text there).
+const entry = await getEntry('home', 'copy');
+if (!entry) throw new Error('Missing src/content/home/copy.yaml');
+const c = entry.data;
 
-const { Content } = await render(homeEntry);
-
-// Build option URLs (same logic as [...slug].astro)
-async function getOptionUrl(targetId: string): Promise<string> {
-  const targetEntry = await getEntry('discover', targetId);
-  if (targetEntry?.data.external && targetEntry.data.externalUrl) {
-    return targetEntry.data.externalUrl;
-  }
-  return targetId === 'home' ? '/' : `/discover/${targetId}`;
-}
-
-const optionData = await Promise.all(
-  homeEntry.data.options.map(async (opt) => {
-    const url = await getOptionUrl(opt.target);
-    return { label: opt.label, url };
-  })
-);
+// CTA destinations (config, not copy — labels come from copy.yaml).
+const signupUrl = 'https://app.answerlayer.io/sign-up';
+const contactUrl = '/contact';
 ---
 
-<Layout title="AnswerLayer">
-  <div class="crt-screen hero-section">
-    <div class="container mx-auto px-6" style="max-width: 48rem;">
-
-      <div class="technical-card crt-glow">
-        <div class="title-box">
-          <h1 class="home-title crt-text">
-            {homeEntry.data.title}
-          </h1>
-        </div>
-
-        <div class="body-content crt-text">
-          <Content />
-        </div>
-
-        <div class="continue-section">
-          {optionData.map((opt) => (
-            <a href={opt.url} class="continue-button crt-text">{opt.label}</a>
-          ))}
+<Layout title={c.meta.title} home>
+  <!-- ============================================================
+       1. HERO — full-bleed navy-950, two-column split
+       ============================================================ -->
+  <section class="bg-navy-950">
+    <div class="home-wrap py-24 md:py-36 grid grid-cols-1 md:grid-cols-2 gap-14 md:gap-20 items-center">
+      <!-- Left: copy -->
+      <div>
+        <p class="eyebrow text-navy-300">
+          <span class="eyebrow-bullet"></span>{c.hero.eyebrow}
+        </p>
+        <h1 class="text-white mt-7 text-[clamp(2.25rem,5vw,3.625rem)] leading-[1.05]">
+          {c.hero.heading}
+        </h1>
+        <p class="mt-7 text-navy-200 text-lg max-w-[34em]">
+          {c.hero.sub}
+        </p>
+        <div class="mt-10 flex flex-wrap gap-3.5">
+          <a href={signupUrl} target="_blank" rel="noopener" class="btn-solid">{c.ctas.primary}</a>
+          <a href={contactUrl} class="btn-outline-dark">{c.ctas.secondary}</a>
         </div>
       </div>
 
+      <!-- Right: schematic -->
+      <div class="flex flex-col gap-3">
+        <div class="grid grid-cols-3 gap-3">
+          {c.schematic.topChips.map((chip) => (
+            <div class="schematic-chip border-navy-400 text-navy-50">{chip}</div>
+          ))}
+        </div>
+        <p class="schematic-connector">↑&nbsp;&nbsp;{c.schematic.contractLabel}&nbsp;&nbsp;↑</p>
+        <div class="border-2 border-white bg-navy-900 text-center px-4 py-6">
+          <div class="font-display font-bold uppercase text-navy-50 text-lg tracking-tight">{c.schematic.centerTitle}</div>
+          <div class="font-mono uppercase text-xs tracking-[0.14em] text-navy-300 mt-2">{c.schematic.centerCaption}</div>
+        </div>
+        <p class="schematic-connector">↓&nbsp;&nbsp;{c.schematic.inPlaceLabel}&nbsp;&nbsp;↓</p>
+        <div class="grid grid-cols-3 gap-3">
+          {c.schematic.bottomChips.map((chip) => (
+            <div class="schematic-chip border-navy-700 bg-navy-800 text-navy-200">{chip}</div>
+          ))}
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 
-  <style>
-    .hero-section {
-      min-height: calc(100vh - 119px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .title-box {
-      border: none;
-      border-bottom: 2px solid var(--color-navy-900);
-      padding: 1rem 2.5rem;
-      margin: -2rem -2.5rem 1.5rem -2.5rem;
-      background: transparent;
-    }
-    .home-title {
-      font-family: 'MS Sans Serif', 'Microsoft Sans Serif', Tahoma, sans-serif;
-      font-size: 2rem;
-      font-weight: 400;
-      text-transform: none;
-      margin: 0;
-      color: #151c3f;
-    }
-    @media (min-width: 640px) {
-      .home-title {
-        white-space: nowrap;
-      }
-    }
-    .body-content {
-      font-family: var(--font-body);
-      font-size: 1.0625rem;
-      font-weight: 200;
-      color: #374151;
-      line-height: 1.75;
-      margin-bottom: 1.5rem;
-    }
-    .body-content :global(p) {
-      margin-bottom: 1.25rem;
-    }
-    .body-content :global(p:last-child) {
-      margin-bottom: 0;
-    }
-    .technical-card {
-      background: transparent;
-      border: 2px solid var(--color-navy-900);
-      padding: 2rem 2.5rem;
-      margin-bottom: 2rem;
-      position: relative;
-    }
-    .technical-card::before {
-      content: "";
-      position: absolute;
-      inset: -6px;
-      border: 1px solid var(--color-navy-300);
-      pointer-events: none;
-    }
-    .crt-link {
-      font-family: var(--font-mono);
-      font-size: 0.875rem;
-      color: var(--color-navy-900);
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      transition: opacity 0.2s;
-    }
-    .crt-link:hover {
-      opacity: 0.7;
-      text-decoration: underline;
-    }
-    .continue-section {
-      border-top: 2px solid var(--color-navy-900);
-      margin: 0 -2.5rem -2rem -2.5rem;
-      padding: 1rem 2.5rem;
-    }
-    .continue-button {
-      font-family: var(--font-body);
-      font-size: 0.875rem;
-      font-weight: 400;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--color-navy-900);
-      background: transparent;
-      border: 2px solid var(--color-navy-900);
-      padding: 0.625rem 1.5rem;
-      text-decoration: none;
-      display: inline-block;
-      transition: all 0.15s ease;
-    }
-    .continue-button:hover {
-      background: var(--color-navy-900);
-      color: var(--color-background);
-      text-decoration: none;
-    }
-  </style>
+  <!-- ============================================================
+       2. PROBLEM — light, centered
+       ============================================================ -->
+  <section id="problem" class="bg-background">
+    <div class="home-wrap py-24 md:py-28 text-center">
+      <p class="eyebrow text-navy-600 justify-center"><span class="eyebrow-bullet"></span>{c.problem.eyebrow}</p>
+      <h2 class="mt-5 text-[clamp(1.75rem,4vw,2.625rem)] leading-[1.08]">{c.problem.heading}</h2>
+      <p class="mt-5 mx-auto max-w-[40em] text-gray-700 text-[1.0625rem]">
+        {c.problem.sub}
+      </p>
+
+      <div class="mt-9 inline-block border-2 border-navy-900 bg-white font-mono text-sm text-navy-900 px-4 py-2">
+        &gt; "{c.problem.query}"
+      </div>
+      <p class="font-mono text-navy-600 text-xl mt-3">↓</p>
+
+      <div class="mt-6 grid grid-cols-2 md:grid-cols-4 gap-3.5 text-left">
+        {c.problem.answers.map((a) => (
+          <div class="border-2 border-navy-200 bg-white p-5">
+            <div class="font-display font-bold text-navy-900 text-[1.375rem]">{a.value}</div>
+            <div class="font-mono uppercase text-[0.6875rem] tracking-[0.12em] text-gray-500 mt-2">{a.caption}</div>
+          </div>
+        ))}
+      </div>
+      <p class="mt-4 font-mono text-xs text-gray-500">{c.problem.answersNote}</p>
+
+      <p class="mt-10 mx-auto max-w-[24em] font-display font-semibold text-navy-900 text-[clamp(1.1875rem,2.5vw,1.5rem)] leading-snug">
+        {c.problem.punchline}
+      </p>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       3. THE ANSWER — full-bleed navy-50, bordered top/bottom
+       ============================================================ -->
+  <section class="bg-navy-50 border-y-2 border-navy-900">
+    <div class="home-wrap py-24 md:py-28">
+      <div class="text-center">
+        <p class="eyebrow text-navy-600 justify-center"><span class="eyebrow-bullet"></span>{c.semanticLayer.eyebrow}</p>
+        <h2 class="mt-5 text-[clamp(1.75rem,4vw,2.625rem)] leading-[1.08]">{c.semanticLayer.heading}</h2>
+        <p class="mt-5 mx-auto max-w-[44em] text-gray-700 text-[1.0625rem]">
+          {c.semanticLayer.sub}
+        </p>
+      </div>
+
+      <div class="mt-10 grid grid-cols-1 md:grid-cols-3 gap-3.5">
+        {c.semanticLayer.primitives.map((p, i) => (
+          <div class="relative border-2 border-navy-900 bg-white p-6">
+            <span class="absolute top-3 right-4 font-mono text-xs text-navy-400">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="text-xl">{p.title}</h3>
+            <p class="mt-2 text-gray-700">{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       4. HOW IT FITS — light, horizontal flow
+       ============================================================ -->
+  <section id="how-it-fits" class="bg-background">
+    <div class="home-wrap py-24 md:py-28">
+      <div class="text-center">
+        <p class="eyebrow text-navy-600 justify-center"><span class="eyebrow-bullet"></span>{c.howItFits.eyebrow}</p>
+        <h2 class="mt-5 text-[clamp(1.75rem,4vw,2.625rem)] leading-[1.08]">{c.howItFits.heading}</h2>
+      </div>
+
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-[1fr_auto_1.1fr_auto_1fr] gap-5 items-center">
+        <div class="flex flex-col gap-3">
+          {c.howItFits.leftChips.map((chip) => (
+            <div class="flow-chip border-navy-900 bg-white text-navy-900">{chip}</div>
+          ))}
+        </div>
+        <p class="flow-arrow"><span class="hidden md:inline">→</span><span class="md:hidden">↓</span></p>
+        <div class="technical-border bg-navy-900 text-center px-6 py-8">
+          <div class="font-display font-bold uppercase text-navy-50 text-[1.375rem] tracking-tight">{c.howItFits.centerTitle}</div>
+          <div class="font-mono uppercase text-xs tracking-[0.14em] text-navy-200 mt-2">
+            {c.howItFits.centerCaptionLines.map((line, i) => (
+              <>{i > 0 && <br />}{line}</>
+            ))}
+          </div>
+        </div>
+        <p class="flow-arrow"><span class="hidden md:inline">→</span><span class="md:hidden">↓</span></p>
+        <div class="flex flex-col gap-3">
+          {c.howItFits.rightChips.map((chip) => (
+            <div class="flow-chip border-navy-700 bg-navy-100 text-navy-800">{chip}</div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       5. RUNS IN YOUR CLOUD — full-bleed navy-950 (inverted)
+       ============================================================ -->
+  <section id="security" class="bg-navy-950">
+    <div class="home-wrap py-24 md:py-28">
+      <div class="text-center">
+        <p class="eyebrow text-navy-300 justify-center"><span class="eyebrow-bullet"></span>{c.cloud.eyebrow}</p>
+        <h2 class="text-navy-50 mt-5 text-[clamp(1.75rem,4vw,2.625rem)] leading-[1.08]">{c.cloud.heading}</h2>
+        <p class="mt-5 mx-auto max-w-[42em] text-navy-200 text-[1.0625rem]">
+          {c.cloud.sub}
+        </p>
+      </div>
+
+      <div class="mt-12 relative border-2 border-dashed border-navy-400 p-6 md:p-9">
+        <span class="absolute -top-3 left-6 bg-navy-950 px-2 font-mono uppercase text-xs tracking-[0.14em] text-navy-300">{c.cloud.containerLabel}</span>
+
+        <div class="border-2 border-white bg-navy-900 px-6 py-7 text-center">
+          <div class="font-display font-bold uppercase text-navy-50 text-lg tracking-tight">{c.cloud.stackTitle}</div>
+          <p class="mt-2 text-navy-200">{c.cloud.stackCaption}</p>
+        </div>
+
+        <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-6">
+          {c.cloud.guarantees.map((g) => (
+            <div>
+              <h4 class="text-navy-50 pb-2 border-b-2 border-navy-400">{g.title}</h4>
+              <p class="mt-3 text-navy-300">{g.body}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       6. PRICING — light
+       ============================================================ -->
+  <section id="pricing" class="bg-background">
+    <div class="home-wrap py-24 md:py-28">
+      <div class="text-center">
+        <p class="eyebrow text-navy-600 justify-center"><span class="eyebrow-bullet"></span>{c.pricing.eyebrow}</p>
+        <h2 class="mt-5 text-[clamp(1.75rem,4vw,2.625rem)] leading-[1.08]">{c.pricing.heading}</h2>
+      </div>
+
+      <div class="mt-10 max-w-[760px] mx-auto border-2 border-navy-900 bg-white grid grid-cols-1 md:grid-cols-2 divide-y-2 md:divide-y-0 md:divide-x-2 divide-navy-900">
+        <div class="p-8">
+          <div class="font-mono uppercase text-xs tracking-[0.14em] text-gray-500">{c.pricing.platform.label}</div>
+          <div class="mt-3"><span class="font-display font-bold text-navy-900 text-4xl">{c.pricing.platform.price}</span> <span class="font-mono text-navy-600">{c.pricing.platform.unit}</span></div>
+          <p class="mt-3 text-gray-700">{c.pricing.platform.body}</p>
+        </div>
+        <div class="p-8">
+          <div class="font-mono uppercase text-xs tracking-[0.14em] text-gray-500">{c.pricing.users.label}</div>
+          <div class="mt-3"><span class="font-display font-bold text-navy-900 text-4xl">{c.pricing.users.price}</span> <span class="font-mono text-navy-600">{c.pricing.users.unit}</span></div>
+          <p class="mt-3 text-gray-700">{c.pricing.users.body}</p>
+        </div>
+      </div>
+
+      <div class="mt-3.5 max-w-[760px] mx-auto border-2 border-navy-900 bg-navy-50 px-8 py-5 text-center">
+        <span class="font-mono uppercase text-xs tracking-[0.14em] text-navy-600">{c.pricing.perkLabel}</span>
+        <p class="mt-2 font-display font-semibold text-navy-900 text-lg normal-case">{c.pricing.perkBody}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================
+       7. FINAL CTA — full-bleed navy-900, centered
+       ============================================================ -->
+  <section class="bg-navy-900">
+    <div class="home-wrap py-24 md:py-28 text-center">
+      <h2 class="text-navy-50 text-[clamp(1.875rem,4.5vw,3rem)] leading-[1.06]">{c.finalCta.heading}</h2>
+      <p class="mt-5 mx-auto max-w-[40em] text-navy-200 text-[1.0625rem]">
+        {c.finalCta.sub}
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3.5 justify-center">
+        <a href={signupUrl} target="_blank" rel="noopener" class="btn-solid">{c.ctas.primary}</a>
+        <a href={contactUrl} class="btn-outline-dark">{c.ctas.secondary}</a>
+      </div>
+    </div>
+  </section>
 </Layout>
+
+<style>
+  /* Content column — handoff spec: 1120px max, 28px gutters. */
+  .home-wrap {
+    max-width: 1120px;
+    margin-inline: auto;
+    padding-inline: 28px;
+  }
+
+  /* Eyebrow: mono, uppercase, wide tracking, square bullet. */
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.18em;
+  }
+  .eyebrow-bullet {
+    width: 8px;
+    height: 8px;
+    background: var(--color-navy-400);
+    display: inline-block;
+    flex: none;
+  }
+
+  /* Buttons */
+  .btn-solid,
+  .btn-outline-dark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 0.03em;
+    padding: 0.75rem 1.5rem;
+    border: 2px solid;
+    transition: all 0.15s ease;
+  }
+  .btn-solid {
+    background: var(--color-background);
+    color: var(--color-navy-950);
+    border-color: var(--color-navy-950);
+  }
+  .btn-solid:hover {
+    background: var(--color-navy-100);
+    text-decoration: none;
+  }
+  .btn-outline-dark {
+    background: transparent;
+    color: var(--color-navy-50);
+    border-color: var(--color-navy-400);
+  }
+  .btn-outline-dark:hover {
+    background: var(--color-background);
+    color: var(--color-navy-950);
+    text-decoration: none;
+  }
+
+  /* Hero schematic chips + connectors */
+  .schematic-chip {
+    border-width: 2px;
+    border-style: solid;
+    text-align: center;
+    padding: 0.75rem 0.5rem;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+  }
+  .schematic-connector {
+    text-align: center;
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    color: var(--color-navy-300);
+  }
+
+  /* How-it-fits flow chips + arrows */
+  .flow-chip {
+    border-width: 2px;
+    border-style: solid;
+    text-align: center;
+    padding: 0.875rem 1rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.9375rem;
+    letter-spacing: 0.02em;
+  }
+  .flow-arrow {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 1.5rem;
+    color: var(--color-navy-600);
+  }
+</style>

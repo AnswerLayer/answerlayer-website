@@ -7,12 +7,15 @@ interface Props {
   title: string;
   description?: string;
   minimal?: boolean;
+  /** Home/marketing layout: full-bleed (no <main> top padding) + dark header over the hero. */
+  home?: boolean;
 }
 
 const {
   title,
   description = 'Generative semantic layer for analytics agents. Your data stays in your cloud.',
-  minimal = false
+  minimal = false,
+  home = false
 } = Astro.props;
 ---
 
@@ -62,8 +65,8 @@ const {
   </head>
   <body class="crt-screen" style="display: flex; flex-direction: column; min-height: 100vh;">
     <div class="scanline-overlay" aria-hidden="true"></div>
-    {!minimal && <Header />}
-    <main style={minimal ? "flex: 1;" : "flex: 1; padding-top: 2rem;"}>
+    {!minimal && <Header dark={home} />}
+    <main style={minimal || home ? "flex: 1;" : "flex: 1; padding-top: 2rem;"}>
       <slot />
     </main>
     {!minimal && <Footer />}

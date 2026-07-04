@@ -78,8 +78,71 @@ const docsCollection = defineCollection({
   }),
 });
 
+/**
+ * Home Collection Schema
+ *
+ * A single data entry (`copy.yaml`) holding all editable copy for the
+ * marketing home page. Layout lives in src/pages/index.astro; text lives here.
+ */
+const chip = z.array(z.string());
+const sectionHead = { eyebrow: z.string(), heading: z.string() };
+
+const homeCollection = defineCollection({
+  loader: glob({ pattern: '*.yaml', base: './src/content/home' }),
+  schema: z.object({
+    meta: z.object({ title: z.string() }),
+    ctas: z.object({ primary: z.string(), secondary: z.string() }),
+    hero: z.object({ ...sectionHead, sub: z.string() }),
+    schematic: z.object({
+      topChips: chip,
+      contractLabel: z.string(),
+      centerTitle: z.string(),
+      centerCaption: z.string(),
+      inPlaceLabel: z.string(),
+      bottomChips: chip,
+    }),
+    problem: z.object({
+      ...sectionHead,
+      sub: z.string(),
+      query: z.string(),
+      answers: z.array(z.object({ value: z.string(), caption: z.string() })),
+      answersNote: z.string(),
+      punchline: z.string(),
+    }),
+    semanticLayer: z.object({
+      ...sectionHead,
+      sub: z.string(),
+      primitives: z.array(z.object({ title: z.string(), body: z.string() })),
+    }),
+    howItFits: z.object({
+      ...sectionHead,
+      leftChips: chip,
+      centerTitle: z.string(),
+      centerCaptionLines: chip,
+      rightChips: chip,
+    }),
+    cloud: z.object({
+      ...sectionHead,
+      sub: z.string(),
+      containerLabel: z.string(),
+      stackTitle: z.string(),
+      stackCaption: z.string(),
+      guarantees: z.array(z.object({ title: z.string(), body: z.string() })),
+    }),
+    pricing: z.object({
+      ...sectionHead,
+      platform: z.object({ label: z.string(), price: z.string(), unit: z.string(), body: z.string() }),
+      users: z.object({ label: z.string(), price: z.string(), unit: z.string(), body: z.string() }),
+      perkLabel: z.string(),
+      perkBody: z.string(),
+    }),
+    finalCta: z.object({ heading: z.string(), sub: z.string() }),
+  }),
+});
+
 export const collections = {
   discover: discoverCollection,
   blog: blogCollection,
   docs: docsCollection,
+  home: homeCollection,
 };
