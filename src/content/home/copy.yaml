@@ -98,18 +98,18 @@ cloud:
     - title: "No tradeoff"
       body: "Modern AI analytics and governance, together."
 
-# ---- 6. Pricing --------------------------------------------
+# ---- Pricing (rendered on the /pricing page) ---------------
 pricing:
   eyebrow: "Pricing"
   heading: "Simple, and built for design partners"
   platform:
     label: "Platform fee"
-    price: "$15K"
+    price: "$20K"
     unit: "/ yr"
     body: "Flat. The full semantic-layer stack, deployed in your cloud."
   users:
     label: "Embedded users"
-    price: "$1–10"
+    price: "$1–20"
     unit: "/ user / mo"
     body: "Tiered by volume. You pay only for active users."
   perkLabel: "Design-partner perk"
