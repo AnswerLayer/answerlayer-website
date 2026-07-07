@@ -112,40 +112,7 @@ const contactUrl = '/contact';
     </section>
 
     <!-- ============================================================
-         4. HOW IT FITS — horizontal flow
-         ============================================================ -->
-    <section id="how-it-fits" class="screen-section container mx-auto px-6 py-24 md:py-32 section-divider">
-      <div class="section-head">
-        <p class="eyebrow crt-text">{c.howItFits.eyebrow}</p>
-        <h2 class="section-title crt-text">{c.howItFits.heading}</h2>
-      </div>
-
-      <div class="flow">
-        <div class="flow-col">
-          {c.howItFits.leftChips.map((chip) => (
-            <div class="diagram-chip crt-text">{chip}</div>
-          ))}
-        </div>
-        <p class="flow-arrow crt-text"><span class="arrow-h">→</span><span class="arrow-v">↓</span></p>
-        <div class="diagram-center">
-          <div class="diagram-center-title crt-text">{c.howItFits.centerTitle}</div>
-          <div class="diagram-center-caption crt-text">
-            {c.howItFits.centerCaptionLines.map((line, i) => (
-              <>{i > 0 && <br />}{line}</>
-            ))}
-          </div>
-        </div>
-        <p class="flow-arrow crt-text"><span class="arrow-h">→</span><span class="arrow-v">↓</span></p>
-        <div class="flow-col">
-          {c.howItFits.rightChips.map((chip) => (
-            <div class="diagram-chip crt-text">{chip}</div>
-          ))}
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================
-         5. RUNS IN YOUR CLOUD
+         4. RUNS IN YOUR CLOUD
          ============================================================ -->
     <section id="security" class="screen-section container mx-auto px-6 py-24 md:py-32 section-divider">
       <div class="section-head">
@@ -484,35 +451,6 @@ const contactUrl = '/contact';
     color: var(--color-navy-700);
     line-height: 1.5;
     margin: 0;
-  }
-
-  /* ---- How it fits: flow layout ---- */
-  .flow {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 1.25rem;
-    align-items: center;
-    margin-top: 3.5rem;
-  }
-  .flow-col {
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-  .flow-arrow {
-    text-align: center;
-    font-family: var(--font-mono);
-    font-size: 1.5rem;
-    color: var(--color-navy-500);
-  }
-  .arrow-h { display: none; }
-  .arrow-v { display: inline; }
-  @media (min-width: 900px) {
-    .flow {
-      grid-template-columns: 1fr auto 1.2fr auto 1fr;
-    }
-    .arrow-h { display: inline; }
-    .arrow-v { display: none; }
   }
 
   /* ---- Runs in your cloud ---- */

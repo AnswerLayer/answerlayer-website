@@ -114,13 +114,6 @@ const homeCollection = defineCollection({
       sub: z.string(),
       primitives: z.array(z.object({ title: z.string(), body: z.string() })),
     }),
-    howItFits: z.object({
-      ...sectionHead,
-      leftChips: chip,
-      centerTitle: z.string(),
-      centerCaptionLines: chip,
-      rightChips: chip,
-    }),
     cloud: z.object({
       ...sectionHead,
       sub: z.string(),

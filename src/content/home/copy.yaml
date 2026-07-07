@@ -73,16 +73,7 @@ semanticLayer:
     - title: "Filters"
       body: 'Shared definitions of "active," "paid," "churned."'
 
-# ---- 4. How it fits ----------------------------------------
-howItFits:
-  eyebrow: "How it fits"
-  heading: "Every consumer speaks business, not SQL"
-  leftChips: ["Agents", "Dashboards", "ML features"]
-  centerTitle: "AnswerLayer"
-  centerCaptionLines: ["one API contract", "governed definitions"]
-  rightChips: ["Warehouse", "Database", "More sources"]
-
-# ---- 5. Runs in your cloud ---------------------------------
+# ---- Runs in your cloud ------------------------------------
 cloud:
   eyebrow: "The differentiator"
   heading: "It runs in your cloud"
