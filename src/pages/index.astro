@@ -26,7 +26,7 @@ const exploreUrl = `/discover/${exploreOption.target}`;
 
 // CTA destinations (config, not copy — labels come from copy.yaml).
 const signupUrl = 'https://app.answerlayer.io/sign-up';
-const contactUrl = '/contact';
+const talkUrl = 'https://calendly.com/josh-getanswerlayer/30min';
 ---
 
 <Layout title={c.meta.title}>
@@ -44,7 +44,7 @@ const contactUrl = '/contact';
           <p class="lead crt-text">{c.hero.sub}</p>
           <div class="button-row">
             <a href={signupUrl} target="_blank" rel="noopener" class="cta-button is-primary crt-text">{c.ctas.primary}</a>
-            <a href={contactUrl} class="cta-button crt-text">{c.ctas.secondary}</a>
+            <a href={talkUrl} target="_blank" rel="noopener" class="cta-button crt-text">{c.ctas.secondary}</a>
           </div>
         </div>
 
@@ -172,7 +172,7 @@ const contactUrl = '/contact';
       </div>
       <div class="button-row button-row--center">
         <a href={signupUrl} target="_blank" rel="noopener" class="cta-button is-primary crt-text">{c.ctas.primary}</a>
-        <a href={contactUrl} class="cta-button crt-text">{c.ctas.secondary}</a>
+        <a href={talkUrl} target="_blank" rel="noopener" class="cta-button crt-text">{c.ctas.secondary}</a>
       </div>
     </section>
 
