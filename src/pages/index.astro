@@ -6,15 +6,23 @@
  * existing site design system (light `crt-screen`, double-border `.topic-card`,
  * mono eyebrows, `.crt-text`, bordered `.cta-button`) — matching Trust/About/etc.
  *
- * All copy lives in src/content/home/copy.yaml. The discover/explore flow lives
- * at /discover (linked from the header "Explore" nav item).
+ * All copy lives in src/content/home/copy.yaml. The discover/explore flow is
+ * introduced as the second screen (below the hero) and continues at /discover/*.
  */
 import Layout from '../layouts/Layout.astro';
-import { getEntry } from 'astro:content';
+import { getEntry, render } from 'astro:content';
 
 const entry = await getEntry('home', 'copy');
 if (!entry) throw new Error('Missing src/content/home/copy.yaml');
 const c = entry.data;
+
+// The Explore screen reuses the discover flow's intro node ("home"), rendered
+// inline below the hero, and links into the flow's first branch.
+const exploreEntry = await getEntry('discover', 'home');
+if (!exploreEntry) throw new Error('Missing discover "home" node');
+const { Content: ExploreContent } = await render(exploreEntry);
+const exploreOption = exploreEntry.data.options[0];
+const exploreUrl = `/discover/${exploreOption.target}`;
 
 // CTA destinations (config, not copy — labels come from copy.yaml).
 const signupUrl = 'https://app.answerlayer.io/sign-up';
@@ -52,7 +60,11 @@ const contactUrl = '/contact';
             <div class="diagram-center-title crt-text">{c.schematic.centerTitle}</div>
             <div class="diagram-center-caption crt-text">{c.schematic.centerCaption}</div>
           </div>
-          <p class="diagram-connector crt-text">↓&nbsp;&nbsp;{c.schematic.inPlaceLabel}&nbsp;&nbsp;↓</p>
+          <p class="diagram-connector diagram-sync crt-text">
+            <span class="sync-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></span>
+            <span>{c.schematic.inPlaceLabel}</span>
+            <span class="sync-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></span>
+          </p>
           <div class="diagram-row">
             {c.schematic.bottomChips.map((chip) => (
               <div class="diagram-chip crt-text">{chip}</div>
@@ -63,7 +75,19 @@ const contactUrl = '/contact';
     </section>
 
     <!-- ============================================================
-         2. PROBLEM
+         2. EXPLORE — discover flow entry (reuses the "home" node)
+         ============================================================ -->
+    <section id="explore" class="screen-section container mx-auto px-6 py-24 md:py-32 section-divider">
+      <div class="explore-card">
+        <p class="eyebrow crt-text">Explore</p>
+        <h2 class="section-title crt-text">{exploreEntry.data.title}</h2>
+        <div class="explore-body crt-text"><ExploreContent /></div>
+        <a href={exploreUrl} class="cta-button is-primary crt-text explore-cta">{exploreOption.label}</a>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. PROBLEM
          ============================================================ -->
     <section id="problem" class="screen-section container mx-auto px-6 py-24 md:py-32 section-divider">
       <div class="section-head">
@@ -244,6 +268,39 @@ const contactUrl = '/contact';
     max-width: 34em;
   }
 
+  /* ---- Explore screen (discover flow entry, technical card) ---- */
+  .explore-card {
+    position: relative;
+    max-width: 42rem;
+    margin: 0 auto;
+    text-align: center;
+    border: 2px solid var(--color-navy-900);
+    padding: 2.5rem;
+  }
+  .explore-card::before {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border: 1px solid var(--color-navy-300);
+    pointer-events: none;
+  }
+  .explore-body {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--color-navy-700);
+    margin-top: 1.25rem;
+  }
+  .explore-body :global(p) {
+    margin: 0 0 1rem;
+  }
+  .explore-body :global(p:last-child) {
+    margin-bottom: 0;
+  }
+  .explore-cta {
+    margin-top: 1.75rem;
+  }
+
   /* ---- Buttons (reuses the site's bordered .cta-button pattern) ---- */
   .button-row {
     display: flex;
@@ -312,6 +369,42 @@ const contactUrl = '/contact';
     text-transform: uppercase;
     letter-spacing: 0.1em;
     color: var(--color-navy-500);
+  }
+  /* Lo-fi continuous-sync cycle between AnswerLayer and the source blocks:
+     slowly rotating arrows, stepped for a retro/choppy feel. Conveys that
+     AnswerLayer keeps updating as the underlying sources change. */
+  .diagram-sync {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.6rem;
+  }
+  /* Static wrapper carries the CRT chromatic fringing (matching .crt-text) so
+     it stays horizontal while the icon inside spins. Colour matches the
+     connector text (navy-500); the parent .crt-text supplies contrast/brightness. */
+  .sync-arrow {
+    display: inline-flex;
+    width: 1.1rem;
+    height: 1.1rem;
+    flex: none;
+    color: var(--color-navy-500);
+    filter:
+      drop-shadow(-1px 0 0 rgba(56, 67, 147, 0.5))
+      drop-shadow(1px 0 0 rgba(137, 151, 214, 0.5))
+      drop-shadow(0 0 3px rgba(56, 67, 147, 0.3));
+  }
+  .sync-arrow svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    transform-origin: 50% 50%;
+    animation: sync-spin 5s steps(10) infinite;
+  }
+  @keyframes sync-spin {
+    to { transform: rotate(360deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sync-arrow svg { animation: none; }
   }
   .diagram-center {
     position: relative;

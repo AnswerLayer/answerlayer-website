@@ -30,7 +30,7 @@ schematic:
   contractLabel: "API contract"
   centerTitle: "AnswerLayer"
   centerCaption: "Semantic layer · Governed"
-  inPlaceLabel: "In place"
+  inPlaceLabel: "In sync"
   bottomChips: ["Warehouse", "Database", "Sources"]
 
 # ---- 2. Problem --------------------------------------------
