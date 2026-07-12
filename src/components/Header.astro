@@ -18,7 +18,7 @@ const navLinks = [
   { href: '/customers', label: 'Customers' },
   { href: '/trust', label: 'Trust' },
   { href: '/pricing', label: 'Pricing' },
-  { href: '/architecture', label: 'Architecture' },
+  { href: '/architecture-diagram', label: 'Architecture' },
   { href: '/docs/overview', label: 'Docs' },
   { href: '/blog', label: 'Blog' },
   { href: '/about', label: 'About' },
@@ -27,7 +27,7 @@ const navLinks = [
 // Primary CTA: "Sign up free" on the home hero, "Deploy" everywhere else.
 const cta = dark
   ? { href: 'https://app.answerlayer.io/sign-up', label: 'Sign up free', external: true }
-  : { href: '/deploy', label: 'Deploy', external: false };
+  : { href: 'https://app.answerlayer.io/sign-up', label: 'Deploy', external: true };
 
 const isActive = (href: string) =>
   currentPath === href || currentPath.startsWith(href + '/');
