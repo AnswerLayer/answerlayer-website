@@ -27,6 +27,7 @@ const exploreUrl = `/discover/${exploreOption.target}`;
 // CTA destinations (config, not copy — labels come from copy.yaml).
 const signupUrl = 'https://app.answerlayer.io/sign-up';
 const talkUrl = 'https://calendly.com/josh-getanswerlayer/30min';
+const docsUrl = '/docs/overview';
 ---
 
 <Layout title={c.meta.title}>
@@ -75,47 +76,7 @@ const talkUrl = 'https://calendly.com/josh-getanswerlayer/30min';
     </section>
 
     <!-- ============================================================
-         2. EXPLORE — discover flow entry (reuses the "home" node)
-         ============================================================ -->
-    <section id="explore" class="screen-section container mx-auto px-6 py-24 md:py-32 section-divider">
-      <div class="explore-card">
-        <p class="eyebrow crt-text">Explore</p>
-        <h2 class="section-title crt-text">{exploreEntry.data.title}</h2>
-        <div class="explore-body crt-text"><ExploreContent /></div>
-        <a href={exploreUrl} class="cta-button is-primary crt-text explore-cta">{exploreOption.label}</a>
-      </div>
-    </section>
-
-    <!-- ============================================================
-         3. PROBLEM
-         ============================================================ -->
-    <section id="problem" class="screen-section container mx-auto px-6 py-24 md:py-32 section-divider">
-      <div class="section-head">
-        <p class="eyebrow crt-text">{c.problem.eyebrow}</p>
-        <h2 class="section-title crt-text">{c.problem.heading}</h2>
-        <p class="section-sub crt-text">{c.problem.sub}</p>
-      </div>
-
-      <div class="stack-center">
-        <div class="query-chip crt-text">&gt; "{c.problem.query}"</div>
-        <p class="down-arrow crt-text">↓</p>
-      </div>
-
-      <div class="card-grid card-grid--4">
-        {c.problem.answers.map((a) => (
-          <div class="topic-card">
-            <div class="answer-value crt-text">{a.value}</div>
-            <div class="answer-caption crt-text">{a.caption}</div>
-          </div>
-        ))}
-      </div>
-      <p class="fine-print crt-text">{c.problem.answersNote}</p>
-
-      <p class="punchline crt-text">{c.problem.punchline}</p>
-    </section>
-
-    <!-- ============================================================
-         3. THE ANSWER — semantic-layer primitives
+         2. THE ANSWER — semantic-layer primitives
          ============================================================ -->
     <section class="screen-section container mx-auto px-6 py-24 md:py-32 section-divider">
       <div class="section-head">
@@ -132,6 +93,30 @@ const talkUrl = 'https://calendly.com/josh-getanswerlayer/30min';
             <p class="card-description crt-text">{p.body}</p>
           </div>
         ))}
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. EMBED INTO PRODUCTS
+         ============================================================ -->
+    <section id="embed" class="screen-section container mx-auto px-6 py-24 md:py-32 section-divider">
+      <div class="section-head">
+        <p class="eyebrow crt-text">{c.embed.eyebrow}</p>
+        <h2 class="section-title crt-text">{c.embed.heading}</h2>
+        <p class="section-sub crt-text">{c.embed.sub}</p>
+      </div>
+
+      <div class="card-grid">
+        {c.embed.cards.map((card) => (
+          <div class="topic-card">
+            <h3 class="card-title crt-text">{card.title}</h3>
+            <p class="card-description crt-text">{card.body}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="button-row button-row--center">
+        <a href={docsUrl} class="cta-button is-primary crt-text">{c.embed.ctaLabel}</a>
       </div>
     </section>
 
@@ -159,6 +144,18 @@ const talkUrl = 'https://calendly.com/josh-getanswerlayer/30min';
             </div>
           ))}
         </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         5. EXPLORE — discover flow entry (reuses the "home" node)
+         ============================================================ -->
+    <section id="explore" class="screen-section container mx-auto px-6 py-24 md:py-32 section-divider">
+      <div class="explore-card">
+        <p class="eyebrow crt-text">Explore</p>
+        <h2 class="section-title crt-text">{exploreEntry.data.title}</h2>
+        <div class="explore-body crt-text"><ExploreContent /></div>
+        <a href={exploreUrl} class="cta-button is-primary crt-text explore-cta">{exploreOption.label}</a>
       </div>
     </section>
 
@@ -437,58 +434,6 @@ const talkUrl = 'https://calendly.com/josh-getanswerlayer/30min';
     margin-top: 0.4rem;
   }
 
-  /* ---- Problem: query chip, answers, punchline ---- */
-  .stack-center {
-    text-align: center;
-    margin: 3.5rem 0 2rem;
-  }
-  .query-chip {
-    display: inline-block;
-    border: 2px solid var(--color-navy-900);
-    background: var(--color-white, #fff);
-    font-family: var(--font-mono);
-    font-size: 0.875rem;
-    color: var(--color-navy-900);
-    padding: 0.5rem 1rem;
-  }
-  .down-arrow {
-    font-family: var(--font-mono);
-    font-size: 1.25rem;
-    color: var(--color-navy-500);
-    margin-top: 0.75rem;
-  }
-  .answer-value {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 1.375rem;
-    color: var(--color-navy-900);
-  }
-  .answer-caption {
-    font-family: var(--font-mono);
-    font-size: 0.6875rem;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    color: var(--color-navy-500);
-    margin-top: 0.5rem;
-  }
-  .fine-print {
-    text-align: center;
-    font-family: var(--font-mono);
-    font-size: 0.75rem;
-    color: var(--color-navy-500);
-    margin-top: 1rem;
-  }
-  .punchline {
-    text-align: center;
-    max-width: 26em;
-    margin: 3.5rem auto 0;
-    font-family: var(--font-display);
-    font-weight: 500;
-    font-size: clamp(1.125rem, 2.5vw, 1.5rem);
-    line-height: 1.3;
-    color: var(--color-navy-900);
-  }
-
   /* ---- Card grids (the site's .topic-card double-border pattern) ---- */
   .card-grid {
     display: grid;
@@ -501,10 +446,6 @@ const talkUrl = 'https://calendly.com/josh-getanswerlayer/30min';
   }
   @media (min-width: 1024px) {
     .card-grid { grid-template-columns: repeat(3, 1fr); }
-  }
-  .card-grid--4 { margin-top: 0; }
-  @media (min-width: 1024px) {
-    .card-grid--4 { grid-template-columns: repeat(4, 1fr); }
   }
 
   .topic-card {

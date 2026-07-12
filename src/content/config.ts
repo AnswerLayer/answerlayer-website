@@ -101,13 +101,11 @@ const homeCollection = defineCollection({
       inPlaceLabel: z.string(),
       bottomChips: chip,
     }),
-    problem: z.object({
+    embed: z.object({
       ...sectionHead,
       sub: z.string(),
-      query: z.string(),
-      answers: z.array(z.object({ value: z.string(), caption: z.string() })),
-      answersNote: z.string(),
-      punchline: z.string(),
+      cards: z.array(z.object({ title: z.string(), body: z.string() })),
+      ctaLabel: z.string(),
     }),
     semanticLayer: z.object({
       ...sectionHead,

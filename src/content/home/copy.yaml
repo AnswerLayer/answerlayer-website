@@ -11,52 +11,47 @@
 
 # Browser tab / social title
 meta:
-  title: "AnswerLayer — The trusted layer between your data and your AI"
+  title: "AnswerLayer — A learned semantic layer. Context infrastructure for agentic analytics"
 
 # Button labels used in the hero and the final call-to-action
 ctas:
-  primary: "Sign up free"
+  primary: "Demo Account"
   secondary: "Talk to us"
 
 # ---- 1. Hero ------------------------------------------------
 hero:
-  eyebrow: "The foundation for AI analytics"
-  heading: "The trusted layer between your data and your AI"
-  sub: "Define every business concept once. Serve it to every agent, dashboard, and model through a single governed API — running entirely inside your own cloud."
+  eyebrow: "Context infrastructure for agentic analytics"
+  heading: "A learned semantic layer, curated by your experts"
+  sub: "Agents do the heavy lifting, your experts curate semantic objects. Embed to every agent, dashboard, and ML model through an API running entirely inside your own cloud."
 
 # The diagram on the right of the hero
 schematic:
   topChips: ["Agents", "Dashboards", "ML"]
   contractLabel: "API contract"
   centerTitle: "AnswerLayer"
-  centerCaption: "Semantic layer · Governed"
+  centerCaption: ""
   inPlaceLabel: "In sync"
-  bottomChips: ["Warehouse", "Database", "Sources"]
+  bottomChips: ["Warehouse", "Data Lake", "API Source"]
 
-# ---- 2. Problem --------------------------------------------
-problem:
-  eyebrow: "The problem"
-  heading: "Ask an LLM one question. Get five answers."
-  sub: "There's no known-correct answer to retrieve, and one question has many defensible definitions — so the model guesses, confidently."
-  # Shown in the mono query chip (wrapped as: > "your text")
-  query: "What was revenue last quarter?"
-  # The four conflicting answers
-  answers:
-    - value: "$24.8M"
-      caption: "Gross · Booked · Close date"
-    - value: "$21.3M"
-      caption: "Net · Recognized · Ship date"
-    - value: "$23.1M"
-      caption: "Booked · EUR @ spot"
-    - value: "$19.9M"
-      caption: "Recognized · Ship date"
-  answersNote: "Illustrative — many defensible definitions, no ground truth."
-  punchline: "A confident wrong number is worse than no number."
+# ---- Embed into products -----------------------------------
+embed:
+  eyebrow: "Embed"
+  heading: "Better products, built on shared semantics"
+  sub: "AnswerLayer is context infrastructure, not a chatbot. The same governed semantic layer powers agents, embedded analytics, and ML features through one API — so every product you ship speaks the same trusted definitions instead of reinventing them in SQL."
+  # Three cards: what you can build on the semantic layer
+  cards:
+    - title: "Agents"
+      body: "Ground agents in governed metrics and relationships, not raw tables they have to guess at."
+    - title: "Embedded analytics"
+      body: "Ship dashboards and reports on definitions that already match how the business thinks."
+    - title: "ML features"
+      body: "Reuse the same measures and entities as model features — consistent across every model."
+  ctaLabel: "Read the API docs"
 
 # ---- 3. The answer (semantic layer) ------------------------
 semanticLayer:
-  eyebrow: "The answer"
-  heading: "Define it once. Govern it everywhere."
+  eyebrow: ""
+  heading: "Industry Standard Semantic Objects"
   sub: "A semantic layer is one trusted, governed place that defines what every business concept means and how it maps to the underlying data. These six primitives are the whole model."
   # The six cards (numbered 01–06 automatically, in order)
   primitives:
