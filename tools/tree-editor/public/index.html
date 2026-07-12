@@ -949,7 +949,7 @@ function setStatus(type, text) {
 
 // ---- Home Page Copy editor (src/content/home/copy.yaml) ----
 let copyMode = false;
-let copySaveTimeout = null;
+const copySaveTimeouts = new Map();
 
 const COPY_SECTION_LABELS = {
   meta: 'Page meta', ctas: 'Buttons', hero: 'Hero', schematic: 'Hero schematic',
@@ -1004,10 +1004,12 @@ function renderCopyEditor(leaves) {
 
 function saveCopyField(el) {
   const fieldPath = JSON.parse(el.dataset.path);
+  const pathKey = JSON.stringify(fieldPath);
   const value = el.value;
   setStatus('saving', '💾 Saving...');
-  if (copySaveTimeout) clearTimeout(copySaveTimeout);
-  copySaveTimeout = setTimeout(async () => {
+  const pendingSave = copySaveTimeouts.get(pathKey);
+  if (pendingSave) clearTimeout(pendingSave);
+  copySaveTimeouts.set(pathKey, setTimeout(async () => {
     try {
       const res = await fetch('/api/home-copy', {
         method: 'PUT',
@@ -1020,8 +1022,10 @@ function saveCopyField(el) {
     } catch (err) {
       setStatus('error', '✕ Save failed');
       showToast('Failed to save: ' + err.message, 'error');
+    } finally {
+      copySaveTimeouts.delete(pathKey);
     }
-  }, 300);
+  }, 300));
 }
 
 // Rename node

@@ -249,6 +249,10 @@ function flattenLeaves(value, prefix, out) {
   }
 }
 
+function pathsEqual(left, right) {
+  return left.length === right.length && left.every((segment, index) => segment === right[index]);
+}
+
 // GET /api/home-copy - flattened, ordered list of editable copy fields
 app.get('/api/home-copy', (req, res) => {
   try {
@@ -268,12 +272,20 @@ app.put('/api/home-copy', (req, res) => {
     if (!Array.isArray(fieldPath) || fieldPath.length === 0) {
       return res.status(400).json({ error: 'path (non-empty array) is required' });
     }
+    if (typeof value !== 'string') {
+      return res.status(400).json({ error: 'value must be a string' });
+    }
     const doc = YAML.parseDocument(fs.readFileSync(COPY_PATH, 'utf-8'));
+    const leaves = [];
+    flattenLeaves(doc.toJS(), [], leaves);
+    if (!leaves.some(leaf => pathsEqual(leaf.path, fieldPath))) {
+      return res.status(400).json({ error: 'path is not an editable copy field' });
+    }
     const node = doc.getIn(fieldPath, true); // keepScalar: get the Scalar node
     if (node && typeof node === 'object' && 'value' in node) {
       node.value = value; // in-place: keeps the node's quote style and comments
     } else {
-      doc.setIn(fieldPath, value);
+      return res.status(400).json({ error: 'path is not an editable scalar field' });
     }
     // lineWidth:0 keeps long strings on one line; flowCollectionPadding:false
     // keeps arrays as ["a","b"] — both avoid reformatting untouched lines.
