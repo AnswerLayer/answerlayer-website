@@ -5,7 +5,7 @@
  * Using ghost button variant for softer appearance
  *
  * `dark` renders the navy-950 variant used over the marketing home hero, and
- * swaps the primary button to "Sign up free" (the home CTA).
+ * exposes the CLI installation path as the primary CTA.
  */
 interface Props {
   dark?: boolean;
@@ -24,10 +24,7 @@ const navLinks = [
   { href: '/about', label: 'About' },
 ];
 
-// Primary CTA: "Sign up free" on the home hero, "Deploy" everywhere else.
-const cta = dark
-  ? { href: 'https://app.answerlayer.io/sign-up', label: 'Sign up free', external: true }
-  : { href: 'https://app.answerlayer.io/sign-up', label: 'Deploy', external: true };
+const cta = { href: '/install', label: 'Install the CLI', external: false };
 
 const isActive = (href: string) =>
   currentPath === href || currentPath.startsWith(href + '/');

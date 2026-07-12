@@ -2,14 +2,14 @@
 /**
  * Deploy Page
  *
- * Deployment options hub with links to signup, VPC docs, pricing, and contact.
+ * Deployment options hub with links to CLI install, VPC docs, pricing, and contact.
  */
 import Layout from '../layouts/Layout.astro';
 ---
 
 <Layout
   title="Deploy - AnswerLayer"
-  description="Get started with AnswerLayer - cloud or bring your own cloud"
+  description="Install AnswerLayer locally or deploy it in your own cloud"
 >
   <div class="crt-screen">
     <div class="container mx-auto px-6 py-12 md:py-20">
@@ -17,18 +17,17 @@ import Layout from '../layouts/Layout.astro';
       <!-- Page Header -->
       <div class="page-header">
         <h1 class="page-title crt-text">Deploy</h1>
-        <p class="page-subtitle crt-text">Get started with AnswerLayer</p>
+        <p class="page-subtitle crt-text">Start locally, then deploy where your data lives</p>
       </div>
 
       <!-- Card Grid -->
       <div class="card-grid">
 
         <div class="topic-card">
-          <h2 class="card-title crt-text">Free Cloud</h2>
-          <p class="card-description crt-text">Start immediately with our hosted platform. No credit card required, encrypted connections. Limited capabilities.</p>
+          <h2 class="card-title crt-text">Local Evaluation</h2>
+          <p class="card-description crt-text">Install the CLI and let your agent start the Docker stack locally. Test safely with a dedicated read-only database user.</p>
           <div class="card-links">
-            <a href="https://app.answerlayer.io/sign-up" target="_blank" rel="noopener" class="card-link crt-text">Sign Up ↗</a>
-            <a href="https://app.answerlayer.io/sign-in" target="_blank" rel="noopener" class="card-link crt-text">Sign In ↗</a>
+            <a href="/install" class="card-link crt-text">Install the CLI →</a>
           </div>
         </div>
 
@@ -44,7 +43,7 @@ import Layout from '../layouts/Layout.astro';
 
         <a href="/pricing" class="topic-card">
           <h2 class="card-title crt-text">Pricing</h2>
-          <p class="card-description crt-text">Simple, transparent pricing. Free cloud tier for getting started. Custom pricing for BYOC deployments.</p>
+          <p class="card-description crt-text">Simple, transparent pricing for moving from local evaluation to a managed or BYOC deployment.</p>
         </a>
 
       </div>

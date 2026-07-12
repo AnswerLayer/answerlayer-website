@@ -11,18 +11,18 @@
 
 # Browser tab / social title
 meta:
-  title: "AnswerLayer — A learned semantic layer. Context infrastructure for agentic analytics"
+  title: "AnswerLayer — The semantic factory for agents"
 
 # Button labels used in the hero and the final call-to-action
 ctas:
-  primary: "Demo Account"
+  primary: "Install the CLI"
   secondary: "Talk to us"
 
 # ---- 1. Hero ------------------------------------------------
 hero:
-  eyebrow: "Context infrastructure for agentic analytics"
-  heading: "A learned semantic layer, curated by your experts"
-  sub: "Agents do the heavy lifting, your experts curate semantic objects. Embed to every agent, dashboard, and ML model through an API running entirely inside your own cloud."
+  eyebrow: "Semantic factory for agents"
+  heading: "Build trusted context your agents can use"
+  sub: "AnswerLayer turns your data model and expert knowledge into governed semantic objects. Install the CLI to build, query, and ship shared context across agents, dashboards, and ML models."
 
 # The diagram on the right of the hero
 schematic:
@@ -103,5 +103,5 @@ pricing:
 
 # ---- 7. Final call-to-action -------------------------------
 finalCta:
-  heading: "One source of truth for every agent you ship"
-  sub: "Deploy the semantic layer in your own cloud and stop shipping confident wrong numbers."
+  heading: "Start building your semantic factory"
+  sub: "Install the CLI, run AnswerLayer locally, and give every agent the same trusted context."

@@ -13,7 +13,7 @@ const entry = await getEntry('home', 'copy');
 if (!entry) throw new Error('Missing src/content/home/copy.yaml');
 const p = entry.data.pricing;
 
-const signupUrl = 'https://app.answerlayer.io/sign-up';
+const installUrl = '/install';
 const talkUrl = 'https://calendly.com/josh-getanswerlayer/30min';
 const ctas = entry.data.ctas;
 ---
@@ -53,7 +53,7 @@ const ctas = entry.data.ctas;
 
       <!-- CTA -->
       <div class="cta-row">
-        <a href={signupUrl} target="_blank" rel="noopener" class="cta-button is-primary crt-text">{ctas.primary}</a>
+        <a href={installUrl} class="cta-button is-primary crt-text">{ctas.primary}</a>
         <a href={talkUrl} target="_blank" rel="noopener" class="cta-button crt-text">{ctas.secondary}</a>
       </div>
 
