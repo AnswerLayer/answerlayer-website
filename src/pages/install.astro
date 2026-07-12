@@ -6,6 +6,7 @@
  * available from /deploy.
  */
 import Layout from '../layouts/Layout.astro';
+import CopyCommand from '../components/CopyCommand.astro';
 ---
 
 <Layout
@@ -25,7 +26,7 @@ import Layout from '../layouts/Layout.astro';
           <span class="step-number crt-text">01</span>
           <h2 class="card-title crt-text">Install the CLI</h2>
           <p class="card-description crt-text">The CLI runs on Node.js 20 or newer.</p>
-          <pre class="command crt-text"><code>npm install -g @answerlayer/cli</code></pre>
+          <div class="command-row"><CopyCommand command="npm install -g @answerlayer/cli" /></div>
           <p class="card-description crt-text">Prefer not to install it globally? Run <code>npx -y @answerlayer/cli --help</code>.</p>
         </article>
 
@@ -33,7 +34,7 @@ import Layout from '../layouts/Layout.astro';
           <span class="step-number crt-text">02</span>
           <h2 class="card-title crt-text">Install the agent skill</h2>
           <p class="card-description crt-text">The CLI includes a Codex skill that knows how to prepare, start, and verify the local stack.</p>
-          <pre class="command crt-text"><code>answerlayer skills install</code></pre>
+          <div class="command-row"><CopyCommand command="answerlayer skills install" /></div>
           <p class="card-description crt-text">Then ask your agent: “Start AnswerLayer locally and help me connect a read-only database safely.”</p>
         </article>
 
@@ -151,6 +152,8 @@ answerlayer inquiry ask --connection &lt;connection-id&gt; "What changed in reve
     line-height: 1.65;
     white-space: pre-wrap;
   }
+
+  .command-row { margin-top: 1rem; }
 
   .cta-row {
     display: flex;

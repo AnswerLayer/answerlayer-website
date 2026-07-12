@@ -10,6 +10,7 @@
  * introduced as the second screen (below the hero) and continues at /discover/*.
  */
 import Layout from '../layouts/Layout.astro';
+import CopyCommand from '../components/CopyCommand.astro';
 import { getEntry, render } from 'astro:content';
 
 const entry = await getEntry('home', 'copy');
@@ -25,7 +26,6 @@ const exploreOption = exploreEntry.data.options[0];
 const exploreUrl = `/discover/${exploreOption.target}`;
 
 // CTA destinations (config, not copy — labels come from copy.yaml).
-const installUrl = '/install';
 const talkUrl = 'https://calendly.com/josh-getanswerlayer/30min';
 const docsUrl = '/docs/overview';
 ---
@@ -44,7 +44,7 @@ const docsUrl = '/docs/overview';
           <h1 class="hero-title crt-text">{c.hero.heading}</h1>
           <p class="lead crt-text">{c.hero.sub}</p>
           <div class="button-row">
-            <a href={installUrl} class="cta-button is-primary crt-text">{c.ctas.primary}</a>
+            <CopyCommand command="npm install -g @answerlayer/cli" />
             <a href={talkUrl} target="_blank" rel="noopener" class="cta-button crt-text">{c.ctas.secondary}</a>
           </div>
         </div>
@@ -168,7 +168,7 @@ const docsUrl = '/docs/overview';
         <p class="section-sub crt-text">{c.finalCta.sub}</p>
       </div>
       <div class="button-row button-row--center">
-        <a href={installUrl} class="cta-button is-primary crt-text">{c.ctas.primary}</a>
+        <CopyCommand command="npm install -g @answerlayer/cli" />
         <a href={talkUrl} target="_blank" rel="noopener" class="cta-button crt-text">{c.ctas.secondary}</a>
       </div>
     </section>

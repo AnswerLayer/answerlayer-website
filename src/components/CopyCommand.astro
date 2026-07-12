@@ -1,0 +1,104 @@
+---
+interface Props {
+  command: string;
+  label?: string;
+}
+
+const { command, label = 'Copy' } = Astro.props;
+---
+
+<div class="copy-command crt-text" data-copy-command data-command={command}>
+  <span class="prompt" aria-hidden="true">$</span>
+  <code>{command}</code>
+  <button type="button" data-copy-button aria-label={`Copy command: ${command}`}>
+    <span data-copy-label aria-live="polite">{label}</span>
+  </button>
+</div>
+
+<script>
+  const copyText = async (text: string) => {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    textarea.remove();
+  };
+
+  document.querySelectorAll<HTMLElement>('[data-copy-command]').forEach((container) => {
+    if (container.dataset.copyReady === 'true') return;
+    container.dataset.copyReady = 'true';
+
+    const button = container.querySelector<HTMLButtonElement>('[data-copy-button]');
+    const label = container.querySelector<HTMLElement>('[data-copy-label]');
+    if (!button || !label) return;
+
+    button.addEventListener('click', async () => {
+      try {
+        await copyText(container.dataset.command || '');
+        label.textContent = 'Copied';
+        window.setTimeout(() => { label.textContent = 'Copy'; }, 1800);
+      } catch {
+        label.textContent = 'Copy failed';
+        window.setTimeout(() => { label.textContent = 'Copy'; }, 1800);
+      }
+    });
+  });
+</script>
+
+<style>
+  .copy-command {
+    display: inline-flex;
+    align-items: stretch;
+    max-width: 100%;
+    border: 2px solid var(--color-navy-900);
+    background: var(--color-navy-900);
+    color: var(--color-navy-50);
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    line-height: 1.4;
+  }
+
+  .prompt,
+  code {
+    display: inline-flex;
+    align-items: center;
+    padding-block: 0.75rem;
+  }
+
+  .prompt {
+    padding-left: 1rem;
+    color: var(--color-navy-400);
+  }
+
+  code {
+    overflow-x: auto;
+    padding-inline: 0.5rem 1rem;
+    white-space: nowrap;
+  }
+
+  button {
+    flex: 0 0 auto;
+    border: 0;
+    border-left: 2px solid var(--color-navy-500);
+    padding: 0.75rem 1rem;
+    background: var(--color-navy-50);
+    color: var(--color-navy-900);
+    font: inherit;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+  }
+
+  button:hover,
+  button:focus-visible {
+    background: var(--color-navy-200);
+  }
+</style>
