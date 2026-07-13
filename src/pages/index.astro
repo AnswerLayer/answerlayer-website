@@ -6,24 +6,16 @@
  * existing site design system (light `crt-screen`, double-border `.topic-card`,
  * mono eyebrows, `.crt-text`, bordered `.cta-button`) — matching Trust/About/etc.
  *
- * All copy lives in src/content/home/copy.yaml. The discover/explore flow is
- * introduced as the second screen (below the hero) and continues at /discover/*.
+ * All copy lives in src/content/home/copy.yaml. The discover/explore flow lives
+ * at /discover and is linked from the site header.
  */
 import Layout from '../layouts/Layout.astro';
 import CopyCommand from '../components/CopyCommand.astro';
-import { getEntry, render } from 'astro:content';
+import { getEntry } from 'astro:content';
 
 const entry = await getEntry('home', 'copy');
 if (!entry) throw new Error('Missing src/content/home/copy.yaml');
 const c = entry.data;
-
-// The Explore screen reuses the discover flow's intro node ("home"), rendered
-// inline below the hero, and links into the flow's first branch.
-const exploreEntry = await getEntry('discover', 'home');
-if (!exploreEntry) throw new Error('Missing discover "home" node');
-const { Content: ExploreContent } = await render(exploreEntry);
-const exploreOption = exploreEntry.data.options[0];
-const exploreUrl = `/discover/${exploreOption.target}`;
 
 // CTA destinations (config, not copy — labels come from copy.yaml).
 const talkUrl = 'https://calendly.com/josh-getanswerlayer/30min';
@@ -148,19 +140,7 @@ const docsUrl = '/docs/overview';
     </section>
 
     <!-- ============================================================
-         5. EXPLORE — discover flow entry (reuses the "home" node)
-         ============================================================ -->
-    <section id="explore" class="screen-section container mx-auto px-6 py-24 md:py-32 section-divider">
-      <div class="explore-card">
-        <p class="eyebrow crt-text">Explore</p>
-        <h2 class="section-title crt-text">{exploreEntry.data.title}</h2>
-        <div class="explore-body crt-text"><ExploreContent /></div>
-        <a href={exploreUrl} class="cta-button is-primary crt-text explore-cta">{exploreOption.label}</a>
-      </div>
-    </section>
-
-    <!-- ============================================================
-         6. FINAL CTA
+         5. FINAL CTA
          ============================================================ -->
     <section class="screen-section container mx-auto px-6 py-24 md:py-32 section-divider">
       <div class="section-head">
@@ -263,39 +243,6 @@ const docsUrl = '/docs/overview';
     color: var(--color-navy-700);
     margin: 1.25rem 0 0;
     max-width: 34em;
-  }
-
-  /* ---- Explore screen (discover flow entry, technical card) ---- */
-  .explore-card {
-    position: relative;
-    max-width: 42rem;
-    margin: 0 auto;
-    text-align: center;
-    border: 2px solid var(--color-navy-900);
-    padding: 2.5rem;
-  }
-  .explore-card::before {
-    content: "";
-    position: absolute;
-    inset: -6px;
-    border: 1px solid var(--color-navy-300);
-    pointer-events: none;
-  }
-  .explore-body {
-    font-family: var(--font-body);
-    font-size: 1rem;
-    line-height: 1.7;
-    color: var(--color-navy-700);
-    margin-top: 1.25rem;
-  }
-  .explore-body :global(p) {
-    margin: 0 0 1rem;
-  }
-  .explore-body :global(p:last-child) {
-    margin-bottom: 0;
-  }
-  .explore-cta {
-    margin-top: 1.75rem;
   }
 
   /* ---- Buttons (reuses the site's bordered .cta-button pattern) ---- */

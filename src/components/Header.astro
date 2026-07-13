@@ -15,6 +15,7 @@ const { dark = false } = Astro.props;
 const currentPath = Astro.url.pathname;
 
 const navLinks = [
+  { href: '/discover', label: 'Explore' },
   { href: '/customers', label: 'Customers' },
   { href: '/trust', label: 'Trust' },
   { href: '/pricing', label: 'Pricing' },
@@ -54,7 +55,7 @@ const isActive = (href: string) =>
       </a>
 
       <!-- Desktop Navigation -->
-      <nav class="hidden md:flex items-center gap-6">
+      <nav class="hidden lg:flex items-center gap-6">
         {navLinks.map((link) => (
           <a
             href={link.href}
@@ -94,7 +95,7 @@ const isActive = (href: string) =>
       <!-- Mobile Menu Toggle -->
       <button
         class:list={[
-          'md:hidden border-2 px-4 py-2 uppercase text-sm font-display font-semibold transition-colors',
+          'lg:hidden border-2 px-4 py-2 uppercase text-sm font-display font-semibold transition-colors',
           dark
             ? 'border-navy-400 text-navy-50 hover:bg-navy-50 hover:text-navy-950'
             : 'border-navy-900 hover:bg-navy-900 hover:text-white',
@@ -110,7 +111,7 @@ const isActive = (href: string) =>
     <!-- Mobile Navigation -->
     <nav
       class:list={[
-        'hidden md:hidden flex-col gap-2 pb-4 border-t pt-4',
+        'hidden lg:hidden flex-col gap-2 pb-4 border-t pt-4',
         dark ? 'border-navy-800' : 'border-gray-200',
       ]}
       id="mobile-nav"
