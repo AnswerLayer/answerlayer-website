@@ -24,7 +24,10 @@ const navLinks = [
   { href: '/about', label: 'About' },
 ];
 
-const cta = { href: '/install', label: 'Install the CLI', external: false };
+const ctas = [
+  { href: 'https://app.answerlayer.io/sign-up', label: 'Sign up', external: true, primary: true },
+  { href: '/deploy', label: 'Deploy', external: false, primary: false },
+];
 
 const isActive = (href: string) =>
   currentPath === href || currentPath.startsWith(href + '/');
@@ -65,19 +68,27 @@ const isActive = (href: string) =>
             {link.label}
           </a>
         ))}
-        <a
-          href={cta.href}
-          target={cta.external ? '_blank' : undefined}
-          rel={cta.external ? 'noopener' : undefined}
-          class:list={[
-            'crt-text inline-flex items-center justify-center uppercase tracking-wide font-display font-semibold text-sm px-4 py-2 border-2 transition-all duration-150 hover:no-underline',
-            dark
-              ? 'border-navy-400 text-navy-50 hover:bg-navy-50 hover:text-navy-950'
-              : 'border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white',
-          ]}
-        >
-          {cta.label}
-        </a>
+        <div class="flex items-center gap-2">
+          {ctas.map((cta) => (
+            <a
+              href={cta.href}
+              target={cta.external ? '_blank' : undefined}
+              rel={cta.external ? 'noopener' : undefined}
+              class:list={[
+                'crt-text inline-flex items-center justify-center uppercase tracking-wide font-display font-semibold text-sm px-4 py-2 border-2 transition-all duration-150 hover:no-underline',
+                cta.primary
+                  ? (dark
+                      ? 'border-navy-50 bg-navy-50 text-navy-950 hover:bg-navy-200'
+                      : 'border-navy-900 bg-navy-900 text-white hover:bg-navy-700')
+                  : (dark
+                      ? 'border-navy-400 text-navy-50 hover:bg-navy-50 hover:text-navy-950'
+                      : 'border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white'),
+              ]}
+            >
+              {cta.label}
+            </a>
+          ))}
+        </div>
       </nav>
 
       <!-- Mobile Menu Toggle -->
@@ -117,19 +128,25 @@ const isActive = (href: string) =>
           {link.label}
         </a>
       ))}
-      <a
-        href={cta.href}
-        target={cta.external ? '_blank' : undefined}
-        rel={cta.external ? 'noopener' : undefined}
-        class:list={[
-          'crt-text inline-flex items-center justify-center uppercase tracking-wide font-display font-semibold text-sm px-4 py-2 mt-2 border-2 transition-colors',
-          dark
-            ? 'border-navy-400 text-navy-50 hover:bg-navy-50 hover:text-navy-950'
-            : 'border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white',
-        ]}
-      >
-        {cta.label}
-      </a>
+      {ctas.map((cta) => (
+        <a
+          href={cta.href}
+          target={cta.external ? '_blank' : undefined}
+          rel={cta.external ? 'noopener' : undefined}
+          class:list={[
+            'crt-text inline-flex items-center justify-center uppercase tracking-wide font-display font-semibold text-sm px-4 py-2 mt-2 border-2 transition-colors',
+            cta.primary
+              ? (dark
+                  ? 'border-navy-50 bg-navy-50 text-navy-950 hover:bg-navy-200'
+                  : 'border-navy-900 bg-navy-900 text-white hover:bg-navy-700')
+              : (dark
+                  ? 'border-navy-400 text-navy-50 hover:bg-navy-50 hover:text-navy-950'
+                  : 'border-navy-900 text-navy-900 hover:bg-navy-900 hover:text-white'),
+          ]}
+        >
+          {cta.label}
+        </a>
+      ))}
     </nav>
   </div>
 </header>
