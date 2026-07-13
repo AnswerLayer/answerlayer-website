@@ -7,7 +7,7 @@ interface Props {
   title: string;
   description?: string;
   minimal?: boolean;
-  /** Home/marketing layout: full-bleed (no <main> top padding) + dark header over the hero. */
+  /** Home/marketing layout: full-bleed with no <main> top padding. */
   home?: boolean;
 }
 
@@ -65,7 +65,7 @@ const {
   </head>
   <body class="crt-screen" style="display: flex; flex-direction: column; min-height: 100vh;">
     <div class="scanline-overlay" aria-hidden="true"></div>
-    {!minimal && <Header dark={home} />}
+    {!minimal && <Header />}
     <main style={minimal || home ? "flex: 1;" : "flex: 1; padding-top: 2rem;"}>
       <slot />
     </main>
