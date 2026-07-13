@@ -5,8 +5,6 @@ options:
     target: "access-generation"
   - label: "See a demo"
     target: "external-demo"
-  - label: "See who uses AnswerLayer"
-    target: "external-customers"
   - label: "Back"
     target: "path-access"
 external: false
