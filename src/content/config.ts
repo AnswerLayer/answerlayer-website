@@ -92,7 +92,7 @@ const homeCollection = defineCollection({
   schema: z.object({
     meta: z.object({ title: z.string() }),
     ctas: z.object({ primary: z.string(), secondary: z.string() }),
-    hero: z.object({ ...sectionHead, sub: z.string() }),
+    hero: z.object({ ...sectionHead, sub: z.string(), bookCallLabel: z.string() }),
     schematic: z.object({
       topChips: chip,
       contractLabel: z.string(),
