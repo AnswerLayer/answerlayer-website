@@ -23,6 +23,7 @@ hero:
   eyebrow: "Context infrastructure for agentic analytics"
   heading: "A learned semantic layer, curated by your experts"
   sub: "Agents do the heavy lifting, your experts curate semantic objects. Embed to every agent, dashboard, and ML model through an API running entirely inside your own cloud."
+  deployLabel: "Deploy"
   bookCallLabel: "Book a Call"
 
 # The diagram on the right of the hero

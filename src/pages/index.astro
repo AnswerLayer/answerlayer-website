@@ -35,7 +35,9 @@ const bookCallUrl = 'https://calendly.com/josh-getanswerlayer/30min';
           <h1 class="hero-title crt-text">{c.hero.heading}</h1>
           <p class="lead crt-text">{c.hero.sub}</p>
           <div class="button-row">
-            <CopyCommand command="npm install -g @answerlayer/cli" />
+            <a href="/deploy" class="cta-button is-primary crt-text">
+              {c.hero.deployLabel}
+            </a>
             <a href={bookCallUrl} target="_blank" rel="noopener" class="cta-button crt-text">
               {c.hero.bookCallLabel}
             </a>
