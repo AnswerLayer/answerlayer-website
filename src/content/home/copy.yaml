@@ -2,16 +2,16 @@
 # HOMEPAGE COPY
 # ------------------------------------------------------------
 # Edit the text between the quotes. Layout, colors, and spacing
-# live in src/pages/index.astro — you shouldn't need to touch that.
+# live in src/pages/index.astro; you shouldn't need to touch that.
 # Lines starting with # are comments (ignored by the site).
 #
 # Note: headings, eyebrows, chips, and captions are DISPLAYED IN
-# UPPERCASE automatically — write them in normal case here.
+# UPPERCASE automatically; write them in normal case here.
 # ============================================================
 
 # Browser tab / social title
 meta:
-  title: "AnswerLayer — The semantic factory for agents"
+  title: "AnswerLayer | The semantic factory for agents"
 
 # Button labels used on the pricing page
 ctas:
@@ -37,7 +37,7 @@ schematic:
 embed:
   eyebrow: "Embed"
   heading: "Better products, built on shared semantics"
-  sub: "AnswerLayer is context infrastructure, not a chatbot. The same governed semantic layer powers agents, embedded analytics, and ML features through one API — so every product you ship speaks the same trusted definitions instead of reinventing them in SQL."
+  sub: "AnswerLayer is context infrastructure, not a chatbot. The same governed semantic layer powers agents, embedded analytics, and ML features through one API, so every product you ship speaks the same trusted definitions instead of reinventing them in SQL."
   # Three cards: what you can build on the semantic layer
   cards:
     - title: "Agents"
@@ -45,7 +45,7 @@ embed:
     - title: "Embedded analytics"
       body: "Ship dashboards and reports on definitions that already match how the business thinks."
     - title: "ML features"
-      body: "Reuse the same measures and entities as model features — consistent across every model."
+      body: "Reuse the same measures and entities as model features, consistent across every model."
   ctaLabel: "Read the API docs"
 
 # ---- 3. The answer (semantic layer) ------------------------
@@ -58,7 +58,7 @@ semanticLayer:
     - title: "Entities"
       body: "The nouns of your business: customers, orders, accounts."
     - title: "Relationships"
-      body: "How entities join — defined once and reused."
+      body: "How entities join, defined once and reused."
     - title: "Dimensions"
       body: "The ways you slice: region, plan, channel."
     - title: "Measures"
@@ -70,17 +70,16 @@ semanticLayer:
 
 # ---- Runs in your cloud ------------------------------------
 cloud:
-  eyebrow: "The differentiator"
   heading: "It runs in your cloud"
-  sub: "Bring Your Own Cloud — the full stack deploys inside your own account. No third-party SaaS upload. Data never leaves."
+  sub: "Bring Your Own Cloud. The full stack deploys inside your own account. No third-party SaaS upload. Data never leaves."
   containerLabel: "Your cloud account"
-  stackTitle: "Full AnswerLayer stack — installed here"
+  stackTitle: "Full AnswerLayer stack, installed here"
   stackCaption: "All resources provisioned and managed within your account."
   guarantees:
     - title: "Data sovereignty"
       body: "Data stays in your jurisdiction and your accounts."
     - title: "Privacy & protection"
-      body: "No third-party SaaS upload — often a hard requirement."
+      body: "No third-party SaaS upload. This is often a hard requirement."
     - title: "No tradeoff"
       body: "Modern AI analytics and governance, together."
 
