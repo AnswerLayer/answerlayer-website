@@ -17,8 +17,6 @@ const entry = await getEntry('home', 'copy');
 if (!entry) throw new Error('Missing src/content/home/copy.yaml');
 const c = entry.data;
 
-// CTA destinations (config, not copy — labels come from copy.yaml).
-const talkUrl = 'https://calendly.com/josh-getanswerlayer/30min';
 const docsUrl = '/docs/overview';
 ---
 
@@ -37,7 +35,6 @@ const docsUrl = '/docs/overview';
           <p class="lead crt-text">{c.hero.sub}</p>
           <div class="button-row">
             <CopyCommand command="npm install -g @answerlayer/cli" />
-            <a href={talkUrl} target="_blank" rel="noopener" class="cta-button crt-text">{c.ctas.secondary}</a>
           </div>
         </div>
 
@@ -148,7 +145,6 @@ const docsUrl = '/docs/overview';
       </div>
       <div class="button-row button-row--center">
         <CopyCommand command="npm install -g @answerlayer/cli" />
-        <a href={talkUrl} target="_blank" rel="noopener" class="cta-button crt-text">{c.ctas.secondary}</a>
       </div>
     </section>
 

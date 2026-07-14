@@ -13,7 +13,7 @@
 meta:
   title: "AnswerLayer — The semantic factory for agents"
 
-# Button labels used in the hero and the final call-to-action
+# Button labels used on the pricing page
 ctas:
   primary: "Install the CLI"
   secondary: "Talk to us"
