@@ -127,7 +127,7 @@ const homeCollection = defineCollection({
       perkLabel: z.string(),
       perkBody: z.string(),
     }),
-    finalCta: z.object({ heading: z.string(), sub: z.string() }),
+    finalCta: z.object({ heading: z.string() }),
   }),
 });
 

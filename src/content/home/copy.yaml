@@ -104,4 +104,3 @@ pricing:
 # ---- 7. Final call-to-action -------------------------------
 finalCta:
   heading: "Start building your semantic factory"
-  sub: "Install the CLI, run AnswerLayer locally, and give every agent the same trusted context."
