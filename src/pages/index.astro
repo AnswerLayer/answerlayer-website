@@ -1,153 +1,498 @@
 ---
 /**
- * Home Page
- * Renders content from the discover collection's "home" node
- * Minimal approach with W95FA body text, technical card, CRT effects
+ * Home Page: marketing landing page.
+ *
+ * Same section structure/content as the design handoff, but styled with the
+ * existing site design system (light `crt-screen`, double-border `.topic-card`,
+ * mono eyebrows, `.crt-text`, bordered `.cta-button`), matching Trust/About/etc.
+ *
+ * All copy lives in src/content/home/copy.yaml. The discover/explore flow lives
+ * at /discover and is linked from the site header.
  */
 import Layout from '../layouts/Layout.astro';
-import { getEntry, render } from 'astro:content';
+import CopyCommand from '../components/CopyCommand.astro';
+import { getEntry } from 'astro:content';
 
-// Fetch the home node from the discover collection
-const homeEntry = await getEntry('discover', 'home');
-if (!homeEntry) {
-  throw new Error('Missing home.md in discover collection');
-}
+const entry = await getEntry('home', 'copy');
+if (!entry) throw new Error('Missing src/content/home/copy.yaml');
+const c = entry.data;
 
-const { Content } = await render(homeEntry);
-
-// Build option URLs (same logic as [...slug].astro)
-async function getOptionUrl(targetId: string): Promise<string> {
-  const targetEntry = await getEntry('discover', targetId);
-  if (targetEntry?.data.external && targetEntry.data.externalUrl) {
-    return targetEntry.data.externalUrl;
-  }
-  return targetId === 'home' ? '/' : `/discover/${targetId}`;
-}
-
-const optionData = await Promise.all(
-  homeEntry.data.options.map(async (opt) => {
-    const url = await getOptionUrl(opt.target);
-    return { label: opt.label, url };
-  })
-);
+const docsUrl = '/docs/overview';
 ---
 
-<Layout title="AnswerLayer">
-  <div class="crt-screen hero-section">
-    <div class="container mx-auto px-6" style="max-width: 48rem;">
+<Layout title={c.meta.title} home>
+  <div class="crt-screen">
 
-      <div class="technical-card crt-glow">
-        <div class="title-box">
-          <h1 class="home-title crt-text">
-            {homeEntry.data.title}
-          </h1>
+    <!-- ============================================================
+         1. HERO: two-column, copy left, schematic right
+         ============================================================ -->
+    <section class="screen-section container mx-auto px-6 py-12">
+      <div class="hero-grid">
+        <!-- Left: copy -->
+        <div>
+          <p class="eyebrow crt-text">{c.hero.eyebrow}</p>
+          <h1 class="hero-title crt-text">{c.hero.heading}</h1>
+          <p class="lead crt-text">{c.hero.sub}</p>
+          <div class="button-row">
+            <CopyCommand command="npm install -g @answerlayer/cli" />
+          </div>
         </div>
 
-        <div class="body-content crt-text">
-          <Content />
+        <!-- Right: schematic -->
+        <div class="diagram">
+          <div class="diagram-row">
+            {c.schematic.topChips.map((chip) => (
+              <div class="diagram-chip crt-text">{chip}</div>
+            ))}
+          </div>
+          <p class="diagram-connector crt-text">↑&nbsp;&nbsp;{c.schematic.contractLabel}&nbsp;&nbsp;↑</p>
+          <div class="diagram-center">
+            <div class="diagram-center-title crt-text">{c.schematic.centerTitle}</div>
+            <div class="diagram-center-caption crt-text">{c.schematic.centerCaption}</div>
+          </div>
+          <p class="diagram-connector diagram-sync crt-text">
+            <span class="sync-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></span>
+            <span>{c.schematic.inPlaceLabel}</span>
+            <span class="sync-arrow" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg></span>
+          </p>
+          <div class="diagram-row">
+            {c.schematic.bottomChips.map((chip) => (
+              <div class="diagram-chip crt-text">{chip}</div>
+            ))}
+          </div>
         </div>
+      </div>
+    </section>
 
-        <div class="continue-section">
-          {optionData.map((opt) => (
-            <a href={opt.url} class="continue-button crt-text">{opt.label}</a>
+    <!-- ============================================================
+         2. THE ANSWER: semantic-layer primitives
+         ============================================================ -->
+    <section class="screen-section container mx-auto px-6 py-24 md:py-32 section-divider">
+      <div class="section-head">
+        <p class="eyebrow crt-text">{c.semanticLayer.eyebrow}</p>
+        <h2 class="section-title crt-text">{c.semanticLayer.heading}</h2>
+        <p class="section-sub crt-text">{c.semanticLayer.sub}</p>
+      </div>
+
+      <div class="card-grid">
+        {c.semanticLayer.primitives.map((p, i) => (
+          <div class="topic-card">
+            <span class="card-index crt-text">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="card-title crt-text">{p.title}</h3>
+            <p class="card-description crt-text">{p.body}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ============================================================
+         3. EMBED INTO PRODUCTS
+         ============================================================ -->
+    <section id="embed" class="screen-section container mx-auto px-6 py-24 md:py-32 section-divider">
+      <div class="section-head">
+        <p class="eyebrow crt-text">{c.embed.eyebrow}</p>
+        <h2 class="section-title crt-text">{c.embed.heading}</h2>
+        <p class="section-sub crt-text">{c.embed.sub}</p>
+      </div>
+
+      <div class="card-grid">
+        {c.embed.cards.map((card) => (
+          <div class="topic-card">
+            <h3 class="card-title crt-text">{card.title}</h3>
+            <p class="card-description crt-text">{card.body}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="button-row button-row--center">
+        <a href={docsUrl} class="cta-button is-primary crt-text">{c.embed.ctaLabel}</a>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         4. RUNS IN YOUR CLOUD
+         ============================================================ -->
+    <section id="security" class="screen-section container mx-auto px-6 py-24 md:py-32 section-divider">
+      <div class="section-head">
+        <h2 class="section-title crt-text">{c.cloud.heading}</h2>
+        <p class="section-sub crt-text">{c.cloud.sub}</p>
+      </div>
+
+      <div class="cloud-frame">
+        <span class="cloud-tab crt-text">{c.cloud.containerLabel}</span>
+        <div class="cloud-stack">
+          <div class="cloud-stack-title crt-text">{c.cloud.stackTitle}</div>
+          <p class="cloud-stack-caption crt-text">{c.cloud.stackCaption}</p>
+        </div>
+        <div class="guarantee-grid">
+          {c.cloud.guarantees.map((g) => (
+            <div class="guarantee">
+              <h4 class="guarantee-title crt-text">{g.title}</h4>
+              <p class="guarantee-body crt-text">{g.body}</p>
+            </div>
           ))}
         </div>
       </div>
+    </section>
 
-    </div>
+    <!-- ============================================================
+         5. FINAL CTA
+         ============================================================ -->
+    <section class="screen-section container mx-auto px-6 py-24 md:py-32 section-divider">
+      <div class="section-head">
+        <h2 class="section-title crt-text">{c.finalCta.heading}</h2>
+      </div>
+      <div class="button-row button-row--center">
+        <CopyCommand command="npm install -g @answerlayer/cli" />
+      </div>
+    </section>
+
   </div>
-
-  <style>
-    .hero-section {
-      min-height: calc(100vh - 119px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .title-box {
-      border: none;
-      border-bottom: 2px solid var(--color-navy-900);
-      padding: 1rem 2.5rem;
-      margin: -2rem -2.5rem 1.5rem -2.5rem;
-      background: transparent;
-    }
-    .home-title {
-      font-family: 'MS Sans Serif', 'Microsoft Sans Serif', Tahoma, sans-serif;
-      font-size: 2rem;
-      font-weight: 400;
-      text-transform: none;
-      margin: 0;
-      color: #151c3f;
-    }
-    @media (min-width: 640px) {
-      .home-title {
-        white-space: nowrap;
-      }
-    }
-    .body-content {
-      font-family: var(--font-body);
-      font-size: 1.0625rem;
-      font-weight: 200;
-      color: #374151;
-      line-height: 1.75;
-      margin-bottom: 1.5rem;
-    }
-    .body-content :global(p) {
-      margin-bottom: 1.25rem;
-    }
-    .body-content :global(p:last-child) {
-      margin-bottom: 0;
-    }
-    .technical-card {
-      background: transparent;
-      border: 2px solid var(--color-navy-900);
-      padding: 2rem 2.5rem;
-      margin-bottom: 2rem;
-      position: relative;
-    }
-    .technical-card::before {
-      content: "";
-      position: absolute;
-      inset: -6px;
-      border: 1px solid var(--color-navy-300);
-      pointer-events: none;
-    }
-    .crt-link {
-      font-family: var(--font-mono);
-      font-size: 0.875rem;
-      color: var(--color-navy-900);
-      text-decoration: none;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      transition: opacity 0.2s;
-    }
-    .crt-link:hover {
-      opacity: 0.7;
-      text-decoration: underline;
-    }
-    .continue-section {
-      border-top: 2px solid var(--color-navy-900);
-      margin: 0 -2.5rem -2rem -2.5rem;
-      padding: 1rem 2.5rem;
-    }
-    .continue-button {
-      font-family: var(--font-body);
-      font-size: 0.875rem;
-      font-weight: 400;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      color: var(--color-navy-900);
-      background: transparent;
-      border: 2px solid var(--color-navy-900);
-      padding: 0.625rem 1.5rem;
-      text-decoration: none;
-      display: inline-block;
-      transition: all 0.15s ease;
-    }
-    .continue-button:hover {
-      background: var(--color-navy-900);
-      color: var(--color-background);
-      text-decoration: none;
-    }
-  </style>
 </Layout>
+
+<style>
+  /* ---- Section heads (mono eyebrow + display title + body) ---- */
+  .section-head {
+    text-align: center;
+    max-width: 46rem;
+    margin: 0 auto 0.5rem;
+  }
+
+  .section-divider {
+    border-top: 1px solid var(--color-navy-100);
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-navy-500);
+    margin-bottom: 1rem;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 3vw, 2rem);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--color-navy-900);
+    margin: 0;
+  }
+
+  .section-sub {
+    font-family: var(--font-body);
+    font-size: 1.0625rem;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--color-navy-700);
+    margin: 1rem auto 0;
+    max-width: 44rem;
+  }
+
+  /* ---- Full-screen sections ---- */
+  /* Each section fills the viewport (minus header + main top padding) with its
+     content vertically centered, so sections read one screen at a time. Taller
+     sections (card grids) simply grow past the minimum. */
+  .screen-section {
+    min-height: calc(100vh - 84px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    align-items: center;
+    width: 100%;
+  }
+
+  @media (min-width: 900px) {
+    .hero-grid {
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 4rem;
+    }
+  }
+
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    color: var(--color-navy-900);
+    margin: 0.5rem 0 0;
+  }
+
+  .lead {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 1.7;
+    color: var(--color-navy-700);
+    margin: 1.25rem 0 0;
+    max-width: 34em;
+  }
+
+  /* ---- Buttons (reuses the site's bordered .cta-button pattern) ---- */
+  .button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.75rem;
+  }
+  .button-row--center {
+    justify-content: center;
+    margin-top: 2rem;
+  }
+
+  .cta-button {
+    font-family: var(--font-mono);
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    display: inline-block;
+    border: 2px solid var(--color-navy-900);
+    color: var(--color-navy-900);
+    background: transparent;
+    transition: all 0.15s ease;
+  }
+  .cta-button:hover {
+    background: var(--color-navy-900);
+    color: var(--color-background);
+    text-decoration: none;
+  }
+  .cta-button.is-primary {
+    background: var(--color-navy-900);
+    color: var(--color-background);
+  }
+  .cta-button.is-primary:hover {
+    background: var(--color-navy-700);
+    border-color: var(--color-navy-700);
+  }
+
+  /* ---- Schematic + flow diagrams ---- */
+  .diagram {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .diagram-row {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0.75rem;
+  }
+  .diagram-chip {
+    border: 2px solid var(--color-navy-900);
+    background: transparent;
+    padding: 0.75rem 0.5rem;
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-navy-900);
+  }
+  .diagram-connector {
+    text-align: center;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-navy-500);
+  }
+  /* Lo-fi continuous-sync cycle between AnswerLayer and the source blocks:
+     slowly rotating arrows, stepped for a retro/choppy feel. Conveys that
+     AnswerLayer keeps updating as the underlying sources change. */
+  .diagram-sync {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.6rem;
+  }
+  /* Static wrapper carries the CRT chromatic fringing (matching .crt-text) so
+     it stays horizontal while the icon inside spins. Colour matches the
+     connector text (navy-500); the parent .crt-text supplies contrast/brightness. */
+  .sync-arrow {
+    display: inline-flex;
+    width: 1.1rem;
+    height: 1.1rem;
+    flex: none;
+    color: var(--color-navy-500);
+    filter:
+      drop-shadow(-1px 0 0 rgba(56, 67, 147, 0.5))
+      drop-shadow(1px 0 0 rgba(137, 151, 214, 0.5))
+      drop-shadow(0 0 3px rgba(56, 67, 147, 0.3));
+  }
+  .sync-arrow svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    transform-origin: 50% 50%;
+    animation: sync-spin 5s steps(10) infinite;
+  }
+  @keyframes sync-spin {
+    to { transform: rotate(360deg); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .sync-arrow svg { animation: none; }
+  }
+  .diagram-center {
+    position: relative;
+    border: 2px solid var(--color-navy-900);
+    background: var(--color-navy-900);
+    color: var(--color-navy-50);
+    text-align: center;
+    padding: 1.25rem 1rem;
+  }
+  .diagram-center::before {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border: 1px solid var(--color-navy-300);
+    pointer-events: none;
+  }
+  .diagram-center-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.125rem;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+  .diagram-center-caption {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-navy-300);
+    margin-top: 0.4rem;
+  }
+
+  /* ---- Card grids (the site's .topic-card double-border pattern) ---- */
+  .card-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
+    margin-top: 3.5rem;
+  }
+  @media (min-width: 640px) {
+    .card-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (min-width: 1024px) {
+    .card-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+
+  .topic-card {
+    position: relative;
+    background: transparent;
+    border: 2px solid var(--color-navy-900);
+    padding: 1.5rem;
+  }
+  .topic-card::before {
+    content: "";
+    position: absolute;
+    inset: -6px;
+    border: 1px solid var(--color-navy-300);
+    pointer-events: none;
+  }
+  .card-index {
+    position: absolute;
+    top: 0.75rem;
+    right: 1rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--color-navy-400);
+  }
+  .card-title {
+    font-family: 'MS Sans Serif', 'Microsoft Sans Serif', Tahoma, sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--color-navy-900);
+    margin: 0 0 0.5rem 0;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+  }
+  .card-description {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: var(--color-navy-700);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  /* ---- Runs in your cloud ---- */
+  .cloud-frame {
+    position: relative;
+    border: 2px solid var(--color-navy-900);
+    padding: 2.5rem 2rem 2rem;
+    margin-top: 3.75rem;
+    max-width: 60rem;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .cloud-tab {
+    position: absolute;
+    top: -0.75rem;
+    left: 1.5rem;
+    background: var(--color-background);
+    padding: 0 0.5rem;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-navy-500);
+  }
+  .cloud-stack {
+    border: 2px solid var(--color-navy-900);
+    background: var(--color-navy-900);
+    color: var(--color-navy-50);
+    padding: 1.5rem;
+    text-align: center;
+  }
+  .cloud-stack-title {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 1.125rem;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+  }
+  .cloud-stack-caption {
+    font-family: var(--font-body);
+    color: var(--color-navy-200);
+    margin-top: 0.5rem;
+  }
+  .guarantee-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  @media (min-width: 768px) {
+    .guarantee-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  .guarantee-title {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--color-navy-900);
+    border-bottom: 2px solid var(--color-navy-900);
+    padding-bottom: 0.5rem;
+    margin: 0;
+  }
+  .guarantee-body {
+    font-family: var(--font-body);
+    font-size: 0.875rem;
+    color: var(--color-navy-700);
+    line-height: 1.5;
+    margin: 0.75rem 0 0;
+  }
+</style>

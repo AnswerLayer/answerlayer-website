@@ -1,0 +1,105 @@
+# ============================================================
+# HOMEPAGE COPY
+# ------------------------------------------------------------
+# Edit the text between the quotes. Layout, colors, and spacing
+# live in src/pages/index.astro; you shouldn't need to touch that.
+# Lines starting with # are comments (ignored by the site).
+#
+# Note: headings, eyebrows, chips, and captions are DISPLAYED IN
+# UPPERCASE automatically; write them in normal case here.
+# ============================================================
+
+# Browser tab / social title
+meta:
+  title: "AnswerLayer | The semantic factory for agents"
+
+# Button labels used on the pricing page
+ctas:
+  primary: "Install the CLI"
+  secondary: "Talk to us"
+
+# ---- 1. Hero ------------------------------------------------
+hero:
+  eyebrow: "Context infrastructure for agentic analytics"
+  heading: "A learned semantic layer, curated by your experts"
+  sub: "Agents do the heavy lifting, your experts curate semantic objects. Embed to every agent, dashboard, and ML model through an API running entirely inside your own cloud."
+
+# The diagram on the right of the hero
+schematic:
+  topChips: ["Agents", "Dashboards", "ML"]
+  contractLabel: "API contract"
+  centerTitle: "AnswerLayer"
+  centerCaption: ""
+  inPlaceLabel: "In sync"
+  bottomChips: ["Warehouse", "Data Lake", "API Source"]
+
+# ---- Embed into products -----------------------------------
+embed:
+  eyebrow: "Embed"
+  heading: "Better products, built on shared semantics"
+  sub: "AnswerLayer is context infrastructure, not a chatbot. The same governed semantic layer powers agents, embedded analytics, and ML features through one API, so every product you ship speaks the same trusted definitions instead of reinventing them in SQL."
+  # Three cards: what you can build on the semantic layer
+  cards:
+    - title: "Agents"
+      body: "Ground agents in governed metrics and relationships, not raw tables they have to guess at."
+    - title: "Embedded analytics"
+      body: "Ship dashboards and reports on definitions that already match how the business thinks."
+    - title: "ML features"
+      body: "Reuse the same measures and entities as model features, consistent across every model."
+  ctaLabel: "Read the API docs"
+
+# ---- 3. The answer (semantic layer) ------------------------
+semanticLayer:
+  eyebrow: ""
+  heading: "Industry Standard Semantic Objects"
+  sub: "A semantic layer is one trusted, governed place that defines what every business concept means and how it maps to the underlying data. These six primitives are the whole model."
+  # The six cards (numbered 01–06 automatically, in order)
+  primitives:
+    - title: "Entities"
+      body: "The nouns of your business: customers, orders, accounts."
+    - title: "Relationships"
+      body: "How entities join, defined once and reused."
+    - title: "Dimensions"
+      body: "The ways you slice: region, plan, channel."
+    - title: "Measures"
+      body: "Raw aggregations: sum of amount, count of orders."
+    - title: "Metrics"
+      body: "Governed business numbers: net revenue, active users."
+    - title: "Filters"
+      body: 'Shared definitions of "active," "paid," "churned."'
+
+# ---- Runs in your cloud ------------------------------------
+cloud:
+  heading: "It runs in your cloud"
+  sub: "Bring Your Own Cloud. The full stack deploys inside your own account. No third-party SaaS upload. Data never leaves."
+  containerLabel: "Your cloud account"
+  stackTitle: "Full AnswerLayer stack, installed here"
+  stackCaption: "All resources provisioned and managed within your account."
+  guarantees:
+    - title: "Data sovereignty"
+      body: "Data stays in your jurisdiction and your accounts."
+    - title: "Privacy & protection"
+      body: "No third-party SaaS upload. This is often a hard requirement."
+    - title: "No tradeoff"
+      body: "Modern AI analytics and governance, together."
+
+# ---- Pricing (rendered on the /pricing page) ---------------
+pricing:
+  eyebrow: "Pricing"
+  heading: "Simple, and built for design partners"
+  platform:
+    label: "Platform fee"
+    price: "$20K"
+    unit: "/ yr"
+    body: "Flat. The full semantic-layer stack, deployed in your cloud."
+  users:
+    label: "Embedded users"
+    price: "$1–20"
+    unit: "/ user / mo"
+    body: "Tiered by volume. You pay only for active users."
+  perkLabel: "Design-partner perk"
+  perkBody: "3 months free Forward-Deployed Engineer (FDE) service."
+
+# ---- 7. Final call-to-action -------------------------------
+finalCta:
+  heading: "Start building your semantic factory"

@@ -398,6 +398,33 @@ body {
   height: 12px;
   border-radius: 50%;
 }
+
+/* Home Page Copy editor */
+.home-copy-btn {
+  width: 100%;
+  margin-top: 8px;
+  padding: 8px 12px;
+  background: #21262d;
+  color: #c9d1d9;
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: all 0.15s;
+}
+.home-copy-btn:hover { background: #30363d; border-color: #8b949e; }
+.home-copy-btn.active { background: #1f6feb; border-color: #1f6feb; color: #fff; }
+.copy-section-title {
+  font-size: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #58a6ff;
+  border-bottom: 1px solid #30363d;
+  padding-bottom: 6px;
+  margin: 28px 0 14px;
+}
+.copy-section-title:first-of-type { margin-top: 8px; }
 </style>
 </head>
 <body>
@@ -412,6 +439,7 @@ body {
         <button id="btnListView" class="active" onclick="setView('list')">📋 List</button>
         <button id="btnGraphView" onclick="setView('graph')">🔗 Graph</button>
       </div>
+      <button id="btnHomeCopy" class="home-copy-btn" onclick="openHomeCopy()">📄 Home Page Copy</button>
     </div>
     <div class="node-list" id="nodeList">
       <div class="editor-placeholder">
@@ -751,6 +779,8 @@ function renderNodeList() {
 }
 
 function selectNode(id) {
+  copyMode = false;
+  document.getElementById('btnHomeCopy').classList.remove('active');
   selectedNode = id;
   renderNodeList();
   renderEditor();
@@ -917,6 +947,87 @@ function setStatus(type, text) {
   el.textContent = text;
 }
 
+// ---- Home Page Copy editor (src/content/home/copy.yaml) ----
+let copyMode = false;
+const copySaveTimeouts = new Map();
+
+const COPY_SECTION_LABELS = {
+  meta: 'Page meta', ctas: 'Buttons', hero: 'Hero', schematic: 'Hero schematic',
+  problem: 'Problem', semanticLayer: 'The answer (semantic layer)', cloud: 'Runs in your cloud',
+  pricing: 'Pricing', finalCta: 'Final call-to-action'
+};
+
+function prettifySection(s) {
+  return COPY_SECTION_LABELS[s] || s.replace(/([a-z0-9])([A-Z])/g, '$1 $2').replace(/^./, c => c.toUpperCase());
+}
+
+async function openHomeCopy() {
+  copyMode = true;
+  selectedNode = null;
+  renderNodeList();
+  document.getElementById('btnHomeCopy').classList.add('active');
+  document.getElementById('editorContent').innerHTML =
+    '<div class="editor-placeholder"><div class="icon">⏳</div>Loading copy…</div>';
+  try {
+    const res = await fetch('/api/home-copy');
+    if (!res.ok) throw new Error((await res.json()).error || 'load failed');
+    const data = await res.json();
+    renderCopyEditor(data.leaves);
+  } catch (err) {
+    showToast('Failed to load copy: ' + err.message, 'error');
+  }
+}
+
+function renderCopyEditor(leaves) {
+  let html = '<div style="max-width: 700px;">';
+  html += '<div style="margin-bottom: 24px;">'
+    + '<h2 style="font-size: 20px; color: #58a6ff; margin-bottom: 4px;">📄 Home Page Copy</h2>'
+    + '<code style="color: #8b949e; font-size: 13px;">src/content/home/copy.yaml</code></div>';
+
+  let currentSection = null;
+  leaves.forEach(lf => {
+    if (lf.section !== currentSection) {
+      currentSection = lf.section;
+      html += `<h3 class="copy-section-title">${escapeHtml(prettifySection(currentSection))}</h3>`;
+    }
+    const pathAttr = escapeHtml(JSON.stringify(lf.path));
+    const val = escapeHtml(lf.value);
+    const control = lf.multiline
+      ? `<textarea data-path='${pathAttr}' onchange="saveCopyField(this)">${val}</textarea>`
+      : `<input type="text" data-path='${pathAttr}' value="${val}" onchange="saveCopyField(this)">`;
+    html += `<div class="field"><label>${escapeHtml(lf.label)}</label>${control}</div>`;
+  });
+
+  html += '</div>';
+  document.getElementById('editorContent').innerHTML = html;
+}
+
+function saveCopyField(el) {
+  const fieldPath = JSON.parse(el.dataset.path);
+  const pathKey = JSON.stringify(fieldPath);
+  const value = el.value;
+  setStatus('saving', '💾 Saving...');
+  const pendingSave = copySaveTimeouts.get(pathKey);
+  if (pendingSave) clearTimeout(pendingSave);
+  copySaveTimeouts.set(pathKey, setTimeout(async () => {
+    try {
+      const res = await fetch('/api/home-copy', {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ path: fieldPath, value })
+      });
+      if (!res.ok) throw new Error((await res.json()).error || 'save failed');
+      setStatus('saved', '✓ Saved');
+      setTimeout(() => setStatus('', 'Ready'), 2000);
+    } catch (err) {
+      setStatus('error', '✕ Save failed');
+      showToast('Failed to save: ' + err.message, 'error');
+    } finally {
+      copySaveTimeouts.delete(pathKey);
+    }
+  }, 300));
+}
+
 // Rename node
 async function renameNode(newId) {
   if (!selectedNode || newId === selectedNode) return;
@@ -1058,6 +1169,7 @@ document.addEventListener('keydown', e => {
 
 // Initialize
 loadNodes();
+if (location.hash === '#copy') openHomeCopy();
 </script>
 
 </body>

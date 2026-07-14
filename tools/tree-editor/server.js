@@ -1,12 +1,15 @@
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
+const YAML = require('yaml');
 
 const app = express();
 const PORT = 3456;
 
 // Path to discover content
 const DISCOVER_PATH = path.join(__dirname, '../../src/content/discover');
+// Path to the marketing home page copy (single YAML data file)
+const COPY_PATH = path.join(__dirname, '../../src/content/home/copy.yaml');
 
 app.use(express.json());
 app.use(express.static(path.join(__dirname, 'public')));
@@ -212,6 +215,82 @@ app.post('/api/nodes', (req, res) => {
 
     fs.writeFileSync(filepath, serializeNode(node), 'utf-8');
     res.json(node);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// ---------------------------------------------------------------------------
+// Home page copy (src/content/home/copy.yaml)
+// Edited as a flat list of labelled string fields. Saves mutate the parsed
+// YAML Document in place so comments, ordering, and quote style are preserved.
+// ---------------------------------------------------------------------------
+
+function prettifySeg(seg) {
+  if (typeof seg === 'number') return String(seg + 1);
+  return seg.replace(/([a-z0-9])([A-Z])/g, '$1 $2').replace(/^./, c => c.toUpperCase());
+}
+
+// Walk the parsed object into an ordered list of editable string leaves.
+function flattenLeaves(value, prefix, out) {
+  if (Array.isArray(value)) {
+    value.forEach((v, i) => flattenLeaves(v, prefix.concat(i), out));
+  } else if (value && typeof value === 'object') {
+    for (const k of Object.keys(value)) flattenLeaves(value[k], prefix.concat(k), out);
+  } else {
+    const str = value == null ? '' : String(value);
+    out.push({
+      path: prefix,
+      value: str,
+      section: prefix[0],
+      label: prefix.slice(1).map(prettifySeg).join(' › ') || prettifySeg(prefix[0]),
+      multiline: str.length > 55 || str.includes('\n'),
+    });
+  }
+}
+
+function pathsEqual(left, right) {
+  return left.length === right.length && left.every((segment, index) => segment === right[index]);
+}
+
+// GET /api/home-copy - flattened, ordered list of editable copy fields
+app.get('/api/home-copy', (req, res) => {
+  try {
+    const doc = YAML.parseDocument(fs.readFileSync(COPY_PATH, 'utf-8'));
+    const leaves = [];
+    flattenLeaves(doc.toJS(), [], leaves);
+    res.json({ leaves });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// PUT /api/home-copy - update one field by path (preserving comments/structure)
+app.put('/api/home-copy', (req, res) => {
+  try {
+    const { path: fieldPath, value } = req.body;
+    if (!Array.isArray(fieldPath) || fieldPath.length === 0) {
+      return res.status(400).json({ error: 'path (non-empty array) is required' });
+    }
+    if (typeof value !== 'string') {
+      return res.status(400).json({ error: 'value must be a string' });
+    }
+    const doc = YAML.parseDocument(fs.readFileSync(COPY_PATH, 'utf-8'));
+    const leaves = [];
+    flattenLeaves(doc.toJS(), [], leaves);
+    if (!leaves.some(leaf => pathsEqual(leaf.path, fieldPath))) {
+      return res.status(400).json({ error: 'path is not an editable copy field' });
+    }
+    const node = doc.getIn(fieldPath, true); // keepScalar: get the Scalar node
+    if (node && typeof node === 'object' && 'value' in node) {
+      node.value = value; // in-place: keeps the node's quote style and comments
+    } else {
+      return res.status(400).json({ error: 'path is not an editable scalar field' });
+    }
+    // lineWidth:0 keeps long strings on one line; flowCollectionPadding:false
+    // keeps arrays as ["a","b"] — both avoid reformatting untouched lines.
+    fs.writeFileSync(COPY_PATH, doc.toString({ lineWidth: 0, flowCollectionPadding: false }), 'utf-8');
+    res.json({ ok: true });
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

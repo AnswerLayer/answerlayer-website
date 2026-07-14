@@ -2,15 +2,25 @@
 /**
  * Pricing Page
  *
- * Card-only layout matching site design.
- * Two tiers: Free (cloud) and Pro (BYOC).
+ * Design-partner pricing: a flat platform fee + tiered embedded-user pricing,
+ * with the FDE perk. Copy lives in src/content/home/copy.yaml (`pricing`).
+ * Styled with the site design system (technical-border box, mono labels, crt-text).
  */
 import Layout from '../layouts/Layout.astro';
+import { getEntry } from 'astro:content';
+
+const entry = await getEntry('home', 'copy');
+if (!entry) throw new Error('Missing src/content/home/copy.yaml');
+const p = entry.data.pricing;
+
+const installUrl = '/install';
+const talkUrl = 'https://calendly.com/josh-getanswerlayer/30min';
+const ctas = entry.data.ctas;
 ---
 
 <Layout
   title="Pricing - AnswerLayer"
-  description="AnswerLayer pricing - Free cloud tier and Pro BYOC for data sovereignty"
+  description="Simple design-partner pricing: a flat platform fee deployed in your own cloud, plus tiered pricing for embedded users."
 >
   <div class="crt-screen">
     <div class="container mx-auto px-6 py-12 md:py-20">
@@ -18,45 +28,33 @@ import Layout from '../layouts/Layout.astro';
       <!-- Page Header -->
       <div class="page-header">
         <h1 class="page-title crt-text">Pricing</h1>
+        <p class="page-subtitle crt-text">{p.heading}</p>
       </div>
 
-      <!-- Card Grid -->
-      <div class="card-grid">
+      <!-- Two-column price box -->
+      <div class="price-box">
+        <div class="price-col">
+          <div class="price-label crt-text">{p.platform.label}</div>
+          <div class="price-amount crt-text">{p.platform.price} <span class="price-unit">{p.platform.unit}</span></div>
+          <p class="price-body crt-text">{p.platform.body}</p>
+        </div>
+        <div class="price-col">
+          <div class="price-label crt-text">{p.users.label}</div>
+          <div class="price-amount crt-text">{p.users.price} <span class="price-unit">{p.users.unit}</span></div>
+          <p class="price-body crt-text">{p.users.body}</p>
+        </div>
+      </div>
 
-        <a href="https://app.answerlayer.io/sign-up" target="_blank" rel="noopener" class="topic-card">
-          <h2 class="card-title crt-text">Free For Now ↗</h2>
-          <p class="card-badge crt-text">Cloud Hosted</p>
-          <ul class="card-list">
-            <li class="crt-text">Natural language queries</li>
-            <li class="crt-text">Multi-database connectivity</li>
-            <li class="crt-text">CSV file uploads</li>
-            <li class="crt-text">Secure encrypted connections</li>
-            <li class="crt-text">Community support</li>
-            <li class="crt-text">1000 free credits</li>
-          </ul>
-          <p class="card-description crt-text" style="margin-top: 0.75rem;">We're building the future of data access. Early users help shape the roadmap. No credit card required.</p>
-        </a>
+      <!-- Design-partner perk -->
+      <div class="perk">
+        <span class="price-label crt-text">{p.perkLabel}</span>
+        <p class="perk-body crt-text">{p.perkBody}</p>
+      </div>
 
-        <a href="https://calendly.com/josh-getanswerlayer/30min" target="_blank" rel="noopener" class="topic-card">
-          <h2 class="card-title crt-text">Not Free ↗</h2>
-          <p class="card-badge crt-text">Bring Your Own Cloud</p>
-          <ul class="card-list two-column">
-            <li class="crt-text">Semantic layer generation</li>
-            <li class="crt-text">Unlimited user seats</li>
-            <li class="crt-text">Collaborative knowledge capture</li>
-            <li class="crt-text">Continuous learning</li>
-            <li class="crt-text">Complete data sovereignty</li>
-            <li class="crt-text">Dedicated support</li>
-            <li class="crt-text">Deploy in your AWS or GCP</li>
-            <li class="crt-text">VPC deployment</li>
-            <li class="crt-text">Custom SSO/SAML</li>
-            <li class="crt-text">Audit logging</li>
-            <li class="crt-text">SLA guarantee</li>
-            <li class="crt-text">Priority feature requests</li>
-          </ul>
-          <p class="card-description crt-text" style="margin-top: 0.75rem;">Security, privacy, and regulatory standards supported.</p>
-        </a>
-
+      <!-- CTA -->
+      <div class="cta-row">
+        <a href={installUrl} class="cta-button is-primary crt-text">{ctas.primary}</a>
+        <a href={talkUrl} target="_blank" rel="noopener" class="cta-button crt-text">{ctas.secondary}</a>
       </div>
 
     </div>
@@ -66,7 +64,7 @@ import Layout from '../layouts/Layout.astro';
 <style>
   .page-header {
     text-align: center;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
   }
 
   .page-title {
@@ -86,106 +84,85 @@ import Layout from '../layouts/Layout.astro';
     margin: 0;
   }
 
-  .card-grid {
+  /* ---- Price box (matches the homepage pricing treatment) ---- */
+  .price-box {
+    position: relative;
+    max-width: 48rem;
+    margin: 0 auto;
+    border: 2px solid var(--color-navy-900);
     display: grid;
     grid-template-columns: 1fr;
-    gap: 1.5rem;
   }
-
-  @media (min-width: 640px) {
-    .card-grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-  }
-
-  .topic-card {
-    display: block;
-    background: transparent;
-    border: 2px solid var(--color-navy-900);
-    padding: 1.5rem;
-    text-decoration: none;
-    transition: all 0.15s ease;
-    position: relative;
-  }
-
-  .topic-card::before {
+  .price-box::before {
     content: "";
     position: absolute;
     inset: -6px;
     border: 1px solid var(--color-navy-300);
     pointer-events: none;
   }
-
-  a.topic-card:hover {
-    border-color: var(--color-navy-600);
-    text-decoration: none;
+  .price-col {
+    padding: 2rem;
+    border-top: 2px solid var(--color-navy-900);
   }
-
-  .card-title {
-    font-family: 'MS Sans Serif', 'Microsoft Sans Serif', Tahoma, sans-serif;
-    font-size: 1rem;
-    font-weight: 600;
-    color: var(--color-navy-900);
-    margin: 0 0 0.25rem 0;
-    text-transform: uppercase;
-    letter-spacing: 0.025em;
+  .price-col:first-child { border-top: none; }
+  @media (min-width: 640px) {
+    .price-box { grid-template-columns: 1fr 1fr; }
+    .price-col { border-top: none; }
+    .price-col + .price-col { border-left: 2px solid var(--color-navy-900); }
   }
-
-  .card-badge {
+  .price-label {
     font-family: var(--font-mono);
     font-size: 0.75rem;
-    color: var(--color-navy-500);
     text-transform: uppercase;
-    letter-spacing: 0.05em;
-    margin: 0 0 0.75rem 0;
-  }
-
-  .card-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 0.75rem 0;
-  }
-
-  .card-list li {
-    font-family: var(--font-body);
-    font-size: 0.875rem;
-    color: var(--color-navy-700);
-    line-height: 1.5;
-    padding: 0.25rem 0;
-    padding-left: 1rem;
-    position: relative;
-  }
-
-  .card-list li::before {
-    content: "–";
-    position: absolute;
-    left: 0;
+    letter-spacing: 0.1em;
     color: var(--color-navy-500);
   }
-
-  .card-list.two-column {
-    columns: 2;
-    column-gap: 1.5rem;
+  .price-amount {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 2.25rem;
+    color: var(--color-navy-900);
+    margin-top: 0.5rem;
   }
-
-  .card-list.two-column li {
-    break-inside: avoid;
-  }
-
-  .card-description {
-    font-family: var(--font-body);
-    font-size: 0.875rem;
+  .price-unit {
+    font-family: var(--font-mono);
+    font-size: 0.9375rem;
     font-weight: 400;
+    color: var(--color-navy-500);
+  }
+  .price-body {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
     color: var(--color-navy-700);
-    line-height: 1.5;
-    margin: 0;
+    line-height: 1.6;
+    margin-top: 0.75rem;
   }
 
-  .cta-row {
-    margin-top: 2rem;
+  .perk {
+    max-width: 48rem;
+    margin: 1.25rem auto 0;
+    border: 2px solid var(--color-navy-900);
+    background: var(--color-navy-50);
+    padding: 1rem 2rem;
     text-align: center;
   }
+  .perk-body {
+    font-family: var(--font-display);
+    font-weight: 500;
+    font-size: 1.0625rem;
+    color: var(--color-navy-900);
+    margin-top: 0.5rem;
+  }
 
+  /* ---- CTA row (site pattern) ---- */
+  .cta-row {
+    margin-top: 3rem;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+  }
   .cta-button {
     font-family: var(--font-mono);
     font-size: 0.875rem;
@@ -193,15 +170,23 @@ import Layout from '../layouts/Layout.astro';
     letter-spacing: 0.05em;
     padding: 0.75rem 2rem;
     text-decoration: none;
-    transition: all 0.15s ease;
     display: inline-block;
     border: 2px solid var(--color-navy-900);
     color: var(--color-navy-900);
+    background: transparent;
+    transition: all 0.15s ease;
   }
-
   .cta-button:hover {
     background: var(--color-navy-900);
     color: var(--color-background);
     text-decoration: none;
+  }
+  .cta-button.is-primary {
+    background: var(--color-navy-900);
+    color: var(--color-background);
+  }
+  .cta-button.is-primary:hover {
+    background: var(--color-navy-700);
+    border-color: var(--color-navy-700);
   }
 </style>

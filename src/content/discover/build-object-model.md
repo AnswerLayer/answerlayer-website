@@ -3,7 +3,7 @@ title: "An Object Model Example"
 options:
   - label: "How it all connects"
     target: "external-architecture"
-  - label: "Schedule a demo"
+  - label: "Install the CLI"
     target: "external-demo"
   - label: "Back"
     target: "build-generation"

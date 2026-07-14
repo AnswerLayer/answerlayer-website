@@ -1,7 +1,7 @@
 ---
-title: "Request Demo"
+title: "Install the CLI"
 options: []
 external: true
-externalUrl: "https://calendly.com/josh-getanswerlayer/30min"
+externalUrl: "/install"
 ---
-Redirecting to demo request...
+Redirecting to CLI installation...

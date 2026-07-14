@@ -53,7 +53,7 @@ async function getOptionUrl(targetId: string): Promise<string> {
   if (targetEntry?.data.external && targetEntry.data.externalUrl) {
     return targetEntry.data.externalUrl;
   }
-  return targetId === 'home' ? '/' : `/discover/${targetId}`;
+  return targetId === 'home' ? '/discover' : `/discover/${targetId}`;
 }
 
 // Pre-compute option URLs

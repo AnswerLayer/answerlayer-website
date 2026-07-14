@@ -1,7 +1,7 @@
 ---
 title: "Curating the semantic layer"
 options:
-  - label: "Request a demo"
+  - label: "Install the CLI"
     target: "external-demo"
   - label: "Need help?"
     target: "external-contact"
