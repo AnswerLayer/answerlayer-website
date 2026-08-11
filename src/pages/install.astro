@@ -1,77 +1,124 @@
 ---
 /**
- * CLI installation and first-run path.
- *
- * The primary path is agent-first local evaluation. Deployment choices remain
- * available from /deploy.
+ * Shareable entry point for human- and agent-led local installation.
+ * The complete reference lives at /docs/cli.
  */
 import Layout from '../layouts/Layout.astro';
 import CopyCommand from '../components/CopyCommand.astro';
+
+const agentPrompt = `Open https://www.answerlayer.io/docs/cli and set up AnswerLayer locally. Follow the agent instructions on that page, ask before connecting any database, and never ask me to paste secrets into chat.`;
 ---
 
 <Layout
-  title="Install the AnswerLayer CLI"
-  description="Install the AnswerLayer CLI to build and query governed context for your agents."
+  title="Install AnswerLayer locally"
+  description="Give this page to an agent or follow the public-image CLI setup yourself. No source checkout or private registry access required."
 >
   <div class="crt-screen">
     <section class="container mx-auto px-6 py-12 md:py-20">
       <div class="page-header">
-        <p class="eyebrow crt-text">Semantic factory for agents</p>
-        <h1 class="page-title crt-text">Install the CLI. Let your agent take it from there.</h1>
-        <p class="page-subtitle crt-text">Run AnswerLayer locally, connect a dedicated read-only database user, and test against real data without creating a hosted account.</p>
+        <p class="eyebrow crt-text">Local AnswerLayer</p>
+        <h1 class="page-title crt-text">Give this page to your agent</h1>
+        <p class="page-subtitle crt-text">
+          The AnswerLayer CLI downloads a public container image, starts a standalone local stack, and preserves its data in an isolated Docker volume. No private repository or hosted account is required.
+        </p>
+      </div>
+
+      <div class="prompt-card">
+        <div>
+          <span class="step-number crt-text">Prompt</span>
+          <h2 class="card-title crt-text">Copy and send this</h2>
+        </div>
+        <p class="agent-prompt crt-text" data-agent-prompt>{agentPrompt}</p>
+        <button type="button" class="copy-button crt-text" data-copy-prompt>
+          <span data-copy-label aria-live="polite">Copy prompt</span>
+        </button>
       </div>
 
       <div class="steps">
         <article class="topic-card">
           <span class="step-number crt-text">01</span>
-          <h2 class="card-title crt-text">Install the CLI</h2>
-          <p class="card-description crt-text">The CLI runs on Node.js 20 or newer.</p>
-          <div class="command-row"><CopyCommand command="npm install -g @answerlayer/cli" /></div>
-          <p class="card-description crt-text">Prefer not to install it globally? Run <code>npx -y @answerlayer/cli --help</code>.</p>
+          <h2 class="card-title crt-text">Check the prerequisites</h2>
+          <p class="card-description crt-text">
+            You need Node.js 20 or newer and a running Docker runtime with Docker Compose. The default local URL uses port 8000.
+          </p>
         </article>
 
         <article class="topic-card">
           <span class="step-number crt-text">02</span>
-          <h2 class="card-title crt-text">Install the agent skill</h2>
-          <p class="card-description crt-text">The CLI includes a Codex skill that knows how to prepare, start, and verify the local stack.</p>
-          <div class="command-row"><CopyCommand command="answerlayer skills install" /></div>
-          <p class="card-description crt-text">Then ask your agent: “Start AnswerLayer locally and help me connect a read-only database safely.”</p>
+          <h2 class="card-title crt-text">Initialize and start</h2>
+          <p class="card-description crt-text">
+            Run the published npm package directly. Initialization pulls and pins the supported public image; start launches Postgres, runs migrations, and creates a local CLI identity.
+          </p>
+          <div class="commands">
+            <CopyCommand command="npx -y @answerlayer/cli@latest local init" />
+            <CopyCommand command="npx -y @answerlayer/cli@latest local start" />
+          </div>
         </article>
 
         <article class="topic-card">
           <span class="step-number crt-text">03</span>
-          <h2 class="card-title crt-text">Start locally</h2>
-          <p class="card-description crt-text">Your agent will confirm each state-changing step, prepare the local environment, start Docker Compose, and create a local-only organization and scoped CLI key.</p>
-          <pre class="command crt-text"><code>git clone https://github.com/AnswerLayer/answerlayer-core.git
-cd answerlayer-core
-cp .env.example .env
-docker compose up --build -d
-make local-bootstrap</code></pre>
-        </article>
-
-        <article class="topic-card">
-          <span class="step-number crt-text">04</span>
-          <h2 class="card-title crt-text">Test real data safely</h2>
-          <p class="card-description crt-text">Run the printed <code>answerlayer init</code> command, then connect a dedicated database account restricted to approved schemas and <code>SELECT</code> only.</p>
-          <pre class="command crt-text"><code>answerlayer connections list
-answerlayer inquiry ask --connection &lt;connection-id&gt; "What changed in revenue this month?"</code></pre>
+          <h2 class="card-title crt-text">Verify before connecting data</h2>
+          <p class="card-description crt-text">
+            Confirm that the runtime is ready and the local credential works. When you connect real data, use a dedicated database user restricted to approved schemas and <code>SELECT</code> only.
+          </p>
+          <div class="commands">
+            <CopyCommand command="npx -y @answerlayer/cli@latest local status --json" />
+            <CopyCommand command="npx -y @answerlayer/cli@latest auth me --json" />
+          </div>
         </article>
       </div>
 
       <div class="cta-row">
-        <a href="https://github.com/AnswerLayer/answerlayer-cli" target="_blank" rel="noopener" class="cta-button is-primary crt-text">Read the CLI guide ↗</a>
-        <a href="/docs/overview" class="cta-button crt-text">Read the API docs</a>
+        <a href="/docs/cli" class="cta-button is-primary crt-text">Read the complete CLI guide</a>
+        <a href="/deploy" class="cta-button crt-text">Explore deployment options</a>
       </div>
 
-      <p class="deployment-note crt-text">Need to deploy AnswerLayer into your own cloud? <a href="/deploy">Explore deployment options</a>.</p>
+      <p class="deployment-note crt-text">
+        First boot does not require Git, an AnswerLayer account, a model-provider key, or registry credentials. Model-backed features need provider configuration later.
+      </p>
     </section>
   </div>
 </Layout>
 
+<script>
+  const copyText = async (text: string) => {
+    if (navigator.clipboard && window.isSecureContext) {
+      await navigator.clipboard.writeText(text);
+      return;
+    }
+
+    const textarea = document.createElement('textarea');
+    textarea.value = text;
+    textarea.style.position = 'fixed';
+    textarea.style.opacity = '0';
+    document.body.appendChild(textarea);
+    textarea.select();
+    document.execCommand('copy');
+    textarea.remove();
+  };
+
+  document.querySelectorAll<HTMLButtonElement>('[data-copy-prompt]').forEach((button) => {
+    button.addEventListener('click', async () => {
+      const prompt = document.querySelector<HTMLElement>('[data-agent-prompt]');
+      const label = button.querySelector<HTMLElement>('[data-copy-label]');
+      if (!prompt || !label) return;
+
+      try {
+        await copyText(prompt.textContent?.trim() || '');
+        label.textContent = 'Copied';
+        window.setTimeout(() => { label.textContent = 'Copy prompt'; }, 1800);
+      } catch {
+        label.textContent = 'Copy failed';
+        window.setTimeout(() => { label.textContent = 'Copy prompt'; }, 1800);
+      }
+    });
+  });
+</script>
+
 <style>
   .page-header {
-    max-width: 48rem;
-    margin: 0 auto 3rem;
+    max-width: 52rem;
+    margin: 0 auto 2rem;
     text-align: center;
   }
 
@@ -89,7 +136,7 @@ answerlayer inquiry ask --connection &lt;connection-id&gt; "What changed in reve
   .page-title {
     margin: 0;
     font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(2rem, 4vw, 3.25rem);
     font-weight: 500;
     line-height: 1.1;
     text-transform: uppercase;
@@ -104,20 +151,57 @@ answerlayer inquiry ask --connection &lt;connection-id&gt; "What changed in reve
     color: var(--color-navy-700);
   }
 
+  .prompt-card,
+  .topic-card {
+    border: 2px solid var(--color-navy-300);
+    background: var(--color-navy-100);
+  }
+
+  .prompt-card {
+    display: grid;
+    grid-template-columns: minmax(10rem, 0.7fr) minmax(0, 2fr) auto;
+    align-items: center;
+    gap: 1.25rem;
+    max-width: 64rem;
+    margin: 0 auto 1rem;
+    padding: 1.5rem;
+    border-color: var(--color-navy-900);
+  }
+
+  .agent-prompt {
+    margin: 0;
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    line-height: 1.6;
+    color: var(--color-navy-900);
+  }
+
+  .copy-button {
+    border: 2px solid var(--color-navy-900);
+    padding: 0.75rem 1rem;
+    background: var(--color-navy-900);
+    color: var(--color-navy-50);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+  .copy-button:hover,
+  .copy-button:focus-visible {
+    background: var(--color-navy-700);
+  }
+
   .steps {
     display: grid;
+    grid-template-columns: minmax(0, 1fr);
     gap: 1rem;
-    max-width: 56rem;
+    max-width: 64rem;
     margin: 0 auto;
   }
 
-  .topic-card {
-    position: relative;
-    padding: 1.5rem;
-    background: var(--color-navy-100);
-    border: 2px solid var(--color-navy-300);
-  }
-
+  .topic-card { padding: 1.5rem; }
   .step-number { display: block; margin-bottom: 0.5rem; }
 
   .card-title {
@@ -141,19 +225,24 @@ answerlayer inquiry ask --connection &lt;connection-id&gt; "What changed in reve
     font-size: 0.875em;
   }
 
-  .command {
-    overflow-x: auto;
-    margin: 1rem 0 0;
-    padding: 1rem;
-    background: var(--color-navy-900);
-    color: var(--color-navy-50);
-    font-family: var(--font-mono);
-    font-size: 0.8125rem;
-    line-height: 1.65;
-    white-space: pre-wrap;
+  .commands {
+    display: grid;
+    gap: 0.75rem;
+    min-width: 0;
+    margin-top: 1rem;
   }
 
-  .command-row { margin-top: 1rem; }
+  .commands :global(.copy-command) {
+    display: flex;
+    width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+  }
+
+  .commands :global(.copy-command code) {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
 
   .cta-row {
     display: flex;
@@ -163,12 +252,39 @@ answerlayer inquiry ask --connection &lt;connection-id&gt; "What changed in reve
     margin: 2rem auto 0;
   }
 
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--color-navy-900);
+    padding: 0.875rem 1.25rem;
+    color: var(--color-navy-900);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
+
+  .cta-button:hover { background: var(--color-navy-200); }
+
+  .cta-button.is-primary {
+    background: var(--color-navy-900);
+    color: var(--color-navy-50);
+  }
+
+  .cta-button.is-primary:hover { background: var(--color-navy-700); }
+
   .deployment-note {
+    max-width: 48rem;
     margin: 1.5rem auto 0;
     text-align: center;
     font-family: var(--font-body);
     color: var(--color-navy-700);
   }
 
-  .deployment-note a { color: var(--color-navy-900); }
+  @media (max-width: 820px) {
+    .prompt-card { grid-template-columns: 1fr; }
+    .copy-button { justify-self: start; }
+  }
 </style>

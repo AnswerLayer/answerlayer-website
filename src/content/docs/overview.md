@@ -7,6 +7,8 @@ section: Getting Started
 
 The AnswerLayer API provides programmatic access to a semantic layer and natural language query engine. It sits between your application and your data warehouse -- you define the semantic model (entities, relationships, measures, metrics), then submit natural language questions via the API. AnswerLayer generates SQL, executes it against your warehouse, and returns structured results over a streaming connection.
 
+To install the CLI or run AnswerLayer locally from its public container image, start with [CLI and local setup](/docs/cli).
+
 ## Base URL
 
 ```text
