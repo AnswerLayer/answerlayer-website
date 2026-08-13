@@ -54,7 +54,7 @@ Successful setup ends with `local status` reporting `ready` and `auth me` return
 - Docker Engine 20.10 or newer
 - Docker Compose 2.20 or newer
 - A Linux container runtime for `amd64` or `arm64`; Docker Desktop provides this on macOS
-- Port 8000 available by default
+- Port 8172 available by default
 - At least 2 GB of free disk space
 
 The clean-machine path has been verified using the published CLI package on Intel macOS with Docker Desktop. Release gating for additional platforms is tracked separately.
@@ -123,7 +123,7 @@ answerlayer local start
 
 Start creates an isolated Compose project for the selected runtime directory, starts Postgres, runs database migrations as a one-shot job, waits for migration-aware readiness, and creates a local-only organization and scoped API key. The key is verified and stored in the CLI configuration without being printed.
 
-When ready, AnswerLayer is available at `http://127.0.0.1:8000` unless another port was selected.
+When ready, AnswerLayer is available at `http://127.0.0.1:8172` unless another port was selected. Existing runtimes keep the port recorded when they were initialized.
 
 ### Inspect status
 
@@ -453,12 +453,12 @@ docker version
 docker compose version
 ```
 
-### Port 8000 is occupied
+### Port 8172 is occupied
 
 Choose another port:
 
 ```bash
-answerlayer local init --port 8080
+answerlayer local init --port 8173
 answerlayer local start
 ```
 
