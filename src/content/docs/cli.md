@@ -32,21 +32,19 @@ When a user asks you to set up AnswerLayer from this page:
 1. Confirm that Node.js 20 or newer and a running Docker runtime with Docker Compose are available.
 2. Explain that setup will download a public npm package and public container images, create Docker resources, and store local runtime data. Obtain confirmation before starting containers.
 3. Run the verified public-package workflow below. Do not clone `answerlayer-core`, request GitHub access, or request registry credentials.
-4. Verify both local readiness and authenticated CLI access.
-5. Report the URL, CLI version, selected image and digest, runtime directory, and next safe command.
+4. After approval, run the noninteractive quickstart below. If it reports `provider-required`, explain that the provider-free demo succeeded and ask the user to rerun the same quickstart interactively in their own terminal; the CLI will provide a hidden key prompt.
+5. Verify local readiness and report the URL, CLI version, selected image and digest, runtime directory, demo result, and next safe command.
 6. Before connecting real data, show the proposed database host, database, and username. Obtain confirmation and require a dedicated account restricted to approved schemas and `SELECT` only.
-7. Never request secrets in chat or print them. Ask the user to enter provider or database credentials privately in their own environment or a permission-restricted local file.
+7. Never request secrets in chat or print them. Never pass a provider key as a command argument. Let the CLI collect it through its hidden terminal prompt.
 
 Verified setup commands:
 
 ```bash
-npx -y @answerlayer/cli@latest local init
-npx -y @answerlayer/cli@latest local start
+npx -y @answerlayer/cli@latest local quickstart --yes --json
 npx -y @answerlayer/cli@latest local status --json
-npx -y @answerlayer/cli@latest auth me --json
 ```
 
-Successful setup ends with `local status` reporting `ready` and `auth me` returning the local user and organization identifiers. First boot does not require Git, Clerk, an AnswerLayer account, private registry credentials, AWS credentials, or a model-provider key.
+Quickstart initializes and starts the stack, creates local credentials, installs a deterministic synthetic retail demo and starter semantic objects, and verifies a real query. A `provider-required` result means all provider-free setup succeeded. An interactive `answerlayer local quickstart` then offers a hidden Anthropic-key prompt and continues directly to a real model-backed answer. First boot does not require Git, Clerk, an AnswerLayer account, private registry credentials, AWS credentials, or a model-provider key.
 
 ## Prerequisites
 
@@ -86,6 +84,22 @@ The package has no runtime dependencies beyond Node.js and uses the same command
 
 ## Local AnswerLayer
 
+### One-command quickstart
+
+```bash
+answerlayer local quickstart
+```
+
+Quickstart confirms before changing local state, initializes and starts the public-image runtime, creates local credentials, installs and verifies the synthetic demo, and offers a hidden Anthropic-key prompt. When the key verifies, the same command runs a real model-backed inquiry. Decline the provider step to keep using the provider-free demo; rerun quickstart later to resume.
+
+For noninteractive agent automation after the user has approved the state changes:
+
+```bash
+answerlayer local quickstart --yes --json
+```
+
+This mode never requests secret input. It returns one credential-free JSON object with the runtime, image digest, demo, provider, inquiry, and next-action state.
+
 ### Initialize
 
 ```bash
@@ -104,14 +118,14 @@ Initialization:
 Select another published image or port when needed:
 
 ```bash
-answerlayer local init --image public.ecr.aws/s8d9x7y7/answerlayer:1.19.9
-answerlayer local init --port 8080
+answerlayer local init --image public.ecr.aws/s8d9x7y7/answerlayer:<version>
+answerlayer local init --port 8173
 ```
 
 Environment overrides:
 
 ```bash
-export ANSWERLAYER_LOCAL_IMAGE=public.ecr.aws/s8d9x7y7/answerlayer:1.19.9
+export ANSWERLAYER_LOCAL_IMAGE=public.ecr.aws/s8d9x7y7/answerlayer:<version>
 export ANSWERLAYER_LOCAL_DIR=/path/to/answerlayer-local
 ```
 
@@ -208,7 +222,15 @@ CLI credentials are stored separately in `~/.answerlayer/config.json` by default
 
 A model-provider key is not required to initialize the stack, run migrations, reach ready state, or use non-model-backed API operations. Features that call a model provider require the corresponding provider configuration before use.
 
-Enter provider credentials privately. Do not paste them into an agent conversation or commit them. For the local runtime, the generated permission-restricted `runtime.env` includes `ANSWERLAYER_ANTHROPIC_API_KEY`; after setting it privately, run `answerlayer local start` again.
+Enter provider credentials privately. Do not paste them into an agent conversation, pass them as command arguments, or commit them. Interactive `answerlayer local quickstart` offers to collect the Anthropic key through a hidden prompt, verifies it inside the runtime, and continues to a model-backed answer. The key is stored only in the permission-restricted runtime environment and is omitted from CLI output and state.
+
+The standalone provider commands remain available for later management:
+
+```bash
+answerlayer local provider status --json
+answerlayer local provider rotate anthropic
+answerlayer local provider remove anthropic --force
+```
 
 ## Install the AnswerLayer agent skill
 
@@ -459,7 +481,7 @@ Choose another port:
 
 ```bash
 answerlayer local init --port 8173
-answerlayer local start
+answerlayer local quickstart
 ```
 
 ### Image pull fails
@@ -486,9 +508,9 @@ A `403` response means the key is valid but lacks a required scope. Add only the
 
 ## Current local-first boundaries
 
-- A new local instance contains the AnswerLayer application and local metadata database, but does not yet include a deterministic demo dataset.
-- Connect a database before running a meaningful data query.
-- Use explicit provider configuration before model-backed semantic generation or inquiry.
+- A new local instance includes the application, metadata database, deterministic synthetic retail demo, starter semantic objects, and a verified saved query.
+- Connect a dedicated read-only database before applying the workflow to real customer data; the bundled demo is immediately usable without one.
+- Model-backed semantic generation and inquiry require provider configuration; interactive quickstart supplies the secure prompt and verifies the key.
 - S3-compatible object storage and the ML worker are optional integrations, not first-boot dependencies. Features such as document and branding uploads may require separately configured object storage.
 - Use `/deploy` for customer-cloud deployment choices; the local CLI workflow is for evaluation and local operation.
 

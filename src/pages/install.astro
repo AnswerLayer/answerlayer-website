@@ -45,13 +45,12 @@ const agentPrompt = `Open https://www.answerlayer.io/docs/cli and set up AnswerL
 
         <article class="topic-card">
           <span class="step-number crt-text">02</span>
-          <h2 class="card-title crt-text">Initialize and start</h2>
+          <h2 class="card-title crt-text">Run one quickstart</h2>
           <p class="card-description crt-text">
-            Run the published npm package directly. Initialization pulls and pins the supported public image; start launches Postgres, runs migrations, and creates a local CLI identity.
+            Quickstart pulls and pins the public image, launches Postgres, runs migrations, creates local credentials and demo data, then offers a hidden provider-key prompt for the first model-backed answer.
           </p>
           <div class="commands">
-            <CopyCommand command="npx -y @answerlayer/cli@latest local init" />
-            <CopyCommand command="npx -y @answerlayer/cli@latest local start" />
+            <CopyCommand command="npx -y @answerlayer/cli@latest local quickstart" />
           </div>
         </article>
 
@@ -74,7 +73,7 @@ const agentPrompt = `Open https://www.answerlayer.io/docs/cli and set up AnswerL
       </div>
 
       <p class="deployment-note crt-text">
-        First boot does not require Git, an AnswerLayer account, a model-provider key, or registry credentials. Model-backed features need provider configuration later.
+        First boot and the synthetic demo do not require Git, an AnswerLayer account, a model-provider key, or registry credentials. When you choose to add Anthropic, quickstart hides the key while you type and continues without another setup command.
       </p>
     </section>
   </div>
