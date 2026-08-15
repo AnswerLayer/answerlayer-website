@@ -118,14 +118,14 @@ Initialization:
 Select another published image or port when needed:
 
 ```bash
-answerlayer local init --image public.ecr.aws/s8d9x7y7/answerlayer:<version>
+answerlayer local init --image public.ecr.aws/s8d9x7y7/answerlayer:1.20.3
 answerlayer local init --port 8173
 ```
 
 Environment overrides:
 
 ```bash
-export ANSWERLAYER_LOCAL_IMAGE=public.ecr.aws/s8d9x7y7/answerlayer:<version>
+export ANSWERLAYER_LOCAL_IMAGE=public.ecr.aws/s8d9x7y7/answerlayer:1.20.3
 export ANSWERLAYER_LOCAL_DIR=/path/to/answerlayer-local
 ```
 
