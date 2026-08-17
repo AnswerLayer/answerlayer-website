@@ -13,19 +13,17 @@ https://www.answerlayer.io/install
 1. Confirm Node.js 20+ and a running Docker runtime with Docker Compose.
 2. Explain that setup downloads a public npm package and public container images, creates Docker resources, and stores persistent local data. Ask before starting containers.
 3. Do not clone a private repository, request GitHub access, or request container-registry credentials.
-4. Run:
+4. After the user approves the state changes, run:
 
-   npx -y @answerlayer/cli@latest local init
-   npx -y @answerlayer/cli@latest local start
+   npx -y @answerlayer/cli@latest local quickstart --yes --json
    npx -y @answerlayer/cli@latest local status --json
-   npx -y @answerlayer/cli@latest auth me --json
 
-5. Treat setup as successful only when local status is ready and auth me returns the local user and organization identifiers.
+5. Treat provider-free setup as successful when quickstart reports provider-required with a ready runtime and verified demo. Ask the user to run the same quickstart interactively in their own terminal; the CLI will provide a hidden Anthropic-key prompt and continue directly to a model-backed answer.
 6. Report the local URL, CLI version, selected image and digest, runtime directory, and next safe command.
 7. Before connecting real data, show the proposed host, database, and username; ask for confirmation; and use a dedicated account restricted to approved schemas and SELECT only.
-8. Never request secrets in chat or print them. Have the user enter provider and database credentials privately in their own environment or a permission-restricted local file.
+8. Never request secrets in chat, print them, or pass provider keys as command arguments. Let the CLI collect the provider key through its hidden terminal prompt.
 
-First boot does not require Git, an AnswerLayer account, private registry credentials, AWS credentials, Clerk credentials, or a model-provider key. Model-backed inquiry and semantic generation require provider configuration later. A new local instance does not yet include a demo dataset.
+First boot does not require Git, an AnswerLayer account, private registry credentials, AWS credentials, Clerk credentials, or a model-provider key. A new local instance includes a deterministic synthetic retail demo and starter semantic objects. Model-backed inquiry and semantic generation require provider configuration later.
 
 Lifecycle commands:
 
