@@ -305,6 +305,60 @@ PUT /api/v1/dashboards/{dashboard_id}/tiles/{tile_id}/parameters
 
 Only `viewer_editable: true` parameters may be included. The response returns the full effective parameter contract and resolved values after the update.
 
+### Response
+
+Both `GET` and `PUT /parameters` return the same shape: the tile's full parameter contract with effective values, plus a `values` map for convenience.
+
+```json
+{
+  "dashboard_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+  "tile_id": "5f1c7e3a-8b2d-4c6e-9a1f-2e3d4c5b6a7f",
+  "subject_org_id": "acme-widgets",
+  "parameters": [
+    {
+      "key": "retention_weight",
+      "label": "Retention weight",
+      "type": "number",
+      "default": 0.7,
+      "value": 0.85,
+      "required": false,
+      "min": 0,
+      "max": 1,
+      "options": null,
+      "viewer_editable": true
+    }
+  ],
+  "values": {
+    "retention_weight": 0.85
+  }
+}
+```
+
+| Field | Description |
+|---|---|
+| `dashboard_id` / `tile_id` | The dashboard and tile the settings belong to. |
+| `subject_org_id` | The subject org these values resolved for, or `null` for the org-level (defaults-only) view. |
+| `parameters` | The full parameter contract — every field from [Parameter contract](#parameter-contract), with `value` set to the effective value. |
+| `values` | A flat `{ key: value }` map of the effective values, equivalent to reading each parameter's `value`. |
+
+### Errors
+
+Invalid input returns `400` with the reason in the `detail` field. The same validation applies to the `params` field on the [tile-data](#tile-data) endpoint.
+
+```json
+{ "detail": "Parameter 'cohort' is not viewer editable." }
+```
+
+| Condition | `detail` message |
+|---|---|
+| Key not declared on the tile | `Unknown tile parameter(s): foo.` |
+| Editing a `viewer_editable: false` parameter | `Parameter 'cohort' is not viewer editable.` |
+| Missing a required value | `Parameter 'retention_weight' is required.` |
+| Wrong type | `Parameter 'retention_weight' must be a number.` |
+| Below `min` / above `max` | `Parameter 'retention_weight' must be less than or equal to 1.0.` |
+| Value not in `options` | `Parameter 'tier' must be one of ['gold', 'silver'].` |
+| A `filters` key collides with a `params` key (tile-data endpoint) | `Filter and parameter keys must be distinct: retention_weight.` |
+
 ## Caching
 
 Tile data is cached so repeat dashboard views do not re-run slow source queries. A second request with the same dashboard, tile, filters, and embed context returns `cache_hit: true` and serves the stored result — typically in milliseconds rather than seconds.
