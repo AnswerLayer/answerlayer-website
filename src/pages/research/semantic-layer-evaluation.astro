@@ -1,0 +1,493 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const canonical = 'https://www.answerlayer.io/research/semantic-layer-evaluation';
+const reportUrl = '/reports/semantic-layer-evaluation-2026-08.pdf';
+const bookCallUrl = 'https://calendly.com/josh-getanswerlayer/30min';
+const title = 'Semantic Layer Evaluation: Quality and Efficiency Across Nine Models | AnswerLayer';
+const description = 'A controlled paired benchmark found that governed semantic-layer access increased pooled strict pass rate from 28.7% to 61.3% across nine language models.';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Report',
+  name: 'Evaluating Semantic-Layer Effects on Analytical Quality and Efficiency',
+  alternateName: 'AnswerLayer Semantic Layer Benchmark',
+  description,
+  datePublished: '2026-08-14',
+  version: 'August 2026 public edition',
+  author: {
+    '@type': 'Organization',
+    name: 'AnswerLayer',
+    url: 'https://www.answerlayer.io',
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'AnswerLayer',
+    url: 'https://www.answerlayer.io',
+  },
+  url: canonical,
+  encoding: {
+    '@type': 'MediaObject',
+    contentUrl: `https://www.answerlayer.io${reportUrl}`,
+    encodingFormat: 'application/pdf',
+  },
+};
+---
+
+<Layout title={title} description={description} canonical={canonical} ogType="article">
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+  <div class="report-page crt-screen">
+    <header class="hero container mx-auto px-6">
+      <div class="hero-copy">
+        <p class="eyebrow crt-text">Research / August 2026 public edition</p>
+        <h1 class="crt-text">Evaluating semantic-layer effects on analytical quality and efficiency</h1>
+        <p class="dek crt-text">
+          A controlled paired benchmark across nine language models found that governed semantic-layer access
+          more than doubled pooled strict pass rate while reducing SQL calls for every evaluated model.
+        </p>
+        <div class="button-row">
+          <a
+            class="cta-button is-primary crt-text"
+            href={reportUrl}
+            data-report-action="download"
+            target="_blank"
+            rel="noopener"
+          >
+            Read the technical report <span aria-hidden="true">↗</span>
+          </a>
+          <a class="cta-button crt-text" href="#method">Review the method</a>
+        </div>
+        <p class="publication-meta crt-text">Technical report · Published 14 August 2026 · PDF · Public, anonymized</p>
+      </div>
+
+      <div class="headline-result" aria-label="Strict pass rate comparison">
+        <p class="result-label crt-text">Pooled strict pass rate</p>
+        <div class="bar-row">
+          <span class="bar-name crt-text">Raw schema</span>
+          <div class="bar-track"><span class="bar raw" style="--value: 28.7%"></span></div>
+          <strong class="bar-value crt-text">28.7%</strong>
+        </div>
+        <div class="bar-row">
+          <span class="bar-name crt-text">Semantic layer</span>
+          <div class="bar-track"><span class="bar semantic" style="--value: 61.3%"></span></div>
+          <strong class="bar-value crt-text">61.3%</strong>
+        </div>
+        <p class="result-delta crt-text">+32.6 percentage points</p>
+        <p class="result-note crt-text">124/432 → 265/432 strict passes across the reported models</p>
+      </div>
+    </header>
+
+    <div class="report-content">
+      <section class="section container mx-auto px-6" aria-labelledby="findings-heading">
+        <p class="section-index crt-text">01 / Findings</p>
+        <h2 id="findings-heading" class="crt-text">Governed context improved every model. The operating paths still differed.</h2>
+        <div class="finding-grid">
+          <article class="finding-card">
+            <p class="finding-number crt-text">9 / 9</p>
+            <h3 class="crt-text">Models improved</h3>
+            <p>Every evaluated model achieved a higher strict pass rate with semantic-layer access. Model-level lifts ranged from 6.3 to 58.3 percentage points.</p>
+          </article>
+          <article class="finding-card">
+            <p class="finding-number crt-text">9 / 9</p>
+            <h3 class="crt-text">Used fewer SQL calls</h3>
+            <p>Semantic access consistently shortened the route to the database. Aggregate duration also declined for every evaluated model.</p>
+          </article>
+          <article class="finding-card">
+            <p class="finding-number crt-text">7 / 9</p>
+            <h3 class="crt-text">Cost less per case</h3>
+            <p>Estimated model cost declined for seven configurations under the report's normalized rate card. The effect was not universal.</p>
+          </article>
+        </div>
+      </section>
+
+      <section id="method" class="section section-split container mx-auto px-6" aria-labelledby="method-heading">
+        <div>
+          <p class="section-index crt-text">02 / Method</p>
+          <h2 id="method-heading" class="crt-text">A paired comparison with the model held constant</h2>
+          <p>
+            Each model answered the same ordered set of 16 expert-gated analytical tasks under two conditions:
+            direct raw-schema access and governed semantic-layer access. The model, dataset, task order, evaluator,
+            prompt family, timeout, and semantic-layer snapshot were held fixed within each comparison.
+          </p>
+        </div>
+        <dl class="method-grid">
+          <div><dt class="crt-text">Models</dt><dd>9</dd></div>
+          <div><dt class="crt-text">Tasks</dt><dd>16</dd></div>
+          <div><dt class="crt-text">Trials per cell</dt><dd>3</dd></div>
+          <div><dt class="crt-text">Case attempts</dt><dd>864</dd></div>
+          <div><dt class="crt-text">Conditions</dt><dd>2</dd></div>
+          <div><dt class="crt-text">Primary outcome</dt><dd>Strict automatic pass rate</dd></div>
+        </dl>
+      </section>
+
+      <section class="section section-split container mx-auto px-6" aria-labelledby="interpretation-heading">
+        <div>
+          <p class="section-index crt-text">03 / Interpretation</p>
+          <h2 id="interpretation-heading" class="crt-text">Retrieval was not the finish line</h2>
+        </div>
+        <div class="prose">
+          <p>
+            Relevant semantic context was often retrieved and used in failed cases. Residual failures arose in
+            definition choice, analytical interpretation, SQL construction, handling unsupported questions,
+            relationship resolution, and final-answer completeness.
+          </p>
+          <p>
+            With the same semantic package, semantic-mode pass rates ranged from 35.4% to 95.8%. The practical
+            conclusion is to qualify the model and semantic layer as one production configuration, with the full
+            trajectory from governed context to final answer visible.
+          </p>
+        </div>
+      </section>
+
+      <section class="section limitations container mx-auto px-6" aria-labelledby="limitations-heading">
+        <p class="section-index crt-text">04 / Scope and limitations</p>
+        <h2 id="limitations-heading" class="crt-text">What this benchmark does and does not establish</h2>
+        <ul>
+          <li>The results describe one fixed 16-task cohort on one private analytical dataset.</li>
+          <li>Three trials characterize observed repeatability; they do not support population-level inference.</li>
+          <li>The benchmark does not establish universal model rankings or performance on another domain.</li>
+          <li>Lower SQL, token, or cost totals are observed associations and should not be interpreted as causes of higher quality.</li>
+        </ul>
+      </section>
+
+      <section class="final-cta container mx-auto px-6">
+        <div>
+          <p class="section-index crt-text">Run the comparison on your system</p>
+          <h2 class="crt-text">Benchmark raw-schema and governed-context behavior on your analytical workload.</h2>
+        </div>
+        <div class="button-row">
+          <a
+            class="cta-button is-primary crt-text"
+            href={bookCallUrl}
+            target="_blank"
+            rel="noopener"
+            data-report-action="benchmark-conversation"
+          >
+            Discuss a benchmark <span aria-hidden="true">↗</span>
+          </a>
+          <a
+            class="cta-button crt-text"
+            href={reportUrl}
+            target="_blank"
+            rel="noopener"
+            data-report-action="download"
+          >
+            Read the report <span aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </section>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-report-action]').forEach((element) => {
+    element.addEventListener('click', () => {
+      const action = element.dataset.reportAction;
+      const analytics = (window as Window & {
+        posthog?: { capture: (event: string, properties: Record<string, string>) => void };
+      }).posthog;
+      if (analytics && action) {
+        analytics.capture('semantic_layer_report_action', { action });
+      }
+    });
+  });
+</script>
+
+<style>
+  .report-page {
+    color: var(--color-navy-900);
+  }
+
+  .hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(20rem, 0.85fr);
+    gap: clamp(3rem, 8vw, 7rem);
+    align-items: center;
+    padding-top: clamp(4rem, 9vw, 8rem);
+    padding-bottom: clamp(5rem, 10vw, 9rem);
+  }
+
+  .eyebrow,
+  .section-index,
+  .publication-meta,
+  .result-label,
+  .result-note {
+    font-family: var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+  }
+
+  .eyebrow,
+  .section-index {
+    color: var(--color-navy-500);
+    font-size: 0.8rem;
+    margin: 0 0 1rem;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    text-transform: uppercase;
+  }
+
+  h1 {
+    font-size: clamp(2.25rem, 5vw, 4.5rem);
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    margin: 0;
+    max-width: 15ch;
+  }
+
+  h2 {
+    font-size: clamp(1.65rem, 3vw, 2.5rem);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin: 0;
+    max-width: 22ch;
+  }
+
+  h3 {
+    font-size: 1rem;
+    letter-spacing: 0.03em;
+    margin: 0 0 0.65rem;
+  }
+
+  .dek {
+    color: var(--color-navy-700);
+    font-family: var(--font-body);
+    font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+    line-height: 1.7;
+    max-width: 45rem;
+    margin: 1.75rem 0 0;
+  }
+
+  .button-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-top: 2rem;
+  }
+
+  .cta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 2px solid var(--color-navy-900);
+    color: var(--color-navy-900);
+    font-family: var(--font-display);
+    font-size: 0.9rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    padding: 0.85rem 1.15rem;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .cta-button:hover,
+  .cta-button.is-primary {
+    background: var(--color-navy-900);
+    color: white;
+    text-decoration: none;
+  }
+
+  .cta-button.is-primary:hover {
+    background: var(--color-navy-700);
+  }
+
+  .publication-meta {
+    color: var(--color-navy-500);
+    font-size: 0.7rem;
+    line-height: 1.5;
+    margin: 1.25rem 0 0;
+  }
+
+  .headline-result {
+    border: 2px solid var(--color-navy-900);
+    padding: clamp(1.5rem, 3vw, 2.25rem);
+    position: relative;
+  }
+
+  .headline-result::before,
+  .finding-card::before {
+    border: 1px solid var(--color-navy-300);
+    content: '';
+    inset: -7px;
+    pointer-events: none;
+    position: absolute;
+  }
+
+  .result-label {
+    font-size: 0.75rem;
+    margin: 0 0 1.75rem;
+  }
+
+  .bar-row {
+    display: grid;
+    grid-template-columns: 7rem 1fr 3.5rem;
+    gap: 0.75rem;
+    align-items: center;
+    margin-top: 1rem;
+  }
+
+  .bar-name,
+  .bar-value {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+  }
+
+  .bar-value { text-align: right; }
+
+  .bar-track {
+    background: var(--color-navy-100);
+    height: 1.5rem;
+    overflow: hidden;
+  }
+
+  .bar {
+    display: block;
+    height: 100%;
+    width: var(--value);
+  }
+
+  .bar.raw { background: var(--color-navy-400); }
+  .bar.semantic { background: var(--color-navy-900); }
+
+  .result-delta {
+    border-top: 1px solid var(--color-navy-300);
+    font-family: var(--font-display);
+    font-size: clamp(1.6rem, 3vw, 2.35rem);
+    margin: 2rem 0 0;
+    padding-top: 1.25rem;
+    text-transform: uppercase;
+  }
+
+  .result-note {
+    color: var(--color-navy-500);
+    font-size: 0.65rem;
+    line-height: 1.5;
+    margin: 0.75rem 0 0;
+  }
+
+  .section {
+    border-top: 1px solid var(--color-navy-200);
+    padding-top: clamp(4rem, 8vw, 7rem);
+    padding-bottom: clamp(4rem, 8vw, 7rem);
+  }
+
+  .finding-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .finding-card {
+    border: 2px solid var(--color-navy-900);
+    padding: 1.5rem;
+    position: relative;
+  }
+
+  .finding-number {
+    font-family: var(--font-mono);
+    font-size: 2rem;
+    margin: 0 0 1.5rem;
+  }
+
+  .finding-card p:last-child,
+  .section-split p,
+  .limitations li {
+    color: var(--color-navy-700);
+    font-family: var(--font-body);
+    line-height: 1.7;
+  }
+
+  .section-split {
+    display: grid;
+    grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+    gap: clamp(3rem, 8vw, 8rem);
+  }
+
+  .section-split p:first-child { margin-top: 0; }
+
+  .method-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    margin: 0;
+  }
+
+  .method-grid > div {
+    border-left: 1px solid var(--color-navy-300);
+    border-top: 1px solid var(--color-navy-300);
+    padding: 1.25rem;
+  }
+
+  .method-grid dt {
+    color: var(--color-navy-500);
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .method-grid dd {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    margin: 0.5rem 0 0;
+    text-transform: uppercase;
+  }
+
+  .prose p:first-child { margin-top: 0; }
+
+  .limitations ul {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem 3rem;
+    margin: 2.5rem 0 0;
+    padding-left: 1.25rem;
+  }
+
+  .final-cta {
+    align-items: center;
+    background: var(--color-navy-900);
+    color: white;
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: minmax(0, 1fr) auto;
+    margin-top: clamp(2rem, 5vw, 5rem);
+    margin-bottom: clamp(3rem, 6vw, 6rem);
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+  }
+
+  .final-cta .section-index { color: var(--color-navy-300); }
+  .final-cta h2 { color: white; }
+  .final-cta .button-row { margin-top: 0; }
+  .final-cta .cta-button { border-color: white; color: white; }
+  .final-cta .cta-button.is-primary,
+  .final-cta .cta-button:hover { background: white; color: var(--color-navy-900); }
+
+  @media (max-width: 900px) {
+    .hero,
+    .section-split,
+    .final-cta {
+      grid-template-columns: 1fr;
+    }
+
+    .finding-grid { grid-template-columns: 1fr; }
+    .final-cta .button-row { margin-top: 0.5rem; }
+  }
+
+  @media (max-width: 560px) {
+    .hero { padding-top: 3rem; }
+    .bar-row { grid-template-columns: 5.5rem 1fr 3.5rem; }
+    .method-grid,
+    .limitations ul { grid-template-columns: 1fr; }
+    .cta-button { width: 100%; }
+  }
+</style>
