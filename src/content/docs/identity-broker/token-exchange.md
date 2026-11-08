@@ -27,7 +27,7 @@ POST /api/v1/oauth/token
 | `subject_token_type` | No | Defaults to `urn:ietf:params:oauth:token-type:jwt`, the only currently-supported value. RFC 8693 conformant clients should send it explicitly. |
 
 ```bash
-curl -X POST https://app.answerlayer.io/api/v1/oauth/token \
+curl -X POST "$ANSWERLAYER_BASE_URL/api/v1/oauth/token" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -d "grant_type=urn:ietf:params:oauth:grant-type:token-exchange" \
   -d "subject_token=$IDP_JWT" \
@@ -48,7 +48,7 @@ curl -X POST https://app.answerlayer.io/api/v1/oauth/token \
 The `access_token` is signed by this AnswerLayer install. Use it as `Authorization: Bearer ...` on any subsequent API call:
 
 ```bash
-curl -X POST https://app.answerlayer.io/api/v1/inquiry/sessions \
+curl -X POST "$ANSWERLAYER_BASE_URL/api/v1/inquiry/sessions" \
   -H "Authorization: Bearer $ANSWERLAYER_TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"connection_id": "..."}'

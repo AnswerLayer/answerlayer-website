@@ -317,14 +317,14 @@ If many subject orgs use different parameter values, each distinct resolved para
 
 ```bash
 # 1. Discover the dashboard's tiles.
-curl https://app.answerlayer.io/api/v1/dashboards/$DASHBOARD_ID/manifest \
+curl "$ANSWERLAYER_BASE_URL/api/v1/dashboards/$DASHBOARD_ID/manifest" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY"
 
 # 2. In your client, index the tiles by tile_key:
 #      tiles["avg_engagement_score"], tiles["member_engagement_table"], …
 
 # 3. Load a metric tile (small — returned inline).
-curl -X POST "https://app.answerlayer.io$DATA_URL_FOR_AVG_ENGAGEMENT_SCORE" \
+curl -X POST "$ANSWERLAYER_BASE_URL$DATA_URL_FOR_AVG_ENGAGEMENT_SCORE" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "X-Subject-Org-ID: acme-widgets" \
   -H "Content-Type: application/json" \
@@ -332,14 +332,14 @@ curl -X POST "https://app.answerlayer.io$DATA_URL_FOR_AVG_ENGAGEMENT_SCORE" \
 #   → { "rows": [[72.4]], "next_cursor": null, "cache_hit": false, … }
 
 # 4. Persist a customer-specific parameter setting.
-curl -X PUT "https://app.answerlayer.io/api/v1/dashboards/$DASHBOARD_ID/tiles/$TILE_ID/parameters" \
+curl -X PUT "$ANSWERLAYER_BASE_URL/api/v1/dashboards/$DASHBOARD_ID/tiles/$TILE_ID/parameters" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "X-Subject-Org-ID: acme-widgets" \
   -H "Content-Type: application/json" \
   -d '{"values": {"retention_weight": 0.85}}'
 
 # 5. Load a table tile (large — paginated). First page:
-curl -X POST "https://app.answerlayer.io$DATA_URL_FOR_MEMBER_ENGAGEMENT_TABLE" \
+curl -X POST "$ANSWERLAYER_BASE_URL$DATA_URL_FOR_MEMBER_ENGAGEMENT_TABLE" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "X-Subject-Org-ID: acme-widgets" \
   -H "Content-Type: application/json" \
@@ -347,7 +347,7 @@ curl -X POST "https://app.answerlayer.io$DATA_URL_FOR_MEMBER_ENGAGEMENT_TABLE" \
 #   → { "rows": [...500...], "result_handle": "a1b2…", "next_cursor": "eyJvZmZ…", … }
 
 # 6. Fetch the next page with the same tile data URL, handle, and cursor.
-curl -X POST "https://app.answerlayer.io$DATA_URL_FOR_MEMBER_ENGAGEMENT_TABLE" \
+curl -X POST "$ANSWERLAYER_BASE_URL$DATA_URL_FOR_MEMBER_ENGAGEMENT_TABLE" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "X-Subject-Org-ID: acme-widgets" \
   -H "Content-Type: application/json" \

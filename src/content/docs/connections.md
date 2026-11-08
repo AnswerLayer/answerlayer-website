@@ -112,7 +112,7 @@ AnswerLayer also supports direct file uploads as data sources:
 ### CSV upload example
 
 ```bash
-curl -X POST https://app.answerlayer.io/api/v1/csv/upload \
+curl -X POST "$ANSWERLAYER_BASE_URL/api/v1/csv/upload" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -F "file=@sales_data.csv" \
   -F "name=Sales Data" \

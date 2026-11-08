@@ -29,7 +29,7 @@ POST /api/v1/query/{connection_id}
 ### Example
 
 ```bash
-curl -X POST https://app.answerlayer.io/api/v1/query/$CONNECTION_ID \
+curl -X POST "$ANSWERLAYER_BASE_URL/api/v1/query/$CONNECTION_ID" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"query": "SELECT region, SUM(amount) FROM orders GROUP BY region", "row_limit": 100}'
@@ -87,7 +87,7 @@ Same body shape as `execute`, but returns the result set as a downloadable file 
 ### Example
 
 ```bash
-curl -X POST "https://app.answerlayer.io/api/v1/query/$CONNECTION_ID/export?format=excel" \
+curl -X POST "$ANSWERLAYER_BASE_URL/api/v1/query/$CONNECTION_ID/export?format=excel" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"query": "SELECT * FROM orders LIMIT 10000"}' \

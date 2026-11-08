@@ -33,7 +33,7 @@ Where `{component}` is one of: `entities`, `relationships`, `dimensions`, `measu
 ### Example: generate entities
 
 ```bash
-curl -N -X POST https://app.answerlayer.io/api/v1/semantic/entities/generate/stream \
+curl -N -X POST "$ANSWERLAYER_BASE_URL/api/v1/semantic/entities/generate/stream" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -97,7 +97,7 @@ QUEUED → RUNNING → AWAITING_GUIDANCE → RUNNING → ... → COMPLETED
 ### Create a job
 
 ```bash
-curl -X POST https://app.answerlayer.io/api/v1/semantic/jobs \
+curl -X POST "$ANSWERLAYER_BASE_URL/api/v1/semantic/jobs" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -116,7 +116,7 @@ Returns `409 Conflict` if an active job already exists for this connection and c
 ### Stream a job
 
 ```bash
-curl -N https://app.answerlayer.io/api/v1/semantic/jobs/{job_id}/stream \
+curl -N "$ANSWERLAYER_BASE_URL/api/v1/semantic/jobs/{job_id}/stream" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY"
 ```
 
@@ -152,14 +152,14 @@ When the stream emits a `guidance_needed` event, the job is paused. The event pa
 You can also poll for pending questions:
 
 ```bash
-curl https://app.answerlayer.io/api/v1/semantic/jobs/{job_id}/questions \
+curl "$ANSWERLAYER_BASE_URL/api/v1/semantic/jobs/{job_id}/questions" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY"
 ```
 
 Submit answers to resume the agent:
 
 ```bash
-curl -X POST https://app.answerlayer.io/api/v1/semantic/jobs/{job_id}/guidance \
+curl -X POST "$ANSWERLAYER_BASE_URL/api/v1/semantic/jobs/{job_id}/guidance" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{

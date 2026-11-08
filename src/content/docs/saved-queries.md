@@ -74,7 +74,7 @@ Returns `201` with the created saved query.
 ### Example
 
 ```bash
-curl -X POST https://app.answerlayer.io/api/v1/saved-queries \
+curl -X POST "$ANSWERLAYER_BASE_URL/api/v1/saved-queries" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -154,7 +154,7 @@ A result at or below 1,000 rows is returned **inline** — every row in this res
 ### Example
 
 ```bash
-curl -X POST https://app.answerlayer.io/api/v1/saved-queries/$SAVED_QUERY_ID/execute \
+curl -X POST "$ANSWERLAYER_BASE_URL/api/v1/saved-queries/$SAVED_QUERY_ID/execute" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"row_limit": 100}'
