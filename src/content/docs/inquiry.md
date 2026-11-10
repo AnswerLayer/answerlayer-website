@@ -21,12 +21,17 @@ POST /api/v1/inquiry/sessions
 |-------|------|----------|-------------|
 | `connection_id` | string (UUID) | Yes | Database connection to query |
 | `model` | string | No | Override the default Claude model for this session |
+| `use_semantic_layer` | boolean | No | Whether semantic-layer context and tools may be used. Default `true` |
+| `policy_id` | string (UUID) | No | Explicit [response policy](/docs/response-policies); defaults are resolved when omitted |
+| `policy_revision_id` | string (UUID) | No | Exact active or superseded revision. Requires `policy_id` |
 
 ### Response
 
 ```json
 { "session_id": "d290f1ee-6c54-4b01-90e6-d701748f0851" }
 ```
+
+The resolved response-policy revision is frozen into the session. Later policy activations do not change an existing session. Session reads include `policy_id`, `policy_revision_id`, `policy_version`, and `policy_hash`. See [Response Policies](/docs/response-policies) for default resolution and exact revision pinning.
 
 ## Add a turn (streaming)
 
