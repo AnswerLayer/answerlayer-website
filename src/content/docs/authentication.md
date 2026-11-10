@@ -30,6 +30,8 @@ Each API key has a set of scopes that control what it can do. Requests to scoped
 |-------|-----------------|
 | `inquiry:execute` | Create inquiry sessions and submit questions |
 | `inquiry:read` | List inquiry sessions and turns |
+| `inquiry_policy:read` | List, inspect, and resolve [response policies](/docs/response-policies) |
+| `inquiry_policy:write` | Preview, create, revise, activate, archive, and assign response policies |
 | `semantic:read` | List and view semantic layer components |
 | `semantic:write` | Create, update, and delete semantic layer components |
 | `semantic:generate` | Trigger AI generation of semantic layer components |
@@ -40,6 +42,7 @@ Each API key has a set of scopes that control what it can do. Requests to scoped
 Use `resource:*` to grant all actions for a resource:
 
 - `inquiry:*` grants `inquiry:read` and `inquiry:execute`
+- `inquiry_policy:*` grants `inquiry_policy:read` and `inquiry_policy:write`
 - `semantic:*` grants `semantic:read`, `semantic:write`, and `semantic:generate`
 
 ## Connection scoping

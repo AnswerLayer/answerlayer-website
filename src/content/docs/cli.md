@@ -327,6 +327,34 @@ answerlayer inquiry ask --session <session-id> --json \
 
 Natural-language inquiry is model-backed and requires the selected deployment's provider configuration.
 
+### Configure response policies
+
+Response policies version answer formatting, numeric precision, evidence, and uncertainty behavior. Preview before saving, then activate the draft revision explicitly:
+
+```bash
+answerlayer inquiry-policies preview \
+  --output-format table_first \
+  --precision-mode significant_figures --precision-value 4 \
+  --require-identifiers --require-numeric-support \
+  --insufficient-data ask_for_clarification \
+  --proxy-behavior require_confirmation \
+  --guidance "Lead with the decision-relevant result." --json
+
+answerlayer inquiry-policies create \
+  --name "Board answers" \
+  --output-format table_first \
+  --precision-mode significant_figures --precision-value 4 \
+  --require-identifiers --require-numeric-support \
+  --insufficient-data ask_for_clarification \
+  --proxy-behavior require_confirmation \
+  --guidance "Lead with the decision-relevant result." --json
+
+answerlayer inquiry-policies activate "Board answers" 1 --json
+answerlayer inquiry-policies set-default organization "Board answers" --json
+```
+
+Use `set-default connection`, `effective`, and `clear-default` for connection overrides. Pin a new inquiry or evaluation with `--policy <id-or-name>` and `--policy-version <number-or-revision-id>`. Existing sessions and runs keep their resolved revision. See [Response Policies](/docs/response-policies) for every option and the equivalent API workflow.
+
 ### Manage saved queries
 
 ```bash
@@ -408,6 +436,8 @@ saved-queries list|get|create|update|delete|approve|unapprove|execute
 semantic <entities|relationships|measures|metrics|dimensions|filters>
   list|get|create|update|delete|delete-all|generate
 inquiry models|ask|sessions|create-session|session|update-session|delete-session|turn
+inquiry-policies list|get|preview|create|revise|activate|archive
+inquiry-policies effective|set-default|clear-default
 evals suites list|create|get|update|delete
 evals cases create|update|delete
 evals runs list|create|create-batch|get|update|cancel|compare|analyze
@@ -463,6 +493,7 @@ answerlayer branding update --data-file ./branding.json
 | `dashboard:read`, `dashboard:write`, `tile:read`, `tile:write` | Dashboard workflows |
 | `inquiry:read` | Inspect inquiry sessions and evaluation runs |
 | `inquiry:execute` | Run natural-language inquiry and evaluations |
+| `inquiry_policy:read`, `inquiry_policy:write` | Inspect and manage response policies |
 
 ## Troubleshooting
 
