@@ -98,7 +98,7 @@ Content-Type: application/json
 
 Product, region, and report identifiers are public entitlement identifiers agreed with the embedding product. Physical table and column names remain server-side. `table` must match the qualified name exposed by schema discovery. `region_column` is applied at every scan of that table before joins or aggregation; `region_type` is `string` or `integer`. `allowed_columns` is explicit and non-empty.
 
-Every table used by a report must be registered. If multiple granted reports map to the same table, their allowed columns and region lists are combined, but the table must use one consistent region column and type throughout the catalog. AnswerLayer freezes the catalog hash when it creates a session; changing the catalog invalidates existing access-controlled sessions. Invalid or unregistered mappings fail closed. See [Embedded inquiry access](/docs/inquiry#embedded-inquiry-access) for the session grant payload.
+Every table used by a report must be registered. A physical table must use one consistent region column, region type, and allowed-column list throughout the catalog. Multiple granted reports may map to that table only when they share that rule; their authorized regions are combined without expanding the table's allowed columns. AnswerLayer freezes the catalog hash when it creates a session; changing the catalog invalidates existing access-controlled sessions. Invalid or unregistered mappings fail closed. See [Embedded inquiry access](/docs/inquiry#embedded-inquiry-access) for the session grant payload.
 
 ## File uploads
 
