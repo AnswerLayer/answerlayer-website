@@ -10,7 +10,10 @@ import { getCollection, getEntry, render } from 'astro:content';
 
 export async function getStaticPaths() {
   const allDocs = await getCollection('docs');
-  return allDocs.map((doc) => ({
+  const visibleDocs = import.meta.env.PROD
+    ? allDocs.filter((doc) => !doc.data.draft)
+    : allDocs;
+  return visibleDocs.map((doc) => ({
     params: { slug: doc.id },
     props: { slug: doc.id },
   }));
@@ -19,7 +22,7 @@ export async function getStaticPaths() {
 const { slug } = Astro.props;
 const entry = await getEntry('docs', slug);
 
-if (!entry) {
+if (!entry || (import.meta.env.PROD && entry.data.draft)) {
   return Astro.redirect('/docs');
 }
 
@@ -27,7 +30,10 @@ const { Content } = await render(entry);
 
 // Build sidebar nav grouped by section
 const allDocs = await getCollection('docs');
-const sorted = allDocs.sort((a, b) => a.data.order - b.data.order);
+const visibleDocs = import.meta.env.PROD
+  ? allDocs.filter((doc) => !doc.data.draft)
+  : allDocs;
+const sorted = visibleDocs.sort((a, b) => a.data.order - b.data.order);
 const sections: Record<string, typeof sorted> = {};
 for (const doc of sorted) {
   const section = doc.data.section;

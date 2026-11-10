@@ -3,6 +3,7 @@ title: Identity Broker Overview
 description: B2B2B2C identity model for embedding AnswerLayer into your platform with verified end-user identity.
 order: 50
 section: Identity Broker
+draft: true
 ---
 
 The identity broker lets your platform vouch for individual end-users when calling the AnswerLayer API. Your application authenticates your users with your existing identity provider; AnswerLayer accepts a token exchange that proves who the end-user is, and issues a short-lived API token bound to that user.

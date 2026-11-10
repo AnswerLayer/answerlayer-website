@@ -49,7 +49,7 @@ Sessions are stateful -- follow-up questions have access to the full conversatio
 
 ### 4. Embed in your product
 
-Authenticate with a scoped API key and pass your end-user's identity via `X-Subject-Org-ID` and `X-Subject-User-ID` headers. AnswerLayer uses these for audit logging and data isolation, so each of your customers only sees their own data.
+Authenticate from your backend with a scoped API key. You can pass stable, opaque end-user identifiers in `X-Subject-Org-ID` and `X-Subject-User-ID` for attribution. When a connection is configured for subject filtering, `X-Subject-Org-ID` also supplies the tenant value used by that filter. These headers are trusted metadata and do not grant access by themselves.
 
 ## Request format
 

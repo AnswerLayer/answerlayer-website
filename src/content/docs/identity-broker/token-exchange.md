@@ -3,6 +3,7 @@ title: Token Exchange
 description: Exchange a JWT from your identity provider for a short-lived AnswerLayer API token (RFC 8693).
 order: 51
 section: Identity Broker
+draft: true
 ---
 
 The token-exchange endpoint implements [RFC 8693](https://datatracker.ietf.org/doc/html/rfc8693). Your backend submits a subject token issued by your IdP and receives a short-lived AnswerLayer-signed JWT scoped to the end-user.
