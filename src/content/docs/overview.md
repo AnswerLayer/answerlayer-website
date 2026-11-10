@@ -49,7 +49,7 @@ Sessions are stateful -- follow-up questions have access to the full conversatio
 
 ### 4. Embed in your product
 
-Authenticate from your backend with a scoped API key. You can pass stable, opaque end-user identifiers in `X-Subject-Org-ID` and `X-Subject-User-ID` for attribution. When a connection is configured for subject filtering, `X-Subject-Org-ID` also supplies the tenant value used by that filter. These headers are trusted metadata and do not grant access by themselves.
+Authenticate from your backend with a scoped API key. You can pass a stable, opaque customer-organization identifier in `X-Subject-Org-ID` and an individual identifier in `X-Subject-User-ID`. On connections using legacy subject filtering, the subject organization also supplies the tenant value used by that filter. These headers are trusted metadata and do not grant access by themselves.
 
 ## Request format
 

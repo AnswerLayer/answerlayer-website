@@ -71,9 +71,9 @@ curl -N -X POST https://app.answerlayer.io/api/v1/inquiry/sessions/{session_id} 
 
 These headers are **trusted metadata**, not a separate authentication method. AnswerLayer accepts the values because the request came from your authenticated backend. Do not send email addresses, names, or other personal information when a stable internal ID will do.
 
-`X-Subject-User-ID` supports end-user attribution in audit and usage data. `X-Subject-Org-ID` can also drive row-level filtering when the selected connection is configured for subject filtering. The headers do not grant API scopes or connection access by themselves; the API key and the connection's server-side configuration remain authoritative.
+`X-Subject-Org-ID` identifies your customer organization; it is not your AnswerLayer organization ID. `X-Subject-User-ID` identifies the individual within that customer organization and supports end-user attribution in audit and usage data. On connections using the legacy subject-filter configuration, the subject organization can also supply the tenant value for a warehouse row filter. The headers do not grant API scopes or connection access by themselves; the API key and the connection's server-side configuration remain authoritative.
 
-Use an immutable database primary key or identity-provider subject for `X-Subject-User-ID`. Never use an email address, display name, username, or session token, and never reassign an identifier to another user.
+Use immutable database primary keys or identity-provider subjects for both values. Never use an email address, display name, organization name, username, or session token, and never reassign an identifier.
 
 If [subject filtering](/docs/connections#subject-filtering-for-embedded-tenants) or [embedded inquiry access](/docs/inquiry#embedded-inquiry-access) is enabled for a connection, send the same subject values consistently on every operation for that session. Missing or different subject values do not inherit access to the original session. Subject headers are suitable only for server-to-server integrations where your backend authenticates the user before making the AnswerLayer request.
 
