@@ -73,7 +73,9 @@ These headers are **trusted metadata**, not a separate authentication method. An
 
 `X-Subject-User-ID` supports end-user attribution in audit and usage data. `X-Subject-Org-ID` can also drive row-level filtering when the selected connection is configured for subject filtering. The headers do not grant API scopes or connection access by themselves; the API key and the connection's server-side configuration remain authoritative.
 
-If subject filtering is enabled for a connection, send `X-Subject-Org-ID` consistently on every request that can query or discover data. Subject headers are suitable only for server-to-server integrations where your backend authenticates the user before making the AnswerLayer request.
+Use an immutable database primary key or identity-provider subject for `X-Subject-User-ID`. Never use an email address, display name, username, or session token, and never reassign an identifier to another user.
+
+If subject filtering or [embedded inquiry access](/docs/inquiry#embedded-inquiry-access) is enabled for a connection, send the same subject values consistently on every operation for that session. Missing or different subject values do not inherit access to the original session. Subject headers are suitable only for server-to-server integrations where your backend authenticates the user before making the AnswerLayer request.
 
 ## Errors
 
