@@ -67,6 +67,7 @@ const blogCollection = defineCollection({
  * - description: Short description for SEO
  * - order: Sort order within the sidebar (lower = higher)
  * - section: Grouping label in the sidebar
+ * - draft: If true, hidden from production builds
  */
 const docsCollection = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/docs' }),
@@ -75,6 +76,7 @@ const docsCollection = defineCollection({
     description: z.string(),
     order: z.number().default(100),
     section: z.string().default('General'),
+    draft: z.boolean().default(false),
   }),
 });
 

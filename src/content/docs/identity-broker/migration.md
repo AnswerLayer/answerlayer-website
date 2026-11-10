@@ -3,6 +3,7 @@ title: Migrating to IdP-Configured Mode
 description: What changes when you register your first IdP, and how to roll out without breaking existing API-key calls.
 order: 53
 section: Identity Broker
+draft: true
 ---
 
 Before any IdP is registered, your AnswerLayer organization is in **API-key-only mode**. After an admin registers the first IdP, your organization enters **IdP-configured mode** and the rules change for protected endpoints.

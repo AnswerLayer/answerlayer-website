@@ -3,6 +3,7 @@ title: JWKS Endpoint
 description: Public verification keys for AnswerLayer-issued bearer tokens (RFC 7517).
 order: 52
 section: Identity Broker
+draft: true
 ---
 
 AnswerLayer publishes the public keys it uses to sign bearer tokens at the standard JWKS path. Use this if a service downstream of your backend needs to verify AnswerLayer tokens without re-calling AnswerLayer.

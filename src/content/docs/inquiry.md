@@ -24,6 +24,7 @@ POST /api/v1/inquiry/sessions
 | `use_semantic_layer` | boolean | No | Whether semantic-layer context and tools may be used. Default `true` |
 | `policy_id` | string (UUID) | No | Explicit [response policy](/docs/response-policies); defaults are resolved when omitted |
 | `policy_revision_id` | string (UUID) | No | Exact active or superseded revision. Requires `policy_id` |
+| `access` | object | Connection-dependent | Versioned product, region, and report grants. Required only when the connection is configured for embedded inquiry access |
 
 ### Response
 
@@ -32,6 +33,51 @@ POST /api/v1/inquiry/sessions
 ```
 
 The resolved response-policy revision is frozen into the session. Later policy activations do not change an existing session. Session reads include `policy_id`, `policy_revision_id`, `policy_version`, and `policy_hash`. See [Response Policies](/docs/response-policies) for default resolution and exact revision pinning.
+
+### Embedded inquiry access
+
+For a connection configured to require embedded inquiry access, send the complete end-user access snapshot when creating the session. Product, region, and report identifiers must come from the catalog configured for that connection.
+
+```json
+{
+  "connection_id": "d290f1ee-6c54-4b01-90e6-d701748f0851",
+  "access": {
+    "version": 1,
+    "expires_at": "2026-12-10T22:00:00Z",
+    "grants": [
+      {
+        "product": "analytics",
+        "region_ids": ["region-123"],
+        "report_ids": ["report-abc"]
+      }
+    ]
+  }
+}
+```
+
+| Field | Rules |
+|-------|-------|
+| `version` | Must be `1` |
+| `expires_at` | Timezone-aware RFC 3339 timestamp after creation and no more than 30 days away |
+| `grants` | Non-empty list; each product may appear once |
+| `grants[].product` | Product identifier registered for the connection; wildcards are not allowed |
+| `grants[].region_ids` | Non-empty list of registered region identifiers, or `["*"]` as the sole item |
+| `grants[].report_ids` | Non-empty list of registered report identifiers, or `["*"]` as the sole item |
+
+There is no implicit all-access behavior. A product omitted from `grants` is not included. AnswerLayer resolves wildcards to explicit catalog identifiers, normalizes the snapshot, and freezes both the snapshot and the server-owned catalog hash on the session. Session reads expose `access_version`, `access_expires_at`, `access_hash`, and `access_snapshot`.
+
+The expiry is a fixed authorization refresh deadline, not an inactivity timeout; using the session does not extend it. Once it expires, new turns return `403`, while existing session history remains readable. If the user's permissions change or are revoked earlier, or if an administrator changes the connection's access catalog, stop using the old session and create a new one with the current snapshot.
+
+Configured connections require a stable `X-Subject-Org-ID` for your customer organization and a stable `X-Subject-User-ID` for the individual within it. The API key identifies your AnswerLayer organization. Use the same subject headers for every operation on the session. See [Authentication](/docs/authentication#attributing-requests-to-your-end-users).
+
+Access validation errors use these statuses:
+
+| Status | Meaning |
+|--------|---------|
+| `400` | Required subject identity is missing or violates the session identity boundary |
+| `403` | Required access is missing or the stored snapshot has expired |
+| `404` | The session does not exist or belongs to a different subject |
+| `422` | The access object is malformed, exceeds 30 days, or contains an unsupported version or unknown identifier |
 
 ## Add a turn (streaming)
 

@@ -5,7 +5,7 @@ order: 2
 section: Getting Started
 ---
 
-The AnswerLayer API uses API key authentication. If you embed AnswerLayer into a product where your own users issue queries, there is also an optional identity-broker mode that lets you propagate verified end-user identity to AnswerLayer.
+The AnswerLayer API uses API key authentication. Keep API keys on your backend and never expose them in browser or mobile client code.
 
 ## Creating an API key
 
@@ -53,13 +53,7 @@ Set the connection when creating the key in the dashboard.
 
 ## Attributing requests to your end-users
 
-When you embed AnswerLayer into a multi-tenant product, every API call from your backend ultimately represents one of your customers' end-users. AnswerLayer needs to know which one — for audit logging, RBAC, and per-user data isolation.
-
-There are two modes for this. Pick based on where you are in your integration.
-
-### Identity headers (simple, for getting started)
-
-The fastest way to ship is to pass your end-user's identity as opaque strings on each request:
+When your backend calls AnswerLayer on behalf of an end-user, it can pass opaque identifiers with the request:
 
 | Header | Purpose | Example |
 |--------|---------|---------|
@@ -75,43 +69,18 @@ curl -N -X POST https://app.answerlayer.io/api/v1/inquiry/sessions/{session_id} 
   -d '{"user_input": "What was our revenue last quarter?"}'
 ```
 
-These headers are **passthrough trust** — AnswerLayer believes whatever string your backend sends and stores them on the audit trail. They are not stored on the API key itself.
+These headers are **trusted metadata**, not a separate authentication method. AnswerLayer accepts the values because the request came from your authenticated backend. Do not send email addresses, names, or other personal information when a stable internal ID will do.
 
-This mode is great for prototyping, internal tooling, scripts, MCP integrations, and any deployment where your own backend is the only caller and there is no compliance constraint requiring cryptographic attribution.
+`X-Subject-Org-ID` identifies your customer organization; it is not your AnswerLayer organization ID. `X-Subject-User-ID` identifies the individual within that customer organization and supports end-user attribution in audit and usage data. On connections using the legacy subject-filter configuration, the subject organization can also supply the tenant value for a warehouse row filter. The headers do not grant API scopes or connection access by themselves; the API key and the connection's server-side configuration remain authoritative.
 
-### Identity provider integration (production, end-user-attested)
+Use immutable database primary keys or identity-provider subjects for both values. Never use an email address, display name, organization name, username, or session token, and never reassign an identifier.
 
-For production embedded integrations where compliance, audit defensibility, or insider-risk reduction matter, register your identity provider (Okta, Auth0, Azure AD, etc.) with AnswerLayer. Once you do, AnswerLayer:
-
-- Stops accepting the trusted passthrough headers from your organization.
-- Requires a short-lived AnswerLayer bearer token on every protected call.
-- Issues that token only after your backend exchanges a JWT signed by your IdP, proving the end-user actually authenticated.
-
-The calling pattern shifts from `X-API-Key` + headers to `Authorization: Bearer <token>`:
-
-```bash
-# Once per session: exchange your IdP's JWT for an AnswerLayer token
-curl -X POST https://app.answerlayer.io/api/v1/oauth/token \
-  -H "X-API-Key: $ANSWERLAYER_API_KEY" \
-  -d "grant_type=urn:ietf:params:oauth:grant-type:token-exchange" \
-  -d "subject_token=$IDP_JWT" \
-  -d "subject_token_type=urn:ietf:params:oauth:token-type:jwt"
-
-# Subsequent calls use the returned token
-curl -X POST https://app.answerlayer.io/api/v1/inquiry/sessions \
-  -H "Authorization: Bearer $ANSWERLAYER_TOKEN" \
-  -H "Content-Type: application/json" \
-  -d '{"connection_id": "..."}'
-```
-
-End-user identity is now encoded in the token's claims, cryptographically attested by your IdP — not asserted by a header your backend filled in.
-
-For the full integration guide — when to flip the switch, how registration works, claim mapping, JWKS for external verification — see the [Identity Broker section](/docs/identity-broker/overview).
+If [subject filtering](/docs/connections#subject-filtering-for-embedded-tenants) or [embedded inquiry access](/docs/inquiry#embedded-inquiry-access) is enabled for a connection, send the same subject values consistently on every operation for that session. Missing or different subject values do not inherit access to the original session. Subject headers are suitable only for server-to-server integrations where your backend authenticates the user before making the AnswerLayer request.
 
 ## Errors
 
 | Status | Meaning |
 |--------|---------|
-| 401 | Missing or invalid `X-API-Key`, or invalid bearer token |
+| 401 | Missing or invalid `X-API-Key` |
 | 403 | Authenticated but missing the required scope |
-| 422 | Request shape invalid (e.g., bad form parameters on token exchange) |
+| 422 | Request shape is invalid |
