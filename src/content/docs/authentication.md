@@ -75,7 +75,7 @@ These headers are **trusted metadata**, not a separate authentication method. An
 
 Use an immutable database primary key or identity-provider subject for `X-Subject-User-ID`. Never use an email address, display name, username, or session token, and never reassign an identifier to another user.
 
-If subject filtering or [embedded inquiry access](/docs/inquiry#embedded-inquiry-access) is enabled for a connection, send the same subject values consistently on every operation for that session. Missing or different subject values do not inherit access to the original session. Subject headers are suitable only for server-to-server integrations where your backend authenticates the user before making the AnswerLayer request.
+If [subject filtering](/docs/connections#subject-filtering-for-embedded-tenants) or [embedded inquiry access](/docs/inquiry#embedded-inquiry-access) is enabled for a connection, send the same subject values consistently on every operation for that session. Missing or different subject values do not inherit access to the original session. Subject headers are suitable only for server-to-server integrations where your backend authenticates the user before making the AnswerLayer request.
 
 ## Errors
 
