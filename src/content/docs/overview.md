@@ -11,9 +11,13 @@ To install the CLI or run AnswerLayer locally from its public container image, s
 
 ## Base URL
 
-```text
-https://app.answerlayer.io/api/v1
+Set `ANSWERLAYER_BASE_URL` to the root URL of your AnswerLayer install. For example:
+
+```bash
+export ANSWERLAYER_BASE_URL=https://answerlayer.your-company.com
 ```
+
+API endpoints are served beneath `$ANSWERLAYER_BASE_URL/api/v1`. The CLI-managed local runtime saves its selected local URL automatically.
 
 ## How it works
 
@@ -57,13 +61,13 @@ All requests use JSON. Include `Content-Type: application/json` for request bodi
 
 ```bash
 # Create a session
-curl -X POST https://app.answerlayer.io/api/v1/inquiry/sessions \
+curl -X POST "$ANSWERLAYER_BASE_URL/api/v1/inquiry/sessions" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"connection_id": "your-connection-uuid"}'
 
 # Ask a question (streaming)
-curl -N -X POST https://app.answerlayer.io/api/v1/inquiry/sessions/{session_id} \
+curl -N -X POST "$ANSWERLAYER_BASE_URL/api/v1/inquiry/sessions/{session_id}" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"user_input": "What'\''s the month-over-month change in average order value for our top 5 regions?"}'

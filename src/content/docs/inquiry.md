@@ -99,19 +99,19 @@ Submits a question within an existing session and streams the agent's progress a
 
 ```bash
 # Create a session
-curl -X POST https://app.answerlayer.io/api/v1/inquiry/sessions \
+curl -X POST "$ANSWERLAYER_BASE_URL/api/v1/inquiry/sessions" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"connection_id": "d290f1ee-6c54-4b01-90e6-d701748f0851"}'
 
 # Ask a question (streaming)
-curl -N -X POST https://app.answerlayer.io/api/v1/inquiry/sessions/{session_id} \
+curl -N -X POST "$ANSWERLAYER_BASE_URL/api/v1/inquiry/sessions/{session_id}" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"user_input": "What are our top 10 customers by revenue?"}'
 
 # Follow up (agent remembers the previous context)
-curl -N -X POST https://app.answerlayer.io/api/v1/inquiry/sessions/{session_id} \
+curl -N -X POST "$ANSWERLAYER_BASE_URL/api/v1/inquiry/sessions/{session_id}" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"user_input": "Now show me their month-over-month growth"}'

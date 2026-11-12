@@ -54,7 +54,7 @@ POST /api/v1/inquiry-policies/preview
 ```
 
 ```bash
-curl -X POST https://app.answerlayer.io/api/v1/inquiry-policies/preview \
+curl -X POST "$ANSWERLAYER_BASE_URL/api/v1/inquiry-policies/preview" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -86,7 +86,7 @@ POST /api/v1/inquiry-policies
 ```
 
 ```bash
-curl -X POST https://app.answerlayer.io/api/v1/inquiry-policies \
+curl -X POST "$ANSWERLAYER_BASE_URL/api/v1/inquiry-policies" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{

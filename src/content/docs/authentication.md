@@ -18,7 +18,7 @@ When you create a key, the full key is shown **once**. Store it securely -- it c
 Include the key in every request:
 
 ```bash
-curl https://app.answerlayer.io/api/v1/connections/ \
+curl "$ANSWERLAYER_BASE_URL/api/v1/connections/" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY"
 ```
 
@@ -61,7 +61,7 @@ When your backend calls AnswerLayer on behalf of an end-user, it can pass opaque
 | `X-Subject-User-ID` | Identifies the individual end-user within that organization | `user-42` |
 
 ```bash
-curl -N -X POST https://app.answerlayer.io/api/v1/inquiry/sessions/{session_id} \
+curl -N -X POST "$ANSWERLAYER_BASE_URL/api/v1/inquiry/sessions/{session_id}" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY" \
   -H "X-Subject-Org-ID: acme-widgets" \
   -H "X-Subject-User-ID: user-42" \

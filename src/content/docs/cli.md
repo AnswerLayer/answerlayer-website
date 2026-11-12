@@ -255,15 +255,11 @@ For Claude Code, install the CLI repository as a plugin:
 /plugin install answerlayer@answerlayer
 ```
 
-## Hosted, BYOC, and self-hosted configuration
+## Existing deployment configuration
 
-Local setup creates and configures its own local key. For an existing hosted or customer-managed AnswerLayer deployment, create an API key with the required scopes and initialize the CLI:
+Local setup creates and configures its own local key. For an existing customer-managed AnswerLayer deployment, create an API key with the required scopes and initialize the CLI with its base URL:
 
 ```bash
-# Hosted AnswerLayer uses https://app.answerlayer.io by default
-answerlayer init --api-key al_live_...
-
-# BYOC or self-hosted
 answerlayer init \
   --base-url https://answerlayer.your-company.com \
   --api-key al_live_...

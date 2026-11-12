@@ -41,11 +41,11 @@ Returns the same envelope as the originating endpoint. Keep following `next_curs
 
 ```bash
 # First page.
-curl "https://app.answerlayer.io/api/v1/query-results/$HANDLE?limit=500" \
+curl "$ANSWERLAYER_BASE_URL/api/v1/query-results/$HANDLE?limit=500" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY"
 
 # Next page — pass the cursor from the previous response.
-curl "https://app.answerlayer.io/api/v1/query-results/$HANDLE?cursor=$NEXT_CURSOR&limit=500" \
+curl "$ANSWERLAYER_BASE_URL/api/v1/query-results/$HANDLE?cursor=$NEXT_CURSOR&limit=500" \
   -H "X-API-Key: $ANSWERLAYER_API_KEY"
 ```
 
