@@ -3,6 +3,22 @@
     {
       "source": "/",
       "destination": "https://www.answerlayer.io/",
+      "permanent": false,
+      "has": [
+        { "type": "host", "value": "app.answerlayer.io" }
+      ]
+    },
+    {
+      "source": "/:path+",
+      "destination": "https://www.answerlayer.io/",
+      "permanent": false,
+      "has": [
+        { "type": "host", "value": "app.answerlayer.io" }
+      ]
+    },
+    {
+      "source": "/",
+      "destination": "https://www.answerlayer.io/",
       "permanent": true,
       "has": [
         { "type": "host", "value": "getanswerlayer.com" }
